@@ -1,0 +1,95 @@
+img, source{
+	display: inline-block; /*обираем отступ у всех изображений*/
+	text-decoration: none; /*убираем подчеркивание*/
+}
+
+.cat_content_none {
+	width: 100%;
+	height: auto;
+	float: none;
+	background-size:cover;/*фон пропорцианально растягивается и заполняется весь блок, внутри которого он находится*/
+	
+/*выравнивание текста по центру и вертекали*/
+	display:flex;/*определяем блок header как контейнер для flex*/
+	flex-direction:column;/*создание клонок*/
+	justify-content:center;/*выравнивание по ширине и по центру*/
+}
+
+.cat_content {
+	margin-top: 10px;
+	margin-left: 230px;
+	margin-right: 230px;
+	text-align: center;
+}
+
+.cat_block {
+	width: 200px;
+	text-decoration: none;
+	border-radius: 10px; /*скругление*/
+	/*
+	border: 1px solid grey;
+	background: #cccccc;
+	*/
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.cat_img img {
+	width: 200px;
+	height: 200px;
+}
+
+.cat_text {
+	
+}
+
+.cat_form {
+	float: none;
+	text-align: center;
+	width: 100%;
+	margin-top: 0px;/*отступ cверху*/
+	margin-bottom: 50px;/*отступ cверху*/
+}
+.cat_footer {
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+.cat_header {
+	margin-bottom: 10px;
+}
+
+@media (max-width: 984px) { /*При ширене экрана в 1160px и менее*/
+	 .cat_content {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center; /*текст по центру*/
+		margin-left: 0px;
+		margin-right: 0px;
+	 }
+	 .cat_block {
+		
+		display:flex;/*определяем блок header как контейнер для flex*/
+		flex-direction:column;/*создание клонок*/
+		align-items:center;/*выравнивание содержимого flex бокса по горизонтали*/
+		justify-content:center;/*выравнивание по ширине и по центру*/
+		position:relative;/*позиция относительно родителя(основного блока)*/
+		padding: 0; 
+		width: 96%; /*реальная ширина = 100% + border = 0 + padding = 15px + 15px = 100% + 30px*/
+		margin: 0; /*отступ со всех сторон*/
+		margin-bottom: 10px; /*отступ снизу*/
+		margin-left: 10px; /*отступ снизу*/
+		margin-right: 10px; /*отступ снизу*/
+		height: 100%;
+	}
+	.cat_img img {
+		width: 50vh;/*100vh-100% от высоты окна браузера*/
+		height: auto;
+	}
+	.cat_text {
+		font-size: 5vh;
+	}
+}

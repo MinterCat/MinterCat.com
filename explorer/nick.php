@@ -1,0 +1,129 @@
+<?php
+echo '<title>MinterCat | Explorer</title>';
+//========================================
+include('../../config/config.php');
+include('../function.php');
+session_start();
+$cript_mnemonic = $_SESSION['cript_mnemonic'];
+$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
+$decript = json_decode($decript_text,true);
+
+$address = $decript['address'];
+
+$db_users = new Users();
+
+$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
+$data = $result->fetchArray(1);
+$check_language = $data['language'];
+
+if ($check_language != '') {$lang = $check_language;} else {$lang = 'English';}
+
+$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
+$language = json_decode($jsonlanguage,true);
+//========================================
+$db_users = new Users();
+$results = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"');
+$data = array();
+while ($res = $results->fetchArray(1)){array_push($data, $res);}
+
+$address = $data[0]['address'];
+$get = file_get_contents($site."api/cats?addr=$address");
+$payloads1 = json_decode($get,true);
+echo "<center><h2><b>$nick</b></h2></center><hr>";
+
+echo "
+<link rel='stylesheet' href='".$site."css/pagination.css'>
+<link rel='stylesheet' href='".$site."css/style_header.css'>
+";
+
+$json4 = file_get_contents($site.'api');
+$payloads4 = json_decode($json4,true);
+
+$result = (count($payloads1)-1);
+$countq = ceil(($result+1)/12);
+echo '<div class="cat_content_none"><div class="cat_content">';
+$id = $_GET['id'];
+if ($id==''){$id=1;}
+$q = ($id-1)*12; if ($q<0){$q=0;}
+$result=($id*12)-1;
+
+$cats = $payloads4['cats'];
+
+$ccount = (count($cats))-1;
+
+for ($i = $q; $i <= $result; $i++)
+{
+	$pricebd = $payloads1[$i]['price'];
+	$img = $payloads1[$i]['img'];
+	$block = $payloads1[$i]['stored_id'];
+	for ($y = 0; $y<=$ccount;$y++)
+		{
+			$catimg = $cats[$y]['img'];
+			if ($catimg == $img)
+				{
+					$series = $cats[$y]['series'];
+					$rarity = $cats[$y]['rarity'];
+					$rarity = $rarity * 100;
+					$price = $cats[$y]['price'];
+					$name1 = $cats[$y]['name'];
+					$count = $cats[$y]['count'];
+					$gender = $cats[$y]['gender'];
+				}
+		}
+	$name2 = $payloads1[$i]['name'];
+	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
+	if ($pricebd == '') {$bgimg = ''; $prr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $prr = "<font color='red'><b>$pricebd</b></font>";}
+		if ($gender == '0') {$gender = '';}
+
+		switch ($series) 
+		{
+			case 0: {$u = '#C1B5FF'; break;}
+			case 1: {$u = '#FFF6B5'; break;}
+			case 2: {$u = '#FFB5B5'; break;}
+			case 3: {$u = '#C7F66F'; break;}
+			case 4: {$u = '#FFC873'; break;}
+			case 5: {$u = '#6AF2D7'; break;}
+			case 999: {$u = '#9BF5DA'; break;}
+		}
+				echo "
+					<div class='cat_block' style='background: $u'>
+						<div class='cat_img'>
+							<a href='".$site."cat?id=$block'>
+								<picture>
+									<source srcset='../img/Cat$img.webp' type='image/webp'>
+									<img src='../png.php?png=$img'>
+								</picture>
+							</a>
+						</div>
+						<div class='cat_text'>
+							#$block $bgimg<br>
+							<hr>
+							$name $gender<br>
+							$prr MINTERCAT<br>
+						</div>
+					</div>";
+}
+echo "</div></div><div class='cat_form'>";
+
+$qidd = $id-1;
+$qiid = $id+1;
+
+$ppm1 = $id - 1;
+$ppm2 = $id - 2;
+$ppp1 = $id + 1;
+$ppp2 = $id + 2;
+echo "
+<ul class='pagination'>
+	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
+  <li><a href='?id=$qidd'>«</a></li>
+  ";
+  for ($p = 1; $p <= $countq; $p++)
+  {
+	  if (($p == $id) || ($p == $ppm1) || ($p == $ppm2) || ($p == $ppp1) || ($p == $ppp2)) {
+	  echo "<li><a href='?id=$p'>$p</a></li>";}
+  }
+echo "
+<li><a href='?id=$qiid'>»</a></li>
+</ul>
+</div>
+";
