@@ -1,0 +1,11 @@
+.page__footer {
+  margin-top: -2rem;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 2rem;
+  }
+}
+
+.page--profile__footer {
+  margin-top: -4rem;
+}

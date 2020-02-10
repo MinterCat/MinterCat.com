@@ -1,0 +1,25 @@
+.logo {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+.logo__img {
+  display: block;
+  width: (53px / 16px) * 1rem;
+  height: (53px / 16px) * 1rem;
+}
+
+.logo__text {
+  margin-left: 1rem;
+
+  color: $white;
+  font-family: "Blogger Sans";
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logo__text-dark {
+  color: $dark;
+}

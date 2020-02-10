@@ -1,0 +1,33 @@
+.wallet {
+  padding: 1rem 0;
+
+  text-align: center;
+
+  background-color: #7b75d5;
+  border-radius: 4px;
+}
+
+.wallet__title {
+  margin-bottom: .9rem;
+
+  color: $white;
+  font-size: (17px / 16px) * 1rem;
+  font-weight: 400;
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+}
+
+.wallet__sum {
+  margin-bottom: .7rem;
+
+  color: $white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.wallet__avatar {
+  width: (28px / 16px) * 1rem;
+  height: (28px / 16px) * 1rem;
+}

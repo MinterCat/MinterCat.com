@@ -1,0 +1,204 @@
+.modal-login {
+  position: relative;
+
+  width: 100%;
+  max-width: (412px / 16px) * 1rem;
+
+  text-align: center;
+
+  @media screen and (max-width: 480px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    max-width: 100%;
+  }
+}
+
+.modal-login__form {
+  position: relative;
+  z-index: 20;
+
+  padding: 4rem 3rem 2rem;
+
+  background: linear-gradient(to right, #b385e0, #8685dd);
+  border-radius: 8px;
+
+  @media screen and (max-width: 480px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 100%;
+    padding: 0 1rem 12rem;
+
+    border-radius: 0;
+  }
+
+  @media screen and (max-width: 360px) {
+    padding: 0 1rem 10rem;
+  }
+}
+
+.modal-login__form-group {
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 360px) {
+    margin-bottom: 1rem;
+  }
+}
+
+.modal-login__label {
+  display: block;
+  margin-bottom: .5rem;
+
+  color: $white;
+  font-size: (17px / 16px) * 1rem;
+  font-weight: 700;
+}
+
+.modal-login__field-text {
+  width: 100%;
+  height: (37px / 16px) * 1rem;
+  padding: 0 1rem;
+
+  color: $white;
+  font-size: (15px / 16px) * 1rem;
+  font-weight: 400;
+  text-align: center;
+
+  background-color: #9176d7;
+  border: none;
+  border-radius: 5px;
+
+  &::placeholder {
+    color: $white;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 4rem;
+  }
+
+  @media screen and (max-width: 360px) {
+    height: 3rem;
+  }
+}
+
+.modal-login__btn {
+  margin-bottom: 1.7rem;
+  width: 100%;
+  height: (44px / 16px) * 1rem;
+
+  color: #8f8e8f;
+  font-size: (19px / 16px) * 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+
+  @media screen and (max-width: 480px) {
+    height: 4rem;
+  }
+
+  @media screen and (max-width: 360px) {
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.modal-login__link {
+  position: relative;
+
+
+  color: $white;
+  font-size: (17px / 16px) * 1rem;
+  font-weight: 400;
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    bottom: -0.2rem;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+    background-color: $white;
+
+    transition: .2s linear;
+    content: '';
+  }
+
+  &:hover {
+    &::after {
+      transform: scale(0);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    align-self: center;
+  }
+}
+
+.modal-login__cats {
+  @media screen and (max-width: 480px) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 40;
+
+    opacity: .6;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 360px) {
+    bottom: -1.5rem;
+  }
+}
+
+.modal-login__cat-img-1 {
+  position: absolute;
+  top: -5rem;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    transform: translate(0, 3rem);
+  }
+}
+
+.modal-login__cat-img-2 {
+  position: absolute;
+  top: -2rem;
+  left: -14.5rem;
+  transform: rotate(-80deg);
+
+  @media screen and (max-width: 480px) {
+    top: -2rem;
+    left: -7rem;
+    transform: rotate(0);
+  }
+}
+
+.modal-login__cat-img-3 {
+  position: absolute;
+  top: -3.5rem;
+  right: -11.5rem;
+  transform: rotate(50deg);
+
+  @media screen and (max-width: 480px) {
+    right: -5rem;
+    top: -2rem;
+    transform: rotate(0);
+  }
+}

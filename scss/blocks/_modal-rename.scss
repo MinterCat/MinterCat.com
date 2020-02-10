@@ -1,0 +1,180 @@
+.modal-rename {
+  position: relative;
+
+  width: 100%;
+  max-width: 360px;
+  padding: (30px / 16px) * 1rem (35px / 16px) * 1rem;
+  margin: 0 2.5rem;
+
+  text-align: center;
+
+  background: linear-gradient(to right, #b385e0, #8685dd);
+  border-radius: 8px;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+
+    border-radius: 0;
+  }
+}
+
+.modal-rename__title {
+  margin-bottom: 1rem;
+
+  color: $white;
+  font-size: (17px / 16px) * 1rem;
+  font-weight: 400;
+}
+
+.modal-rename__input {
+  margin-bottom: 1rem;
+
+  display: block;
+  width: 100%;
+  padding: (20px / 16px) * 1rem (44px / 16px) * 1rem;
+
+  text-align: center;
+  color: $white;
+  font-size: (24px / 16px) * 1rem;
+  font-weight: 700;
+
+  background-color: #7b75d5;
+  border: none;
+  border-radius: 4px;
+
+  @media screen and (max-width: 480px) {
+    padding: 1rem 1rem;
+
+    font-size: 1.2rem;
+  }
+}
+
+.modal-rename__btn-save {
+  position: relative;
+
+  padding: 0;
+
+  color: $white;
+  font-size: (15px / 16px) * 1rem;
+  font-weight: 400;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  &:after {
+    position: absolute;
+    bottom: -0.3rem;
+    right: 0;
+    left: 0;
+
+    height: 1px;
+    background-color: $white;
+
+    transition: .2s linear;
+    content: '';
+  }
+
+  &:hover {
+
+    &:after {
+      transform: scale(0);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+
+    font-family: "Blogger Sans";
+    font-size: 1.5rem;
+    color: $dark;
+
+    background-color: $white;
+    border-radius: 4px;
+
+    &:after {
+      content: none;
+    }
+  }
+}
+
+.modal-rename__btn-cancel {
+  display: none;
+  margin-bottom: 2rem;
+
+  color: $white;
+
+  @media screen and (max-width: 480px) {
+    display: block;
+  }
+}
+
+.modal-rename__close {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  z-index: 10;
+  transform: translate(100%, -100%);
+
+  width: (23px / 16px) * 1rem;
+  height: (23px / 16px) * 1rem;
+  padding: 0;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  @media screen and (max-width: 480px) {
+    top: 2rem;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.modal-rename__close-icon {
+  width: 100%;
+  height: 100%;
+
+  fill: #7b75d5;
+
+  @media screen and (max-width: 480px) {
+    fill: $white;
+  }
+}
+
+.modal-rename__illustration {
+  position: absolute;
+
+  display: none;
+
+  width: 15rem;
+
+  fill: #9a92e0;
+
+  @media screen and (max-width: 480px) {
+    display: block;
+  }
+}
+
+.modal-rename__illustration-1 {
+  top: 3rem;
+  right: -2rem;
+}
+
+.modal-rename__illustration-2 {
+  top: 9rem;
+  left: 1rem;
+}

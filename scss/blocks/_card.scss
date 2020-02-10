@@ -1,0 +1,58 @@
+.card {
+  padding: (25px / 16px) * 1rem .7rem (20px / 16px) * 1rem;
+
+  text-align: center;
+
+  background-color: #f7f7f7;
+  border-radius: 3px;
+
+  transition: .2s linear;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 8px 31px 3px rgba(210, 147, 243, 0.51);
+  }
+}
+
+.card__img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.card__name {
+  margin-bottom: .3rem;
+
+  color: #c488e5;
+  font-family: "Blogger Sans";
+  font-size: (23px / 16px) * 1rem;
+  font-weight: 700;
+}
+
+.card__id {
+  margin-bottom: .6rem;
+
+  color: #737373;
+  font-size: (15px / 16px) * 1rem;
+  font-weight: 500;
+}
+
+.card__price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__price-text {
+  margin-right: .5rem;
+
+  color: #737373;
+  font-size: (15px / 16px) * 1rem;
+  font-weight: 700;
+}
+
+.card__price-icon-img {
+  width: (17px / 16px) * 1rem;
+  height: (17px / 16px) * 1rem;
+}

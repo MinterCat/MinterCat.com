@@ -1,0 +1,22 @@
+.heading {
+  color: #efefef;
+  font-family: "Blogger Sans";
+  font-size: (171px / 16px) * 1rem;
+  font-weight: 500;
+
+  @media screen and (max-width: 984px) {
+    font-size: 10rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 8rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 4rem;
+
+    &::after {
+      content: none;
+    }
+  }
+}

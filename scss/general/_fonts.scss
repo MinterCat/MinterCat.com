@@ -1,0 +1,30 @@
+// font-weight helper:
+
+// 100 Extra Light or Ultra Light;
+// 200 Light or Thin; 300 Book or Demi;
+// 400 Regular or Normal;
+// 500 Medium;
+// 600 Semibold or Demibold;
+// 700 Bold;
+// 800 Black or Extra Bold or Heavy;
+// 900 Extra Black or Fat or Ultra Black
+
+
+// Avenir Next
+@include font('Avenir Next', normal, 400, '../fonts/AvenirNextCyr-Regular.woff2');
+@include font('Avenir Next', normal, 500, '../fonts/AvenirNextCyr-Medium.woff2');
+@include font('Avenir Next', normal, 700, '../fonts/AvenirNextCyr-Bold.woff2');
+
+// Blogger Sans
+@include font('Blogger Sans', normal, 400, '../fonts/BloggerSans-Regular.woff2');
+@include font('Blogger Sans', normal, 500, '../fonts/BloggerSans-Medium.woff2');
+@include font('Blogger Sans', normal, 700, '../fonts/BloggerSans-Bold.woff2');
+
+
+
+// Example of including
+
+// @include font('Roboto', normal, 400, '../fonts/roboto-regular-webfont.woff2');
+// @include font('Roboto', italic, 400, '../fonts/roboto-italic-webfont.woff2');
+// @include font('Roboto', normal, 700, '../fonts/roboto-bold-webfont.woff2');
+// @include font('Roboto', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2');

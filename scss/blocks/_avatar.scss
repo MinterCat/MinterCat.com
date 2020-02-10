@@ -1,0 +1,29 @@
+.avatar {
+  position: relative;
+}
+
+.avatar__img {
+  border-radius: 50%;
+}
+
+.avatar__btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  width: (51px / 16px) * 1rem;
+  height: (51px / 16px) * 1rem;
+  padding: 0;
+
+  background: #efefef url('../img/svg/camera-icon.svg') no-repeat center center /28px;
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  @media screen and (max-width: 480px) {
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}

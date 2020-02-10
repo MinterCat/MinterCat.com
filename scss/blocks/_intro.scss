@@ -1,0 +1,160 @@
+.intro {
+  position: relative;
+
+  padding: (240px / 16px) * 1rem 0 (166px / 16px) * 1rem;
+
+  background: linear-gradient(to right, #b385e0, #8685dd);
+
+  @media screen and (max-width: 480px) {
+    padding-bottom: 0;
+    padding-top: 12rem;
+
+    overflow: hidden;
+  }
+}
+
+.intro__inner {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.intro__content {
+  flex: 0 1 (348px / 16px) * 1rem;
+
+  @media screen and (max-width: 768px) {
+    flex: 0 1 auto;
+    margin-bottom: 2rem;
+
+    text-align: center;
+  }
+}
+
+.intro__logo-mobile {
+  display: none;
+  width: 4rem;
+  margin: 0 auto;
+
+  @media screen and (max-width: 480px) {
+    display: block;
+  }
+}
+
+.intro__text {
+  margin-bottom: 3rem;
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 1rem;
+  }
+}
+
+.intro__heading {
+  margin: 0;
+  margin-bottom: .8rem;
+
+  color: $white;
+  font-family: "Blogger Sans";
+  font-size: (83px / 16px) * 1rem;
+  font-weight: 700;
+
+  @media screen and (max-width: 480px) {
+    font-size: 4rem;
+  }
+}
+
+.intro__heading-dark {
+  color: $dark;
+}
+
+.intro__descr {
+  margin: 0;
+
+  color: $white;
+  font-size: (21px / 16px) * 1rem;
+  font-weight: 400;
+}
+
+.intro__illustration {
+  position: absolute;
+  top: 1.4rem;
+  right: -2rem;
+
+  fill: #adaae7;
+
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    top: -4rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+.intro__img-wrapper {
+  position: absolute;
+  top: (-70px / 16px) * 1rem;
+  left: (344px / 984px) * 100%;
+
+  width: 735px;
+
+  @media screen and (max-width: 1200px) {
+    position: static;
+
+    width: 100%;
+  }
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+}
+
+.intro__img-inner {
+  position: relative;
+
+  width: 100%;
+  padding-top: (389px / 735px) * 100%;
+}
+
+.intro__img-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.intro__img-layer-1 {
+  background: url('../img/@1x/intro-cats-1.png') no-repeat bottom /contain;
+}
+
+.intro__img-layer-2 {
+  width: (570px / 735px) * 100%;
+  margin: 0 auto;
+
+  background: url('../img/@1x/intro-cats-2.png') no-repeat bottom /contain;
+}
+
+.intro__img-layer-3 {
+  width: (441px / 735px) * 100%;
+  margin: 0 auto -1rem;
+
+  background: url('../img/@1x/intro-cats-3.png') no-repeat bottom /contain;
+}
+
+.intro__img-mobile {
+  display: none;
+
+  @media screen and (max-width: 480px) {
+    display: block;
+
+    transform: translateY(2.5rem);
+  }
+}

@@ -1,0 +1,16 @@
+.main {
+  position: relative;
+  z-index: 20;
+}
+
+.main__about {
+  margin-top: (154px / 16px) * 1rem;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 5rem;
+  }
+}
+
+.main__partners {
+  margin-top: -13rem;
+}

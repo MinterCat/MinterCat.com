@@ -1,0 +1,122 @@
+.about {
+  position: relative;
+
+  padding-bottom: (422px / 16px) * 1rem;
+
+  background: url(../img/svg/about-bg.svg) no-repeat center /cover;
+  overflow: hidden;
+
+  &::before {
+    position: absolute;
+    bottom: (196px / 16px) * 1rem;
+    right: -4rem;
+    z-index: 10;
+
+    width: (339px / 16px) * 1rem;
+    height: (265px / 16px) * 1rem;
+
+    background: url(../img/svg/cat-ellipse.svg) no-repeat center /contain;
+
+    content: '';
+
+    @media screen and (max-width: 780px) {
+      width: 200px;
+      height: 156px;
+    }
+
+    @media screen and (max-width: 480px) {
+      bottom: 15rem;
+      right: -3rem;
+
+      width: 150px;
+      height: 117px;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    top: (125px / 16px) * 1rem;
+    left: -5rem;
+
+    width: (267px / 16px) * 1rem;
+    height: (272px / 16px) * 1rem;
+
+    background: url(../img/svg/circle-illustration.svg) no-repeat center /contain;
+
+    content: '';
+
+    @media screen and (max-width: 768px) {
+      width: 13rem;
+      height: 13rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      top: 4rem;
+
+      width: 10rem;
+      height: 10rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    padding-bottom: 18rem;
+  }
+}
+
+.about__container {
+  position: relative;
+  z-index: 20;
+}
+
+.about__heading {
+  position: relative;
+
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+
+  text-align: right;
+
+  // &::after {
+  //   position: absolute;
+  //   bottom: 15%;
+  //   right: 3.4%;
+
+  //   width: (25px / 16px) * 1rem;
+  //   height: (25px / 16px) * 1rem;
+
+  //   background: linear-gradient(to right, #b185e0, #8985dd);
+  //   border-radius: 50%;
+
+  //   content: '';
+  // }
+
+  @media screen and (max-width: 480px) {
+    text-align: center;
+  }
+}
+
+.about__subtitle {
+  position: absolute;
+  top: 5rem;
+  left: -2.6rem;
+
+  display: inline-block;
+
+  color: #c386e5;
+  font-size: (24px / 16px) * 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  transform: rotate(-90deg);
+
+  @media screen and (max-width: 480px) {
+    position: static;
+
+    display: block;
+
+    font-size: 1rem;
+    text-align: center;
+
+    transform: rotate(0);
+  }
+}
