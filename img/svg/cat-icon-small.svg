@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 18.57 18.51" enable-background="new 0 0 18.57 18.51" xml:space="preserve">
+<g>
+	<circle fill="#C285E3" cx="9.25" cy="9.25" r="9.25"/>
+	<g>
+		<defs>
+			<circle id="SVGID_1_" cx="9.31" cy="9.25" r="9.25"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_2_)">
+			<path fill="#1F2224" d="M5.37,3.68C5.5,3.2,1.08,18.83,3.12,23.06c1.55,3.21,10.75,4.24,12.48-0.04
+				c1.73-4.28-2.14-19.72-2.14-19.72l-2.54,2.2L8.1,5.66L5.37,3.68z"/>
+			<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="11" y1="10.62" x2="13.51" y2="9.8"/>
+			<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="11" y1="11.5" x2="13.88" y2="11.2"/>
+			<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="4.99" y1="9.85" x2="7.71" y2="10.58"/>
+			<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="5.03" y1="11.19" x2="7.76" y2="11.47"/>
+			<polygon fill="#FFFFFF" points="11.68,5.81 12.93,4.68 13.11,6.02 			"/>
+			<polygon fill="#FFFFFF" points="5.63,5.87 5.79,4.83 7.17,5.87 			"/>
+			<polygon fill="#FFFFFF" points="8.79,10.88 9.99,10.88 9.39,11.71 			"/>
+		</g>
+	</g>
+</g>
+</svg>

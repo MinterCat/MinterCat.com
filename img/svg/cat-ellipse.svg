@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 330.46 251.12" enable-background="new 0 0 330.46 251.12" xml:space="preserve">
+<g>
+	<g>
+		
+			<ellipse transform="matrix(0.9914 -0.1306 0.1306 0.9914 -15.0667 22.164)" fill="#C68EEB" cx="161.39" cy="125.91" rx="161.94" ry="124.46"/>
+		
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="367.6678" y1="378.732" x2="665.7891" y2="378.732" gradientTransform="matrix(0.9792 0.2029 -0.2029 0.9792 -264.3555 -352.1635)">
+			<stop  offset="0" style="stop-color:#C285E3"/>
+			<stop  offset="1" style="stop-color:#8785E0"/>
+		</linearGradient>
+		<path fill="url(#SVGID_1_)" d="M310.75,153.77c-13.7,66.13-90.16,106.2-170.77,89.5S5.13,159.41,18.83,93.29
+			s90.16-106.2,170.77-89.5S324.45,87.64,310.75,153.77z"/>
+	</g>
+	<g opacity="0.25">
+		<defs>
+			
+				<ellipse id="SVGID_2_" transform="matrix(0.9914 -0.1306 0.1306 0.9914 -14.9674 22.663)" opacity="0.25" cx="165.24" cy="125.4" rx="165.83" ry="124.46"/>
+		</defs>
+		<clipPath id="SVGID_3_">
+			<use xlink:href="#SVGID_2_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_3_)">
+			<path fill="#1F2224" d="M89.01,89.86c-1.35-5.05,40.14,160.43,80.85,188.26c30.94,21.15,120.04-17.62,113.47-65.66
+				c-6.58-48.03-122.61-168.44-122.61-168.44L149.1,77.38l-24.83,16.23L89.01,89.86z"/>
+			
+				<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="176.61" y1="123.62" x2="195.17" y2="102.96"/>
+			
+				<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="181.18" y1="131.58" x2="205.81" y2="113.82"/>
+			
+				<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="117.85" y1="148.01" x2="146.43" y2="140.44"/>
+			
+				<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="125.15" y1="160" x2="151.56" y2="148.28"/>
+			<polygon fill="#FFFFFF" points="157.58,76.23 163.12,59.4 171.72,70.67 			"/>
+			<polygon fill="#FFFFFF" points="102.84,108.42 98.8,98.14 116.88,100.36 			"/>
+			<polygon fill="#FFFFFF" points="157.83,137.52 168.71,131.27 167.64,142 			"/>
+		</g>
+	</g>
+</g>
+</svg>
