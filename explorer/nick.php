@@ -1,27 +1,4 @@
 <?php
-echo '<title>MinterCat | Explorer</title>';
-//========================================
-include('../../config/config.php');
-include('../function.php');
-session_start();
-$cript_mnemonic = $_SESSION['cript_mnemonic'];
-$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
-$decript = json_decode($decript_text,true);
-
-$address = $decript['address'];
-
-$db_users = new Users();
-
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
-$check_language = $data['language'];
-
-if ($check_language != '') {$lang = $check_language;} else {$lang = 'English';}
-
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
-//========================================
-$db_users = new Users();
 $results = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"');
 $data = array();
 while ($res = $results->fetchArray(1)){array_push($data, $res);}
@@ -30,11 +7,6 @@ $address = $data[0]['address'];
 $get = file_get_contents($site."api/cats?addr=$address");
 $payloads1 = json_decode($get,true);
 echo "<center><h2><b>$nick</b></h2></center><hr>";
-
-echo "
-<link rel='stylesheet' href='".$site."css/pagination.css'>
-<link rel='stylesheet' href='".$site."css/style_header.css'>
-";
 
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
@@ -105,25 +77,22 @@ for ($i = $q; $i <= $result; $i++)
 }
 echo "</div></div><div class='cat_form'>";
 
-$qidd = $id-1;
-$qiid = $id+1;
-
-$ppm1 = $id - 1;
-$ppm2 = $id - 2;
-$ppp1 = $id + 1;
-$ppp2 = $id + 2;
+$idm1 = $id - 1;
+$idm2 = $id - 2;
+$idp1 = $id + 1;
+$idp2 = $id + 2;
 echo "
 <ul class='pagination'>
 	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
-  <li><a href='?id=$qidd'>«</a></li>
+  <li><a href='?id=$idm1'>«</a></li>
   ";
   for ($p = 1; $p <= $countq; $p++)
   {
-	  if (($p == $id) || ($p == $ppm1) || ($p == $ppm2) || ($p == $ppp1) || ($p == $ppp2)) {
+	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
 	  echo "<li><a href='?id=$p'>$p</a></li>";}
   }
 echo "
-<li><a href='?id=$qiid'>»</a></li>
+<li><a href='?id=$idp1'>»</a></li>
 </ul>
 </div>
 ";

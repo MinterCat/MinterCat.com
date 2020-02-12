@@ -1,15 +1,10 @@
 <?php
-include('../../config/config.php');
-include('../function.php');
-echo '
-<link rel="stylesheet" href="../css/pagination.css">
-<link rel="stylesheet" href="../css/style6.css">
-<link rel="stylesheet" href="../css/lk.css">
-';
-$json_api = JSON($site.'api');
-$count4 = $json_api->count;
+echo '<link rel="stylesheet" href="'.$site.'css/lk.css">';
+$json4 = file_get_contents($site.'api');
+$payloads4 = json_decode($json4,true);
+$count4 = $payloads4['count'];
+$cats = $payloads4['cats'];
 echo "<center><h4>" . $language['Total_number_of_cats'] . " $count4</h4></center>";
-$cats = $json_api->cats;
 $result = count($cats);
 $countq = ceil(($result)/12);
 echo '<div class="cat_content_none"><div class="cat_content">';
@@ -47,8 +42,8 @@ echo "
 	<div class='cat_block' style='background: $u'>
 		<div class='cat_img'>
 			<picture>
-			<source srcset='../img/Cat$img.webp' type='image/webp'>
-			<img src='../png.php?png=$img'>
+			<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+			<img src='".$site."png.php?png=$img'>
 			</picture>
 		</div>
 		<div class='cat_text'>
@@ -63,6 +58,7 @@ echo "
 }
 }
 echo "</div></div><div class='cat_form'>";
+
 $idm1 = $id - 1;
 $idm2 = $id - 2;
 $idp1 = $id + 1;

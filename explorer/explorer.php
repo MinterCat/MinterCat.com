@@ -1,10 +1,6 @@
 <?php
-include('../../config/config.php');
-include('../function.php');
 $db_rss = new RSS();
-echo '<title>MinterCat | Explorer</title>';
 echo '<br>';
-
 
 $result = $db_rss->query('SELECT * FROM "table" ORDER BY id DESC LIMIT 50');
 $data = array();

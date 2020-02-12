@@ -64,7 +64,7 @@ function Language ($lang)
     return $jsonCalled;
 }
 // $check_hesh = CHECK_HESH($hash, $check);
-function CHECK_HESH ($hash, $check)
+function CHECK_HESH ($api, $hash, $check)
 {
     $api = new MinterAPI($api);
     if ($check == true)
