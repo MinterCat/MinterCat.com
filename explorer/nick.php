@@ -14,6 +14,8 @@ $payloads4 = json_decode($json4,true);
 
 $result = (count($payloads1)-1);
 $countq = ceil(($result+1)/12);
+if ($countq != 0)
+{
 echo '<div class="cat_content_none"><div class="cat_content">';
 $id = $_GET['id'];
 if ($id==''){$id=1;}
@@ -76,7 +78,9 @@ for ($i = $q; $i <= $result; $i++)
 						</div>
 					</div>";
 }
-echo "</div></div><div class='cat_form'>";
+echo "</div></div>";
+}
+echo "<div class='cat_form'>";
 
 $idm1 = $id - 1;
 $idm2 = $id - 2;
@@ -85,15 +89,15 @@ $idp2 = $id + 2;
 echo "
 <ul class='pagination'>
 	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
-  <li><a href='?id=$idm1'>«</a></li>
+  <li><a href='?nick=$nick&id=$idm1'>«</a></li>
   ";
   for ($p = 1; $p <= $countq; $p++)
   {
 	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-	  echo "<li><a href='?id=$p'>$p</a></li>";}
+	  echo "<li><a href='?nick=$nick&id=$p'>$p</a></li>";}
   }
 echo "
-<li><a href='?id=$idp1'>»</a></li>
+<li><a href='?nick=$nick&id=$idp1'>»</a></li>
 </ul>
 </div>
 ";
