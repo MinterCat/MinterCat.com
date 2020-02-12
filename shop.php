@@ -187,7 +187,7 @@ echo "
 			#$id $bgimg<br>
 			$name $gender
 			<hr>
-			$pricebd MINTERCAT
+			$pricebd $coin
 		</div>
 	</div>";
 }

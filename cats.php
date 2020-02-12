@@ -51,7 +51,7 @@ echo "
 			<hr>
 			" . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 			" . $language['Chance_of_falling_out'] . ": <b>$rarity%</b><br>
-			<b>$price</b> MINTERCAT
+			<b>$price</b> $coin
 			<br>
 		</div>
 	</div>";

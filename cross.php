@@ -173,24 +173,32 @@ if ($balance > $komsa)
 		
 		$api_node = new MinterAPI($api);
 		
+		if ($test != 'TESTNET')
+			{
+				$chainId = MinterTx::MAINNET_CHAIN_ID;
+			}
+		else
+			{
+				$chainId = MinterTx::TESTNET_CHAIN_ID;
+			}
 		$tx = new MinterTx([
 							'nonce' => $api->getNonce($address),
-							'chainId' => MinterTx::MAINNET_CHAIN_ID, // or MinterTx::TESTNET_CHAIN_ID
+							'chainId' => $chainId,
 							'gasPrice' => 1,
-							'gasCoin' => 'MINTERCAT',
+							'gasCoin' => $coin,
 							'type' => MinterMultiSendTx::TYPE,
 							'data' => [
 								'list' => [
 									[
-										'coin' => 'MINTERCAT',
+										'coin' => $coin,
 										'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
 										'value' => $me
 									], [
-										'coin' => 'MINTERCAT',
+										'coin' => $coin,
 										'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
 										'value' => $kamil
 									],	[
-										'coin' => 'MINTERCAT',
+										'coin' => $coin,
 										'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
 										'value' => $fond
 									]

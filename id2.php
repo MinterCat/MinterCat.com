@@ -82,8 +82,8 @@ echo "
 " . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 <br>
 "; 
-if ($pricebd != '') {echo "Price in shop: <b>$pr</b> MINTERCAT<br><br>";}
-echo $language['Approximate_cost'] . " <b>$price</b> MINTERCAT<br><br>
+if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
+echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
 
 echo "

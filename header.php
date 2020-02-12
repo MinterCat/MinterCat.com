@@ -292,12 +292,12 @@ echo "
             </div>
 
           </div>
-
+		  
           <div class='wallet profile-section__wallet'>
             <div class='wallet__title'>Balance:</div>
             <div class='wallet__sum'>$balance</div>
 			<img src='".$site."img/svg/logo.svg' class='wallet__avatar'>
-			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 MINTERCAT</div>
+			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 $coin</div>
 				<form>
 					<button class='button' id='buycat' name='buycat' type='submit'>" . $language['Buy'] . "</button>
 				</form>

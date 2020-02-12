@@ -101,7 +101,7 @@ for ($i = $q; $i <= $result; $i++)
 							#$block $bgimg<br>
 							<hr>
 							$name $gender<br>
-							$prr MINTERCAT<br>
+							$prr $coin<br>
 						</div>
 					</div>";
 }

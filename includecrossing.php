@@ -76,11 +76,11 @@ echo $text='
 		<div class="calс_tab_p_2">
 			<div class="calс_tab_slider" data-min="0" data-val="24" data-step="1" data-max="24"></div>
 			<div class="calс_tab_slider_grad">
-				<div class="calс_tab_slider_num calс_tab_slider_num_1">240 MINTERCAT</div>
-				<div class="calс_tab_slider_num calс_tab_slider_num_25">180 MINTERCAT</div>
-				<div class="calс_tab_slider_num calс_tab_slider_num_50">120 MINTERCAT</div>
-				<div class="calс_tab_slider_num calс_tab_slider_num_75">60 MINTERCAT</div>
-				<div class="calс_tab_slider_num calс_tab_slider_num_100">1 MINTERCAT</div>
+				<div class="calс_tab_slider_num calс_tab_slider_num_1">240 '.$coin.'</div>
+				<div class="calс_tab_slider_num calс_tab_slider_num_25">180 '.$coin.'</div>
+				<div class="calс_tab_slider_num calс_tab_slider_num_50">120 '.$coin.'</div>
+				<div class="calс_tab_slider_num calс_tab_slider_num_75">60 '.$coin.'</div>
+				<div class="calс_tab_slider_num calс_tab_slider_num_100">1 '.$coin.'</div>
 			</div><!--frontBox_n8_calk_polz_tabl-->
 		</div><!--calс_tab_p_2-->
 	</div><!--calс_tab_1-->

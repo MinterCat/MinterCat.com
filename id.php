@@ -88,8 +88,8 @@ echo "
 "; 
 
 
-if ($pricebd != '') {echo "Price in shop: <b>$pr</b> MINTERCAT<br><br>";}
-echo $language['Approximate_cost'] . " <b>$price</b> MINTERCAT<br><br>
+if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
+echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
 echo '<br><br><br><br><br><br><br>';
 	/*
@@ -172,14 +172,14 @@ $eggblock = $blocks - $id;
 												{
 												echo "
 												<input id='craft' name='craft' type='submit' value='" . $language['Craft'] . "'>
-												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> MINTERCAT.</p>
+												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> $coin.</p>
 												";
 												}
 												if (($fishtail == 0) and ($tentacles == 4) and ($horns == 3))
 												{
 												echo "
 												<input id='craft' name='craft' type='submit' value='" . $language['Craft'] . "'>
-												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> MINTERCAT.</p>
+												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> $coin.</p>
 												";
 												}
 												echo "
@@ -206,7 +206,7 @@ $eggblock = $blocks - $id;
 " . $language['gender'] . ": $gender_p<br>
 " . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 <br>
-" . $language['Approximate_cost'] . " <b>$pr</b> MINTERCAT<br><br>
+" . $language['Approximate_cost'] . " <b>$pr</b> $coin<br><br>
 ";
 if ($sale == 1)
 	{
