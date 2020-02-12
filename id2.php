@@ -4,13 +4,13 @@ $db_cats = new Cats();
 $result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
 $payloads1 = $result->fetchArray(1);
 
-$addr = $payloads1[0]['addr'];
-$img = $payloads1[0]['img'];
+$addr = $payloads1['addr'];
+$img = $payloads1['img'];
 
 $json4 = file_get_contents($site.'api?img='.$img);
 $payloads4 = json_decode($json4,true);
 
-	$pricebd = $payloads1[0]['price'];
+	$pricebd = $payloads1['price'];
 
 	$cats = $payloads4['cats'];
 			
@@ -35,7 +35,7 @@ switch ($series)
 	case 5: {$u = '#6AF2D7'; break;}
 	case 999: {$u = '#9BF5DA'; break;}
 }
-/*
+
 $db_gen = new Gen();
 $result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id);
 $payloadsID = $result2->fetchArray(1);
@@ -54,7 +54,7 @@ $timestamp2 = date('Y-m-d',strtotime("$nd"));
 		
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
-*/
+
 if ($gender == '♂') {
 	$gender_p = $language['Male'] . " ($gender)";
 }
@@ -69,8 +69,8 @@ echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='../img/Cat$img.webp' type='image/webp' width='350' height='350'>
-			<img src='../png.php?png=$img' width='350' height='350'>
+			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
 			#$id<br>
@@ -85,6 +85,7 @@ echo "
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> MINTERCAT<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> MINTERCAT<br><br>
 ";
+
 echo "
 <br>
 1
@@ -120,6 +121,5 @@ $horns
 </picture>
 ";
 }
-
 	echo '<br><br><br><br><br><br><br>
 	</center>';

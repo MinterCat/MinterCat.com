@@ -1,6 +1,5 @@
 <?php
 $id = $_GET['id'];
-
 $db_cats = new Cats();
 $result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
 $payloads1 = $result->fetchArray(1);
@@ -74,8 +73,8 @@ echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='../img/Cat$img.webp' type='image/webp' width='350' height='350'>
-			<img src='../png.php?png=$img' width='350' height='350'>
+			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
 			#$id<br>
