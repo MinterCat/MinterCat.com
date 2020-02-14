@@ -20,7 +20,6 @@ $ch = curl_init();
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true
     ]);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    print($response);
+$response = curl_exec($ch);
+curl_close($ch);
+print($response);
