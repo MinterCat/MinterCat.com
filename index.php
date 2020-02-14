@@ -1,8 +1,8 @@
 <?php
 ob_start();
 //========================================
-include('../../config/config.php');
-include('../function.php');
+include('../config/config.php');
+include('function.php');
 session_start();
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
