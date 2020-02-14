@@ -21,8 +21,9 @@ if (isset($language))
 				if ($address!='')
 					{
 						$db_users = new Users();
-						$db_users->query('UPDATE "table" SET language = "'.$language .'" WHERE address = "'. $address .'"');
+						$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
 					}
+				$_SESSION['session_language'] = $language;
 				header("Location: $link"); exit;												
 			}
 	}
