@@ -37,7 +37,7 @@ switch ($series)
 	case 5: {$u = '#6AF2D7'; break;}
 	case 999: {$u = '#9BF5DA'; break;}
 }
-/*
+
 $db_gen = new Gen();
 $result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id);
 $payloadsID = $result2->fetchArray(1);	
@@ -57,7 +57,7 @@ $timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
 		
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
-*/
+
 if ($gender == '♂') {
 	$gender_p = $language['Male'] . " ($gender)";
 }
