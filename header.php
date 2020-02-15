@@ -9,8 +9,6 @@ session_start();
 include('../../config/config.php');
 include('../function.php');
 
-include('../function.php');
-
 function getBlockByHash ($api,$hash)
 {
     $api = new MinterAPI($api);

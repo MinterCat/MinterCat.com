@@ -63,8 +63,8 @@ function Language ($lang)
     $jsonCalled = json_decode($data);
     return $jsonCalled;
 }
-// $check_hesh = CHECK_HESH($api, $hash, $check);
-function CHECK_HESH ($api, $hash, $check)
+// $CheckHash = CheckHash($api, $hash, $check);
+function CheckHash ($api, $hash, $check)
 {
     $api = new MinterAPI($api);
     if ($check == true)

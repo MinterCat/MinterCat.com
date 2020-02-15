@@ -2,11 +2,26 @@
 declare(strict_types=1);
 require_once('../../config/minterapi/vendor/autoload.php');
 use Minter\MinterAPI;
+use Minter\SDK\MinterTx;
+use Minter\SDK\MinterCoins\MinterMultiSendTx;
 
 session_start();
 include('../../config/config.php');
 include('../function.php');
-$api = new MinterAPI($api.'/');
+
+function getBlockByHash ($api,$hash)
+{
+    $api = new MinterAPI($api);
+    return $api->getTransaction($hash);
+}
+
+function TransactoinSendDebug ($api,$transaction)
+{
+    $api = new MinterAPI($api);
+    return $api->send($transaction);
+}
+
+$api_node = new MinterAPI($api.'/');
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
@@ -15,6 +30,9 @@ $decript = json_decode($decript_text,true);
 $address = $decript['address'];
 $private_key = $decript['private_key'];
 ob_start();
+
+$db_cats = new Cats();
+$db_rss = new RSS();
 $db_users = new Users();
 
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
@@ -26,8 +44,8 @@ if ($check_language != '') {$lang = $check_language;} else {$lang = 'English';}
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 
-$nonce = $api->getNonce($address);
-$response = $api->getBalance($address);
+$nonce = $api_node->getNonce($address);
+$response = $api_node->getBalance($address);
 $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
 echo "
