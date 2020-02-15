@@ -6,23 +6,23 @@ $payloads1 = $result->fetchArray(1);
 
 $addr = $payloads1['addr'];
 
-if ($addr == '') {header('Location: '.$site.'profile'); exit;}
+if ($address == '') {header('Location: '.$site.'profile'); exit;}
 $img = $payloads1['img'];
 
 $json4 = file_get_contents($site.'api?img='.$img);
 $payloads4 = json_decode($json4,true);
 
-	$pricebd = $payloads1['price'];
+$pricebd = $payloads1['price'];
 
-	$cats = $payloads4['cats'];
+$cats = $payloads4['cats'];
 			
-	$series = $cats[0]['series'];
-	$rarity = $cats[0]['rarity'];
-	$rarity = $rarity * 100;
-	$price = $cats[0]['price'];
-	$name1 = $cats[0]['name'];
-	$count = $cats[0]['count'];
-	$gender = $cats[0]['gender'];
+$series = $cats[0]['series'];
+$rarity = $cats[0]['rarity'];
+$rarity = $rarity * 100;
+$price = $cats[0]['price'];
+$name1 = $cats[0]['name'];
+$count = $cats[0]['count'];
+$gender = $cats[0]['gender'];
 
 $name2 = $payloads1['name'];
 if (($name2 != '') or ($name2 != null)) {$name = $name2;} else {$name = $name1;}
@@ -68,7 +68,7 @@ if ($gender == '0') {
 	$gender_p = $language['Undefined'];
 }
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $pr = $pricebd;}
-//if($addr == $address){
+if($addr == $address){
 echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
@@ -91,10 +91,10 @@ echo "
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
-echo '<br><br><br><br><br><br><br>';
-	/*
-if ($gender != '0') {
-if (isset($_GET['send2']))
+
+if ($gender != '0') 
+{
+if (isset($_POST['send2']))
 	{
 		echo "
 		<form>
@@ -109,7 +109,7 @@ if (isset($_GET['send2']))
 	}
 else
 	{
-		if (isset($_GET['sale']))
+		if (isset($_POST['sale']))
 					{
 						echo "
 						<form'>
@@ -123,69 +123,50 @@ else
 						";
 					}
 				else
-					{			$id = $_GET['id'];
-								$json10 = file_get_contents("https://mintercat.com/kron/id.php?id=$id");
-								$payloads10 = json_decode($json10,true);
-								$sale = $payloads10[0]['sale'];
-										if ($sale == 1)
-											{
-												echo "
-												<form>
-												<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
-												<input id='nosale' name='nosale' type='submit' value='" . $language['Not_sell'] . "'>
-												<input id='id' name='id' type='hidden' value='$id'>
-												</form>
-												";
-											}
-										else
-											{
-												echo "
-												<form>
-												<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
-												<input id='sale' name='sale' type='submit' value='" . $language['Sell'] . "'>
-												<input id='id' name='id' type='hidden' value='$id'>
-												</form>
-												";
-											}
+					{		
+						$sale = $payloads1['sale'];
+						if ($sale == 1)
+							{
+								echo "
+								<form>
+								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
+								<input id='nosale' name='nosale' type='submit' value='" . $language['Not_sell'] . "'>
+								<input id='id' name='id' type='hidden' value='$id'>
+								</form>
+								";
+							}
+						else
+							{
+								echo "
+								<form>
+								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
+								<input id='sale' name='sale' type='submit' value='" . $language['Sell'] . "'>
+								<input id='id' name='id' type='hidden' value='$id'>
+								</form>
+								";
+							}
 					}
-					if (isset($_GET['back']))
-						{
-							header("Location: $site/profile"); exit;
-						}		
+				if (isset($_POST['back']))
+					{
+						header('Location: '.$site.'profile'); exit;
+					}		
 				
 	}
 }else{
-$jsonblock = file_get_contents($api.'/status');
-$status = json_decode($jsonblock,true);
-$blocks = $status['result']['latest_block_height'];
-$block = $block+1;
-$eggblock = $blocks - $id;
-										if ($eggblock >= 17280)
-											{
-												echo "
-												<br>
-												<form action=''>
-												<input id='in' name='in' type='submit' value='" . $language['Hatching_egg'] . "'>
-												<input id='id' name='id' type='hidden' value='$id'>
-												";
-												if (($fishtail == 4) and ($tentacles == 9) and ($horns == 1))
-												{
-												echo "
-												<input id='craft' name='craft' type='submit' value='" . $language['Craft'] . "'>
-												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> $coin.</p>
-												";
-												}
-												if (($fishtail == 0) and ($tentacles == 4) and ($horns == 3))
-												{
-												echo "
-												<input id='craft' name='craft' type='submit' value='" . $language['Craft'] . "'>
-												<p>" . $language['Attention_The_cost_of_crafting'] . " <b>500</b> $coin.</p>
-												";
-												}
-												echo "
-												</form>
-												";
-											}
+$status = 'https://explorer-api.minter.network/api/v1/status';
+$statuspayload = json_decode($status,true);
+$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
+$eggblock = $latestBlockHeight - $id;
+	if ($eggblock >= 17280)
+		{
+			echo "
+			<br>
+			<form action=''>
+			<input id='in' name='in' type='submit' value='" . $language['Hatching_egg'] . "'>
+			<input id='id' name='id' type='hidden' value='$id'>
+			</form>
+			";
+		}
 }
 
 }else{
@@ -194,8 +175,8 @@ $eggblock = $blocks - $id;
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='../img/Cat$img.webp' type='image/webp' width='350' height='350'>
-			<img src='../png.php?png=$img' width='350' height='350'>
+			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
 			#$id<br>
@@ -210,19 +191,18 @@ $eggblock = $blocks - $id;
 ";
 if ($sale == 1)
 	{
-if ($balance > $pricebd) {
-echo "
-<form'>
-   <input id='buy' name='buy' type='submit' value='" . $language['Buy'] . "'>
-   <input id='id' name='id' type='hidden' value='$id'>
-   <input id='addr' name='addr' type='hidden' value='$addr'>
-   <input id='pricebd' name='pricebd' type='hidden' value='$pricebd'>
- </form>
-  ";
- }	
+		if ($balance > $pricebd) 
+			{
+				echo "
+				<form'>
+				   <input id='buy' name='buy' type='submit' value='" . $language['Buy'] . "'>
+				   <input id='id' name='id' type='hidden' value='$id'>
+				   <input id='addr' name='addr' type='hidden' value='$addr'>
+				   <input id='pricebd' name='pricebd' type='hidden' value='$pricebd'>
+				 </form>
+				  ";
+			 }
 	}
 }
-
 	echo '<br><br><br><br><br><br><br>
 	</center>';
-*/

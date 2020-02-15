@@ -1,4 +1,9 @@
 <?php
+declare(strict_types=1);
+require_once('../../config/minterapi/vendor/autoload.php');
+use Minter\MinterAPI;
+use Minter\SDK\MinterTx;
+use Minter\SDK\MinterCoins\MinterMultiSendTx;
 //========================================
 include('../../config/config.php');
 include('../function.php');
@@ -26,7 +31,39 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
-if ($check_language == '') {
+if ($address != '')
+{
+function getBlockByHash ($api,$hash)
+{
+    $api = new MinterAPI($api);
+    return $api->getTransaction($hash);
+}
+
+function TransactoinSendDebug ($api,$transaction)
+{
+    $api = new MinterAPI($api);
+    return $api->send($transaction);
+}
+
+$api_node = new MinterAPI($api.'/');
+
+$private_key = $decript['private_key'];
+
+$db_cats = new Cats();
+$db_rss = new RSS();
+
+$nonce = $api_node->getNonce($address);
+$response = $api_node->getBalance($address);
+$balance = intval(($response->result->balance->$coin)/10**18);
+if ($balance == '') {$balance = 0;}
+$nick = $data['nick'];
+$active = 1;
+include('../header4.php');
+//-------------------------------
+include('../id.php');
+//-------------------------------
+include('../footer.php');
+}else{
 $header = "<div class='footer__logo'>Minter<span class='footer__logo-dark'>Cat Explorer</span></div>";
 $title = "<title>MinterCat | Explorer</title>";
 $menu = "
@@ -43,13 +80,4 @@ include('../header3.php');
 include('../id2.php');
 //-------------------------------
 include('../footer3.php');
-
-}else{
-
-$active = 1;
-include('../header.php');
-//-------------------------------
-include('../id.php');
-//-------------------------------
-include('../footer.php');
 }
