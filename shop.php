@@ -166,7 +166,7 @@ switch ($series)
 echo "
 	<div class='cat_block' style='background: $u'>
 		<div class='cat_img'>
-			<a href='cat?id=$block'>
+			<a href='".$site."cat?id=$block'>
 				<picture>
 					<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
 					<img src='".$site."png.php?png=$img'>
