@@ -127,7 +127,7 @@ for ($i = $q; $i <= $result; $i++)
 {
 		$pricebd = $data[$i]['price'];
 		$img = $data[$i]['img'];
-		$id = $data[$i]['stored_id'];
+		$block = $data[$i]['stored_id'];
 		$addr = $data[$i]['addr'];
 		if ($addr == $address) {$bgimg = '<font color="red"><b>(Ваш)</b></font>';} else {$bgimg = '';}
 		
@@ -166,7 +166,7 @@ switch ($series)
 echo "
 	<div class='cat_block' style='background: $u'>
 		<div class='cat_img'>
-			<a href='cat?id=$id'>
+			<a href='cat?id=$block'>
 				<picture>
 					<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
 					<img src='".$site."png.php?png=$img'>
@@ -174,7 +174,7 @@ echo "
 			</a>
 		</div>
 		<div class='cat_text'>
-			#$id $bgimg<br>
+			#$block $bgimg<br>
 			$name $gender
 			<hr>
 			$pricebd $coin
