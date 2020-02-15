@@ -4,23 +4,22 @@ $db_cats = new Cats();
 $result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
 $payloads1 = $result->fetchArray(1);
 
-$addr = $payloads1['addr'];
 $img = $payloads1['img'];
 
 $json4 = file_get_contents($site.'api?img='.$img);
 $payloads4 = json_decode($json4,true);
 
-	$pricebd = $payloads1['price'];
+$pricebd = $payloads1['price'];
 
-	$cats = $payloads4['cats'];
+$cats = $payloads4['cats'];
 			
-	$series = $cats[0]['series'];
-	$rarity = $cats[0]['rarity'];
-	$rarity = $rarity * 100;
-	$price = $cats[0]['price'];
-	$name1 = $cats[0]['name'];
-	$count = $cats[0]['count'];
-	$gender = $cats[0]['gender'];
+$series = $cats[0]['series'];
+$rarity = $cats[0]['rarity'];
+$rarity = $rarity * 100;
+$price = $cats[0]['price'];
+$name1 = $cats[0]['name'];
+$count = $cats[0]['count'];
+$gender = $cats[0]['gender'];
 
 $name2 = $payloads1[0]['name'];
 if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
@@ -90,16 +89,16 @@ echo "
 <br>
 1
 <picture>
-  <source srcset='../img/gen/Normal.webp' type='image/webp' width='40' height='40'>
-  <img src='../png2.php?png=Normal' width='40' height='40'>
+  <source srcset='".$site."img/gen/Normal.webp' type='image/webp' width='40' height='40'>
+  <img src='".$site."png2.php?png=Normal' width='40' height='40'>
 </picture>
 ";
 if ($fishtail != 0) {
 echo "	
 $fishtail
 <picture>
-  <source srcset='../img/gen/Fish.webp' type='image/webp' width='40' height='40'>
-  <img src='../png2.php?png=Fish' width='40' height='40'>
+  <source srcset='".$site."img/gen/Fish.webp' type='image/webp' width='40' height='40'>
+  <img src='".$site."png2.php?png=Fish' width='40' height='40'>
 </picture>
 ";
 }
@@ -107,8 +106,8 @@ if ($tentacles != 0) {
 echo "	
 $tentacles
 <picture>
-  <source srcset='../img/gen/Sprut.webp' type='image/webp' width='40' height='40'>
-  <img src='../png2.php?png=Sprut' width='40' height='40'>
+  <source srcset='".$site."img/gen/Sprut.webp' type='image/webp' width='40' height='40'>
+  <img src='".$site."png2.php?png=Sprut' width='40' height='40'>
 </picture>
 ";
 }
@@ -116,8 +115,8 @@ if ($horns != 0) {
 echo "	
 $horns
 <picture>
-  <source srcset='../img/gen/Horns.webp' type='image/webp' width='40' height='40'>
-  <img src='../png2.php?png=Horns' width='40' height='40'>
+  <source srcset='".$site."img/gen/Horns.webp' type='image/webp' width='40' height='40'>
+  <img src='".$site."png2.php?png=Horns' width='40' height='40'>
 </picture>
 ";
 }

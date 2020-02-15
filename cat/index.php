@@ -26,7 +26,7 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
-if ($address == '') {
+if ($check_language == '') {
 $header = "<div class='footer__logo'>Minter<span class='footer__logo-dark'>Cat Explorer</span></div>";
 $title = "<title>MinterCat | Explorer</title>";
 $menu = "
