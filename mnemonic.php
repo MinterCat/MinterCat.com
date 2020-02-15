@@ -40,7 +40,7 @@ $data = $result->fetchArray(1);
 
 if ($data)
 	{
-		header("Location: $site/profile"); exit;
+		header('Location: '.$site.'profile'); exit;
 	}
 else
 	{
@@ -58,5 +58,5 @@ else
 		$nick = "ID$id";
 		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
 		
-		header("Location: $site/profile"); exit;
+		header('Location: '.$site.'profile'); exit;
 	}

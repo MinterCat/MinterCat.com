@@ -8,6 +8,13 @@ use Minter\SDK\MinterCoins\MinterMultiSendTx;
 include('../../config/config.php');
 include('../function.php');
 
+$cript_mnemonic = $_SESSION['cript_mnemonic'];
+$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
+$decript = json_decode($decript_text,true);
+
+$address = $decript['address'];
+$private_key = $decript['private_key'];
+
 function getBlockByHash ($api,$hash)
 {
     $api = new MinterAPI($api);
@@ -150,23 +157,8 @@ if ($balance > $komsa)
 			VALUES ("'.$block.'", "'.$fish.'", "'.$tentacl.'", "'.$horn.'")');
 
 
-		$text = "$login Crossed $id1 with $id2 Cat $block";
-		$text = str_replace(' ', '_', $text);
+		$text = '{"type":3,"img":'.$img.',"mom":"0x888...","dad":"0x777..."}';
 
-		$db_rss->query('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"title" VARCHAR,
-					"text" VARCHAR,
-					"date" VARCHAR,
-					"author" VARCHAR,
-					"additionally" VARCHAR,
-					"c1" VARCHAR,
-					"c2" VARCHAR,
-					"c3" VARCHAR
-				)');
-
-		$db_rss->exec('INSERT INTO "table" ("title", "text", "date", "author", "additionally", "c1", "c2", "c3")
-					VALUES ("Crossed", "'.$text.'", "", "'.$login.'", "", "'.$block.'", "'.$id1.'", "'.$id2.'")');
 		$fond = $komsa/2; //50% in found MinterCat
 		$me = $fond/2; //25%
 		$kamil = $fond/2; //25%
@@ -182,7 +174,7 @@ if ($balance > $komsa)
 				$chainId = MinterTx::TESTNET_CHAIN_ID;
 			}
 		$tx = new MinterTx([
-							'nonce' => $api->getNonce($address),
+							'nonce' => $api_node->getNonce($address),
 							'chainId' => $chainId,
 							'gasPrice' => 1,
 							'gasCoin' => $coin,
@@ -209,7 +201,7 @@ if ($balance > $komsa)
 							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
 						]);
 
-		$transaction = $tx->sign($privat_key_mintercat); 
+		$transaction = $tx->sign($private_key); 
 		echo $transaction;
 		$get_hesh = TransactoinSendDebug($api,$transaction);
 		$hash = "0x".$get_hesh->result->hash;

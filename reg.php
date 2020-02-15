@@ -6,8 +6,6 @@ use Minter\SDK\MinterWallet;
 
 include('../config/config.php');
 
-				$api = new MinterAPI($api);
-
 				$wallet = MinterWallet::create();
 				$mnemonic = $wallet['mnemonic'];
 				$address = $wallet['address'];
@@ -67,7 +65,7 @@ include('../config/config.php');
 				$rand_keys = array_rand($input, 1);
 				$img2 = $input[$rand_keys[0]];
 					
-				$status = 'https://explorer-api.minter.network/api/v1/status'; //status blocks
+				$status = 'https://explorer-api.minter.network/api/v1/status';
 				$statuspayload = json_decode($status,true);
 				$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
 				$block = $latestBlockHeight + 1;
@@ -90,4 +88,4 @@ include('../config/config.php');
 				sleep(1);
 				$a=8; $_SESSION['a'] = $a;		
 				//------------------------------		
-				header("Location: $site/profile"); exit;
+				header('Location: '.$site.'profile'); exit;

@@ -343,7 +343,7 @@ echo "
             <div class='wallet__sum'>$balance</div>
 			<img src='".$site."img/svg/logo.svg' class='wallet__avatar'>
 			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 $coin</div>
-				<form>
+				<form method='post'>
 					<button class='button' id='buycat' name='buycat' type='submit'>" . $language['Buy'] . "</button>
 				</form>
 			</div>
@@ -351,6 +351,83 @@ echo "
       </div>
     </div>
  ";
+ 
+ if (isset($_POST['buycat']))
+{
+	if ($balance > 50) 
+			{
+				$img = rand(9990,9999); //egg
+				
+				$status = 'https://explorer-api.minter.network/api/v1/status';
+				$statuspayload = json_decode($status,true);
+				$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
+				//------------------------------
+				$text = '{"type":0,"img":'.$img.'}';
+				
+				$fond = 50/2; //50% in found MinterCat
+				$me = $fond/2; //25%
+				$kamil = $fond/2; //25%
+				
+				$api_node = new MinterAPI($api);
+				
+				if ($test != 'TESTNET')
+					{
+						$chainId = MinterTx::MAINNET_CHAIN_ID;
+					}
+				else
+					{
+						$chainId = MinterTx::TESTNET_CHAIN_ID;
+					}
+				$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => $chainId,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
+												'value' => $me
+											], [
+												'coin' => $coin,
+												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+												'value' => $kamil
+											],	[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => $fond
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+
+				$transaction = $tx->sign($private_key);
+				echo $transaction;
+				$get_hesh = TransactoinSendDebug($api,$transaction);
+				$hash = "0x".$get_hesh->result->hash;
+				//------------------------------
+				$cats_db->exec('CREATE TABLE IF NOT EXISTS "table" (
+					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+					"stored_id" INTEGER,
+					"addr" VARCHAR,
+					"img" INTEGER,
+					"price" INTEGER,
+					"sale" INTEGER
+						)');
+				$cats_db->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
+					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
+				
+				$a=8; $_SESSION['a'] = $a;	
+				//------------------------------
+				header('Location: '.$site.'profile'); exit;
+			}
+}
+ 
 $g = ob_get_contents();
 ob_end_clean();
 
