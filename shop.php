@@ -117,8 +117,7 @@ echo $ttt;
 //-------------------------------
 $data = array();
 while ($res = $results->fetchArray(1)){array_push($data, $res);}
-$payloads = json_encode($data);
-$result = (count($payloads)-1);
+$result = (count($data)-1);
 $countq = ceil(($result+1)/12);
 echo '<div class="cat_content_none"><div class="cat_content">';
 if ($id==""){$id=1;}
@@ -126,10 +125,10 @@ $q = ($id-1)*12; if ($q<0){$q=0;}
 $result=($id*12)-1;
 for ($i = $q; $i <= $result; $i++)
 {
-		$pricebd = $payloads[$i]['price'];
-		$img = $payloads[$i]['img'];
-		$id = $payloads[$i]['stored_id'];
-		$addr = $payloads[$i]['addr'];
+		$pricebd = $data[$i]['price'];
+		$img = $data[$i]['img'];
+		$id = $data[$i]['stored_id'];
+		$addr = $data[$i]['addr'];
 		if ($addr == $address) {$bgimg = '<font color="red"><b>(Ваш)</b></font>';} else {$bgimg = '';}
 		
 		$cats = $payloads4['cats'];
@@ -148,7 +147,7 @@ for ($i = $q; $i <= $result; $i++)
 					
 					}
 			}
-$name2 = $payloads[$i]['name'];
+$name2 = $data[$i]['name'];
 if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 if ($cats != '') {
 if ($gender == '0') {$gender = '';}
