@@ -1,12 +1,6 @@
 <?php
-echo '
-<link rel="stylesheet" href="../css/pagination.css">
-<link rel="stylesheet" href="../css/style6.css">
-<link rel="stylesheet" href="../css/lk.css">
-';
-
-include('../function.php');
-$json_api = JSON($site.'api');
+$json4 = file_get_contents($site.'api');
+$payloads4 = json_decode($json4,true);
 
 echo "<center>	
 				<form>
@@ -24,7 +18,7 @@ $key = $_GET['key'];
 $id = $_GET['id'];
 $select = $_GET['select'];
 $ttt = '';
-if ($_GET['key']=='')
+if ($key == '')
 {if ($select=='') {$key=1;}else{if ($select=='On breeds') {$key=5;}else{$key=6;}}}
 if (isset($_GET['submit2']))
 {$key=2;}
@@ -65,8 +59,6 @@ if ((isset($_GET['submit6'])) or ($select=='The cheapest'))
 		';
 	}
 echo $ttt;
-
-$db_cats = new Cats();
 //-------------------------------
 	if ($key == 1) 
 	{
@@ -141,7 +133,7 @@ for ($i = $q; $i <= $result; $i++)
 		$addr = $payloads[$i]['addr'];
 		if ($addr == $address) {$bgimg = '<font color="red"><b>(Ваш)</b></font>';} else {$bgimg = '';}
 		
-		$cats = $json_api->cats;
+		$cats = $payloads4['cats'];
 		$ccount = (count($cats))-1;
 		for ($y = 0; $y<=$ccount;$y++)
 			{

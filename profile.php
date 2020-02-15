@@ -1,6 +1,4 @@
 <?php
-$db_cats = new Cats();
-
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 
