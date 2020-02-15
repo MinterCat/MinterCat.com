@@ -11,8 +11,7 @@ echo "<center>
 				<input id='submit3' name='submit3' type='submit' value='" . $language['The_oldest'] . "'>
 				<input id='submit4' name='submit4' type='submit' value='" . $language['on_breeds'] . "'>
 				</form>
-		</center>
-				";	
+		</center>";	
 
 $key = $_GET['key'];
 $id = $_GET['id'];
@@ -170,8 +169,8 @@ echo "
 		<div class='cat_img'>
 			<a href='cat?id=$id'>
 				<picture>
-					<source srcset='../img/Cat$img.webp' type='image/webp'>
-					<img src='../png.php?png=$img'>
+					<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+					<img src='".$site."png.php?png=$img'>
 				</picture>
 			</a>
 		</div>
