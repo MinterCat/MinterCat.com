@@ -6,7 +6,6 @@ use Minter\SDK\MinterWallet;
 ob_start();
 //========================================
 include('../config/config.php');
-include('function.php');
 
 class Users extends SQLite3
 {
