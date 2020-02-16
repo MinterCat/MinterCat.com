@@ -6,6 +6,8 @@ include('../function.php');
 session_start();
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
+
+if ($cript_mnemonic != '') {
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
 $decript = json_decode($decript_text,true);
 
@@ -16,7 +18,7 @@ $db_users = new Users();
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
-
+}
 if ($check_language != '') 
 	{$lang = $check_language; $lang_site = $site.'profile';} 
 else 
@@ -30,7 +32,7 @@ $language = json_decode($jsonlanguage,true);
 //========================================
 $header = "<center>
 	<div class='footer__logo'>Langu<span class='footer__logo-dark'>age</span></div>
-	<form action='../lng.php'>
+	<form method='POST'>
 		<p>
 		<button id='language' name='language' value='Russian'>РУССКИЙ</button>
 		<button id='language' name='language' value='English'>ENGLISH</button>
@@ -45,7 +47,7 @@ $header = "<center>
 		</p>
 		<br>
 		<button id='language' name='language' value='language'>MY LANGUAGE</button>
-		</form>
+	</form>
 </center>";
 $title = "<title>MinterCat | Language</title>";
 $menu = "
@@ -62,6 +64,32 @@ echo "<div class='about main__about'>";
 echo '</div>';
 include('../footer3.php');
 //-------------------------------
+
+if (isset($_POST['language']))
+	{
+		$link = $_POST['link'];
+		$language = $_POST['language'];
+		if ($language == 'language')
+			{
+				header('Location: https://poeditor.com/join/project/4zQZx6tHPM'); exit;												
+			}
+		else
+			{
+				$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$language.json");
+				$cript_mnemonic = $_SESSION['cript_mnemonic'];
+				$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
+				$decript = json_decode($decript_text,true);
+
+				$address = $decript['address'];
+				if ($address!='')
+					{
+						$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
+					}
+				$_SESSION['session_language'] = $language;
+				header("Location: $link"); exit;												
+			}
+	}
+
 $g = ob_get_contents();
 ob_end_clean();
 
