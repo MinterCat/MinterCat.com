@@ -1,8 +1,30 @@
 <?php
+declare(strict_types=1);
+require_once('../config/minterapi/vendor/autoload.php');
+use Minter\MinterAPI;
+use Minter\SDK\MinterWallet;
 ob_start();
 //========================================
 include('../config/config.php');
 include('function.php');
+
+class Users extends SQLite3
+{
+    function __construct()
+    {
+        $this->open('../config/users.sqlite');
+    }
+}
+class Cats extends SQLite3
+	{
+		function __construct()
+		{
+			$this->open('../config/cats.sqlite');
+		}
+	}
+$db_users = new Users();
+$db_cats = new Cats();
+
 session_start();
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
@@ -10,8 +32,6 @@ $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $cry
 $decript = json_decode($decript_text,true);
 
 $address = $decript['address'];
-
-$db_users = new Users();
 
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);
@@ -27,6 +47,7 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
+$api_node = new MinterAPI($api);
 echo "
 <!DOCTYPE html>
 <html lang='en'>
@@ -40,17 +61,17 @@ echo "
   <title>MinterCat</title>
 
   <!-- Including favicon -->
-  <link rel='icon' href='img/favicon.png'>
+  <link rel='icon' href='".$site."img/favicon.png'>
 
   <!-- Including swiper slider -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.0/css/swiper.min.css' media='all and (max-width: 480px)'>
 
   <!-- Including styles -->
-  <link rel='stylesheet' href='css/styles.min.css'>
-  <link rel='stylesheet' href='css/social.css'>
-  <link rel='stylesheet' href='css/pagination.css'>
+  <link rel='stylesheet' href='".$site."css/styles.min.css'>
+  <link rel='stylesheet' href='".$site."css/social.css'>
+  <link rel='stylesheet' href='".$site."css/pagination.css'>
 
-	<script type='text/javascript' src='js/jquery.js'></script>
+	<script type='text/javascript' src='".$site."js/jquery.js'></script>
 </head>
 
 <body>
@@ -145,11 +166,11 @@ echo "
             </svg>
 
             <a href='#' class='nav-top__link active'>" . $language['Home'] . "</a>
-            <a href='profile' class='nav-top__link'>" . $language['Profile'] . "</a>
+            <a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
             <a href='#' class='nav-top__link'>" . $language['event'] . "</a>
-            <a href='dev' class='nav-top__link'>" . $language['Developers'] . "</a>
-			<a href='language' class='nav-top__link'>Language</a>
-			<a href='explorer' class='nav-top__link'>Explorer</a>
+            <a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a>
+			<a href='".$site."language' class='nav-top__link'>Language</a>
+			<a href='".$site."explorer' class='nav-top__link'>Explorer</a>
 
             <ul class='social nav-top__social'>
 
@@ -203,7 +224,7 @@ echo "
           <div class='intro__content'>
 
             <div class='intro__logo-mobile'>
-              <img src='img/svg/logo.svg' class='intro__logo-mobile-img'>
+              <img src='".$site."img/svg/logo.svg' class='intro__logo-mobile-img'>
             </div>
 
             <div class='intro__text'>
@@ -228,7 +249,7 @@ echo "
 
           <div class='intro__img-mobile'>
 				
-				<img src='img/@1x/card-cat.webp'>
+				<img src='".$site."img/@1x/card-cat.webp'>
 
           </div>
 
@@ -281,8 +302,8 @@ echo "
                 <div class='post__img-wrapper'>
                   <div class='post__img-inner'>
                     <picture>
-			<source srcset='img/Cat1.webp' type='image/webp' class='post__img'>
-			<img src='png.php?png=1' class='post__img'>
+			<source srcset='".$site."img/Cat1.webp' type='image/webp' class='post__img'>
+			<img src='".$site."png.php?png=1' class='post__img'>
 			</picture>
                   </div>
                 </div>
@@ -300,8 +321,8 @@ echo "
                 <div class='post__img-wrapper post--reverse__img-wrapper'>
                   <div class='post__img-inner'>
 				  <picture>
-			<source srcset='img/Cat902.webp' type='image/webp' class='post__img'>
-			<img src='png.php?png=902' class='post__img'>
+			<source srcset='".$site."img/Cat902.webp' type='image/webp' class='post__img'>
+			<img src='".$site."png.php?png=902' class='post__img'>
 			</picture>
                   </div>
                 </div>
@@ -319,8 +340,8 @@ echo "
                 <div class='post__img-wrapper'>
                   <div class='post__img-inner'>
                     <picture>
-			<source srcset='img/Cat22.webp' type='image/webp' class='post__img'>
-			<img src='png.php?png=22' class='post__img'>
+			<source srcset='".$site."img/Cat22.webp' type='image/webp' class='post__img'>
+			<img src='".$site."png.php?png=22' class='post__img'>
 			</picture>
                   </div>
                 </div>
@@ -366,7 +387,7 @@ echo "
 
 		<span class='footer__copyright'>" . $language['All_rights_are_registered'] . "</span><br>
 		<span class='footer__copyright'>
-		<a href='dev' target='_blank' class='nav-top__link'>API</a> | <a href='pco' target='_blank' class='nav-top__link'>PCO</a> | <a href='explorer' target='_blank' class='nav-top__link'>Explorer</a>
+		<a href='".$site."dev' target='_blank' class='nav-top__link'>API</a> | <a href='".$site."pco' target='_blank' class='nav-top__link'>PCO</a> | <a href='".$site."explorer' target='_blank' class='nav-top__link'>Explorer</a>
 		</span>
 
       </div>
@@ -375,7 +396,7 @@ echo "
 
   <div class='overlay overlay--white overlay--login'>
     <div class='modal-login'>
-		<form class='modal-login__form' action='mnemonic.php' method='POST'>
+		<form class='modal-login__form' method='POST'>
 			<div class='get-wallet-info'>
 				<br>
 				<textarea cols='36' rows='3' class='form-control' name='mnemonic' id='mnemonic' placeholder='Mnemonic phrase'></textarea>
@@ -385,16 +406,16 @@ echo "
 			<input id='Enter' name='Enter' type='submit' class='btn modal-login__btn' value='" . $language['Enter'] . "'>
 			<br>
 		
-			<a href='reg.php'><input type='submit' class='btn modal-login__btn' value='" . $language['Register'] . "'></a>
+			<input id='Register' name='Register' type='submit' class='btn modal-login__btn' value='" . $language['Register'] . "'>
 			<br>
 			<a href='#' class='modal-login__link'>Alternative login to the site</a>
 		</form>
 	  
 
       <div class='modal-login__cats'>
-        <img src='img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
-        <img src='img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
-        <img src='img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
+        <img src='".$site."img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
+        <img src='".$site."img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
+        <img src='".$site."img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
       </div>
 
     </div>
@@ -429,9 +450,9 @@ echo "
       </form>
 
       <div class='modal-login__cats'>
-        <img src='img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
-        <img src='img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
-        <img src='img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
+        <img src='".$site."img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
+        <img src='".$site."img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
+        <img src='".$site."img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
       </div>
 
     </div>
@@ -446,7 +467,7 @@ echo "
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.0/js/swiper.min.js'></script>
-  <script src='js/_custom.js'></script>
+  <script src='".$site."js/_custom.js'></script>
 
   <script>
     var scene = document.getElementById('scene');
@@ -480,3 +501,115 @@ echo "
 
 </html>
 ";
+
+if (isset($_POST['Enter']))
+	{
+		$mnemonic = $_POST['mnemonic'];
+		$seed = MinterWallet::mnemonicToSeed($mnemonic);
+		$privateKey = MinterWallet::seedToPrivateKey($seed);
+		$publicKey = MinterWallet::privateToPublic($privateKey);
+		$address = MinterWallet::getAddressFromPublicKey($publicKey);
+
+		$arr = array(
+				'mnemonic' => $mnemonic,
+				'address' => $address,
+				'private_key' => $privateKey
+			);
+
+		$json = json_encode($arr, JSON_UNESCAPED_UNICODE);
+
+		$cript_mnemonic = openssl_encrypt($json,$crypt_method,$crypt_key,$crypt_options,$crypt_iv);
+		$_SESSION['cript_mnemonic'] = $cript_mnemonic;
+		//------------------------------
+
+		$result = $db_users->query('SELECT address FROM "table" WHERE address="'.$address.'"');
+		$data = $result->fetchArray(1);
+
+		if ($data)
+			{
+				header('Location: '.$site.'profile'); exit;
+			}
+		else
+			{
+				$db_users->exec('CREATE TABLE IF NOT EXISTS "table" (
+					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+					"address" VARCHAR,
+					"nick" VARCHAR,
+					"language" VARCHAR
+				)');
+				$db_users->exec('INSERT INTO "table" ("address", "nick", "language")
+					VALUES ("'.$address.'", "", "")');
+				$result = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"');
+				$data = $result->fetchArray(1);
+				$id = $data['id'];
+				$nick = "ID$id";
+				$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
+				
+				header('Location: '.$site.'profile'); exit;
+			}
+	}
+if (isset($_POST['Register']))
+	{
+		$wallet = MinterWallet::create();
+		$mnemonic = $wallet['mnemonic'];
+		$address = $wallet['address'];
+		$privateKey = $wallet['private_key'];
+
+		$arr = array(
+				'mnemonic' => $mnemonic,
+				'address' => $address,
+				'private_key' => $privateKey
+				);
+
+		$json = json_encode($arr, JSON_UNESCAPED_UNICODE);
+
+		$cript_mnemonic = openssl_encrypt($json,$crypt_method,$crypt_key,$crypt_options,$crypt_iv);
+		$_SESSION['cript_mnemonic'] = $cript_mnemonic;
+		//------------------------------
+		$db_users->exec('CREATE TABLE IF NOT EXISTS "table" (
+					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+					"address" VARCHAR,
+					"nick" VARCHAR,
+					"language" VARCHAR
+				)');
+		$db_users->exec('INSERT INTO "table" ("address", "nick", "language")
+					VALUES ("'.$address.'", "", "")');
+
+		$result = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"');
+		$data = $result->fetchArray();
+		$id = $data['id'];
+		$nick = "ID$id";
+		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
+		//------------------------------		
+		$input = array(1001, 1003, 1004, 1005, 1006);
+		$rand_keys = array_rand($input, 1);
+		$img = $input[$rand_keys[0]];
+
+		$input = array(1002, 1007, 1008, 1009, 1010);
+		$rand_keys = array_rand($input, 1);
+		$img2 = $input[$rand_keys[0]];
+					
+		$status = 'https://explorer-api.minter.network/api/v1/status';
+		$statuspayload = json_decode($status,true);
+		$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
+		$block = $latestBlockHeight + 1;
+		//------------------------------
+
+		$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
+					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+					"stored_id" INTEGER,
+					"addr" VARCHAR,
+					"img" INTEGER,
+					"price" INTEGER,
+					"sale" INTEGER
+						)');
+		$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
+					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
+		$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img2.'", "0", "0")');
+		//------------------------------
+		sleep(1);
+		$a=8; $_SESSION['a'] = $a;		
+		//------------------------------		
+		header('Location: '.$site.'profile'); exit;
+	}
