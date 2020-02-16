@@ -6,6 +6,7 @@ use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 
 session_start();
+$session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
 
@@ -40,7 +41,12 @@ $data = $result->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
-if ($check_language != '') {$lang = $check_language;} else {$lang = 'English';}
+if ($check_language != '') 
+	{$lang = $check_language;} 
+else 
+	{
+		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
+	}
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 
