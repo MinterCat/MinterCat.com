@@ -27,6 +27,8 @@ $db_cats = new Cats();
 session_start();
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
+
+if ($cript_mnemonic != '') {
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
 $decript = json_decode($decript_text,true);
 
@@ -35,7 +37,7 @@ $address = $decript['address'];
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
-
+}
 if ($check_language != '') 
 	{$lang = $check_language;} 
 else 
