@@ -60,6 +60,7 @@ for ($i = $q; $i <= $result; $i++)
 			case 5: {$u = '#6AF2D7'; break;}
 			case 999: {$u = '#9BF5DA'; break;}
 		}
+		if ($img != '') {
 				echo "
 					<div class='cat_block' style='background: $u'>
 						<div class='cat_img'>
@@ -77,7 +78,7 @@ for ($i = $q; $i <= $result; $i++)
 							$prr $coin<br>
 						</div>
 					</div>";
-}
+}}
 echo "</div></div>";
 }
 echo "<div class='cat_form'>";

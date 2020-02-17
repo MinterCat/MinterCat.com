@@ -25,6 +25,7 @@ function TransactoinSendDebug ($api,$transaction)
 $api_node = new MinterAPI($api.'/');
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
+if ($cript_mnemonic != '') {
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
 $decript = json_decode($decript_text,true);
 
@@ -54,6 +55,7 @@ $nonce = $api_node->getNonce($address);
 $response = $api_node->getBalance($address);
 $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
+}else{header('Location: '.$site.'exit.php'); exit;}
 echo "
 <!DOCTYPE html>
 <html lang='en'>
