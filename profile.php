@@ -14,24 +14,13 @@ if ($a==7) {echo $text = "<center><blockquote>" . $language['Operation_is_not_po
 if ($a==8) {echo $text = "<center><blockquote>Before starting the game, do not forget to <a href='".$site."wallet'>save your mnemonic phrase.</a><br>It will replace your login and password to enter the game. </blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 
 $key = $_POST['key'];
-if ($_POST['key']=='')
-{
-	$key=1;
-}//коты
-if (isset($_POST['submit']))
-{
-	$key=2;
-}//яйца
-if (isset($_POST['submit2']))
-{
-	$key=1;
-}
 if ($key == 2)
 {
 	$results = $db_cats->query('SELECT * FROM "table" WHERE addr="' . $address . '" AND img>"9000"');
 }
-if ($key == 1)
+else
 {
+	$key = 1;
 	$results = $db_cats->query('SELECT * FROM "table" WHERE addr="'.$address.'"');
 }
 
@@ -110,19 +99,20 @@ echo "</div></div>";
 echo "<br><div class='cat_form'>";
 if ($key == 2)
 {
+	$key2 = 1;
 	echo "	
 				<form method='post'>
 				<input id='submit2' name='submit2' type='submit' value='" . $language['Cats'] . "'>
-				<input id='key' name='key' type='hidden' value='$key'>
+				<input id='key' name='key' type='hidden' value='$key2'>
 				</form>
 				";
 }
-if ($key == 1)
-{
+else
+{	$key2 = 2;
 	echo "	
 				<form method='post'>
 				<input id='submit' name='submit' type='submit' value='" . $language['Eggs'] . "'>
-				<input id='key' name='key' type='hidden' value='$key'>
+				<input id='key' name='key' type='hidden' value='$key2'>
 				</form>
 				";
 }
@@ -134,7 +124,7 @@ $idp2 = $id + 2;
 
 echo "
 <br>
-<div class='pagination' style='background-color: #9584de'>
+<div class='pagination' style='background-color: #9584de' color: white;>
 <a href='#'>$id " . $language['page_of'] . " $countq</a>
 </div>
 ";

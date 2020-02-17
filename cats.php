@@ -1,24 +1,28 @@
 <?php
 echo '<link rel="stylesheet" href="'.$site.'css/lk.css">';
-$json_api = JSON($site.'api');
-$Total_count = $json_api->count;
-echo "<center><h4>" . $language['Total_number_of_cats'] . " $Total_count</h4></center>";
-$result = count($json_api->cats);
+$json4 = file_get_contents($site.'api');
+$payloads4 = json_decode($json4,true);
+$count4 = $payloads4['count'];
+$cats = $payloads4['cats'];
+echo "<center><h4>" . $language['Total_number_of_cats'] . " $count4</h4></center>";
+$result = count($cats);
 $countq = ceil(($result)/12);
 echo '<div class="cat_content_none"><div class="cat_content">';
+
 $id = $_POST['id'];
 if ($id==''){$id=1;}
 $q = ($id-1)*12; if ($q<0){$q=0;}
 $result=($id*12)-1;
 for ($y = $q; $y <= $result; $y++)
 {
-	$series = $json_api->cats->$y->series;
-	$rarity = ($json_api->cats->$y->rarity)*100;
-	$price = $json_api->cats->$y->price;
-	$name = $json_api->cats->$y->name;
-	$count = $json_api->cats->$y->count;
-	$img = $json_api->cats->$y->img;
-	$gender = $json_api->cats->$y->gender;
+	$series = $cats[$y]['series'];
+	$rarity = $cats[$y]['rarity'];
+	$rarity = $rarity * 100;
+	$price = $cats[$y]['price'];
+	$name = $cats[$y]['name'];
+	$count = $cats[$y]['count'];
+	$img = $cats[$y]['img'];
+	$gender = $cats[$y]['gender'];
 										
 switch ($series) 
 {
