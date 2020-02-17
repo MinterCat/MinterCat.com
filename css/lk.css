@@ -3,6 +3,27 @@ img, source{
 	text-decoration: none; /*убираем подчеркивание*/
 }
 
+.explorer_block {
+	width: 200px;
+	text-decoration: none;
+	border-radius: 10px; /*скругление*/
+	/*
+	border: 1px solid grey;
+	background: #cccccc;
+	*/
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+.explorer_content {
+	margin-top: 10px;
+	margin-left: 230px;
+	margin-right: 230px;
+	text-align: center;
+	text-decoration: none; /*убираем подчеркивание*/
+}
+
 .cat_content_none {
 	width: 100%;
 	height: auto;

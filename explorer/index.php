@@ -38,8 +38,12 @@ $menu = "
 <a href='".$site."rss' class='nav-top__link'>RSS</a>
 ";
 $nick = $_GET['nick'];
+if ($nick == '') 
+{
+	$nick = $_POST['nick'];
+}
 include('../header3.php');
 //-------------------------------
-if (isset($_GET['nick'])) {include('nick.php');} else {include('explorer.php');}
+if ($nick!='') {include('nick.php');} else {include('explorer.php');}
 //-------------------------------
 include('../footer3.php');

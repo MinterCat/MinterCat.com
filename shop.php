@@ -3,7 +3,7 @@ $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 
 echo "<center>	
-				<form>
+				<form method='post'>
 				<p>" . $language['Sort'] . ":</p>
 				<input id='submit5' name='submit5' type='submit' value='My cats'>
 				<input id='submit' name='submit' type='submit' value='" . $language['The_cheapest'] . "'>
@@ -13,26 +13,26 @@ echo "<center>
 				</form>
 		</center>";	
 
-$key = $_GET['key'];
-$id = $_GET['id'];
-$select = $_GET['select'];
+$key = $_POST['key'];
+$id = $_POST['id'];
+$select = $_POST['select'];
 $ttt = '';
 if ($key == '')
 {if ($select=='') {$key=1;}else{if ($select=='On breeds') {$key=5;}else{$key=6;}}}
-if (isset($_GET['submit2']))
+if (isset($_POST['submit2']))
 {$key=2;}
-if (isset($_GET['submit3']))
+if (isset($_POST['submit3']))
 {$key=3;}
-if (isset($_GET['submit']))
+if (isset($_POST['submit']))
 {$key=1;}
-if (isset($_GET['submit4']))
+if (isset($_POST['submit4']))
 {$key=4;}
-if ((isset($_GET['submit5'])) or ($select=='On breeds'))
+if ((isset($_POST['submit5'])) or ($select=='On breeds'))
 	{
 		$key=5;
 		$ttt = '
 		<center><br>
-		<form>
+		<form method="post">
 		<select name="select">
 			<option selected id="submit5" name="submit5">On breeds</option>
 			<option id="submit6" name="submit6">The cheapest</option>
@@ -42,12 +42,12 @@ if ((isset($_GET['submit5'])) or ($select=='On breeds'))
 		</center>
 		';
 	}
-if ((isset($_GET['submit6'])) or ($select=='The cheapest'))
+if ((isset($_POST['submit6'])) or ($select=='The cheapest'))
 	{
 		$key=6;
 		$ttt = '
 		<center><br>
-		<form>
+		<form method="post">
 		<select name="select">
 			<option id="submit5" name="submit5">On breeds</option>
 			<option selected id="submit6" name="submit6">The cheapest</option>
@@ -187,18 +187,44 @@ $idm1 = $id - 1;
 $idm2 = $id - 2;
 $idp1 = $id + 1;
 $idp2 = $id + 2;
+
 echo "
-<ul class='pagination'>
-	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
-  <li><a href='?id=$idm1&key=$key'>«</a></li>
-  ";
+<br>
+<div class='pagination' style='background-color: #9584de'>
+<a href='#'>$id " . $language['page_of'] . " $countq</a>
+</div>
+";
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">«</a>
+<input name="id" type="hidden" value="'.$idm1.'">
+<input name="key" type="hidden" value="'.$key.'">
+</form>
+</div>
+';
   for ($p = 1; $p <= $countq; $p++)
   {
 	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-	  echo "<li><a href='?id=$p&key=$key'>$p</a></li>";}
+		echo '
+		<div class="pagination">
+		<form method="post">
+		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
+		<input name="id" type="hidden" value="'.$p.'">
+		<input name="key" type="hidden" value="'.$key.'">
+		</form>
+		</div>
+		';
+	  }
   }
-echo "
-  <li><a href='?id=$idp1&key=$key'>»</a></li>
-</ul>
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">»</a>
+<input name="id" type="hidden" value="'.$idp1.'">
+<input name="key" type="hidden" value="'.$key.'">
+</form>
 </div>
-";
+</div>
+<br><br><br><br>
+';

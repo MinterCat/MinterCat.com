@@ -9,7 +9,7 @@ $result = count($cats);
 $countq = ceil(($result)/12);
 echo '<div class="cat_content_none"><div class="cat_content">';
 
-$id = $_GET['id'];
+$id = $_POST['id'];
 if ($id==''){$id=1;}
 $q = ($id-1)*12; if ($q<0){$q=0;}
 $result=($id*12)-1;
@@ -63,18 +63,41 @@ $idm1 = $id - 1;
 $idm2 = $id - 2;
 $idp1 = $id + 1;
 $idp2 = $id + 2;
+
 echo "
-<ul class='pagination'>
-	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
-  <li><a href='?id=$idm1'>«</a></li>
-  ";
+<br>
+<div class='pagination' style='background-color: #9584de'>
+<a href='#'>$id " . $language['page_of'] . " $countq</a>
+</div>
+";
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">«</a>
+<input name="id" type="hidden" value="'.$idm1.'">
+</form>
+</div>
+';
   for ($p = 1; $p <= $countq; $p++)
   {
 	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-	  echo "<li><a href='?id=$p'>$p</a></li>";}
+		echo '
+		<div class="pagination">
+		<form method="post">
+		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
+		<input name="id" type="hidden" value="'.$p.'">
+		</form>
+		</div>
+		';
+	  }
   }
-echo "
-<li><a href='?id=$idp1'>»</a></li>
-</ul>
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">»</a>
+<input name="id" type="hidden" value="'.$idp1.'">
+</form>
 </div>
-";
+</div>
+<br><br><br><br>
+';

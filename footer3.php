@@ -1,7 +1,7 @@
 <?php
 echo "
     </main>
-
+<div class='cat_footer'>
     <footer class='footer page__footer page--profile__footer'>
       <div class='container'>
         <div class='footer__logo'>Minter<span class='footer__logo-dark'>Cat</span></div>
@@ -38,7 +38,7 @@ echo "
       </div>
     </footer>
   </div>
-
+</div>
   <script src='".$site."js/scripts.min.js'></script>
 
 </body>

@@ -13,16 +13,16 @@ if ($a==6) {echo $text = "<center><blockquote>" . $language['There_are_not_enoug
 if ($a==7) {echo $text = "<center><blockquote>" . $language['Operation_is_not_possible'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 if ($a==8) {echo $text = "<center><blockquote>Before starting the game, do not forget to <a href='".$site."wallet'>save your mnemonic phrase.</a><br>It will replace your login and password to enter the game. </blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 
-$key = $_GET['key'];
-if ($_GET['key']=='')
+$key = $_POST['key'];
+if ($_POST['key']=='')
 {
 	$key=1;
 }//коты
-if (isset($_GET['submit']))
+if (isset($_POST['submit']))
 {
 	$key=2;
 }//яйца
-if (isset($_GET['submit2']))
+if (isset($_POST['submit2']))
 {
 	$key=1;
 }
@@ -42,7 +42,7 @@ $result = (count($payloads1)-1);
 $countq = ceil(($result+1)/12);
 if ($countq != 0) {
 echo '<div class="cat_content_none"><div class="cat_content">';
-$id = $_GET['id'];
+$id = $_POST['id'];
 if ($id==''){$id=1;}
 $q = ($id-1)*12; if ($q<0){$q=0;}
 $result=($id*12)-1;
@@ -90,8 +90,8 @@ for ($i = $q; $i <= $result; $i++)
 						<div class='cat_img'>
 							<a href='".$site."cat?id=$block'>
 								<picture>
-									<source srcset='../img/Cat$img.webp' type='image/webp'>
-									<img src='../png.php?png=$img'>
+									<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+									<img src='".$site."png.php?png=$img'>
 								</picture>
 							</a>
 						</div>
@@ -109,7 +109,7 @@ echo "<br><div class='cat_form'>";
 if ($key == 2)
 {
 	echo "	
-				<form>
+				<form method='post'>
 				<input id='submit2' name='submit2' type='submit' value='" . $language['Cats'] . "'>
 				<input id='key' name='key' type='hidden' value='$key'>
 				</form>
@@ -118,29 +118,55 @@ if ($key == 2)
 if ($key == 1)
 {
 	echo "	
-				<form>
+				<form method='post'>
 				<input id='submit' name='submit' type='submit' value='" . $language['Eggs'] . "'>
 				<input id='key' name='key' type='hidden' value='$key'>
 				</form>
 				";
 }
 
-$ppm1 = $id - 1;
-$ppm2 = $id - 2;
-$ppp1 = $id + 1;
-$ppp2 = $id + 2;
+$idm1 = $id - 1;
+$idm2 = $id - 2;
+$idp1 = $id + 1;
+$idp2 = $id + 2;
+
 echo "
-<ul class='pagination'>
-	<li><a href='#'>$id " . $language['page_of'] . " $countq</a></li>
-  <li><a href='?id=$ppm1&key=$key'>«</a></li>
-  ";
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $ppm1) || ($p == $ppm2) || ($p == $ppp1) || ($p == $ppp2)) {
-	  echo "<li><a href='?id=$p&key=$key'>$p</a></li>";}
-  }
-echo "
-<li><a href='?id=$ppp1&key=$key'>»</a></li>
-</ul>
+<br>
+<div class='pagination' style='background-color: #9584de'>
+<a href='#'>$id " . $language['page_of'] . " $countq</a>
 </div>
 ";
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">«</a>
+<input name="id" type="hidden" value="'.$idm1.'">
+<input name="key" type="hidden" value="'.$key.'">
+</form>
+</div>
+';
+  for ($p = 1; $p <= $countq; $p++)
+  {
+	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
+		echo '
+		<div class="pagination">
+		<form method="post">
+		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
+		<input name="id" type="hidden" value="'.$p.'">
+		<input name="key" type="hidden" value="'.$key.'">
+		</form>
+		</div>
+		';
+	  }
+  }
+echo '
+<div class="pagination">
+<form method="post">
+<a href="#" onclick="parentNode.submit();">»</a>
+<input name="id" type="hidden" value="'.$idp1.'">
+<input name="key" type="hidden" value="'.$key.'">
+</form>
+</div>
+</div>
+<br><br><br><br>
+';

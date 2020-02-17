@@ -32,7 +32,7 @@ echo "
 </head>
 
 <body>
-
+<div class='cat_header'>
   <svg display='none'>
     <symbol id='illustration' viewBox='0 0 214.72 63.15'>
       <path d='M121.47,21.05h14.75c5.81,0,10.53-4.71,10.53-10.53S142.02,0,136.21,0H26.59
@@ -133,6 +133,6 @@ echo "
 	$header
     </div>
 </center>
-
+</div>
     <main class='main'>
 ";
