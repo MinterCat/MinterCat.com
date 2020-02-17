@@ -16,8 +16,7 @@ $result=($id*12)-1;
 for ($y = $q; $y <= $result; $y++)
 {
 	$series = $cats[$y]['series'];
-	$rarity = $cats[$y]['rarity'];
-	$rarity = $rarity * 100;
+	$rarity = ($cats[$y]['rarity'])*100;
 	$price = $cats[$y]['price'];
 	$name = $cats[$y]['name'];
 	$count = $cats[$y]['count'];
@@ -67,7 +66,7 @@ $idp2 = $id + 2;
 echo "
 <br>
 <div class='pagination' style='background-color: #9584de'>
-<a href='#'>$id " . $language['page_of'] . " $countq</a>
+<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
 </div>
 ";
 echo '
