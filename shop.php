@@ -162,7 +162,7 @@ switch ($series)
 	case 5: {$u = '#6AF2D7'; break;}
 	case 999: {$u = '#9BF5DA'; break;}
 }
-
+if ($img != '') {
 echo "
 	<div class='cat_block' style='background: $u'>
 		<div class='cat_img'>
@@ -180,7 +180,7 @@ echo "
 			$pricebd $coin
 		</div>
 	</div>";
-}
+}}
 }
 echo "</div></div><div class='cat_form'>";
 $idm1 = $id - 1;
