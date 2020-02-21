@@ -1,5 +1,4 @@
 <?php
-echo "<link rel='stylesheet' href='".$site."css/lk.css'>";
 echo '
 <div class="cat_content_none">
 <div class="explorer_content">
@@ -102,4 +101,4 @@ echo "
 
   <div id='users' style='width: 500px; height: 400px;'></div>
 ";
-echo '</div></div></div>';
+echo '</div></div></div><br><br><br>';
