@@ -1,6 +1,6 @@
 <?php
 $active = 1;
-include('../header2.php');
+include('../header.php');
 //-------------------------------
 $mnemonic = $decript['mnemonic'];
 echo "

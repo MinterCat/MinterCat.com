@@ -249,8 +249,7 @@ echo "
                 <div class='profile-info__name'>$nick</div>			
               </div>
 			  
-            </div>
-<a href='".$site."settings' class='nav-top__link'>Setting</a>	
+            </div>	
             <div class='profile-info__item'>
               <div class='profile-info__item-title'></div>
               <div class='profile-info__item-body'> 

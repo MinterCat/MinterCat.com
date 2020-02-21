@@ -1,28 +1,8 @@
 <?php
-declare(strict_types=1);
-require_once('../../config/minterapi/vendor/autoload.php');
-use Minter\MinterAPI;
-use Minter\SDK\MinterTx;
-use Minter\SDK\MinterCoins\MinterMultiSendTx;
-
 session_start();
 $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
-
-function getBlockByHash ($api,$hash)
-{
-    $api = new MinterAPI($api);
-    return $api->getTransaction($hash);
-}
-
-function TransactoinSendDebug ($api,$transaction)
-{
-    $api = new MinterAPI($api);
-    return $api->send($transaction);
-}
-
-$api_node = new MinterAPI($api.'/');
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 if ($cript_mnemonic != '') {
@@ -31,10 +11,7 @@ $decript = json_decode($decript_text,true);
 
 $address = $decript['address'];
 $private_key = $decript['private_key'];
-ob_start();
 
-$db_cats = new Cats();
-$db_rss = new RSS();
 $db_users = new Users();
 
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
@@ -42,6 +19,7 @@ $data = $result->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
+}
 if ($check_language != '') 
 	{$lang = $check_language;} 
 else 
@@ -51,11 +29,6 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 
-$nonce = $api_node->getNonce($address);
-$response = $api_node->getBalance($address);
-$balance = intval(($response->result->balance->$coin)/10**18);
-if ($balance == '') {$balance = 0;}
-}else{header('Location: '.$site.'exit.php'); exit;}
 echo "
 <!DOCTYPE html>
 <html lang='en'>
@@ -221,8 +194,6 @@ echo "
           </li>
             </ul>
 
-            <button class='nav-top__btn-play btn'>" . $language['Play'] . "</button>
-
             <button class='nav-top__close'>
               <svg class='nav-top__close-icon'>
                 <use xlink:href='#close-icon'></use>
@@ -245,22 +216,23 @@ echo "
 
           <div class='avatar profile-section__avatar'>
              <img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
-            <!--button class='avatar__btn'></button-->
           </div>
 
+";
+$d = "onkeyup=". '"' . "var yratext=/['_','\s']/; if(yratext.test(this.value)) alert('Введены запрещенные символы')".'"';
+echo "
           
 		  <div style='position: left'>
 
             <div class='profile-info__item'>
               <div class='profile-info__item-title'>" . $language['My_nickname'] . ":</div>
               <div class='profile-info__item-body'>
-                <div class='profile-info__name'>$nick</div>
                 
-				
-					
-
-					<a href='#clafolowing-dashows' class='profile-info__btn'>" . $language['Edit'] . "</a>
-					
+				<form>
+						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
+						  <input type='submit' id='save' name='save' value='" . $language['Save'] . "'>
+						</form> 
+					</div>
 					
               </div>
             </div>
@@ -292,115 +264,9 @@ function outFunc() {
 </script>
 					  
 </div>
-              </div>
-            </div>
-
-          </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 ";
-$d = "onkeyup=". '"' . "var yratext=/['_','\s']/; if(yratext.test(this.value)) alert('Введены запрещенные символы')".'"';
-echo "
-<div class='anelumen lowingnuska' id='clafolowing-dashows'> 
-					  <a href='#/' class='nedismiseg'></a> 
-					  <figure> 
-					  <h2>" . $language['My_nickname'] . "<a href='#/' class='compatibg-ukastywise' aria-label='Close Modal Box'>×</a></h2> 
-						<form name='test'>
-						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
-						  <input type='submit' id='save' name='save' value='" . $language['Save'] . "'>
-						</form>
-					  </figure> 
-					</div>
-
-          <div class='wallet profile-section__wallet'>
-            <div class='wallet__title'>Balance:</div>
-            <div class='wallet__sum'>$balance</div>
-			<img src='".$site."img/svg/logo.svg' class='wallet__avatar'>
-			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 $coin</div>
-				<form method='post'>
-					<button class='button' id='buycat' name='buycat' type='submit'>" . $language['Buy'] . "</button>
-				</form>
-			</div>
-        </div>
-      </div>
-    </div>
- ";
- 
- if (isset($_POST['buycat']))
-{
-	if ($balance > 50) 
-			{
-				$img = rand(9990,9999); //egg
-				
-				$status = 'https://explorer-api.minter.network/api/v1/status';
-				$statuspayload = json_decode($status,true);
-				$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
-				//------------------------------
-				$text = '{"type":0,"img":'.$img.'}';
-				
-				$fond = 50/2; //50% in found MinterCat
-				$me = $fond/2; //25%
-				$kamil = $fond/2; //25%
-				
-				$api_node = new MinterAPI($api);
-				
-				if ($test != 'TESTNET')
-					{
-						$chainId = MinterTx::MAINNET_CHAIN_ID;
-					}
-				else
-					{
-						$chainId = MinterTx::TESTNET_CHAIN_ID;
-					}
-				$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => $chainId,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-												'value' => $me
-											], [
-												'coin' => $coin,
-												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-												'value' => $kamil
-											],	[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => $fond
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
-
-				$transaction = $tx->sign($private_key);
-				echo $transaction;
-				$get_hesh = TransactoinSendDebug($api,$transaction);
-				$hash = "0x".$get_hesh->result->hash;
-				//------------------------------
-				$cats_db->exec('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"stored_id" INTEGER,
-					"addr" VARCHAR,
-					"img" INTEGER,
-					"price" INTEGER,
-					"sale" INTEGER
-						)');
-				$cats_db->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
-				
-				$a=8; $_SESSION['a'] = $a;	
-				//------------------------------
-				header('Location: '.$site.'profile'); exit;
-			}
-}
- 
-$g = ob_get_contents();
-ob_end_clean();
-
-echo $g;
