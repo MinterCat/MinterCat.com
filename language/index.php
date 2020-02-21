@@ -38,8 +38,14 @@ $menu = "
 	<li><a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a></li>
 	<li><a href='#' class='nav-top__link'>" . $language['event'] . "</a></li>
 	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
-	<li><a href='".$site."explorer' class='nav-top__link active'>Explorer</a>
+	<li><a href='".$site."language' class='nav-top__link active'>Language</a>
+	<ul>
+		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+	</ul>
+	</li>
+	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
 	<ul>
 		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
 		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
@@ -92,8 +98,25 @@ if (isset($_POST['language']))
 						$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
 					}
 				$_SESSION['session_language'] = $language;
-				header("Location: $link"); exit;												
+				header("Location: $lang_site"); exit;												
 			}
+	}
+
+if (isset($_GET['language']))
+	{
+		$language = $_GET['language'];
+		$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$language.json");
+		$cript_mnemonic = $_SESSION['cript_mnemonic'];
+		$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
+		$decript = json_decode($decript_text,true);
+
+		$address = $decript['address'];
+		if ($address!='')
+			{
+				$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
+			}
+		$_SESSION['session_language'] = $language;
+		header("Location: $lang_site"); exit;							
 	}
 
 $g = ob_get_contents();

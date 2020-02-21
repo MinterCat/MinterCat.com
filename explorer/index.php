@@ -34,7 +34,13 @@ $menu = "
 	<li><a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a></li>
 	<li><a href='#' class='nav-top__link'>" . $language['event'] . "</a></li>
 	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
+	<li><a href='".$site."language' class='nav-top__link'>Language</a>
+	<ul>
+		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+	</ul>
+	</li>
 	<li><a href='".$site."explorer' class='nav-top__link active'>Explorer</a>
 	<ul>
 		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
