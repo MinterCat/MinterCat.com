@@ -126,7 +126,7 @@ echo "
     </li>
     <li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
 	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-	<li><a href='".$site."cats' class='nav-top__link'>" . $language['Kitty'] . "</a></li>
+	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
 	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
 </ul>
@@ -145,7 +145,7 @@ echo "
     </li>
     <li><a href='".$site."crossing' class='nav-top__link active'>" . $language['Crossing'] . "</a></li>
 	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-	<li><a href='".$site."cats' class='nav-top__link'>" . $language['Kitty'] . "</a></li>
+	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
 	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
 </ul>
@@ -164,7 +164,7 @@ echo "
     </li>
     <li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
 	<li><a href='".$site."shop' class='nav-top__link active'>" . $language['Shop'] . "</a></li>
-	<li><a href='".$site."cats' class='nav-top__link'>" . $language['Kitty'] . "</a></li>
+	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
 	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
 </ul>
@@ -183,7 +183,7 @@ echo "
     </li>
     <li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
 	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-	<li><a href='".$site."cats' class='nav-top__link active'>" . $language['Kitty'] . "</a></li>
+	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a></li>
 	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
 </ul>
@@ -214,8 +214,6 @@ echo "
 			</div>
           </li>
             </ul>
-
-            <button class='nav-top__btn-play btn'>" . $language['Play'] . "</button>
 
             <button class='nav-top__close'>
               <svg class='nav-top__close-icon'>

@@ -11,7 +11,7 @@ echo "
 
   $title
   
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.0/css/swiper.min.css' media='all and (max-width: 480px)'>
+  <link rel='stylesheet' href='".$site."css/swiper.min.css' media='all and (max-width: 480px)'>
 
 	<link rel='icon' href='".$site."img/favicon.png'>
 	<link rel='stylesheet' href='".$site."css/styles.min.css'>
