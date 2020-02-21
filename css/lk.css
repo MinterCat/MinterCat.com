@@ -14,6 +14,7 @@ a {
 * { /*все теги на странице*/
 			box-sizing: border-box; /*реальная ширина*/
 		}
+
 /*-----------------------
 				HEADER 
 			-----------------------*/
@@ -67,6 +68,66 @@ margin-right: 10px;
 	margin-top: 10px;
 	float: left;
 	text-align: right;
+}
+
+/*-----------------------
+				FOOTER 
+			-----------------------*/
+
+p.footer__name {
+	font-size: 28px;/*размер шрифта*/
+	margin-bottom: 10px;/*отступ снизу*/
+	line-height: normal;/*высота строчки*/
+	font-family: 'Merriweather', serif; /*Шрифт*/
+}
+
+p.footer__social {
+	color: #fff /*цвет белый*/
+}
+
+p.footer__social-icons {
+	color: #fff; /*цвет белый*/
+	font-size: 32px;/*размер шрифта*/
+}
+
+p.footer__social-icons a {
+	color: #fff; /*цвет белый*/
+	text-decoration: none; /*убираем подчеркивание*/
+	margin-right: 30px; /*отступ у иконок*/
+}
+
+p.footer__social-icons a:last-child {
+	margin-right: 0px; /*отступ у последней иконки*/
+}
+
+p.footer__social-icons a:hover{
+	color: green; /*цвет белый*/
+}
+
+.button_circles {
+	font-weight: 700; /*толщина шрифта*/
+	text-decoration: none; /*убираем подчеркивание*/
+	color: white; /*цвет белый*/
+	text-transform: uppercase; /*все буквы заглавные*/
+	letter-spacing: 1.6px; /*между буквами раздвиг*/
+	padding-top: 8px;/*отступ сверху*/
+	padding-bottom: 8px;/*отступ снизу*/
+	padding-left: 23px;/*отступ слева*/
+	padding-right: 23px;/*отступ справа*/
+	
+	display: inline-block; /*обираем отступ*/
+	
+	border-width: 2px; /*ширина рамки*/
+	border-color: #fff; /*цвет рамки*/
+	border-style: solid; /*стиль рамки - прямая неприрывная линия*/
+	border-radius: 50px; /*скругление*/
+	
+	margin-bottom: 13px;/*отступ снизу*/
+}
+
+.button_circles:hover{
+	color: #9584de; /*цвет*/
+	background-color: white; /*цвет рамки*/
 }
 
 img, source{

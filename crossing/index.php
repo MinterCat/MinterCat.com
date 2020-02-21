@@ -85,6 +85,7 @@ echo "
   <script src='".$site."js/slider_jquery-ui.js'></script>
   <script src='".$site."js/slider_jquery.ui.touch-punch.min.js'></script>
   
+  <link rel='stylesheet' href='".$site."css/social.css'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
@@ -264,7 +265,6 @@ echo '
 ';
 
 echo "
-</body>
 <script type='text/javascript'>
   var tooltip = tippy(document.getElementById('heart-btn'));
   var droppedMale;
@@ -314,6 +314,6 @@ echo "
     }
   }
 </script>
-
-</html>
 ";
+//-------------------------------
+include('../footer.php');

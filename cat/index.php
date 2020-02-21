@@ -67,8 +67,8 @@ include('../id.php');
 //-------------------------------
 include('../footer.php');
 }else{
-$header = "<div class='footer__logo'>Minter<span class='footer__logo-dark'>Cat Explorer</span></div>";
-$title = "<title>MinterCat | Explorer</title>";
+echo "<title>MinterCat | Explorer</title>";
+$titles = 'Explorer';
 $menu = "
 <a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a>
 <a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
@@ -78,9 +78,10 @@ $menu = "
 <a href='".$site."explorer' class='nav-top__link active'>Explorer</a>
 <a href='".$site."rss' class='nav-top__link'>RSS</a>
 ";
+//-------------------------------
 include('../header3.php');
 //-------------------------------
 include('../id2.php');
 //-------------------------------
-include('../footer3.php');
+include('../footer.php');
 }

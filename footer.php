@@ -1,5 +1,4 @@
 <?php
-ob_start();
 echo '
 <div class="cat_footer">
     <footer class="footer page__footer page--profile__footer">
@@ -38,15 +37,6 @@ echo '
       </div>
     </footer>
 </div>
-
-  <script src="'.$site.'js/scripts.min.js"></script>
-
 </body>
-
 </html>
 ';
-//-------------------------------
-$g = ob_get_contents();
-ob_end_clean();
-
-echo $g;

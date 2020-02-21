@@ -30,8 +30,20 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
-$header = "<center>
-	<div class='footer__logo'>Langu<span class='footer__logo-dark'>age</span></div>
+echo "<title>MinterCat | Language</title>";
+$titles = 'Language';
+$menu = "
+<a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a>
+<a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
+<a href='#' class='nav-top__link'>" . $language['event'] . "</a>
+<a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a>
+<a href='#' class='nav-top__link active'>Language</a>
+<a href='".$site."explorer' class='nav-top__link'>Explorer</a>
+";
+//-------------------------------
+include('../header3.php');
+//-------------------------------
+echo "<center><br>
 	<form method='POST'>
 		<p>
 		<button id='language' name='language' value='Russian'>РУССКИЙ</button>
@@ -48,21 +60,9 @@ $header = "<center>
 		<br>
 		<button id='language' name='language' value='language'>MY LANGUAGE</button>
 	</form>
-</center>";
-$title = "<title>MinterCat | Language</title>";
-$menu = "
-<a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a>
-<a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
-<a href='#' class='nav-top__link'>" . $language['event'] . "</a>
-<a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a>
-<a href='#' class='nav-top__link active'>Language</a>
-<a href='".$site."explorer' class='nav-top__link'>Explorer</a>
-";
-include('../header3.php');
-echo "<div class='about main__about'>";
+</center><br><br>";
 //-------------------------------
-echo '</div>';
-include('../footer3.php');
+include('../footer.php');
 //-------------------------------
 
 if (isset($_POST['language']))

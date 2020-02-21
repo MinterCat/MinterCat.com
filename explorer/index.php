@@ -26,8 +26,8 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
-$header = "<div class='footer__logo'>Minter<span class='footer__logo-dark'>Cat Explorer</span></div>";
-$title = "<title>MinterCat | Explorer</title>";
+echo "<title>MinterCat | Explorer</title>";
+$titles = 'Explorer';
 $menu = "
 <a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a>
 <a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
@@ -37,13 +37,15 @@ $menu = "
 <a href='".$site."explorer' class='nav-top__link active'>Explorer</a>
 <a href='".$site."rss' class='nav-top__link'>RSS</a>
 ";
+//-------------------------------
+include('../header3.php');
+//-------------------------------
 $nick = $_GET['nick'];
 if ($nick == '') 
 {
 	$nick = $_POST['nick'];
 }
-include('../header3.php');
 //-------------------------------
 if ($nick!='') {include('nick.php');} else {include('explorer.php');}
 //-------------------------------
-include('../footer3.php');
+include('../footer.php');
