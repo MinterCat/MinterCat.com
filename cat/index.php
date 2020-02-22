@@ -60,8 +60,7 @@ $response = $api_node->getBalance($address);
 $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
 $nick = $data['nick'];
-$active = 1;
-include('../header4.php');
+include('../header2.php');
 //-------------------------------
 include('../id.php');
 //-------------------------------
