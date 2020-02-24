@@ -1,5 +1,4 @@
 <?php
-$active = 1;
 include('../header.php');
 //-------------------------------
 $mnemonic = $decript['mnemonic'];

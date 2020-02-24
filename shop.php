@@ -5,11 +5,11 @@ $payloads4 = json_decode($json4,true);
 echo "<center>	
 				<form method='post'>
 				<p>" . $language['Sort'] . ":</p>
-				<input id='submit5' name='submit5' type='submit' value='My cats'>
-				<input id='submit' name='submit' type='submit' value='" . $language['The_cheapest'] . "'>
-				<input id='submit2' name='submit2' type='submit' value='" . $language['Most_expensive'] . "'>
-				<input id='submit3' name='submit3' type='submit' value='" . $language['The_oldest'] . "'>
-				<input id='submit4' name='submit4' type='submit' value='" . $language['on_breeds'] . "'>
+				<input id='key5' name='key5' type='submit' value='My cats'>
+				<input id='key1' name='key1' type='submit' value='" . $language['The_cheapest'] . "'>
+				<input id='key2' name='key2' type='submit' value='" . $language['Most_expensive'] . "'>
+				<input id='key3' name='key3' type='submit' value='" . $language['The_oldest'] . "'>
+				<input id='key4' name='key4' type='submit' value='" . $language['on_breeds'] . "'>
 				</form>
 		</center>";	
 
@@ -18,45 +18,49 @@ $id = $_POST['id'];
 $select = $_POST['select'];
 $ttt = '';
 if ($key == '')
-{if ($select=='') {$key=1;}else{if ($select=='On breeds') {$key=5;}else{$key=6;}}}
-if (isset($_POST['submit2']))
+	{
+		if (($select=='') or (isset($_POST['key1'])))
+			{
+				$key=1;
+			}
+		if ((isset($_POST['key5'])) or ($select=='On breeds'))
+					{
+						$key=5;
+						$ttt = '
+						<center><br>
+						<form method="post">
+						<select name="select">
+							<option selected id="key5" name="key5">On breeds</option>
+							<option id="key6" name="key6">The cheapest</option>
+						</select>
+						<input type="submit" value="Ok">
+						</form>
+						</center>
+						';
+					}
+				if ((isset($_POST['key6'])) or ($select=='The cheapest'))
+					{
+						$key=6;
+						$ttt = '
+						<center><br>
+						<form method="post">
+						<select name="select">
+							<option id="key5" name="key5">On breeds</option>
+							<option selected id="key6" name="key6">The cheapest</option>
+						</select>
+						<input type="submit" value="Ok">
+						</form>
+						</center>
+						';
+					}
+	}
+if (isset($_POST['key2']))
 {$key=2;}
-if (isset($_POST['submit3']))
+if (isset($_POST['key3']))
 {$key=3;}
-if (isset($_POST['submit']))
-{$key=1;}
-if (isset($_POST['submit4']))
+if (isset($_POST['key4']))
 {$key=4;}
-if ((isset($_POST['submit5'])) or ($select=='On breeds'))
-	{
-		$key=5;
-		$ttt = '
-		<center><br>
-		<form method="post">
-		<select name="select">
-			<option selected id="submit5" name="submit5">On breeds</option>
-			<option id="submit6" name="submit6">The cheapest</option>
-		</select>
-		<input type="submit" value="Ok">
-		</form>
-		</center>
-		';
-	}
-if ((isset($_POST['submit6'])) or ($select=='The cheapest'))
-	{
-		$key=6;
-		$ttt = '
-		<center><br>
-		<form method="post">
-		<select name="select">
-			<option id="submit5" name="submit5">On breeds</option>
-			<option selected id="submit6" name="submit6">The cheapest</option>
-		</select>
-		<input type="submit" value="Ok">
-		</form>
-		</center>
-		';
-	}
+
 echo $ttt;
 //-------------------------------
 	if ($key == 1) 
@@ -102,7 +106,7 @@ echo $ttt;
 			addr,
 			sale,
 			price,
-			img FROM "table" WHERE sale="1" AND addr="' . $addr . '" ORDER BY img, price');
+			img FROM "table" WHERE sale="1" AND addr="' . $address . '" ORDER BY img, price');
 	}
 //-------------------------------
 	if ($key == 6) 
@@ -112,7 +116,7 @@ echo $ttt;
 			addr,
 			sale,
 			price,
-			img FROM "table" WHERE sale="1" AND addr="' . $addr . '" ORDER BY price');
+			img FROM "table" WHERE sale="1" AND addr="' . $address . '" ORDER BY price');
 	}
 //-------------------------------
 $data = array();

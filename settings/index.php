@@ -87,12 +87,12 @@ echo "
 			</div>
 		</div>
 	</div>
-	<div class='header_window'>
+<div class='header_window'>
 ";
 $d = "onkeyup=". '"' . "var yratext=/['_','\s']/; if(yratext.test(this.value)) alert('Введены запрещенные символы')".'"';
 echo "
 <div class='logo_float'>
-	<div class='position_left'>
+	<div class='avatar_user'>
 		<div class='avatar profile-section__avatar'>
 			<img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
 		</div>

@@ -22,7 +22,7 @@ function TransactoinSendDebug ($api,$transaction)
     return $api->send($transaction);
 }
 
-$api_node = new MinterAPI($api.'/');
+$api_node = new MinterAPI($api2);
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 if ($cript_mnemonic != '') {
@@ -61,16 +61,19 @@ echo "
 <html lang='en'>
 
 <head>
- <meta charset='utf-8'>
-  <title>MinterCat | $nick</title>
-  <link rel='icon' href='".$site."img/favicon.png'>
-  <link rel='stylesheet' href='".$site."css/styles.min.css'>
-	<link rel='stylesheet' href='".$site."css/style_menu.css'>
-	<link rel='stylesheet' href='".$site."css/social.css'>
-	<link rel='stylesheet' href='".$site."css/pagination.css'>
-	<link rel='stylesheet' href='".$site."css/style_header.css'>
-	<link rel='stylesheet' href='".$site."css/lk.css'>
-	<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>MinterCat | $nick</title>
+	
+<meta charset='utf-8'>
+<link rel='icon' href='".$site."img/favicon.png'>
+<link rel='stylesheet' href='".$site."css/styles.min.css'>
+<link rel='stylesheet' href='".$site."css/style_header.css'>
+<link rel='stylesheet' href='".$site."css/style_menu.css'>
+<link rel='stylesheet' href='".$site."css/pagination.css'>
+<link rel='stylesheet' href='".$site."css/lk.css'>
+<link rel='stylesheet' href='".$site."css/social.css'>
+  
+<link rel='stylesheet' href='".$site."css/normalize.css'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
 <body>

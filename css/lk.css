@@ -28,6 +28,7 @@ a {
 	align-items:center;/*выравнивание содержимого flex бокса по горизонтали*/
 	justify-content:center;/*выравнивание по ширине и по центру*/
 	position:relative;/*позиция относительно родителя(основного блока)*/
+	z-index: 1;
 }
 
 .header_window{
@@ -42,15 +43,19 @@ a {
 	align-items:center;/*выравнивание содержимого flex бокса по горизонтали*/
 	justify-content:center;/*выравнивание по ширине и по центру*/
 	position:relative;/*позиция относительно родителя(основного блока)*/
-	z-index: -9999;
+	z-index: 0;
 }
 
 .position_left{
 
 }
 
-.logo_float{
+.avatar_user{
+float: none;
+}
 
+.logo_float{
+	
 }
 
 .logo_cat{
