@@ -1,15 +1,18 @@
 <?php
-echo '
-<div class="cat_content_none">
-<div class="explorer_content">
-<div class="explorer_block" style="background: #9BF5DA">
-';
+echo "
+<div class='cat_content_none'>
+<div class='explorer_content'>
+<div class='explorer_block'>
+<div class='explorer_block_header'>Transaction</div>
+<div class='explorer_block_content' style='overflow: auto;'>
+";
 $db_rss = new RSS();
 $result = $db_rss->query('SELECT * FROM "table" ORDER BY id DESC LIMIT 10');
 $data = array();
 while ($res = $result->fetchArray(1)){array_push($data, $res);}
 $i = 0;
-    while ($res = $result->fetchArray(1))
+echo '<br>';
+    while ($result->fetchArray(1))
    {
 	 $id=$data[$i]['id'];
      $title=$data[$i]['title'];
@@ -54,7 +57,10 @@ $i = 0;
    echo "<br><br><hr><br>";
    $i += 1;
    }
-echo '</div><div class="explorer_block">';
+echo '</div></div><div class="explorer_block">
+<div class="explorer_block_header">Users</div>
+<div class="explorer_block_content">
+';
 //-----------------------------------
 $db_users = new Users();
 $arr = array('Russian', 'Ukrainian', 'Bulgarian', 'Chinese', 'English', 'French', 'Hebrew', 'Igbo', 'Indonesian', 'Spanish', 'Yoruba');
@@ -99,6 +105,6 @@ echo "
    }
   </script>
 
-  <div id='users' style='width: 500px; height: 400px;'></div>
+  <div id='users' style='width: 460px; height: 400px;'></div>
 ";
-echo '</div></div></div><br><br><br>';
+echo '</div></div></div></div></div><br><br><br>';

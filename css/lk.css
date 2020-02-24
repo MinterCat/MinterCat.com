@@ -191,22 +191,77 @@ img, source{
 }
 
 .explorer_block {
-	width: 200px;
+	width: 500px;
+	height: 500px;
 	text-decoration: none;
 	border-radius: 10px; /*скругление*/
-	/*
-	border: 1px solid grey;
-	background: #cccccc;
-	*/
+
+	border: 2px solid #9584de;
+	/*background: #9BF5DA;*/
+
 	margin-left: 10px;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	float: left;
 }
 .explorer_content {
-	margin-top: 10px;
-	margin-left: 230px;
-	margin-right: 230px;
+	margin-top: 25px;
+	margin-left: 100px;
+	margin-right: 100px;
 	text-align: center;
 	text-decoration: none; /*убираем подчеркивание*/
+}
+
+.explorer_block_header {
+	width: 100%;
+	height: 10%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: none;
+	background-size:cover;/*фон пропорцианально растягивается и заполняется весь блок, внутри которого он находится*/
+	background:#9584de;/*цвет фона*/
+/*выравнивание текста по центру и вертекали*/
+	display:flex;/*определяем блок header как контейнер для flex*/
+	flex-direction:column;/*создание клонок*/
+	justify-content:center;/*выравнивание по ширине и по центру*/
+}
+
+.explorer_block_content {
+	width: 100%;
+	height: 90%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+::-webkit-scrollbar-button {
+background-image:url('');
+background-repeat:no-repeat;
+width:6px;
+height:0px
+}
+
+::-webkit-scrollbar-track {
+/*background-color:#32312e;*/
+box-shadow:0px 0px 3px #000 inset;
+}
+
+::-webkit-scrollbar-thumb {
+-webkit-border-radius: 5px;
+border-radius: 5px;
+background-color:#9584de;
+box-shadow:0px 1px 1px #fff inset;
+background-image:url('http://testnet.mintercat.com/img/@1x/59610063.png');
+background-position:center;
+background-repeat:no-repeat;
+}
+
+::-webkit-resizer{
+background-image:url('');
+background-repeat:no-repeat;
+width:7px;
+height:0px
+}
+
+::-webkit-scrollbar{
+width: 11px;
 }

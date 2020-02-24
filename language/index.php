@@ -30,6 +30,7 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | Language</title>";
 $titles = 'Language';
 $menu = "
@@ -40,9 +41,9 @@ $menu = "
 	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link active'>Language</a>
 	<ul>
-		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
 	</ul>
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
@@ -105,6 +106,7 @@ if (isset($_POST['language']))
 if (isset($_GET['language']))
 	{
 		$language = $_GET['language'];
+		$url = $_GET['url'];
 		$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$language.json");
 		$cript_mnemonic = $_SESSION['cript_mnemonic'];
 		$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
@@ -116,7 +118,7 @@ if (isset($_GET['language']))
 				$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
 			}
 		$_SESSION['session_language'] = $language;
-		header("Location: $lang_site"); exit;							
+		header("Location: $url"); exit;							
 	}
 
 $g = ob_get_contents();

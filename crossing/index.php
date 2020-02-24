@@ -54,6 +54,7 @@ $nonce = $api_node->getNonce($address);
 $response = $api_node->getBalance($address);
 $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }else{header('Location: '.$site.'exit.php'); exit;}
 echo "
 <!DOCTYPE html>
@@ -115,9 +116,9 @@ echo "
 	<li><a href='#' class='nav-top__link '>" . $language['event'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a>
 	<ul>
-		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
 	</ul>
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>

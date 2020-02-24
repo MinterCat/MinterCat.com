@@ -1,5 +1,4 @@
 <?php
-echo '<link rel="stylesheet" href="'.$site.'css/lk.css">';
 $results = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"');
 $data = array();
 while ($res = $results->fetchArray(1)){array_push($data, $res);}

@@ -61,6 +61,7 @@ $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
 $nick = $data['nick'];
 //-------------------------------
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | $nick</title>";
 $titles = '';
 $menu = "
@@ -77,9 +78,9 @@ $menu = "
 	<li><a href='#' class='nav-top__link '>" . $language['event'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a>
 	<ul>
-		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
 	</ul>
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
@@ -460,6 +461,7 @@ echo '<br><br>
 	</center>';
 //-------------------------------
 }else{
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $menu = "
@@ -470,9 +472,9 @@ $menu = "
 	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a>
 	<ul>
-		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
 	</ul>
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link active'>Explorer</a>

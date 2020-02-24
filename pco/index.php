@@ -27,6 +27,7 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | PCO</title>";
 $titles = 'PCO';
 $menu = "
@@ -37,9 +38,9 @@ $menu = "
 	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link'>Language</a>
 	<ul>
-		<li><a href='".$site."language?language=Russian' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French' class='nav-top__link'>FRANÇAIS</a></li>
+		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
+		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
+		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
 	</ul>
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
@@ -52,8 +53,9 @@ $menu = "
 include('../header3.php');
 //-------------------------------
 echo "
+<div class='cat_content' style='text-align: left; float: none;'>
 <p>
-<b>🐈 MINTERCAT</b><br>
+<b><img src='".$site."img/favicon.png' width='20' height='20'> MINTERCAT</b><br>
 MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
 <br>
 <a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>" . $language['Coin'] . " MINTERCAT</a><br>
@@ -120,6 +122,7 @@ MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
 " . $language['Payments_to_players_for_daily'] . "<br>
  • " . $language['is_distributed_among_all_project_developers'] . "<br>
 </p>
+</div>
 ";
 //-------------------------------
 include('../footer.php');
