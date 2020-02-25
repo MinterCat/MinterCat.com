@@ -1,0 +1,9 @@
+*.log
+.htaccess
+.gitignore
+*.md
+refund/
+bot/
+config/
+testnet/
+css/styles.min.css
