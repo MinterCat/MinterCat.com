@@ -58,9 +58,7 @@ include('../header3.php');
 //-------------------------------
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
-$count4 = $payloads4['count'];
 $cats = $payloads4['cats'];
-echo "<center><blockquote>" . $language['Total_number_of_cats'] . " $count4</blockquote></center>";
 $result = count($cats);
 $countq = ceil(($result)/12);
 echo '<div class="cat_content_none"><div class="cat_content">';
