@@ -104,7 +104,6 @@ img, source{
 	height: auto;
 	float: none;
 	background-size:cover;/*фон пропорцианально растягивается и заполняется весь блок, внутри которого он находится*/
-	
 /*выравнивание текста по центру и вертекали*/
 	display:flex;/*определяем блок header как контейнер для flex*/
 	flex-direction:column;/*создание клонок*/
@@ -205,9 +204,7 @@ img, source{
 	float: left;
 }
 .explorer_content {
-	margin-top: 25px;
-	margin-left: 100px;
-	margin-right: 100px;
+	margin: 0 auto; /* Отступ слева и справа */
 	text-align: center;
 	text-decoration: none; /*убираем подчеркивание*/
 }
@@ -231,6 +228,14 @@ img, source{
 	height: 90%;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.explorer_block_icons {
+	width: 200px;
+	height: 200px;
+	text-decoration: none;
+	margin-left: 10px;
+	float: left;
 }
 
 ::-webkit-scrollbar-button {
