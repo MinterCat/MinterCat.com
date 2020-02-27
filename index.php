@@ -24,7 +24,10 @@ class Cats extends SQLite3
 $db_users = new Users();
 $db_cats = new Cats();
 
-session_start();
+//-----------------------
+$base = "explorer/session.txt";
+include('explorer/online.php');
+//-----------------------
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 
@@ -55,24 +58,15 @@ echo "
 
 <head>
   <meta charset='utf-8'>
-
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   
   <title>MinterCat</title>
-
-  <!-- Including favicon -->
   <link rel='icon' href='".$site."img/favicon.png'>
-
-  <!-- Including swiper slider -->
   <link rel='stylesheet' href='".$site."css/swiper.min.css' media='all and (max-width: 480px)'>
-
-  <!-- Including styles -->
   <link rel='stylesheet' href='".$site."css/styles.min.css'>
   <link rel='stylesheet' href='".$site."css/social.css'>
   <link rel='stylesheet' href='".$site."css/pagination.css'>
-
-	<script type='text/javascript' src='".$site."js/jquery.js'></script>
 </head>
 
 <body>
@@ -261,30 +255,7 @@ echo "
         <use xlink:href='#illustration'></use>
       </svg>
 
-    </div>
-<center><blockquote>
-<div id='content'></div>	
-	<script>
-		function show()
-		{
-			$.ajax({
-				url: 'count.php',
-				cache: false,
-				success: function(html){
-					$('#content').html(html);
-				}
-			});
-		}
-	
-	
-	
-		$(document).ready(function(){
-			show();
-			setInterval('show()',1000);
-		});
-		
-	</script>
-</blockquote></center>	
+    </div>	
     <main class='main'>
       <div class='about main__about'>
         <div class='container about__container'>

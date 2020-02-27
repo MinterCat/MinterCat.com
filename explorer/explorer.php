@@ -1,5 +1,30 @@
 <?php
 echo "
+<script type='text/javascript' src='".$site."js/jquery.js'></script>
+<center><blockquote>
+<div id='content'></div>	
+	<script>
+		function show()
+		{
+			$.ajax({
+				url: 'count.php',
+				cache: false,
+				success: function(html){
+					$('#content').html(html);
+				}
+			});
+		}
+	
+	
+	
+		$(document).ready(function(){
+			show();
+			setInterval('show()',1000);
+		});
+		
+	</script>
+</blockquote></center>
+
 <div class='cat_content_none'>
 <div class='explorer_content'>
 <div class='explorer_block'>

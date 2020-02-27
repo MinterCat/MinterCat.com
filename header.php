@@ -5,7 +5,10 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 
-session_start();
+//-----------------------
+$base = "../explorer/session.txt";
+include('../explorer/online.php');
+//-----------------------
 $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');

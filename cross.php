@@ -27,7 +27,10 @@ function TransactoinSendDebug ($api,$transaction)
     return $api->send($transaction);
 }
 
-session_start();
+//-----------------------
+$base = "../explorer/session.txt";
+include('../explorer/online.php');
+//-----------------------
 $db_cats = new Cats();
 $db_gen = new Gen();
 $db_rss = new RSS();

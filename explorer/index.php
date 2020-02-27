@@ -2,7 +2,10 @@
 //========================================
 include('../../config/config.php');
 include('../function.php');
-session_start();
+//-----------------------
+$base = "session.txt";
+include('online.php');
+//-----------------------
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
