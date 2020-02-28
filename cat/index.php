@@ -141,13 +141,13 @@ $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
 $horns = $payloadsID['horns'];
 
-$json2 = file_get_contents($api2."/block?height=$id");
+$json2 = file_get_contents($api3."/block?height=$id");
 $payloads2 = json_decode($json2,true);
 
 $data = $payloads2['result']['time'];
+$nd = explode("T", $data)[0];
 
-$nd = explode('T', $data)[0];
-$timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
+$timestamp2 = date('Y-m-d',strtotime("$nd"));
 		
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);

@@ -43,7 +43,7 @@ $fishtail = $payloadsID[0]['fishtail'];
 $tentacles = $payloadsID[0]['tentacles'];
 $horns = $payloadsID[0]['horns'];
 
-$json2 = file_get_contents($api."/block?height=$id");
+$json2 = file_get_contents($api3."/block?height=$id");
 $payloads2 = json_decode($json2,true);
 
 $data = $payloads2['result']['time'];
