@@ -1,6 +1,7 @@
 <?php
 $png = $_GET['png'];
-$src = __DIR__ . "/img/gen/$png.webp";
+$type = $_GET['type'];
+$src = __DIR__ . "/img/$type/$png.webp";
 $info = pathinfo($src);
  
 $img = imageCreatefromWebp($src);

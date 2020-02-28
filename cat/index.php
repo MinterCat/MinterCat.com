@@ -25,7 +25,6 @@ $db_users = new Users();
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
-$id = $data['id'];
 }
 if ($check_language != '')
 	{$lang = $check_language;}
@@ -37,7 +36,7 @@ else
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
-if ($id != '')
+if ($address != '')
 {
 $api_node = new MinterAPI($api2);
 
@@ -142,7 +141,7 @@ $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
 $horns = $payloadsID['horns'];
 
-$json2 = file_get_contents($api."/block?height=$id");
+$json2 = file_get_contents($api2."/block?height=$id");
 $payloads2 = json_decode($json2,true);
 
 $data = $payloads2['result']['time'];
@@ -463,7 +462,10 @@ if (isset($_POST['back']))
 echo '<br><br>
 	</center>';
 //-------------------------------
-}else{
+}
+else
+{
+//========================================
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
@@ -485,7 +487,13 @@ $menu = "
 		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
 		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
 	</ul></li>
-</ul>
+<li>
+  <form action='../explorer'>
+      <input type='text' placeholder='Поиск..' name='nick'>
+      <button type='submit'><i class='fa fa-search'></i></button>
+  </form>
+</div>
+</li></ul>
 ";
 //-------------------------------
 include('../header3.php');

@@ -50,7 +50,13 @@ $menu = "
 		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
 		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
 	</ul></li>
-</ul>
+<li>
+  <form>
+      <input type='text' placeholder='Поиск..' name='nick'>
+      <button type='submit'><i class='fa fa-search'></i></button>
+  </form>
+</div>
+</li></ul>
 ";
 //-------------------------------
 include('../header3.php');
@@ -61,6 +67,14 @@ if ($nick == '')
 	$nick = $_POST['nick'];
 }
 //-------------------------------
-if ($nick!='') {include('nick.php');} else {include('explorer.php');}
+if ($nick =='')  
+{include('explorer.php');} 
+else 
+{
+	if(mb_stripos($nick,"#") !== false)
+  {
+	  $id = explode("#", $nick)[1];
+	  header('Location: '.$site.'cat?id='.$id); exit;} else {include('nick.php');}
+}
 //-------------------------------
 include('../footer.php');

@@ -1,8 +1,4 @@
 <?php
-//-----------------------
-$base = "session.txt";
-include('online.php');
-//-----------------------
 $results = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"');
 $data = array();
 while ($res = $results->fetchArray(1)){array_push($data, $res);}

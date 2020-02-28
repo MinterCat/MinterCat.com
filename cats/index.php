@@ -51,7 +51,13 @@ $menu = "
 		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
 		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
 	</ul></li>
-</ul>
+<li>
+  <form action='../explorer'>
+      <input type='text' placeholder='Поиск..' name='nick'>
+      <button type='submit'><i class='fa fa-search'></i></button>
+  </form>
+</div>
+</li></ul>
 ";
 //-------------------------------
 include('../header3.php');
