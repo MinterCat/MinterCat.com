@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>MinterCat | Developers</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel='shortcut icon' href='../img/icons/Cats.webp'>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body id="welcome">
+
+	<aside class="left-sidebar">
+		<div class="logo">
+			<a href="#welcome">
+				<img src="../img/icons/Cats.webp" width='50' height='50'>
+				<br>MinterCat | Developers
+			</a>
+		</div>
+		<nav class="left-nav">
+			<ul id="nav">
+				<li class="current"><a href="#welcome">Welcome</a></li>
+				<li><a href="#api">API</a></li>
+				<li><a href="#db">Data base</a></li>
+				<li><a href="#saddr">Explorer | Search by address</a></li>
+				<li><a href="#sid">Explorer | Search by id</a></li>
+				<li><a href="#img">IMG</a></li>
+				<li><a href="#coin">Coin price</a></li>
+				<li><a href="#github">GitHub Files</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="main-wrapper">
+		<div class="main-content">
+			<section id="welcome">
+				<div class="content-header">
+					<h1>Welcome to the MinterCat project!</h1>
+				</div>
+				<div class="welcome">
+
+					<h2 class="twenty">Welcome to the MinterCat project!</h2>
+					<p>The Developers section will help you develop your own app / bot / website with our cats, using our open API</p>
+					<p>This document covers the installation and use of this API and often reveals answers to common problems and
+						issues - read this document thoroughly if you are experiencing any difficulties. If you have any questions that
+						are beyond the scope of this document, feel free to email at <code><a href="mailto:admin@mintercat.com">admin@mintercat.com</a></code>
+						Thank you so much!</p>
+				</div>
+			</section>
+			
+			<section id="api">
+				<div class="content-header">
+					<h1>API</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/</h2>
+				<p>API where you can get all existing types of cats, and also find out how many cats are purchased at the moment.</p><br>
+				<div class="section-content">
+						<li>count - the number of cats purchased at the moment.</li>
+						<li>cats - all existing types of cats.</li>
+						<ul>
+						<li>gender - gender of the cat.</li>
+						<li>name - the Name of the breed.</li>
+						<li>series - release Series. The lower the series, the more expensive the cat.</li>
+						<li>rarity - Rarity. On how many rarely marks a particular cat. Multiply this result by 100 and get the value as a percentage.</li>
+						<li>img - serial number of the cat's avatar.<br>
+						To get an image of the cat's avatar, follow the link -
+		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						</li>
+						<li>count - The number of cats of this breed at the moment.</li>
+						<li>price - the recommended cost of this cat in the MINTERCAT coin.</li>
+						</ul>
+				</div>
+
+			</section>
+			<section id="db">
+			<div class="content-header">
+					<h1>Data base</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/list</h2>
+				<p>All created cats are stored in the database, which can be obtained from the link https://api.mintercat.com/list</p><br>
+<div class="section-content">
+						<li>stored_id - the block where the cat was created.</li>
+						<li>addr - owner of the cat at the moment.</li>
+						<li>id - serial number of the cat.</li>
+						<li>img - serial number of the cat's avatar. <br>
+						To get an image of the cat's avatar, follow the link -
+		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						</li>
+						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
+						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
+				</div>
+			</section>
+			<section id="saddr">
+			<div class="content-header">
+					<h1>Explorer | Search by address</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/cats?addr=Mx...</h2>
+				<p>All cats belonging to the same user, you can get it from the link https://api.mintercat.com/cats?addr=Mx...</p><br>
+<div class="section-content">
+						<li>stored_id - the block where the cat was created.</li>
+						<li>addr - owner of the cat at the moment.</li>
+						<li>id - serial number of the cat.</li>
+						<li>img - serial number of the cat's avatar. <br>
+						To get an image of the cat's avatar, follow the link -
+		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						</li>
+						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
+						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
+				</div>
+			</section>
+			<section id="sid">
+			<div class="content-header">
+					<h1>Explorer | Search by id</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/cats?id=_</h2>
+				<p>Find out which user the cat belongs to, you can follow the link https://api.mintercat.com/cats?id=_ <b><i>block number</i></b></p><br>
+<div class="section-content">
+						<li>stored_id - the block where the cat was created.</li>
+						<li>addr - owner of the cat at the moment.</li>
+						<li>id - serial number of the cat.</li>
+						<li>img - serial number of the cat's avatar. <br>
+						To get an image of the cat's avatar, follow the link -
+		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						</li>
+						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
+						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
+				</div>
+			</section>
+			<section id="img">
+			<div class="content-header">
+					<h1>IMG</h1>
+				</div>
+				<p>All images in the project are used in the format <b><i>.webp</i></b></p><br>
+<div class="section-content">
+<p>To get an image of the cat's avatar, follow the link -
+https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+<br><br>
+Format <b>.webp</b> is supported by all browsers except <b>Apple's Safari</b>.
+For those who need png format, we have written a small utility,
+ converting <b>webp</b> to <b>png</b> on the fly. 
+Just instead</p>
+				<pre class="brush: html">
+					<img src='https://mintercat.com/img/Cat5.webp' width='350' height='350'>
+				</pre>
+<p>use</p>
+<pre class="brush: html">
+					<img src='https://mistercat.com/png.php?png=5' width='350' height='350'>
+				</pre>
+				</div>
+			</section>
+			
+			<section id="coin">
+			<div class="content-header">
+					<h1>Coin price</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/coin</h2>
+				<p>MINTERCAT coin price relative to BIP https://api.mintercat.com/coin</p><br>
+<div class="section-content">
+						<li>estimate - the price of a coin in BIP.</li>
+				</div>
+			</section>
+			
+			<section id="github">
+			<div class="content-header">
+					<h1>GitHub Files</h1>
+				</div>
+				<h2 class="title">https://api.mintercat.com/files</h2>
+				<p>The latest build of the project uploaded to github https://api.mintercat.com/files</p><br>
+			</section>
+<!--==============================================-->			
+		</div>
+	</div>
+
+
+	<!-- Essential JavaScript Libraries
+	==============================================-->
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.nav.js"></script>
+	<script type="text/javascript" src="syntax-highlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushXml.js"></script>
+	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushPhp.js"></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.all()
+	</script>
+	<script type="text/javascript" src="js/custom.js"></script>
+
+</body>
+
+</html>
