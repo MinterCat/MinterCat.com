@@ -93,15 +93,5 @@ if (($tentacles >= 1) and ($horns >= 1) and ($fishtail >= 1))
 	$arr[] = "48";
 }
 
-if (($fishtail == 4) and ($tentacles == 9) and ($horns == 1))
-{
-	$arr[] = "5";
-}
-
-if (($fishtail == 0) and ($tentacles == 4) and ($horns == 3))
-{
-	$arr[] = "30";
-}
-
 $a = array_rand($arr);
 $img = $arr[$a];
