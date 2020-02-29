@@ -75,10 +75,6 @@
 
 .cat_content {
   display: inline-block;
-  margin-top: auto !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-align: center !important;
 }
 
 .ui-droppable-active {
