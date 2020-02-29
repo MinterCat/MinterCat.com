@@ -23,9 +23,9 @@ $data = $result->fetchArray(1);
 $nick = $data['nick'];
 $check_language = $data['language'];
 }
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -39,13 +39,13 @@ echo "
 <head>
  <meta charset='utf-8'>
   <title>MinterCat | $nick</title>
-  <link rel='icon' href='".$site."img/favicon.png'>
-  <link rel='stylesheet' href='".$site."css/normalize.css'>
-  <link rel='stylesheet' href='".$site."css/styles.min.css'>
-  <link rel='stylesheet' href='".$site."css/style_header.css'>
-  <link rel='stylesheet' href='".$site."css/style_menu.css'>
-  <link rel='stylesheet' href='".$site."css/pagination.css'>
-  <link rel='stylesheet' href='".$site."css/lk.css'>
+  <link rel='icon' href='".$site."static/img/favicon.png'>
+  <link rel='stylesheet' href='".$site."static/css/normalize.css'>
+  <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+  <link rel='stylesheet' href='".$site."static/css/style_header.css'>
+  <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
+  <link rel='stylesheet' href='".$site."static/css/pagination.css'>
+  <link rel='stylesheet' href='".$site."static/css/lk.css'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
@@ -100,28 +100,28 @@ echo "
 			<img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
 		</div>
 	</div>
-	<div class='position_left'>" . $language['My_nickname'] . ":               
+	<div class='position_left'>" . $language['My_nickname'] . ":
 				<form>
 						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
 						  <input type='submit' id='save' name='save' value='" . $language['Save'] . "'>
-				</form> 
+				</form>
 
-		
+
 	</div>
 	<div class='position_left'>" . $language['My_wallet'] . ":
-                <input type='text' value='$address' id='myInput'>  
+                <input type='text' value='$address' id='myInput'>
 				  <div class='tooltip'>
 					<button onclick='myFunction()' onmouseout='outFunc()'>
 					  <span class='tooltiptext' id='myTooltip'>Copy to clipboard</span>
 					  " . $language['Copy'] . "
 					  </button>
-					  
+
 <script>
 function myFunction() {
   var copyText = document.getElementById('myInput');
   copyText.select();
   document.execCommand('copy');
-  
+
   var tooltip = document.getElementById('myTooltip');
   tooltip.innerHTML = 'Copied: ' + copyText.value;
 }
@@ -131,7 +131,7 @@ function outFunc() {
   tooltip.innerHTML = 'Copy to clipboard';
 }
 </script>
-					  
+
 				</div>
 	</div>
 </div>

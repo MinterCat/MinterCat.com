@@ -41,9 +41,9 @@ $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
 }
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -60,13 +60,13 @@ echo "
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  
+
   <title>MinterCat</title>
-  <link rel='icon' href='".$site."img/favicon.png'>
-  <link rel='stylesheet' href='".$site."css/swiper.min.css' media='all and (max-width: 480px)'>
-  <link rel='stylesheet' href='".$site."css/styles.min.css'>
-  <link rel='stylesheet' href='".$site."css/social.css'>
-  <link rel='stylesheet' href='".$site."css/pagination.css'>
+  <link rel='icon' href='".$site."static/img/favicon.png'>
+  <link rel='stylesheet' href='".$site."static/css/swiper.min.css' media='all and (max-width: 480px)'>
+  <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+  <link rel='stylesheet' href='".$site."static/css/social.css'>
+  <link rel='stylesheet' href='".$site."static/css/pagination.css'>
 </head>
 
 <body>
@@ -181,7 +181,7 @@ echo "
           </li>
           <li class='social__item'>
 			<div class='social vk'>
-				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>    
+				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>
 			</div>
           </li>
           <li class='social__item'>
@@ -219,7 +219,7 @@ echo "
           <div class='intro__content'>
 
             <div class='intro__logo-mobile'>
-              <img src='".$site."img/svg/logo.svg' class='intro__logo-mobile-img'>
+              <img src='".$site."static/img/svg/logo.svg' class='intro__logo-mobile-img'>
             </div>
 
             <div class='intro__text'>
@@ -243,8 +243,8 @@ echo "
           </div>
 
           <div class='intro__img-mobile'>
-				
-				<img src='".$site."img/@1x/card-cat.webp'>
+
+				<img src='".$site."static/img/@1x/card-cat.webp'>
 
           </div>
 
@@ -255,7 +255,7 @@ echo "
         <use xlink:href='#illustration'></use>
       </svg>
 
-    </div>	
+    </div>
     <main class='main'>
       <div class='about main__about'>
         <div class='container about__container'>
@@ -274,13 +274,13 @@ echo "
                 <div class='post__img-wrapper'>
                   <div class='post__img-inner'>
                     <picture>
-			<source srcset='".$site."img/Cat1.webp' type='image/webp' class='post__img'>
+			<source srcset='".$site."static/img/Cat1.webp' type='image/webp' class='post__img'>
 			<img src='".$site."png.php?png=1' class='post__img'>
 			</picture>
                   </div>
                 </div>
 
-                <p class='post__text'>" . $language['The_Interact_project_is_a_crypto-kitty_on_the_Minter_blockchain'] . " 
+                <p class='post__text'>" . $language['The_Interact_project_is_a_crypto-kitty_on_the_Minter_blockchain'] . "
 				" . $language['Each_kitten_can_be_bought'] . "</p>
               </div>
 
@@ -293,7 +293,7 @@ echo "
                 <div class='post__img-wrapper post--reverse__img-wrapper'>
                   <div class='post__img-inner'>
 				  <picture>
-			<source srcset='".$site."img/Cat902.webp' type='image/webp' class='post__img'>
+			<source srcset='".$site."static/img/Cat902.webp' type='image/webp' class='post__img'>
 			<img src='".$site."png.php?png=902' class='post__img'>
 			</picture>
                   </div>
@@ -312,7 +312,7 @@ echo "
                 <div class='post__img-wrapper'>
                   <div class='post__img-inner'>
                     <picture>
-			<source srcset='".$site."img/Cat22.webp' type='image/webp' class='post__img'>
+			<source srcset='".$site."static/img/Cat22.webp' type='image/webp' class='post__img'>
 			<img src='".$site."png.php?png=22' class='post__img'>
 			</picture>
                   </div>
@@ -347,7 +347,7 @@ echo "
           </li>
           <li class='social__item'>
 			<div class='social vk'>
-				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>    
+				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>
 			</div>
           </li>
           <li class='social__item'>
@@ -377,17 +377,17 @@ echo "
 			<br>
 			<input id='Enter' name='Enter' type='submit' class='btn modal-login__btn' value='" . $language['Enter'] . "'>
 			<br>
-		
+
 			<input id='Register' name='Register' type='submit' class='btn modal-login__btn' value='" . $language['Register'] . "'>
 			<br>
 			<a href='#' class='modal-login__link'>Alternative login to the site</a>
 		</form>
-	  
+
 
       <div class='modal-login__cats'>
-        <img src='".$site."img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
-        <img src='".$site."img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
-        <img src='".$site."img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
+        <img src='".$site."static/img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
+        <img src='".$site."static/img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
+        <img src='".$site."static/img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
       </div>
 
     </div>
@@ -413,18 +413,18 @@ echo "
           <label for='' class='modal-login__label'>" . $language['Password'] . ":</label>
           <input id='password1' name='password1' type='password' class='modal-login__field-text' value=''  maxlength='15' required>
         </div>
-		
+
         <input id='log' name='log' type='submit' class='btn modal-login__btn' value='" . $language['Enter'] . "'>
-        
-		
+
+
         <a href='#' class='modal-login__link'>Back</a>
 
       </form>
 
       <div class='modal-login__cats'>
-        <img src='".$site."img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
-        <img src='".$site."img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
-        <img src='".$site."img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
+        <img src='".$site."static/img/@1x/card-cat.webp' class='modal-login__cat-img-1'>
+        <img src='".$site."static/img/@1x/cat-yellow.webp' class='modal-login__cat-img-2'>
+        <img src='".$site."static/img/@1x/cat-white.webp' class='modal-login__cat-img-3'>
       </div>
 
     </div>
@@ -437,9 +437,9 @@ echo "
 
   </div>
 
-  <script src='".$site."js/parallax.min.js'></script>
-  <script src='".$site."js/swiper.min.js'></script>
-  <script src='".$site."js/_custom.js'></script>
+  <script src='".$site."static/js/parallax.min.js'></script>
+  <script src='".$site."static/js/swiper.min.js'></script>
+  <script src='".$site."static/js/_custom.js'></script>
 
   <script>
     var scene = document.getElementById('scene');
@@ -516,7 +516,7 @@ if (isset($_POST['Enter']))
 				$id = $data['id'];
 				$nick = "ID$id";
 				$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
-				
+
 				header('Location: '.$site.'profile'); exit;
 			}
 	}
@@ -552,7 +552,7 @@ if (isset($_POST['Register']))
 		$id = $data['id'];
 		$nick = "ID$id";
 		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
-		//------------------------------		
+		//------------------------------
 		$input = array(1001, 1003, 1004, 1005, 1006);
 		$rand_keys = array_rand($input, 1);
 		$img = $input[$rand_keys[0]];
@@ -560,7 +560,7 @@ if (isset($_POST['Register']))
 		$input = array(1002, 1007, 1008, 1009, 1010);
 		$rand_keys = array_rand($input, 1);
 		$img2 = $input[$rand_keys[0]];
-					
+
 		$status = 'https://explorer-api.minter.network/api/v1/status';
 		$statuspayload = json_decode($status,true);
 		$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
@@ -581,7 +581,7 @@ if (isset($_POST['Register']))
 					VALUES ("'.$block.'", "'.$address.'", "'.$img2.'", "0", "0")');
 		//------------------------------
 		sleep(1);
-		$a=8; $_SESSION['a'] = $a;		
-		//------------------------------		
+		$a=8; $_SESSION['a'] = $a;
+		//------------------------------
 		header('Location: '.$site.'profile'); exit;
 	}

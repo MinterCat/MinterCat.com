@@ -12,7 +12,7 @@ $payloads4 = json_decode($json4,true);
 $pricebd = $payloads1['price'];
 
 $cats = $payloads4['cats'];
-			
+
 $series = $cats[0]['series'];
 $rarity = $cats[0]['rarity'];
 $rarity = $rarity * 100;
@@ -24,7 +24,7 @@ $gender = $cats[0]['gender'];
 $name2 = $payloads1[0]['name'];
 if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 
-switch ($series) 
+switch ($series)
 {
 	case 0: {$u = '#C1B5FF'; break;}
 	case 1: {$u = '#FFF6B5'; break;}
@@ -50,7 +50,7 @@ $data = $payloads2['result']['time'];
 $nd = explode("T", $data)[0];
 
 $timestamp2 = date('Y-m-d',strtotime("$nd"));
-		
+
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
 
@@ -68,7 +68,7 @@ echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
@@ -80,7 +80,7 @@ echo "
 " . $language['gender'] . ": $gender_p<br>
 " . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 <br>
-"; 
+";
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
@@ -89,33 +89,33 @@ echo "
 <br>
 1
 <picture>
-  <source srcset='".$site."img/gen/Normal.webp' type='image/webp' width='40' height='40'>
+  <source srcset='".$site."static/img/gen/Normal.webp' type='image/webp' width='40' height='40'>
   <img src='".$site."png2.php?png=Normal' width='40' height='40'>
 </picture>
 ";
 if ($fishtail != 0) {
-echo "	
+echo "
 $fishtail
 <picture>
-  <source srcset='".$site."img/gen/Fish.webp' type='image/webp' width='40' height='40'>
+  <source srcset='".$site."static/img/gen/Fish.webp' type='image/webp' width='40' height='40'>
   <img src='".$site."png2.php?png=Fish' width='40' height='40'>
 </picture>
 ";
 }
 if ($tentacles != 0) {
-echo "	
+echo "
 $tentacles
 <picture>
-  <source srcset='".$site."img/gen/Sprut.webp' type='image/webp' width='40' height='40'>
+  <source srcset='".$site."static/img/gen/Sprut.webp' type='image/webp' width='40' height='40'>
   <img src='".$site."png2.php?png=Sprut' width='40' height='40'>
 </picture>
 ";
 }
 if ($horns != 0) {
-echo "	
+echo "
 $horns
 <picture>
-  <source srcset='".$site."img/gen/Horns.webp' type='image/webp' width='40' height='40'>
+  <source srcset='".$site."static/img/gen/Horns.webp' type='image/webp' width='40' height='40'>
   <img src='".$site."png2.php?png=Horns' width='40' height='40'>
 </picture>
 ";

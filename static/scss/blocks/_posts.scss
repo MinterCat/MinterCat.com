@@ -1,0 +1,9 @@
+.posts {
+  position: relative;
+}
+
+.posts__item {
+  &:nth-last-child(n + 2) {
+    margin-bottom: 3rem;
+  }
+}

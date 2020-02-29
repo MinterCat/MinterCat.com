@@ -20,9 +20,9 @@ $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
 
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -58,7 +58,7 @@ include('../header3.php');
 echo "
 <div class='cat_content' style='text-align: left; float: none;'>
 <p>
-<b><img src='".$site."img/favicon.png' width='20' height='20'> MINTERCAT</b><br>
+<b><img src='".$site."static/img/favicon.png' width='20' height='20'> MINTERCAT</b><br>
 MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
 <br>
 <a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>" . $language['Coin'] . " MINTERCAT</a><br>
@@ -92,7 +92,7 @@ MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
  • " . $language['Cost_coverage'] . "<br>
  • " . $language['Bonuses'] . ": <br>
 " . $language['get_people_for_daily'] . " <br>
-" . $language['is_received_by_people'] . "<br> 
+" . $language['is_received_by_people'] . "<br>
  • " . $language['Promotions_large_delegates'] . "<br>
  • " . $language['for_use_in_the_game'] . " <br>
 </p>
@@ -107,7 +107,7 @@ MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
 </p>
 <p style='text-indent: 25px;'>
 <b>" . $language['The_delegation_coins'] . "</b><br>
-" . $language['initial_issue_delegated_per_year'] . " - 
+" . $language['initial_issue_delegated_per_year'] . " -
 <a href='https://minterscan.net/validator/Mp629b5528f09d1c74a83d18414f2e4263e14850c47a3fac3f855f200111111111' target='_blank' class='nav-top__link'>«1%»</a>.<br>
 </p>
 <p style='text-indent: 25px;'>

@@ -20,9 +20,9 @@ $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')
 $data = $result->fetchArray(1);
 $check_language = $data['language'];
 
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -82,8 +82,8 @@ for ($y = $q; $y <= $result; $y++)
 	$count = $cats[$y]['count'];
 	$img = $cats[$y]['img'];
 	$gender = $cats[$y]['gender'];
-										
-switch ($series) 
+
+switch ($series)
 {
 	case 0: {$u = '#C1B5FF'; break;}
 	case 1: {$u = '#FFF6B5'; break;}
@@ -101,7 +101,7 @@ echo "
 	<div class='cat_block' style='background: $u'>
 		<div class='cat_img'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>
 			<img src='".$site."png.php?png=$img'>
 			</picture>
 		</div>

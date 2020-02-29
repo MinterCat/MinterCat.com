@@ -1,15 +1,15 @@
 <?php
 echo "
 <meta charset='utf-8'>
-<link rel='icon' href='".$site."img/favicon.png'>
-<link rel='stylesheet' href='".$site."css/styles.min.css'>
-<link rel='stylesheet' href='".$site."css/style_header.css'>
-<link rel='stylesheet' href='".$site."css/style_menu.css'>
-<link rel='stylesheet' href='".$site."css/pagination.css'>
-<link rel='stylesheet' href='".$site."css/lk.css'>
-<link rel='stylesheet' href='".$site."css/social.css'>
-  
-<link rel='stylesheet' href='".$site."css/normalize.css'>
+<link rel='icon' href='".$site."static/img/favicon.png'>
+<link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+<link rel='stylesheet' href='".$site."static/css/style_header.css'>
+<link rel='stylesheet' href='".$site."static/css/style_menu.css'>
+<link rel='stylesheet' href='".$site."static/css/pagination.css'>
+<link rel='stylesheet' href='".$site."static/css/lk.css'>
+<link rel='stylesheet' href='".$site."static/css/social.css'>
+
+<link rel='stylesheet' href='".$site."static/css/normalize.css'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 ";
 

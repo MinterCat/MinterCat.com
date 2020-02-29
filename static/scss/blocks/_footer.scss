@@ -1,0 +1,85 @@
+.footer {
+  position: relative;
+  z-index: 10;
+
+  padding: (320px / 16px) * 1rem 0 (95px / 16px) * 1rem;
+
+  text-align: center;
+
+  background: linear-gradient(to right, #b385e0, #8685dd);
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: (185px / 16px) * 1rem;
+
+    background: url(../img/svg/footer-top.svg) no-repeat bottom /cover;
+
+    content: '';
+
+    @media screen and (max-width: 480px) {
+      height: 3rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 5rem 0 3rem;
+  }
+}
+
+.footer__logo {
+  position: relative;
+
+  display: inline-block;
+  margin-bottom: 2.6rem;
+
+  color: $white;
+  font-family: "Blogger Sans";
+  font-size: (83px / 16px) * 1rem;
+  font-weight: 700;
+
+  &::after {
+    position: absolute;
+    top: -0.4rem;
+    right: -3rem;
+
+    width: 34px;
+    height: 34px;
+
+    background: url(../img/svg/logo.svg) no-repeat center /cover;
+
+    content: '';
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.footer__logo-dark {
+  color: $dark;
+}
+
+.footer__copyright {
+  color: $white;
+  font-size: (21px / 16px) * 1rem;
+  font-weight: 400;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.footer__social {
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  padding: 0;
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 1.5rem;
+  }
+}
