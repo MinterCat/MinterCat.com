@@ -1,4 +1,5 @@
 <?php
+include('../config/config.php');
 $png = $_GET['png'];
 $type = $_GET['type'];
 $src = $site . "/static/img/$type/$png.webp";
