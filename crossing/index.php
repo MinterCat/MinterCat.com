@@ -221,7 +221,7 @@ for ($i = $q; $i <= $result; $i++)
 					<div class='cat_block' style='background: $u'>
 						<div class='cat_img' data-id='$block' data-gender='$gender_number'>
 								<picture>
-									<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+									<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>
 									<img src='".$site."png.php?png=$img'>
 								</picture>
 						</div>
