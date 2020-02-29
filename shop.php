@@ -171,7 +171,7 @@ echo "
 		<div class='cat_img'>
 			<a href='".$site."cat?id=$block'>
 				<picture>
-					<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+					<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>
 					<img src='".$site."png.php?png=$img'>
 				</picture>
 			</a>
