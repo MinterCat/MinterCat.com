@@ -1,0 +1,15 @@
+.partners {
+  position: relative;
+  z-index: 40;
+}
+
+.partners__heading {
+  margin-top: 0;
+  margin-bottom: 6.2rem;
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 3rem;
+
+    text-align: center;
+  }
+}

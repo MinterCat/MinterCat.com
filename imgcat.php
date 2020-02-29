@@ -21,8 +21,8 @@ $r = mt_rand(1,100);//Проценты
 if (($r <= 30) and ($r >= 1))
 	{
 		$pr = 30;
-		switch($p) 
-		{ 
+		switch($p)
+		{
 			case 1: {
 						$array = array(1,101,102,103,104,105);
 						$rnd = array_rand($array);
@@ -32,7 +32,7 @@ if (($r <= 30) and ($r >= 1))
 			case 2: {
 						$array = array(6,61,62,63,64);
 						$rnd = array_rand($array);
-						$q = $array[$rnd];	
+						$q = $array[$rnd];
 						break;
 					}
 			case 3: {
@@ -46,7 +46,7 @@ if (($r <= 30) and ($r >= 1))
 						{
 							$array = array(12,121,122,123,124);
 							$rnd = array_rand($array);
-							$q = $array[$rnd];	
+							$q = $array[$rnd];
 						}
 					break;
 					}
@@ -59,7 +59,7 @@ if (($r <= 30) and ($r >= 1))
 						{
 							$array = array(24,25);
 							$rnd = array_rand($array);
-							$q = $array[$rnd];	
+							$q = $array[$rnd];
 						}
 					break;
 					}
@@ -69,8 +69,8 @@ if (($r <= 30) and ($r >= 1))
 if (($r <= 60) and ($r >= 31))
 	{
 		$pr = 30;
-		switch($p) 
-		{ 
+		switch($p)
+		{
 			case 1: {
 						$q = 2;
 					break;
@@ -88,7 +88,7 @@ if (($r <= 60) and ($r >= 31))
 						{
 							$array = array(14,141);
 							$rnd = array_rand($array);
-							$q = $array[$rnd];	
+							$q = $array[$rnd];
 						}
 					break;
 					}
@@ -99,7 +99,7 @@ if (($r <= 60) and ($r >= 31))
 						}
 						else
 						{
-							$q = 34;	
+							$q = 34;
 						}
 					break;
 					}
@@ -109,8 +109,8 @@ if (($r <= 60) and ($r >= 31))
 if (($r <= 90) and ($r >= 61))
 	{
 		$pr = 30;
-		switch($p) 
-		{ 
+		switch($p)
+		{
 			case 1: {
 						$q = 3;
 					break;
@@ -130,7 +130,7 @@ if (($r <= 90) and ($r >= 61))
 						}
 						else
 						{
-							$q = 16;	
+							$q = 16;
 						}
 					break;
 					}
@@ -145,7 +145,7 @@ if (($r <= 90) and ($r >= 61))
 						{
 							$array = array(27,28,29);
 							$rnd = array_rand($array);
-							$q = $array[$rnd];	
+							$q = $array[$rnd];
 						}
 					break;
 					}
@@ -155,12 +155,12 @@ if (($r <= 90) and ($r >= 61))
 if (($r <= 99) and ($r >= 91))
 	{
 		$pr = 9;
-		switch($p) 
-		{ 
+		switch($p)
+		{
 			case 1: {
 						$array = array(4,41,42,43,44);
 						$rnd = array_rand($array);
-						$q = $array[$rnd];	
+						$q = $array[$rnd];
 					break;
 					}
 			case 2: {
@@ -174,7 +174,7 @@ if (($r <= 99) and ($r >= 91))
 						}
 						else
 						{
-							$q = 18;	
+							$q = 18;
 						}
 					break;
 					}
@@ -185,7 +185,7 @@ if (($r <= 99) and ($r >= 91))
 						}
 						else
 						{
-							$q = 31;	
+							$q = 31;
 						}
 					break;
 					}
@@ -195,8 +195,8 @@ if (($r <= 99) and ($r >= 91))
 if ($r == 100)
 	{
 		$pr = 1;
-		switch($p) 
-		{ 
+		switch($p)
+		{
 			case 1: {
 						$q = 5;
 					break;
@@ -212,7 +212,7 @@ if ($r == 100)
 						}
 						else
 						{
-							$q = 20;	
+							$q = 20;
 						}
 					break;
 					}
@@ -225,7 +225,7 @@ if ($r == 100)
 						{
 							$array = array(22,60);
 							$rnd = array_rand($array);
-							$q = $array[$rnd];	
+							$q = $array[$rnd];
 						}
 					break;
 					}
@@ -237,5 +237,5 @@ if ($rnd == '') {$rnd = 1;}
 
 $sh = ($pr * (1/$rnd) * ($p/$wls)); //rarity - формула шанса выпадения
 */
-$json_data = array('img'=>$q);
+$json_data = array('static/img'=>$q);
 echo json_encode($json_data);

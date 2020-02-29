@@ -15,7 +15,7 @@ $payloads4 = json_decode($json4,true);
 $pricebd = $payloads1['price'];
 
 $cats = $payloads4['cats'];
-			
+
 $series = $cats[0]['series'];
 $rarity = $cats[0]['rarity'];
 $rarity = $rarity * 100;
@@ -27,7 +27,7 @@ $gender = $cats[0]['gender'];
 $name2 = $payloads1['name'];
 if (($name2 != '') or ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 
-switch ($series) 
+switch ($series)
 {
 	case 0: {$u = '#C1B5FF'; break;}
 	case 1: {$u = '#FFF6B5'; break;}
@@ -40,7 +40,7 @@ switch ($series)
 
 $db_gen = new Gen();
 $result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id);
-$payloadsID = $result2->fetchArray(1);	
+$payloadsID = $result2->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
@@ -54,7 +54,7 @@ $data = $payloads2['result']['time'];
 
 $nd = explode('T', $data)[0];
 $timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
-		
+
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
 
@@ -73,7 +73,7 @@ echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
@@ -85,14 +85,14 @@ echo "
 " . $language['gender'] . ": $gender_p<br>
 " . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 <br>
-"; 
+";
 
 
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
 
-if ($gender != '0') 
+if ($gender != '0')
 {
 if (isset($_POST['send2']))
 	{
@@ -123,7 +123,7 @@ else
 						";
 					}
 				else
-					{		
+					{
 						$sale = $payloads1['sale'];
 						if ($sale == 1)
 							{
@@ -149,8 +149,8 @@ else
 				if (isset($_POST['back']))
 					{
 						header('Location: '.$site.'profile'); exit;
-					}		
-				
+					}
+
 	}
 }else{
 $status = 'https://explorer-api.minter.network/api/v1/status';
@@ -175,7 +175,7 @@ $eggblock = $latestBlockHeight - $id;
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
@@ -191,7 +191,7 @@ $eggblock = $latestBlockHeight - $id;
 ";
 if ($sale == 1)
 	{
-		if ($balance > $pricebd) 
+		if ($balance > $pricebd)
 			{
 				echo "
 				<form'>

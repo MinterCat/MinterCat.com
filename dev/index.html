@@ -5,16 +5,16 @@
 	<title>MinterCat | Developers</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel='shortcut icon' href='../img/icons/Cats.webp'>
+	<link rel='shortcut icon' href='../static/img/icons/Cats.webp'>
 
 	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
 
-	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
-	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+	<link rel="stylesheet" type="text/css" href="static/syntax-highlighter/styles/shCore.css" media="all">
+	<link rel="stylesheet" type="text/css" href="static/syntax-highlighter/styles/shThemeDefault.css" media="all">
 
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/normalize.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/css/normalize.min.css">
+	<link rel="stylesheet" href="static/css/main.css">
 </head>
 
 <body id="welcome">
@@ -22,7 +22,7 @@
 	<aside class="left-sidebar">
 		<div class="logo">
 			<a href="#">
-				<img src="../img/icons/Cats.webp" width='50' height='50'>
+				<img src="../static/img/icons/Cats.webp" width='50' height='50'>
 				<br>MinterCat | Developers
 			</a>
 		</div>
@@ -58,7 +58,7 @@
 						Thank you so much!</p>
 				</div>
 			</section>
-			
+
 			<section id="api">
 				<div class="content-header">
 					<h1>API</h1>
@@ -75,7 +75,7 @@
 						<li>rarity - Rarity. On how many rarely marks a particular cat. Multiply this result by 100 and get the value as a percentage.</li>
 						<li>img - serial number of the cat's avatar.<br>
 						To get an image of the cat's avatar, follow the link -
-		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
 						</li>
 						<li>count - The number of cats of this breed at the moment.</li>
 						<li>price - the recommended cost of this cat in the MINTERCAT coin.</li>
@@ -89,13 +89,13 @@
 				</div>
 				<h2 class="title">https://api.mintercat.com/list</h2>
 				<p>All created cats are stored in the database, which can be obtained from the link https://api.mintercat.com/list</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>stored_id - the block where the cat was created.</li>
 						<li>addr - owner of the cat at the moment.</li>
 						<li>id - serial number of the cat.</li>
 						<li>img - serial number of the cat's avatar. <br>
 						To get an image of the cat's avatar, follow the link -
-		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
 						</li>
 						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
 						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
@@ -107,13 +107,13 @@
 				</div>
 				<h2 class="title">https://api.mintercat.com/cats?addr=Mx...</h2>
 				<p>All cats belonging to the same user, you can get it from the link https://api.mintercat.com/cats?addr=Mx...</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>stored_id - the block where the cat was created.</li>
 						<li>addr - owner of the cat at the moment.</li>
 						<li>id - serial number of the cat.</li>
 						<li>img - serial number of the cat's avatar. <br>
 						To get an image of the cat's avatar, follow the link -
-		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
 						</li>
 						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
 						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
@@ -125,13 +125,13 @@
 				</div>
 				<h2 class="title">https://api.mintercat.com/cats?id=_</h2>
 				<p>Find out which user the cat belongs to, you can follow the link https://api.mintercat.com/cats?id=_ <b><i>block number</i></b></p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>stored_id - the block where the cat was created.</li>
 						<li>addr - owner of the cat at the moment.</li>
 						<li>id - serial number of the cat.</li>
 						<li>img - serial number of the cat's avatar.<br>
 						To get an image of the cat's avatar, follow the link -
-		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
 						</li>
 						<li>sale - if <b><i>1</i></b> - for sale; if <b><i>0</i></b> - not for sale.</li>
 						<li>price - the sale Price of the cats in the MINTERCAT coin.</li>
@@ -142,48 +142,48 @@
 					<h1>IMG</h1>
 				</div>
 				<p>All images in the project are used in the format <b><i>.webp</i></b></p><br>
-<div class="section-content">
-<p>To get an image of the cat's avatar, follow the link -
-https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
-<br><br>
-Format <b>.webp</b> is supported by all browsers except <b>Apple's Safari</b>.
-For those who need png format, we have written a small utility,
- converting <b>webp</b> to <b>png</b> on the fly. 
-Just instead</p>
-				<pre class="brush: html">
-					<img src='https://mintercat.com/img/Cat5.webp' width='350' height='350'>
-				</pre>
-<p>use</p>
-<pre class="brush: html">
-					<img src='https://mistercat.com/png.php?png=5' width='350' height='350'>
-				</pre>
+				<div class="section-content">
+					<p>To get an image of the cat's avatar, follow the link -
+					https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+					<br><br>
+					Format <b>.webp</b> is supported by all browsers except <b>Apple's Safari</b>.
+					For those who need png format, we have written a small utility,
+					 converting <b>webp</b> to <b>png</b> on the fly.
+					Just instead</p>
+					<pre class="brush: html">
+						<img src='https://mintercat.com/img/Cat5.webp' width='350' height='350'>
+					</pre>
+					<p>use</p>
+					<pre class="brush: html">
+						<img src='https://mistercat.com/png.php?png=5' width='350' height='350'>
+					</pre>
 				</div>
 			</section>
-			
+
 			<section id="coin">
 			<div class="content-header">
 					<h1>Coin price</h1>
 				</div>
 				<h2 class="title">https://api.mintercat.com/coin</h2>
 				<p>MINTERCAT coin price relative to BIP https://api.mintercat.com/coin</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>estimate - the price of a coin in BIP.</li>
 				</div>
 			</section>
-			
+
 			<section id="users">
 			<div class="content-header">
-					<h1>Users</h1>
+				<h1>Users</h1>
 				</div>
 				<h2 class="title">https://api.mintercat.com/users</h2>
 				<p>Information about registered users https://api.mintercat.com/users</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>address - address of the user's crypto wallet.</li>
 						<li>nick - nickname in the game.</li>
 						<li>language - user language.</li>
 				</div>
 			</section>
-			
+
 			<section id="hash">
 			<div class="content-header">
 					<h1>Hash</h1>
@@ -192,14 +192,14 @@ Just instead</p>
 				<p>hash - <b><i>0xc4bcf0eea760f882d17fe219ae217a4fdc06529530b14f98551ec0769694e44d</i></b></p><br>
 				<p>API for working with hash: <a href='https://api.mintercat.com/hash?hash=0xc4bcf0eea760f882d17fe219ae217a4fdc06529530b14f98551ec0769694e44d' target='_blank'>https://api.mintercat.com/hash?hash=0xc4bcf0eea760f882d17fe219ae217a4fdc06529530b14f98551ec0769694e44d</a></p><br>
 				<p>Here we see the cat block, from whom and to whom the cat was sent.</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>height - The block where the cat is recorded.</li>
 						<li>tx.from - Sender of the transaction.</li>
 						<li>tx.to - Recipient of the transaction.</li>
 				</div>
 				<p>API for working with hash: <a href='https://api.mintercat.com/hash?hash=0xc4bcf0eea760f882d17fe219ae217a4fdc06529530b14f98551ec0769694e44d&img=true' target='_blank'>https://api.mintercat.com/hash?hash=0xc4bcf0eea760f882d17fe219ae217a4fdc06529530b14f98551ec0769694e44d&img=true</a></p><br>
 				<p>Here we see the transaction type and appearance of the cat.</p><br>
-<div class="section-content">
+				<div class="section-content">
 						<li>type - Transaction type.</li>
 						<ul>
 							<li>type 1: Creating a cat</li>
@@ -211,12 +211,12 @@ Just instead</p>
 						</ul>
 						<li>img - Serial number of the cat's avatar.<br>
 						To get an image of the cat's avatar, follow the link -
-		https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
+						https://mintercat.com/img/Cat <b><i>serial number of the cat's avatar</i></b> .webp
 						</li>
 						<li>hash - Hash transactions.</li>
 				</div>
 			</section>
-			
+
 			<section id="github">
 			<div class="content-header">
 					<h1>GitHub Files</h1>
@@ -224,24 +224,24 @@ Just instead</p>
 				<h2 class="title">https://api.mintercat.com/files</h2>
 				<p>The latest build of the project uploaded to github https://api.mintercat.com/files</p><br>
 			</section>
-<!--==============================================-->			
+<!--==============================================-->
 		</div>
 	</div>
 
 
 	<!-- Essential JavaScript Libraries
 	==============================================-->
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.nav.js"></script>
-	<script type="text/javascript" src="syntax-highlighter/scripts/shCore.js"></script>
-	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushXml.js"></script>
-	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushCss.js"></script>
-	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushJScript.js"></script>
-	<script type="text/javascript" src="syntax-highlighter/scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="static/js/jquery.nav.js"></script>
+	<script type="text/javascript" src="static/syntax-highlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="static/syntax-highlighter/scripts/shBrushXml.js"></script>
+	<script type="text/javascript" src="static/syntax-highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="static/syntax-highlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="static/syntax-highlighter/scripts/shBrushPhp.js"></script>
 	<script type="text/javascript">
 		SyntaxHighlighter.all()
 	</script>
-	<script type="text/javascript" src="js/custom.js"></script>
+	<script type="text/javascript" src="static/js/custom.js"></script>
 
 </body>
 

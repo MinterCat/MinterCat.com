@@ -45,9 +45,9 @@ $data = $result->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -66,17 +66,17 @@ echo "
 
 <head>
 <title>MinterCat | $nick</title>
-	
+
 <meta charset='utf-8'>
-<link rel='icon' href='".$site."img/favicon.png'>
-<link rel='stylesheet' href='".$site."css/styles.min.css'>
-<link rel='stylesheet' href='".$site."css/style_header.css'>
-<link rel='stylesheet' href='".$site."css/style_menu.css'>
-<link rel='stylesheet' href='".$site."css/pagination.css'>
-<link rel='stylesheet' href='".$site."css/lk.css'>
-<link rel='stylesheet' href='".$site."css/social.css'>
-  
-<link rel='stylesheet' href='".$site."css/normalize.css'>
+<link rel='icon' href='".$site."static/img/favicon.png'>
+<link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+<link rel='stylesheet' href='".$site."static/css/style_header.css'>
+<link rel='stylesheet' href='".$site."static/css/style_menu.css'>
+<link rel='stylesheet' href='".$site."static/css/pagination.css'>
+<link rel='stylesheet' href='".$site."static/css/lk.css'>
+<link rel='stylesheet' href='".$site."static/css/social.css'>
+
+<link rel='stylesheet' href='".$site."static/css/normalize.css'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
@@ -214,7 +214,7 @@ echo "
           </li>
           <li class='social__item'>
 			<div class='social vk'>
-				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>    
+				<a href='https://vk.com/MinterCat' target='_blank'><i class='fa fa-vk fa-2x'></i></a>
 			</div>
           </li>
           <li class='social__item'>
@@ -247,31 +247,31 @@ echo "
           <div class='avatar profile-section__avatar'>
              <img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
           </div>
-   
+
 		  <div style='position: center'>
 
             <div class='profile-info__item'>
               <div class='profile-info__item-title'>" . $language['My_nickname'] . ":</div>
               <div class='profile-info__item-body'>
-                <div class='profile-info__name'>$nick</div>			
+                <div class='profile-info__name'>$nick</div>
               </div>
-			  
-            </div>	
+
+            </div>
             <div class='profile-info__item'>
               <div class='profile-info__item-title'></div>
-              <div class='profile-info__item-body'> 
+              <div class='profile-info__item-body'>
 				  <div class='tooltip'>
-					  
+
 </div>
               </div>
             </div>
 
           </div>
-		  
+
           <div class='wallet profile-section__wallet'>
             <div class='wallet__title'>Balance:</div>
             <div class='wallet__sum'>$balance</div>
-			<img src='".$site."img/svg/logo.svg' class='wallet__avatar'>
+			<img src='".$site."static/img/svg/logo.svg' class='wallet__avatar'>
 			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 $coin</div>
 				<form method='post'>
 					<button class='button' id='buycat' name='buycat' type='submit'>" . $language['Buy'] . "</button>
@@ -282,25 +282,25 @@ echo "
     </div>
 </div>
  ";
- 
+
  if (isset($_POST['buycat']))
 {
-	if ($balance > 50) 
+	if ($balance > 50)
 			{
 				$img = rand(9990,9999); //egg
-				
+
 				$status = 'https://explorer-api.minter.network/api/v1/status';
 				$statuspayload = json_decode($status,true);
 				$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
 				//------------------------------
 				$text = '{"type":0,"img":'.$img.'}';
-				
+
 				$fond = 50/2; //50% in found MinterCat
 				$me = $fond/2; //25%
 				$kamil = $fond/2; //25%
-				
+
 				$api_node = new MinterAPI($api);
-				
+
 				if ($test != 'TESTNET')
 					{
 						$chainId = MinterTx::MAINNET_CHAIN_ID;
@@ -352,13 +352,13 @@ echo "
 						)');
 				$cats_db->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
 					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
-				
-				$a=8; $_SESSION['a'] = $a;	
+
+				$a=8; $_SESSION['a'] = $a;
 				//------------------------------
 				header('Location: '.$site.'profile'); exit;
 			}
 }
- 
+
 $g = ob_get_contents();
 ob_end_clean();
 

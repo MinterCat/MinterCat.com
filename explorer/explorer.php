@@ -1,7 +1,7 @@
 <?php
 echo "
-<script type='text/javascript' src='".$site."js/jquery.js'></script>
-<div id='content'></div>	
+<script type='text/javascript' src='".$site."static/js/jquery-3.4.1.min.js'></script>
+<div id='content'></div>
 	<script>
 		function show()
 		{
@@ -13,13 +13,13 @@ echo "
 				}
 			});
 		}
-	
-	
-	
+
+
+
 		$(document).ready(function(){
 			show();
 			setInterval('show()',1000);
-		});		
+		});
 	</script>
 
 <div class='cat_content_none'>
@@ -45,7 +45,7 @@ echo '<br>';
      $c1=$data[$i]['c1'];
      $c2=$data[$i]['c2'];
      $c3=$data[$i]['c3'];
-	 
+
 	if ($title == 'Transfer')
 		{
 			echo "

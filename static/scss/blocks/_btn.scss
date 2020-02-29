@@ -1,0 +1,18 @@
+.btn {
+  width: (216px / 16px) * 1rem;
+  height: (50px / 16px) * 1rem;
+  padding: 0;
+
+  color: $dark;
+  font-family: "Blogger Sans";
+  font-size: (25px / 16px) * 1rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+
+  background-color: $white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 9px 22px rgba(114, 40, 236, 0.35);
+
+  cursor: pointer;
+}

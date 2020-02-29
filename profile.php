@@ -63,7 +63,7 @@ for ($i = $q; $i <= $result; $i++)
 	if ($pricebd == '') {$bgimg = ''; $prr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $prr = "<font color='red'><b>$pricebd</b></font>";}
 		if ($gender == '0') {$gender = '';}
 
-		switch ($series) 
+		switch ($series)
 		{
 			case 0: {$u = '#C1B5FF'; break;}
 			case 1: {$u = '#FFF6B5'; break;}
@@ -79,7 +79,7 @@ for ($i = $q; $i <= $result; $i++)
 						<div class='cat_img'>
 							<a href='".$site."cat?id=$block'>
 								<picture>
-									<source srcset='".$site."img/Cat$img.webp' type='image/webp'>
+									<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>
 									<img src='".$site."png.php?png=$img'>
 								</picture>
 							</a>
@@ -99,7 +99,7 @@ echo "<br><div class='cat_form'>";
 if ($key == 2)
 {
 	$key2 = 1;
-	echo "	
+	echo "
 				<form method='post'>
 				<input id='submit2' name='submit2' type='submit' value='" . $language['Cats'] . "'>
 				<input id='key' name='key' type='hidden' value='$key2'>
@@ -108,7 +108,7 @@ if ($key == 2)
 }
 else
 {	$key2 = 2;
-	echo "	
+	echo "
 				<form method='post'>
 				<input id='submit' name='submit' type='submit' value='" . $language['Eggs'] . "'>
 				<input id='key' name='key' type='hidden' value='$key2'>

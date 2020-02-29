@@ -28,7 +28,7 @@ $check_language = $data['language'];
 }
 if ($check_language != '')
 	{$lang = $check_language;}
-else 
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -111,7 +111,7 @@ $payloads4 = json_decode($json4,true);
 $pricebd = $payloads1['price'];
 
 $cats = $payloads4['cats'];
-			
+
 $series = $cats[0]['series'];
 $rarity = ($cats[0]['rarity'])*100;
 $price = $cats[0]['price'];
@@ -122,7 +122,7 @@ $gender = $cats[0]['gender'];
 $name2 = $payloads1['name'];
 if (($name2 != '') or ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 
-switch ($series) 
+switch ($series)
 {
 	case 0: {$u = '#C1B5FF'; break;}
 	case 1: {$u = '#FFF6B5'; break;}
@@ -135,7 +135,7 @@ switch ($series)
 
 $db_gen = new Gen();
 $result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id);
-$payloadsID = $result2->fetchArray(1);	
+$payloadsID = $result2->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
@@ -148,7 +148,7 @@ $data = $payloads2['result']['time'];
 $nd = explode("T", $data)[0];
 
 $timestamp2 = date('Y-m-d',strtotime("$nd"));
-		
+
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
 
@@ -167,7 +167,7 @@ echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
@@ -179,13 +179,13 @@ echo "
 " . $language['gender'] . ": $gender_p<br>
 " . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
 <br>
-"; 
+";
 
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
 
-if ($gender != '0') 
+if ($gender != '0')
 {
 if (isset($_POST['send2']))
 	{
@@ -212,7 +212,7 @@ else
 						";
 					}
 				else
-					{		
+					{
 						$sale = $payloads1['sale'];
 						if ($sale == 1)
 							{
@@ -232,7 +232,7 @@ else
 								</form>
 								";
 							}
-					}		
+					}
 	}
 }else{
 $status = 'https://explorer-api.minter.network/api/v1/status';
@@ -256,7 +256,7 @@ $eggblock = $latestBlockHeight - $id;
 <center>
 	<div style='background: $u' width='100%' height='300'>
 			<picture>
-			<source srcset='".$site."img/Cat$img.webp' type='image/webp' width='350' height='350'>
+			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>
 			</picture><br>
 	</div>
@@ -272,7 +272,7 @@ $eggblock = $latestBlockHeight - $id;
 ";
 if ($sale == 1)
 	{
-		if ($balance > $pricebd) 
+		if ($balance > $pricebd)
 			{
 				echo "
 				<form method='post'>
@@ -288,14 +288,14 @@ if (isset($_POST['nosale']))
 		$a=4; $_SESSION['a'] = $a;
 		$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
 		$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
-		header('Location: '.$site.'profile'); exit;										
+		header('Location: '.$site.'profile'); exit;
 	}
 //-----------------------------------
 if (isset($_POST['sendprice']))
 	{
 		$price = $_POST['price'];
 		$a=3; $_SESSION['a'] = $a;
-		
+
 		if ($price > 0)
 			{
 				$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$id .'"');
@@ -308,7 +308,7 @@ if (isset($_POST['sendprice']))
 			}
 		header('Location: '.$site.'profile'); exit;
 	}
-//-----------------------------------	
+//-----------------------------------
 if (isset($_POST['in']))
 		{
 			$a=5; $_SESSION['a'] = $a;
@@ -322,7 +322,7 @@ if (isset($_POST['buy']))
 		$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$id .'"');
 		$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
 		$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
-		
+
 		$Amount = ($pricebd - ($pricebd * 0.03));
 		$fond = $pricebd - $Amount;
 		if ($Amount != 0)
@@ -332,16 +332,16 @@ if (isset($_POST['buy']))
 				$fond = 50/2; //50% in found MinterCat
 				$me = $fond/2; //25%
 				$kamil = $fond/2; //25%
-				
+
 				$tx = new MinterTx([
 									'nonce' => $nonce,
 									'chainId' => $chainId,
 									'gasPrice' => 1,
 									'gasCoin' => $coin,
 									'type' => MinterMultiSendTx::TYPE,
-									'data' => 
+									'data' =>
 									[
-										'list' => 
+										'list' =>
 										[
 											[
 												'coin' => 'MINTERCAT',
@@ -372,11 +372,11 @@ if (isset($_POST['buy']))
 				$get_hesh = TransactoinSendDebug($api,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				//---------------------
-				
+
 				header('Location: '.$site.'profile'); exit;
 			}
 	}
-//-----------------------------------	
+//-----------------------------------
 if (isset($_POST['send']))
 	{
 		$nik = $_POST['nik'];
@@ -388,7 +388,7 @@ if (isset($_POST['send']))
 				{
 					$text = "$nick -> $logins Transfer Cat $id";
 					//---------------------
-					if ($test != 'TESTNET') 
+					if ($test != 'TESTNET')
 					{
 						$tx = new MinterTx([
 							'nonce' => $nonce,
@@ -437,21 +437,21 @@ if (isset($_POST['send']))
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					//$hash = "0x".$get_hesh->result->hash;
 					//---------------------
-						
+
 					$a=2; $_SESSION['a'] = $a;
 					$addrs = $payjsn[$i]['address'];
-						
+
 					$db_cats->query('UPDATE "table" SET addr = "'. $addrs .'" WHERE stored_id = "'.$id .'"');
 					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
 					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
-						
+
 					header('Location: '.$site.'profile'); exit;
 				}
-				else 
+				else
 				{
 					$a=1; $_SESSION['a'] = $a; header('Location: '.$site.'profile'); exit;
 				}
-				
+
 	}
 //-----------------------------------
 if (isset($_POST['back']))

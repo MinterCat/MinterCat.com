@@ -44,9 +44,9 @@ $data = $result->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
-if ($check_language != '') 
-	{$lang = $check_language;} 
-else 
+if ($check_language != '')
+	{$lang = $check_language;}
+else
 	{
 		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 	}
@@ -66,36 +66,36 @@ echo "
 <head>
   <meta charset='utf-8'>
   <title>MinterCat | $nick</title>
-  <link rel='icon' href='".$site."img/favicon.png'>
-  <link rel='stylesheet' href='".$site."css/styles.min.css'>
-  <link rel='stylesheet' href='".$site."css/style_header.css'>
-  <link rel='stylesheet' href='".$site."css/style_menu.css'>
-  <link rel='stylesheet' href='".$site."css/pagination.css'>
-  <link rel='stylesheet' href='".$site."css/lk.css'>
-  
-  <link rel='stylesheet' href='".$site."css/normalize.css'>
-  
-  <link rel='stylesheet' href='".$site."css/dragndrop_main.css'>
-  <link rel='stylesheet' href='".$site."css/dragndrop_scale.css'>
-  <script src='".$site."js/dragndrop/ba3a0add07.js' crossorigin='anonymous'></script>
-  <script src='".$site."js/dragndrop/jquery-3.4.1.min.js'></script>
-  <script src='".$site."js/dragndrop/jquery-ui.min.js'></script>
-  <script src='".$site."js/dragndrop/popper.min.js'></script>
-  <script src='".$site."js/dragndrop/tippy-bundle.iife.min.js'></script>
-  <script src='".$site."js/dragndrop/jquery.ui.touch-punch.min.js'></script>
-  
-  <link rel='stylesheet' href='".$site."css/slider_style.css'>
-  <script src='".$site."js/slider_jquery-1.12.4.js'></script>
-  <script src='".$site."js/slider_jquery-ui.js'></script>
-  <script src='".$site."js/slider_jquery.ui.touch-punch.min.js'></script>
-  
-  <link rel='stylesheet' href='".$site."css/social.css'>
+  <link rel='icon' href='".$site."static/img/favicon.png'>
+  <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+  <link rel='stylesheet' href='".$site."static/css/style_header.css'>
+  <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
+  <link rel='stylesheet' href='".$site."static/css/pagination.css'>
+  <link rel='stylesheet' href='".$site."static/css/lk.css'>
+
+  <link rel='stylesheet' href='".$site."static/css/normalize.css'>
+
+  <link rel='stylesheet' href='".$site."static/css/dragndrop_main.css'>
+  <link rel='stylesheet' href='".$site."static/css/dragndrop_scale.css'>
+  <script src='".$site."static/js/dragndrop/ba3a0add07.js' crossorigin='anonymous'></script>
+  <script src='".$site."static/js/dragndrop/jquery-3.4.1.min.js'></script>
+  <script src='".$site."static/js/dragndrop/jquery-ui.min.js'></script>
+  <script src='".$site."static/js/dragndrop/popper.min.js'></script>
+  <script src='".$site."static/js/dragndrop/tippy-bundle.iife.min.js'></script>
+  <script src='".$site."static/js/dragndrop/jquery.ui.touch-punch.min.js'></script>
+
+  <link rel='stylesheet' href='".$site."static/css/slider_style.css'>
+  <script src='".$site."static/js/slider_jquery-1.12.4.js'></script>
+  <script src='".$site."static/js/slider_jquery-ui.js'></script>
+  <script src='".$site."static/js/slider_jquery.ui.touch-punch.min.js'></script>
+
+  <link rel='stylesheet' href='".$site."static/css/social.css'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
 <body>
   <div class='cat_header'>
-    
+
 	<div class='header'>
 		<div class='logo_float'>
 			<div class='logo_cat'>
@@ -135,7 +135,7 @@ echo "
 			</div>
 		</div>
 	</div>
-	
+
 <center><blockquote>
 Balance: ".$balance." ".$coin."
 </blockquote></center>
@@ -161,8 +161,8 @@ Balance: ".$balance." ".$coin."
         </div>
       </form>
 		";
-		
-		
+
+
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 
@@ -206,7 +206,7 @@ for ($i = $q; $i <= $result; $i++)
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 		if ($gender == '0') {$gender = '';}
 
-		switch ($series) 
+		switch ($series)
 		{
 			case 0: {$u = '#C1B5FF'; break;}
 			case 1: {$u = '#FFF6B5'; break;}

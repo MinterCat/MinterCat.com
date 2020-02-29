@@ -1,0 +1,77 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  // overflow-x: hidden;
+
+  &.active {
+    display: flex;
+  }
+}
+
+.overlay--light {
+  background-color: rgba($white, .7);
+}
+
+.overlay--rename {
+  // display: flex;
+}
+
+.overlay--modal-card {
+  // display: flex;
+}
+
+.overlay--white {
+  // display: flex;
+
+  background-color: #fff;
+}
+
+.overlay__close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  padding: 0;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  @media screen and (max-width: 480px) {
+    position: fixed;
+    top: 3rem;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 20;
+  }
+
+  @media screen and (max-width: 360px) {
+    top: 2rem;
+  }
+}
+
+.overlay__close-icon {
+  width: 41px;
+  height: 41px;
+
+  fill: #a987e1;
+
+  @media screen and (max-width: 480px) {
+    width: 2.2rem;
+    height: 2.2rem;
+
+    fill: $white;
+  }
+}

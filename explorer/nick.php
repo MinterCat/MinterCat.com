@@ -48,7 +48,7 @@ for ($i = $q; $i <= $result; $i++)
 	if ($pricebd == '') {$bgimg = ''; $prr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $prr = "<font color='red'><b>$pricebd</b></font>";}
 		if ($gender == '0') {$gender = '';}
 
-		switch ($series) 
+		switch ($series)
 		{
 			case 0: {$u = '#C1B5FF'; break;}
 			case 1: {$u = '#FFF6B5'; break;}
@@ -64,7 +64,7 @@ for ($i = $q; $i <= $result; $i++)
 						<div class='cat_img'>
 							<a href='".$site."cat?id=$block'>
 								<picture>
-									<source srcset='../img/Cat$img.webp' type='image/webp'>
+									<source srcset='../static/img/Cat$img.webp' type='image/webp'>
 									<img src='../png.php?png=$img'>
 								</picture>
 							</a>
@@ -89,16 +89,16 @@ $idp2 = $id + 2;
 echo "
 <br>
 <div class='pagination' style='background-color: #9584de'>
-<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
+	<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
 </div>
 ";
 echo '
 <div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">«</a>
-<input name="id" type="hidden" value="'.$idm1.'">
-<input name="nick" type="hidden" value="'.$nick.'">
-</form>
+	<form method="post">
+		<a href="#" onclick="parentNode.submit();">«</a>
+		<input name="id" type="hidden" value="'.$idm1.'">
+		<input name="nick" type="hidden" value="'.$nick.'">
+	</form>
 </div>
 ';
   for ($p = 1; $p <= $countq; $p++)
@@ -106,22 +106,22 @@ echo '
 	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
 		echo '
 		<div class="pagination">
-		<form method="post">
-		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
-		<input name="id" type="hidden" value="'.$p.'">
-		<input name="nick" type="hidden" value="'.$nick.'">
-		</form>
+			<form method="post">
+				<a href="#" onclick="parentNode.submit();">'.$p.'</a>
+				<input name="id" type="hidden" value="'.$p.'">
+				<input name="nick" type="hidden" value="'.$nick.'">
+			</form>
 		</div>
 		';
 	  }
   }
 echo '
 <div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">»</a>
-<input name="id" type="hidden" value="'.$idp1.'">
-<input name="nick" type="hidden" value="'.$nick.'">
-</form>
+	<form method="post">
+		<a href="#" onclick="parentNode.submit();">»</a>
+		<input name="id" type="hidden" value="'.$idp1.'">
+		<input name="nick" type="hidden" value="'.$nick.'">
+	</form>
 </div>
 </div>
 <br><br><br><br>

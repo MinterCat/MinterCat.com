@@ -1,0 +1,44 @@
+.btn-hamburger {
+  position: relative;
+
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  display: none;
+
+  @media screen and (max-width: 840px) {
+    display: block;
+  }
+}
+
+.btn-hamburger__line,
+.btn-hamburger__line::before,
+.btn-hamburger__line::after {
+  position: absolute;
+  top: calc(50% - 2px);
+  left: calc(50% - 1.2rem);
+
+
+
+  width: 2.4rem;
+  height: 4px;
+  background-color: $white;
+  // border-radius: 4rem;
+
+  content: '';
+}
+
+
+.btn-hamburger__line::before {
+  transform: translateY(-0.8rem);
+}
+
+.btn-hamburger__line::after {
+  transform: translateY(0.8rem);
+}
