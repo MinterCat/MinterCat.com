@@ -14,8 +14,7 @@ $pricebd = $payloads1['price'];
 $cats = $payloads4['cats'];
 
 $series = $cats[0]['series'];
-$rarity = $cats[0]['rarity'];
-$rarity = $rarity * 100;
+$rarity = ($cats[0]['rarity'])*100;
 $price = $cats[0]['price'];
 $name1 = $cats[0]['name'];
 $count = $cats[0]['count'];
@@ -47,9 +46,7 @@ $json2 = file_get_contents($api3."/block?height=$id");
 $payloads2 = json_decode($json2,true);
 
 $data = $payloads2['result']['time'];
-$nd = explode("T", $data)[0];
-
-$timestamp2 = date('Y-m-d',strtotime("$nd"));
+$timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
 
 $unixD = strtotime($timestamp2);
 $nd = date('d.m.Y', $unixD);
