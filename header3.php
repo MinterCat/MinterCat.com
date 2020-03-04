@@ -1,7 +1,7 @@
 <?php
 echo "
 <meta charset='utf-8'>
-<link rel='icon' href='".$site."static/img/favicon.png'>
+<link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
 <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
 <link rel='stylesheet' href='".$site."static/css/style_header.css'>
 <link rel='stylesheet' href='".$site."static/css/style_menu.css'>

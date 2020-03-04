@@ -25,7 +25,7 @@ function TransactoinSendDebug ($api,$transaction)
     return $api->send($transaction);
 }
 
-$api_node = new MinterAPI($api.'/');
+$api_node = new MinterAPI($api2);
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 if ($cript_mnemonic != '') {
@@ -66,7 +66,7 @@ echo "
 <head>
   <meta charset='utf-8'>
   <title>MinterCat | $nick</title>
-  <link rel='icon' href='".$site."static/img/favicon.png'>
+  <link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
   <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
   <link rel='stylesheet' href='".$site."static/css/style_header.css'>
   <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
@@ -106,32 +106,9 @@ echo "
 				</a>
 			</div>
 			<div class='head_menu'>
-				<ul id='menu'>
-    <li><a href='".$site."' class='nav-top__link '>" . $language['Home'] . "</a></li>
-    <li><a href='".$site."profile' class='nav-top__link active'>" . $language['Profile'] . "</a>
-      <ul>
-        <li><a href='".$site."wallet' class='nav-top__link '>" . $language['My_wallet'] . "</a></li>
-		<li><a href='".$site."settings' class='nav-top__link '>Settings</a></li>
-		<li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
-	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-      </ul>
-    </li>
-	<li><a href='#' class='nav-top__link '>" . $language['event'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a>
-	<ul>
-		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
-	<ul>
-		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
-		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
-</ul>
+";
+$m = 2; include('../menu.php');
+echo "$menu
 			</div>
 		</div>
 	</div>

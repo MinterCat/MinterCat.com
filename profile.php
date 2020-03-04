@@ -12,6 +12,8 @@ if ($a==5) {echo $text = "<center><blockquote>" . $language['From_the_egg_hatche
 if ($a==6) {echo $text = "<center><blockquote>" . $language['There_are_not_enough_funds_on_your_balance'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 if ($a==7) {echo $text = "<center><blockquote>" . $language['Operation_is_not_possible'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 if ($a==8) {echo $text = "<center><blockquote>Before starting the game, do not forget to <a href='".$site."wallet'>save your mnemonic phrase.</a><br>It will replace your login and password to enter the game. </blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==9) {echo $text = "<center><blockquote>Done!</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+
 
 $key = $_POST['key'];
 if ($key == 2)
