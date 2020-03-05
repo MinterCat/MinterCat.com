@@ -38,6 +38,8 @@ $private_key = $decript['private_key'];
 $db_cats = new Cats();
 $db_rss = new RSS();
 $db_users = new Users();
+$db_gen = new Gen();
+$db_stored = new Stored();
 
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);

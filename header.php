@@ -9,6 +9,7 @@ use Minter\SDK\MinterCoins\MinterMultiSendTx;
 $base = "../explorer/session.txt";
 include('../explorer/online.php');
 //-----------------------
+
 $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
@@ -271,7 +272,7 @@ $m = 2; include('../menu.php');
 				$me = $fond/2; //25%
 				$kamil = $fond/2; //25%
 
-				if ($test == 'testnet')
+				if ($test != 'testnet')
 					{
 						$tx = new MinterTx([
 									'nonce' => $api_node->getNonce($address),
@@ -335,12 +336,10 @@ $m = 2; include('../menu.php');
 				$transaction = $tx->sign($private_key);
 				echo $transaction;
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
-				echo "<br>";
-				echo $hash = "0x".$get_hesh->result->hash;
-				echo "<br>";
+				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);
-				echo $block = getBlockByHash($api2,$hash)->result->height;
-				/*
+				$block = getBlockByHash($api2,$hash)->result->height;
+				
 				//------------------------------
 				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
 					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -348,19 +347,19 @@ $m = 2; include('../menu.php');
 					"addr" VARCHAR,
 					"img" INTEGER,
 					"price" INTEGER,
-					"sale" INTEGER
+					"sale" INTEGER,
+					"name" VARCHAR,
+					"hash" VARCHAR
 						)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0")');
+				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
 
 				$a=9; $_SESSION['a'] = $a;
 				//------------------------------
 				header('Location: '.$site.'profile'); exit;
-				*/
+				
 			}
 }
-
 $g = ob_get_contents();
 ob_end_clean();
-
 echo $g;

@@ -98,6 +98,7 @@ for ($i = $q; $i <= $result; $i++)
 echo "</div></div>";
 }
 echo "<br><div class='cat_form'>";
+/*
 if ($key == 2)
 {
 	$key2 = 1;
@@ -117,7 +118,7 @@ else
 				</form>
 				";
 }
-
+*/
 $idm1 = $id - 1;
 $idm2 = $id - 2;
 $idp1 = $id + 1;

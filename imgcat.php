@@ -237,5 +237,4 @@ if ($rnd == '') {$rnd = 1;}
 
 $sh = ($pr * (1/$rnd) * ($p/$wls)); //rarity - формула шанса выпадения
 */
-$json_data = array('static/img'=>$q);
-echo json_encode($json_data);
+$img = $q;

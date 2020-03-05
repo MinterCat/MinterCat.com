@@ -3,15 +3,17 @@ include('../header.php');
 //-------------------------------
 $mnemonic = $decript['mnemonic'];
 echo "
-		<center>
-		<br><br>
+<div class='cat_content_none'><div class='cat_content'>
 		address: <b><a href='https://minterscan.net/address/$address' target='_blank'>$address</a> (MinterScan.net)</b>
-		<br><br>
+		<br>
 		mnemonic: <b>$mnemonic</b>
-		<br><br>
+		<br>
 		private key: <b>$private_key</b>
-		<br><br>
-		</center>
+		<br>
+		<br>
+		<br>
+		<br>
+</div></div>
 		";
 //-------------------------------
 include('../footer.php');
