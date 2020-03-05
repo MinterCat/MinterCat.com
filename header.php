@@ -9,19 +9,20 @@ use Minter\SDK\MinterCoins\MinterMultiSendTx;
 $base = "../explorer/session.txt";
 include('../explorer/online.php');
 //-----------------------
+
 $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
 
-function getBlockByHash ($api,$hash)
+function getBlockByHash ($api2,$hash)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->getTransaction($hash);
 }
 
-function TransactoinSendDebug ($api,$transaction)
+function TransactoinSendDebug ($api2,$transaction)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->send($transaction);
 }
 
@@ -68,7 +69,7 @@ echo "
 <title>MinterCat | $nick</title>
 
 <meta charset='utf-8'>
-<link rel='icon' href='".$site."static/img/favicon.png'>
+<link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
 <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
 <link rel='stylesheet' href='".$site."static/css/style_header.css'>
 <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
@@ -173,34 +174,10 @@ echo "
                   </g>
                 </g>
               </g>
-            </svg>
-<ul id='menu'>
-    <li><a href='".$site."' class='nav-top__link '>" . $language['Home'] . "</a></li>
-    <li><a href='".$site."profile' class='nav-top__link active'>" . $language['Profile'] . "</a>
-      <ul>
-        <li><a href='".$site."wallet' class='nav-top__link '>" . $language['My_wallet'] . "</a></li>
-		<li><a href='".$site."settings' class='nav-top__link '>Settings</a></li>
-		<li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
-	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-      </ul>
-    </li>
-	<li><a href='#' class='nav-top__link '>" . $language['event'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a>
-	<ul>
-		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
-	<ul>
-		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
-		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
-</ul>
-            <ul class='social nav-top__social'>
+            </svg>";
+$m = 2; include('../menu.php');
+            echo "$menu
+			<ul class='social nav-top__social'>
 
               <li class='social__item'>
 			<div class='social telegram'>
@@ -289,29 +266,17 @@ echo "
 			{
 				$img = rand(9990,9999); //egg
 
-				$status = 'https://explorer-api.minter.network/api/v1/status';
-				$statuspayload = json_decode($status,true);
-				$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
-				//------------------------------
 				$text = '{"type":0,"img":'.$img.'}';
 
 				$fond = 50/2; //50% in found MinterCat
 				$me = $fond/2; //25%
 				$kamil = $fond/2; //25%
 
-				$api_node = new MinterAPI($api);
-
-				if ($test != 'TESTNET')
+				if ($test != 'testnet')
 					{
-						$chainId = MinterTx::MAINNET_CHAIN_ID;
-					}
-				else
-					{
-						$chainId = MinterTx::TESTNET_CHAIN_ID;
-					}
-				$tx = new MinterTx([
+						$tx = new MinterTx([
 									'nonce' => $api_node->getNonce($address),
-									'chainId' => $chainId,
+									'chainId' => MinterTx::MAINNET_CHAIN_ID,
 									'gasPrice' => 1,
 									'gasCoin' => $coin,
 									'type' => MinterMultiSendTx::TYPE,
@@ -336,30 +301,65 @@ echo "
 									'serviceData' => '',
 									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
 								]);
+					}
+				else
+					{
+						$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => MinterTx::TESTNET_CHAIN_ID,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
+												'value' => $me
+											], [
+												'coin' => $coin,
+												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+												'value' => $kamil
+											],	[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => $fond
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+					}
 
 				$transaction = $tx->sign($private_key);
 				echo $transaction;
-				$get_hesh = TransactoinSendDebug($api,$transaction);
+				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
+				sleep(6);
+				$block = getBlockByHash($api2,$hash)->result->height;
+				
 				//------------------------------
-				$cats_db->exec('CREATE TABLE IF NOT EXISTS "table" (
+				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
 					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 					"stored_id" INTEGER,
 					"addr" VARCHAR,
 					"img" INTEGER,
 					"price" INTEGER,
-					"sale" INTEGER
+					"sale" INTEGER,
+					"name" VARCHAR,
+					"hash" VARCHAR
 						)');
-				$cats_db->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
+				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
 
-				$a=8; $_SESSION['a'] = $a;
+				$a=9; $_SESSION['a'] = $a;
 				//------------------------------
 				header('Location: '.$site.'profile'); exit;
+				
 			}
 }
-
 $g = ob_get_contents();
 ob_end_clean();
-
 echo $g;

@@ -33,32 +33,7 @@ $language = json_decode($jsonlanguage,true);
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
-$menu = "
-<ul id='menu'>
-	<li><a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a></li>
-	<li><a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a></li>
-	<li><a href='#' class='nav-top__link'>" . $language['event'] . "</a></li>
-	<li><a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a>
-	<ul>
-		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."explorer' class='nav-top__link active'>Explorer</a>
-	<ul>
-		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
-		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
-	</ul></li>
-<li>
-  <form action='../explorer'>
-      <input type='text' placeholder='Поиск..' name='nick'>
-      <button type='submit'><i class='fa fa-search'></i></button>
-  </form>
-</div>
-</li></ul>
-";
+$m = 6; include('../menu.php');
 //-------------------------------
 include('../header3.php');
 //-------------------------------

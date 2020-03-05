@@ -1,45 +1,8 @@
 <?php
-declare(strict_types=1);
-require_once('../config/minterapi/vendor/autoload.php');
-use Minter\MinterAPI;
-use Minter\SDK\MinterTx;
-use Minter\SDK\MinterCoins\MinterMultiSendTx;
-
-include('../../config/config.php');
-include('../function.php');
-
-$cript_mnemonic = $_SESSION['cript_mnemonic'];
-$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
-$decript = json_decode($decript_text,true);
-
-$address = $decript['address'];
-$private_key = $decript['private_key'];
-
-function getBlockByHash ($api,$hash)
-{
-    $api = new MinterAPI($api);
-    return $api->getTransaction($hash);
-}
-
-function TransactoinSendDebug ($api,$transaction)
-{
-    $api = new MinterAPI($api);
-    return $api->send($transaction);
-}
-
-//-----------------------
-$base = "../explorer/session.txt";
-include('../explorer/online.php');
-//-----------------------
-$db_cats = new Cats();
-$db_gen = new Gen();
-$db_rss = new RSS();
-$db_stored = new Stored();
-
-if (isset($_GET['crossing'])) 
+if (isset($_POST['button'])) 
 	{
-		$id1 = $_GET['cat1'];
-		$id2 = $_GET['cat2'];
+		$id1 = $_POST['cat1'];
+		$id2 = $_POST['cat2'];
 	
 		if ($id1 == $id2) 
 			{
@@ -95,7 +58,7 @@ $horns2 = $data['horns'];
 	$tentacl = floor(($tentacles1 + $tentacles2)*3/4); if (($tentacl>0) and ($tentacl<=1)) {$tentacl=1;} if ($tentacl>=30) {$tentacl=30;}
 	$horn = floor(($horns1 + $horns2)*3/4); if (($horn>0) and ($horn<=1)) {$horn=1;} if ($horn>=30) {$horn=30;}
 //------------------------------------------------------------		
-		$kolvo = $_GET['kolvo'];
+		$kolvo = $_POST['kolvo'];
 		$blockq = $block + (720*$kolvo);
 
 $komsa = 240 - ($kolvo * 10);
@@ -167,50 +130,92 @@ if ($balance > $komsa)
 		$kamil = $fond/2; //25%
 		
 		$api_node = new MinterAPI($api);
-		
-		if ($test != 'TESTNET')
-			{
-				$chainId = MinterTx::MAINNET_CHAIN_ID;
-			}
-		else
-			{
-				$chainId = MinterTx::TESTNET_CHAIN_ID;
-			}
-		$tx = new MinterTx([
-							'nonce' => $api_node->getNonce($address),
-							'chainId' => $chainId,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-										'value' => $me
-									], [
-										'coin' => $coin,
-										'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-										'value' => $kamil
-									],	[
-										'coin' => $coin,
-										'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-										'value' => $fond
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
 
-		$transaction = $tx->sign($private_key); 
-		echo $transaction;
-		$get_hesh = TransactoinSendDebug($api,$transaction);
-		$hash = "0x".$get_hesh->result->hash;
-		
-		header('Location: '.$site.'crossing');
-		exit;
+				if ($test != 'testnet')
+					{
+						$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => MinterTx::MAINNET_CHAIN_ID,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
+												'value' => $me
+											], [
+												'coin' => $coin,
+												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+												'value' => $kamil
+											],	[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => $fond
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+					}
+				else
+					{
+						$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => MinterTx::TESTNET_CHAIN_ID,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
+												'value' => $me
+											], [
+												'coin' => $coin,
+												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+												'value' => $kamil
+											],	[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => $fond
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+					}
+
+				$transaction = $tx->sign($private_key);
+				echo $transaction;
+				$get_hesh = TransactoinSendDebug($api2,$transaction);
+				$hash = "0x".$get_hesh->result->hash;
+				sleep(6);
+				$block = getBlockByHash($api2,$hash)->result->height;
+				
+				//------------------------------
+				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
+					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+					"stored_id" INTEGER,
+					"addr" VARCHAR,
+					"img" INTEGER,
+					"price" INTEGER,
+					"sale" INTEGER,
+					"name" VARCHAR,
+					"hash" VARCHAR
+						)');
+				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
+
+				$a=9; $_SESSION['a'] = $a;
+				//------------------------------
+				header('Location: '.$site.'profile'); exit;
 	}
 else
 	{

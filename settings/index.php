@@ -60,33 +60,9 @@ echo "
 					<span class='logo__text-dark'><div class='logo_text_2'>Cat</div></span></span>
 				</a>
 			</div>
-			<div class='head_menu'>
-				<ul id='menu'>
-    <li><a href='".$site."' class='nav-top__link '>" . $language['Home'] . "</a></li>
-    <li><a href='".$site."profile' class='nav-top__link active'>" . $language['Profile'] . "</a>
-      <ul>
-        <li><a href='".$site."wallet' class='nav-top__link'>" . $language['My_wallet'] . "</a></li>
-		<li><a href='".$site."settings' class='nav-top__link '>Settings</a></li>
-		<li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
-	<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
-      </ul>
-    </li>
-	<li><a href='#' class='nav-top__link '>" . $language['event'] . "</a></li>
-	<li><a href='".$site."language' class='nav-top__link'>Language</a>
-	<ul>
-		<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>
-		<li><a href='".$site."language?language=English&url=$url' class='nav-top__link'>ENGLISH</a></li>
-		<li><a href='".$site."language?language=French&url=$url' class='nav-top__link'>FRANÇAIS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."explorer' class='nav-top__link'>Explorer</a>
-	<ul>
-		<li><a href='".$site."cats' class='nav-top__link '>" . $language['Kitty'] . "</a></li>
-		<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
-	</ul>
-	</li>
-	<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
-</ul>
+			<div class='head_menu'>";
+				$m = 2; include('../menu.php');
+			echo "$menu
 			</div>
 		</div>
 	</div>
