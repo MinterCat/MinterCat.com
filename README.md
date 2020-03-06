@@ -1,2 +1,2 @@
-# testnet
-http://testnet.mintercat.com/
+# master: https://mintercat.com
+# testnet: http://testnet.mintercat.com
