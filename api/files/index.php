@@ -1,17 +1,18 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json; charset=utf-8');
-
-//https://api.github.com/repos/MinterCat/testnet/contents/
-//https://api.github.com/repos/MinterCat/testnet/git/trees/c7a98d85e78a02cba8e477160e95bbdac60c6c2d
-//https://api.github.com/repos/MinterCat/testnet/git/commits/d91df7f125ecc57e3ff3cb7e01c4722a62587c7b
-//https://api.github.com/repos/MinterCat/testnet/events
+include('../../../config/config.php'); 
+//https://api.github.com/repos/MinterCat/MinterCat.com/contents/
+//https://api.github.com/repos/MinterCat/MinterCat.com/git/trees/c7a98d85e78a02cba8e477160e95bbdac60c6c2d
+//https://api.github.com/repos/MinterCat/MinterCat.com/git/commits/d91df7f125ecc57e3ff3cb7e01c4722a62587c7b
+//https://api.github.com/repos/MinterCat/MinterCat.com/events
+//https://api.github.com/repos/MinterCat/MinterCat.com/branches/master
 $trees = $_GET['trees'];
 $commits = $_GET['commits'];
 
 $ch = curl_init();
     curl_setopt_array($ch, [
-        CURLOPT_URL => "https://api.github.com/repos/MinterCat/testnet/events",
+        CURLOPT_URL => "https://api.github.com/repos/MinterCat/MinterCat.com/branches/$version",
         CURLOPT_HTTPHEADER => [
             "Accept: application/vnd.github.v3+json",
             "Content-Type: text/plain",
