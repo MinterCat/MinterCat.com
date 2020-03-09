@@ -6,6 +6,7 @@ use Minter\SDK\MinterWallet;
 ob_start();
 //========================================
 include('../config/config.php');
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 class Users extends SQLite3
 {
@@ -57,16 +58,20 @@ echo "
 <html lang='en'>
 
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
 
-  <title>MinterCat</title>
-  <link rel='icon' href='".$site."static/img/favicon.png'>
-  <link rel='stylesheet' href='".$site."static/css/swiper.min.css' media='all and (max-width: 480px)'>
-  <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
-  <link rel='stylesheet' href='".$site."static/css/social.css'>
-  <link rel='stylesheet' href='".$site."static/css/pagination.css'>
+<title>MinterCat</title>
+<link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
+<link rel='stylesheet' href='".$site."static/css/swiper.min.css' media='all and (max-width: 480px)'>
+  
+<link rel='stylesheet' href='".$site."static/css/styles.min.css'>
+<link rel='stylesheet' href='".$site."static/css/style_menu.css'>
+<link rel='stylesheet' href='".$site."static/css/pagination.css'>
+<link rel='stylesheet' href='".$site."static/css/social.css'>
+
+<link rel='stylesheet' href='".$site."static/css/normalize.css'>
 </head>
 
 <body>
@@ -159,15 +164,8 @@ echo "
                 </g>
               </g>
             </svg>
-
-            <a href='#' class='nav-top__link active'>" . $language['Home'] . "</a>
-            <a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a>
-            <a href='#' class='nav-top__link'>" . $language['event'] . "</a>
-            <a href='".$site."dev' class='nav-top__link'>" . $language['Developers'] . "</a>
-			<a href='".$site."language' class='nav-top__link'>Language</a>
-			<a href='".$site."explorer' class='nav-top__link'>Explorer</a>
-
-            <ul class='social nav-top__social'>
+			"; $m = 1; include('menu.php'); echo "$menu
+			<ul class='social nav-top__social'>
 
               <li class='social__item'>
 			<div class='social telegram'>

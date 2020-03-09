@@ -1,6 +1,8 @@
 <?php
 echo "
 <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
 <link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
 <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
 <link rel='stylesheet' href='".$site."static/css/style_header.css'>
@@ -10,7 +12,6 @@ echo "
 <link rel='stylesheet' href='".$site."static/css/social.css'>
 
 <link rel='stylesheet' href='".$site."static/css/normalize.css'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
 ";
 
 echo "
