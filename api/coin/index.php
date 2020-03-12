@@ -4,11 +4,18 @@ header('Content-type: application/json; charset=utf-8');
 
 include('../../../config/config.php');
 
-$json = file_get_contents($coin_api);
+function JSON ($url)
+{
+	$data = file_get_contents($url);
+    $jsonCalled = json_decode($data);
+    return $jsonCalled;
+}
 
-$response = json_decode($json,true);
-$will_get = $response['result']['will_get'];
-$will_get = $will_get / 10 ** 18;
+$json_api = JSON($coin_api);
+$estimate = $json_api->result->will_get/10 ** 18;
 
-$array = array("estimate" => $will_get);
+$json_api = JSON('https://api.mscan.dev/'.$mscan.'/node/coin_info?symbol=MINTERCAT');
+$symbol = $json_api->result;
+
+$array = array("estimate" => $estimate, "symbol" => $symbol);
 echo json_encode($array, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
