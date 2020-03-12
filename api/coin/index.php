@@ -11,4 +11,4 @@ $will_get = $response['result']['will_get'];
 $will_get = $will_get / 10 ** 18;
 
 $array = array("estimate" => $will_get);
-echo json_encode($array, JSON_UNESCAPED_UNICODE);
+echo json_encode($array, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

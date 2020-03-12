@@ -134,4 +134,4 @@ $arr = array(
 			'cats' => $array
 );
 
-echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+echo json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
