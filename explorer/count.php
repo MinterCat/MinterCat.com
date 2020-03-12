@@ -18,6 +18,16 @@ $result2 = $database2->query('SELECT COUNT(*) FROM "table" WHERE sale="1"');
 $data3 = $result2->fetchArray(1);
 $count3 = $data3['COUNT(*)'];
 
+function JSON ($url)
+{
+	$data = file_get_contents($url);
+    $jsonCalled = json_decode($data);
+    return $jsonCalled;
+}
+
+$json_api = JSON('https://api.mintercat.com/coin');
+$count4 = number_format($json_api->estimate,4);
+
 echo "
 <div class='cat_content_none' style='margin-top: 30px;'>
 <div class='explorer_content'>
@@ -45,5 +55,12 @@ Cats in the store: <b>$count3</b>
 <img src='".$site."png2.php?png=online&type=icons' width='100' height='100'>
 </picture><br>
 Online: <b>". $online_check ."</b>
+</div>
+<div class='explorer_block_icons'>
+<picture>
+<source srcset='".$site."static/img/icons/Shope.webp' type='image/webp' width='100' height='100'>
+<img src='".$site."png2.php?png=Shope&type=icons' width='100' height='100'>
+</picture><br>
+The rate of the MINTERCAT coin: <b>$count4</b>
 </div>
 </div></div>";
