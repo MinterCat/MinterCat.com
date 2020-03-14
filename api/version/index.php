@@ -2,16 +2,21 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json; charset=utf-8');
 
+include('../../../config/config.php');
+
 $github = array(
 "MinterCat/MinterCat.com" => "v0.1.0-Beta2",
 "MinterCat/api" => "v0.1.0",
 "MinterTeam/minter-go-node" => "v1.1.3",
-"MinterTeam/minter-php-sdk" => "v2.2.0",
+"MinterTeam/minter-php-sdk" => "v2.2.0"
 );
 
 $array = array(
-"php" => "v7.1.3",
+"php" => "v7.3.13",
 "blockchain" => "Minter",
+"branch" => $version,
+"site" => $test,
+"version_node" => $node,
 "github" => $github
 );
 

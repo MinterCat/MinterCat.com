@@ -117,8 +117,7 @@ switch ($series)
 	case 999: {$u = '#9BF5DA'; break;}
 }
 
-$db_gen = new Gen();
-$result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $block);
+$result2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block);
 $payloadsID = $result2->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];

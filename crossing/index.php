@@ -38,8 +38,6 @@ $private_key = $decript['private_key'];
 $db_cats = new Cats();
 $db_rss = new RSS();
 $db_users = new Users();
-$db_gen = new Gen();
-$db_stored = new Stored();
 
 $result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
 $data = $result->fetchArray(1);
@@ -330,11 +328,11 @@ if (isset($_POST['button']))
 				$block = $json_block->result->latest_block_height;
 				$block = $block+1;
 				
-				$result = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id1);
+				$result = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1);
 				$data_gen1 = $result->fetchArray(1);	
 				$ok1 = $data_gen1['block'];
 				
-				$result = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id2);
+				$result = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id2);
 				$data_gen2 = $result->fetchArray(1);
 				$ok2 = $data_gen2['block'];
 
@@ -383,7 +381,9 @@ if ($balance > $komsa)
 
 		if ($data)
 			{
-				echo 'Уже существует!';
+				$a=7; $_SESSION['a'] = $a; 
+				header('Location: '.$site.'profile');
+				exit;
 			}
 		else
 			{
@@ -403,26 +403,16 @@ if ($balance > $komsa)
 		for ($i = 0; $i <= 2; $i++)
 		{
 			$stored_id = $stored[$i];
-			$result = $db_stored->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"');
+			$result = $db_cats->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"');
 			$data = $result->fetchArray(1);
 
 			if ($data)
 				{
-					$db_stored->query('UPDATE "table" SET block = "'.$blockq.'" WHERE stored_id = "'.$stored_id.'"');
-				}
-			else
-				{
-					$db_stored->query('CREATE TABLE IF NOT EXISTS "table" (
-						"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-						"stored_id" INTEGER,
-						"block" INTEGER
-					)');
-					$db_stored->exec('INSERT INTO "table" ("stored_id", "block")
-						VALUES ("'.$stored_id.'", "'.$blockq.'")');
+					$db_cats->query('UPDATE "table" SET stored = "'.$blockq.'" WHERE stored_id = "'.$stored_id.'"');
 				}
 		}
 
-		$db_gen->query('CREATE TABLE IF NOT EXISTS "table" (
+		$db_cats->query('CREATE TABLE IF NOT EXISTS "gen" (
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 			"stored_id" INTEGER,
 			"fishtail" INTEGER,
@@ -430,7 +420,7 @@ if ($balance > $komsa)
 			"horns" INTEGER
 		)');
 
-		$db_gen->exec('INSERT INTO "table" ("stored_id", "fishtail", "tentacles", "horns")
+		$db_cats->exec('INSERT INTO "gen" ("stored_id", "fishtail", "tentacles", "horns")
 			VALUES ("'.$block.'", "'.$fish.'", "'.$tentacl.'", "'.$horn.'")');
 
 

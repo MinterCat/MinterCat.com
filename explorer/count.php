@@ -61,6 +61,6 @@ Online: <b>". $online_check ."</b>
 <source srcset='".$site."static/img/icons/Shope.webp' type='image/webp' width='100' height='100'>
 <img src='".$site."png2.php?png=Shope&type=icons' width='100' height='100'>
 </picture><br>
-The rate of the MINTERCAT coin: <b>$count4</b>
+The rate of the MINTERCAT coin: <b>$count4</b> BIP
 </div>
 </div></div>";
