@@ -68,7 +68,7 @@ float: none;
 .logo__img{
 border-radius: 10px; /*скругление*/
 float: left;
-background-image:url("https://MinterCat.com/img/favicon.png");
+background-image:url("https://MinterCat.com/static/img/icons/favicon.png");
 margin-right: 10px;
 }
 
