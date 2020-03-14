@@ -39,8 +39,7 @@ $db_cats = new Cats();
 $db_rss = new RSS();
 $db_users = new Users();
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
@@ -328,23 +327,19 @@ if (isset($_POST['button']))
 				$block = $json_block->result->latest_block_height;
 				$block = $block+1;
 				
-				$result = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1);
-				$data_gen1 = $result->fetchArray(1);	
+				$data_gen1 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1)->fetchArray(1);	
 				$ok1 = $data_gen1['block'];
 				
-				$result = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id2);
-				$data_gen2 = $result->fetchArray(1);
+				$data_gen2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id2)->fetchArray(1);
 				$ok2 = $data_gen2['block'];
 
 				if ((($block >= $ok1) or ($ok1 == '')) and (($block >= $ok2) or ($ok2 == '')))
 					{
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id1);
-$data = $result->fetchArray(1);
+$data = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id1)->fetchArray(1);
 $addr1 = $data['addr'];
 $hash_addr1 = $data['hash'];
 
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id2);
-$data = $result->fetchArray(1);
+$data = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id2)->fetchArray(1);
 $addr2 = $data['addr'];
 $hash_addr2 = $data['hash'];
 
@@ -376,8 +371,7 @@ if ($komsa == 0) {$komsa = 0;}
 if ($balance > $komsa) 
 	{
 		$img = rand(9990,9999);
-		$result = $db_cats->query('SELECT id FROM "table" WHERE id = "'.$block.'"');
-		$data = $result->fetchArray(1);
+		$data = $db_cats->query('SELECT id FROM "table" WHERE id = "'.$block.'"')->fetchArray(1);
 
 		if ($data)
 			{
@@ -403,8 +397,7 @@ if ($balance > $komsa)
 		for ($i = 0; $i <= 2; $i++)
 		{
 			$stored_id = $stored[$i];
-			$result = $db_cats->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"');
-			$data = $result->fetchArray(1);
+			$data = $db_cats->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"')->fetchArray(1);
 
 			if ($data)
 				{
