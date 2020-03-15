@@ -135,9 +135,63 @@ Balance: ".$balance." ".$coin."
             <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' required disabled style='border: none;'>
           </div>
         </div>
-      </form>
+	<div class='calс_tab calс_tab_1'>
+		<div class='calс_tab_p_1'>
+			<div class='calс_tab_p_txt'>" . $language['Number_of_hours_for_egg_maturation'] . "</div>
+			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' required disabled ></div>
+		</div>
+		<div class='calс_tab_p_2'>
+			<div class='calс_tab_slider' data-min='0' data-val='24' data-step='1' data-max='24'></div>
+			<div class='calс_tab_slider_grad'>
+				<div class='calс_tab_slider_num calс_tab_slider_num_1'>240 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_25'>180 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_50'>120 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_75'>60 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_100'>1 MINTERCAT</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	$('.calс_tab_slider').each(function(){
+		var insert_val=$(this).closest('.calс_tab').find('.calс_tab_p_input_val');
+		
+		var curr_slide=$(this).slider({
+			min:parseInt($(this).attr('data-min')),
+			max:parseInt($(this).attr('data-max')),
+			step:parseFloat($(this).attr('data-step')),
+			value:parseInt($(this).attr('data-val')),
+			stop: function(event, ui) {
+				insert_val.val(curr_slide.slider('value'));
+			},
+			slide: function(event, ui){
+				setTimeout(function(){
+					insert_val.val(curr_slide.slider('value'));
+				},30);
+			}
+		});
+		
+		insert_val.on('change',function(){
+			var this_val=$(this).val();
+			
+			var tmp_1=curr_slide.slider('value');
+			var tmp_2=this_val;
+		
+			if(tmp_1!=tmp_2){
+				curr_slide.slider('value',tmp_2);
+			}
+		});
+		
+		insert_val.val($(this).attr('data-val')).trigger('change');
+		
+	});
+});
+})(jQuery);
+</script>
+	  </form>
 		";
-
 
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
@@ -151,7 +205,7 @@ $countq = ceil(($result+1)/12);
 if ($countq != 0) {
 echo '<div class="cats_div"><div class="cat_content">';
 $id = $_POST['id'];
-if ($id==''){$id=1;}
+if ($id <= 0) {$id=1;}
 $q = ($id-1)*12; if ($q<0){$q=0;}
 $result=($id*12)-1;
 
@@ -312,14 +366,19 @@ include('../footer.php');
 
 if (isset($_POST['button'])) 
 	{
-		$id1 = $_POST['cat1'];
-		$id2 = $_POST['cat2'];
+		$id1 = $_POST['drop-area-1-input'];
+		$id2 = $_POST['drop-area-2-input'];
+		
+		var_dump($_POST);
 		
 		if ($id1 == $id2) 
 			{
+				echo '$id1: '.$id1.' == $id2: '.$id2;
+				/*
 				$a=7; $_SESSION['a'] = $a; 
 				header('Location: '.$site.'profile');
 				exit;
+				*/
 			}
 		else
 			{
@@ -366,7 +425,6 @@ $horns2 = $data_gen2['horns'];
 		$blockq = $block + (720*$kolvo);
 
 $komsa = 240 - ($kolvo * 10);
-if ($komsa == 0) {$komsa = 0;}
 
 if ($balance > $komsa) 
 	{
@@ -375,9 +433,12 @@ if ($balance > $komsa)
 
 		if ($data)
 			{
-				$a=7; $_SESSION['a'] = $a; 
+				echo '$data';
+				/*
+				$a=7; $_SESSION['a'] = $a;
 				header('Location: '.$site.'profile');
 				exit;
+				*/
 			}
 		else
 			{
@@ -513,21 +574,31 @@ if ($balance > $komsa)
 	}
 else
 	{
+		echo '$balance < $komsa';
+		/*
 		$a=6; $_SESSION['a'] = $a; 
 		header('Location: '.$site.'profile');
 		exit;
+		*/
 	}
 }
 else
 {
+	echo '($addr1 != $address) or ($addr2 != $address)';
+	/*
 	$a=7; $_SESSION['a'] = $a; 
 	header('Location: '.$site.'profile');
 	exit;
+	*/
 }
-	}else
-{
+	}
+	else
+	{
+	echo '((($block >= $ok1) or ($ok1 == "")) and (($block >= $ok2) or ($ok2 == "")))';
+	/*
 	$a=7; $_SESSION['a'] = $a; 
 	header('Location: '.$site.'profile');
 	exit;
+	*/
 }	
 	}}
