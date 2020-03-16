@@ -13,15 +13,15 @@ $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
 
-function getBlockByHash ($api,$hash)
+function getBlockByHash ($api2,$hash)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->getTransaction($hash);
 }
 
-function TransactoinSendDebug ($api,$transaction)
+function TransactoinSendDebug ($api2,$transaction)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->send($transaction);
 }
 
@@ -61,7 +61,6 @@ $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP
 echo "
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
   <meta charset='utf-8'>
   <title>MinterCat | $nick</title>
@@ -71,9 +70,7 @@ echo "
   <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
   <link rel='stylesheet' href='".$site."static/css/pagination.css'>
   <link rel='stylesheet' href='".$site."static/css/lk.css'>
-
   <link rel='stylesheet' href='".$site."static/css/normalize.css'>
-
   <link rel='stylesheet' href='".$site."static/css/dragndrop_main.css'>
   <link rel='stylesheet' href='".$site."static/css/dragndrop_scale.css'>
   <script src='".$site."static/js/dragndrop/ba3a0add07.js' crossorigin='anonymous'></script>
@@ -82,19 +79,15 @@ echo "
   <script src='".$site."static/js/dragndrop/popper.min.js'></script>
   <script src='".$site."static/js/dragndrop/tippy-bundle.iife.min.js'></script>
   <script src='".$site."static/js/dragndrop/jquery.ui.touch-punch.min.js'></script>
-
   <link rel='stylesheet' href='".$site."static/css/slider_style.css'>
   <script src='".$site."static/js/slider_jquery-1.12.4.js'></script>
   <script src='".$site."static/js/slider_jquery-ui.js'></script>
   <script src='".$site."static/js/slider_jquery.ui.touch-punch.min.js'></script>
-
   <link rel='stylesheet' href='".$site."static/css/social.css'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
-
 <body>
   <div class='cat_header'>
-
 	<div class='header'>
 		<div class='logo_float'>
 			<div class='logo_cat'>
@@ -111,18 +104,16 @@ echo "$menu
 			</div>
 		</div>
 	</div>
-
 <center><blockquote>
 Balance: ".$balance." ".$coin."
 </blockquote></center>
-
       <form method='post'>
         <div class='drop-areas'>
           <div class='drop-area-container'>
             <div class='drop-area' id='drop-area-1'>
               <h1 class='gender-logo'>♀</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' readonly="readonly" required style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' readonly='readonly' required style='border: none;'>
           </div>
           <div class='heart'>
             <button type='submit' class='heart-button' id='heart-btn' name='button' data-tippy-content='Отлично! Нажми сюда, чтобы скрестить!' disabled style='border: none;'>
@@ -132,13 +123,13 @@ Balance: ".$balance." ".$coin."
             <div class='drop-area' id='drop-area-2'>
               <h1 class='gender-logo'>♂</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' readonly="readonly" required style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' readonly='readonly' required style='border: none;'>
           </div>
         </div>
 	<div class='calс_tab calс_tab_1'>
 		<div class='calс_tab_p_1'>
 			<div class='calс_tab_p_txt'>" . $language['Number_of_hours_for_egg_maturation'] . "</div>
-			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly="readonly" required></div>
+			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly='readonly' required></div>
 		</div>
 		<div class='calс_tab_p_2'>
 			<div class='calс_tab_slider' data-min='0' data-val='24' data-step='1' data-max='24'></div>
@@ -157,7 +148,6 @@ Balance: ".$balance." ".$coin."
 $(document).ready(function(){
 	$('.calс_tab_slider').each(function(){
 		var insert_val=$(this).closest('.calс_tab').find('.calс_tab_p_input_val');
-
 		var curr_slide=$(this).slider({
 			min:parseInt($(this).attr('data-min')),
 			max:parseInt($(this).attr('data-max')),
@@ -172,20 +162,15 @@ $(document).ready(function(){
 				},30);
 			}
 		});
-
 		insert_val.on('change',function(){
 			var this_val=$(this).val();
-
 			var tmp_1=curr_slide.slider('value');
 			var tmp_2=this_val;
-
 			if(tmp_1!=tmp_2){
 				curr_slide.slider('value',tmp_2);
 			}
 		});
-
 		insert_val.val($(this).attr('data-val')).trigger('change');
-
 	});
 });
 })(jQuery);
@@ -351,7 +336,6 @@ echo "
       showToolTip();
     }
   });
-
   function showToolTip() {
     if (droppedMale && droppedFemale) {
       $('#heart-btn').attr('disabled', false);
@@ -366,19 +350,14 @@ include('../footer.php');
 
 if (isset($_POST['button']))
 	{
-		$id1 = $_POST['drop-area-1-input'];
-		$id2 = $_POST['drop-area-2-input'];
-
-		var_dump($_POST);
+		$id1 = $_POST['cat-1'];
+		$id2 = $_POST['cat-2'];
 
 		if ($id1 == $id2)
 			{
-				echo '$id1: '.$id1.' == $id2: '.$id2;
-				/*
 				$a=7; $_SESSION['a'] = $a;
 				header('Location: '.$site.'profile');
 				exit;
-				*/
 			}
 		else
 			{
@@ -433,25 +412,9 @@ if ($balance > $komsa)
 
 		if ($data)
 			{
-				echo '$data';
-				/*
 				$a=7; $_SESSION['a'] = $a;
 				header('Location: '.$site.'profile');
 				exit;
-				*/
-			}
-		else
-			{
-				$db_cats->query('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"stored_id" INTEGER,
-					"addr" VARCHAR,
-					"img" INTEGER,
-					"price" INTEGER,
-					"sale" INTEGER
-				)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0")');
 			}
 
 		$stored = array($id1,$id2,$block);
@@ -484,7 +447,7 @@ if ($balance > $komsa)
 		$me = $fond/2; //25%
 		$kamil = $fond/2; //25%
 
-		$api_node = new MinterAPI($api);
+		$api_node = new MinterAPI($api3);
 
 				if ($test != 'testnet')
 					{
@@ -548,12 +511,10 @@ if ($balance > $komsa)
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);
 				$block = getBlockByHash($api2,$hash)->result->height;
-
 				//------------------------------
 				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
 					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -563,10 +524,11 @@ if ($balance > $komsa)
 					"price" INTEGER,
 					"sale" INTEGER,
 					"name" VARCHAR,
-					"hash" VARCHAR
+					"hash" VARCHAR,
+					"stored" INTEGER
 						)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
+				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash", "stored")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'", "'.$stored_id.'")');
 
 				$a=9; $_SESSION['a'] = $a;
 				//------------------------------
@@ -574,31 +536,22 @@ if ($balance > $komsa)
 	}
 else
 	{
-		echo '$balance < $komsa';
-		/*
 		$a=6; $_SESSION['a'] = $a;
 		header('Location: '.$site.'profile');
 		exit;
-		*/
 	}
 }
 else
 {
-	echo '($addr1 != $address) or ($addr2 != $address)';
-	/*
 	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
-	*/
 }
 	}
 	else
 	{
-	echo '((($block >= $ok1) or ($ok1 == "")) and (($block >= $ok2) or ($ok2 == "")))';
-	/*
 	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
-	*/
 }
 	}}
