@@ -353,7 +353,7 @@ if (isset($_POST['sendprice']))
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
+				
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				
@@ -417,7 +417,7 @@ if (isset($_POST['in']))
 						]);
 					}
 					$transaction = $tx->sign($privat_key_mintercat);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
@@ -490,7 +490,7 @@ if (isset($_POST['in2']))
 						]);
 					}
 					$transaction = $tx->sign($privat_key_mintercat);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
@@ -600,7 +600,7 @@ if (isset($_POST['buy']))
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
+				
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				//---------------------
@@ -675,7 +675,7 @@ if (isset($_POST['send']))
 						]);
 					}
 					$transaction = $tx->sign($private_key);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					//---------------------
