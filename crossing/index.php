@@ -259,15 +259,16 @@ $idp2 = $id + 2;
 
 echo "
 <br>
-<div class='pagination' style='background-color: #9584de'>
-<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
+<div class='pagination'>
+<input type='submit' value='". $id ." ". $language['page_of'] ." ". $countq."'>
 </div>
 ";
 echo '
 <div class="pagination">
 <form method="post">
-<a href="#" onclick="parentNode.submit();">«</a>
+<input type="submit" value="«" style="background-color: white; color: black">
 <input name="id" type="hidden" value="'.$idm1.'">
+<input name="key" type="hidden" value="'.$key.'">
 </form>
 </div>
 ';
@@ -277,8 +278,9 @@ echo '
 		echo '
 		<div class="pagination">
 		<form method="post">
-		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
+		<input type="submit" value="'.$p.'" style="background-color: white; color: black">
 		<input name="id" type="hidden" value="'.$p.'">
+		<input name="key" type="hidden" value="'.$key.'">
 		</form>
 		</div>
 		';
@@ -287,11 +289,13 @@ echo '
 echo '
 <div class="pagination">
 <form method="post">
-<a href="#" onclick="parentNode.submit();">»</a>
+<input type="submit" value="»" style="background-color: white; color: black">
 <input name="id" type="hidden" value="'.$idp1.'">
+<input name="key" type="hidden" value="'.$key.'">
 </form>
 </div>
 </div>
+<br><br><br><br>
 ';
 
 echo "

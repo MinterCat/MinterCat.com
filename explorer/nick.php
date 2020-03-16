@@ -88,17 +88,17 @@ $idp2 = $id + 2;
 
 echo "
 <br>
-<div class='pagination' style='background-color: #9584de'>
-	<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
+<div class='pagination'>
+<input type='submit' value='". $id ." ". $language['page_of'] ." ". $countq."'>
 </div>
 ";
 echo '
 <div class="pagination">
-	<form method="post">
-		<a href="#" onclick="parentNode.submit();">«</a>
-		<input name="id" type="hidden" value="'.$idm1.'">
-		<input name="nick" type="hidden" value="'.$nick.'">
-	</form>
+<form method="post">
+<input type="submit" value="«" style="background-color: white; color: black">
+<input name="id" type="hidden" value="'.$idm1.'">
+<input name="nick" type="hidden" value="'.$nick.'">
+</form>
 </div>
 ';
   for ($p = 1; $p <= $countq; $p++)
@@ -106,22 +106,22 @@ echo '
 	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
 		echo '
 		<div class="pagination">
-			<form method="post">
-				<a href="#" onclick="parentNode.submit();">'.$p.'</a>
-				<input name="id" type="hidden" value="'.$p.'">
-				<input name="nick" type="hidden" value="'.$nick.'">
-			</form>
+		<form method="post">
+		<input type="submit" value="'.$p.'" style="background-color: white; color: black">
+		<input name="id" type="hidden" value="'.$p.'">
+		<input name="nick" type="hidden" value="'.$nick.'">
+		</form>
 		</div>
 		';
 	  }
   }
 echo '
 <div class="pagination">
-	<form method="post">
-		<a href="#" onclick="parentNode.submit();">»</a>
-		<input name="id" type="hidden" value="'.$idp1.'">
-		<input name="nick" type="hidden" value="'.$nick.'">
-	</form>
+<form method="post">
+<input type="submit" value="»" style="background-color: white; color: black">
+<input name="id" type="hidden" value="'.$idp1.'">
+<input name="nick" type="hidden" value="'.$nick.'">
+</form>
 </div>
 </div>
 <br><br><br><br>
