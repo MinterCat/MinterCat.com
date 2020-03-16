@@ -334,7 +334,6 @@ $m = 2; include('../menu.php');
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);

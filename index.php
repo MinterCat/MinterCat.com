@@ -551,6 +551,7 @@ if (isset($_POST['Register']))
 		$nick = "ID$id";
 		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
 		//------------------------------
+		/*
 		$input = array(1001, 1003, 1004, 1005, 1006);
 		$rand_keys = array_rand($input, 1);
 		$img = $input[$rand_keys[0]];
@@ -579,6 +580,7 @@ if (isset($_POST['Register']))
 					VALUES ("'.$block.'", "'.$address.'", "'.$img2.'", "0", "0")');
 		//------------------------------
 		sleep(1);
+		*/
 		$a=8; $_SESSION['a'] = $a;
 		//------------------------------
 		header('Location: '.$site.'profile'); exit;
