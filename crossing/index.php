@@ -122,7 +122,7 @@ Balance: ".$balance." ".$coin."
             <div class='drop-area' id='drop-area-1'>
               <h1 class='gender-logo'>♀</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' required disabled style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' readonly="readonly" required style='border: none;'>
           </div>
           <div class='heart'>
             <button type='submit' class='heart-button' id='heart-btn' name='button' data-tippy-content='Отлично! Нажми сюда, чтобы скрестить!' disabled style='border: none;'>
@@ -132,13 +132,13 @@ Balance: ".$balance." ".$coin."
             <div class='drop-area' id='drop-area-2'>
               <h1 class='gender-logo'>♂</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' required disabled style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' readonly="readonly" required style='border: none;'>
           </div>
         </div>
 	<div class='calс_tab calс_tab_1'>
 		<div class='calс_tab_p_1'>
 			<div class='calс_tab_p_txt'>" . $language['Number_of_hours_for_egg_maturation'] . "</div>
-			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' required disabled ></div>
+			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly="readonly" required></div>
 		</div>
 		<div class='calс_tab_p_2'>
 			<div class='calс_tab_slider' data-min='0' data-val='24' data-step='1' data-max='24'></div>
@@ -157,7 +157,7 @@ Balance: ".$balance." ".$coin."
 $(document).ready(function(){
 	$('.calс_tab_slider').each(function(){
 		var insert_val=$(this).closest('.calс_tab').find('.calс_tab_p_input_val');
-		
+
 		var curr_slide=$(this).slider({
 			min:parseInt($(this).attr('data-min')),
 			max:parseInt($(this).attr('data-max')),
@@ -172,20 +172,20 @@ $(document).ready(function(){
 				},30);
 			}
 		});
-		
+
 		insert_val.on('change',function(){
 			var this_val=$(this).val();
-			
+
 			var tmp_1=curr_slide.slider('value');
 			var tmp_2=this_val;
-		
+
 			if(tmp_1!=tmp_2){
 				curr_slide.slider('value',tmp_2);
 			}
 		});
-		
+
 		insert_val.val($(this).attr('data-val')).trigger('change');
-		
+
 	});
 });
 })(jQuery);
@@ -364,18 +364,18 @@ echo "
 include('../footer.php');
 
 
-if (isset($_POST['button'])) 
+if (isset($_POST['button']))
 	{
 		$id1 = $_POST['drop-area-1-input'];
 		$id2 = $_POST['drop-area-2-input'];
-		
+
 		var_dump($_POST);
-		
-		if ($id1 == $id2) 
+
+		if ($id1 == $id2)
 			{
 				echo '$id1: '.$id1.' == $id2: '.$id2;
 				/*
-				$a=7; $_SESSION['a'] = $a; 
+				$a=7; $_SESSION['a'] = $a;
 				header('Location: '.$site.'profile');
 				exit;
 				*/
@@ -385,10 +385,10 @@ if (isset($_POST['button']))
 				$json_block = JSON($api.'/status');
 				$block = $json_block->result->latest_block_height;
 				$block = $block+1;
-				
-				$data_gen1 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1)->fetchArray(1);	
+
+				$data_gen1 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1)->fetchArray(1);
 				$ok1 = $data_gen1['block'];
-				
+
 				$data_gen2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id2)->fetchArray(1);
 				$ok2 = $data_gen2['block'];
 
@@ -407,26 +407,26 @@ if (($addr1 == $address) and ($addr2 == $address)) {
 $fishtail1 = $data_gen1['fishtail'];
 $tentacles1 = $data_gen1['tentacles'];
 $horns1 = $data_gen1['horns'];
-//------------------------------------------------------------	
+//------------------------------------------------------------
 $fishtail2 = $data_gen2['fishtail'];
 $tentacles2 = $data_gen2['tentacles'];
 $horns2 = $data_gen2['horns'];
-//------------------------------------------------------------	
+//------------------------------------------------------------
 	if (($fishtail1 >= 1) and ($fishtail2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
 	if (($tentacles1 >= 1) and ($tentacles2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
 	if (($horns1 >= 1) and ($horns2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
-//------------------------------------------------------------		
-	
+//------------------------------------------------------------
+
 	$fish = floor(($fishtail1 + $fishtail2)*3/4); if (($fish>0) and ($fish<=1)) {$fish=1;} if ($fish>=30) {$fish=30;}
 	$tentacl = floor(($tentacles1 + $tentacles2)*3/4); if (($tentacl>0) and ($tentacl<=1)) {$tentacl=1;} if ($tentacl>=30) {$tentacl=30;}
 	$horn = floor(($horns1 + $horns2)*3/4); if (($horn>0) and ($horn<=1)) {$horn=1;} if ($horn>=30) {$horn=30;}
-//------------------------------------------------------------		
+//------------------------------------------------------------
 		$kolvo = $_POST['kolvo'];
 		$blockq = $block + (720*$kolvo);
 
 $komsa = 240 - ($kolvo * 10);
 
-if ($balance > $komsa) 
+if ($balance > $komsa)
 	{
 		$img = rand(9990,9999);
 		$data = $db_cats->query('SELECT id FROM "table" WHERE id = "'.$block.'"')->fetchArray(1);
@@ -483,7 +483,7 @@ if ($balance > $komsa)
 		$fond = $komsa/2; //50% in found MinterCat
 		$me = $fond/2; //25%
 		$kamil = $fond/2; //25%
-		
+
 		$api_node = new MinterAPI($api);
 
 				if ($test != 'testnet')
@@ -553,7 +553,7 @@ if ($balance > $komsa)
 				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);
 				$block = getBlockByHash($api2,$hash)->result->height;
-				
+
 				//------------------------------
 				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
 					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -576,7 +576,7 @@ else
 	{
 		echo '$balance < $komsa';
 		/*
-		$a=6; $_SESSION['a'] = $a; 
+		$a=6; $_SESSION['a'] = $a;
 		header('Location: '.$site.'profile');
 		exit;
 		*/
@@ -586,7 +586,7 @@ else
 {
 	echo '($addr1 != $address) or ($addr2 != $address)';
 	/*
-	$a=7; $_SESSION['a'] = $a; 
+	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
 	*/
@@ -596,9 +596,9 @@ else
 	{
 	echo '((($block >= $ok1) or ($ok1 == "")) and (($block >= $ok2) or ($ok2 == "")))';
 	/*
-	$a=7; $_SESSION['a'] = $a; 
+	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
 	*/
-}	
+}
 	}}
