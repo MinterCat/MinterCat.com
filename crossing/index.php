@@ -188,7 +188,7 @@ $result = (count($payloads1)-1);
 
 $countq = ceil(($result+1)/12);
 if ($countq != 0) {
-echo '<div class="cats_div"><div class="cat_content">';
+echo '<div class="cats_div"><div class="cat_content" id="page-1">';
 $id = $_POST['id'];
 if ($id <= 0) {$id=1;}
 $q = ($id-1)*12; if ($q<0){$q=0;}
@@ -250,54 +250,17 @@ for ($i = $q; $i <= $result; $i++)
 		}}
 echo "</div></div>";
 }
-echo "<br><div class='cat_form'>";
-
-$idm1 = $id - 1;
-$idm2 = $id - 2;
-$idp1 = $id + 1;
-$idp2 = $id + 2;
-
-echo "
-<br>
+echo "<br><div class='cat_form'>
 <div class='pagination'>
-<input type='submit' value='". $id ." ". $language['page_of'] ." ". $countq."'>
-</div>
-";
-echo '
-<div class="pagination">
-<form method="post">
-<input type="submit" value="«" style="background-color: white; color: black">
-<input name="id" type="hidden" value="'.$idm1.'">
-<input name="key" type="hidden" value="'.$key.'">
-</form>
-</div>
-';
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-		echo '
-		<div class="pagination">
-		<form method="post">
-		<input type="submit" value="'.$p.'" style="background-color: white; color: black">
-		<input name="id" type="hidden" value="'.$p.'">
-		<input name="key" type="hidden" value="'.$key.'">
-		</form>
-		</div>
-		';
-	  }
-  }
-echo '
-<div class="pagination">
-<form method="post">
-<input type="submit" value="»" style="background-color: white; color: black">
-<input name="id" type="hidden" value="'.$idp1.'">
-<input name="key" type="hidden" value="'.$key.'">
-</form>
+  <button type='button' id='prev-page-btn' onclick='prevPage()' disabled>«</button>
+  <div id='page-counter' style='display: inline-block'>
+    1/1
+  </div>
+  <button type='button' id='next-page-btn' onlick='nextPage()'>»</button>
 </div>
 </div>
 <br><br><br><br>
-';
-
+";
 echo "
 <script type='text/javascript'>
   var tooltip = tippy(document.getElementById('heart-btn'));
@@ -346,6 +309,48 @@ echo "
       tooltip.show();
     }
   }
+</script>
+<script type="text/javascript">
+var maxPage = 3;
+var currentPage = 1;
+
+function prevPage() {
+  $('#page-' + currentPage).hide();
+  currentPage --;
+  if (currentPage < 1) currentPage = 1;
+  $('#page-' + currentPage).show();
+
+  $('#page-counter').html(currentPage + " / " + maxPage);
+
+  if (currentPage == 1) {
+    $('#prev-page-btn').prop('disabled', true);
+  }
+  if (currentPage < maxPage) {
+    $('#next-page-btn').prop('disabled', false);
+  }
+}
+
+function nextPage() {
+  $('#page-' + currentPage).hide();
+  currentPage ++;
+  if (currentPage > maxPage) currentPage = maxPage;
+  $('#page-' + currentPage).show();
+
+  $('#page-counter').html(currentPage + " / " + maxPage);
+
+  if (currentPage == maxPage) {
+    $('#next-page-btn').prop('disabled', true);
+  }
+  if (currentPage > 1) {
+    $('#prev-page-btn').prop('disabled', false);
+  }
+}
+
+$(document).ready(function() {
+  if (currentPage == maxPage) {
+    $('#next-page-btn').prop('disabled', true);
+  }
+})
 </script>
 ";
 //-------------------------------
