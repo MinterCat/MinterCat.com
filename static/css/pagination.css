@@ -1,20 +1,17 @@
-blockquote {
-    background: none repeat scroll 0 0 padding-box rgba(255, 255, 255, 0.1);
-    border-left: 5px solid #9584de;
-    box-shadow: 0 0 20px #222222;
-    color: black;
-    font-family: arial;
-    font-size: 16px;
-    font-style: italic;
-    line-height: 1.45;
-    outline: 0 none;
-    padding: 10px 15px;
-    text-align: center;
-    width: 450px;
+.pagination {
+    display: block;
 }
 
-.pagination {
+#page_counter {
     display: inline-block;
+    background-color: white;
+    color: black;
+    max-width: 80px;
+    font-size: 100%;
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 7px;
+    border: 2px solid #9584de;
 }
 
 .pagination a {

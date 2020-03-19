@@ -176,22 +176,18 @@ progress {
 }
 
 blockquote {
-    /* background: none repeat scroll 0 0 padding-box rgba(255, 255, 255, 0.1); */
-    border-left: 6px solid #9584de;
-    border-top: solid 2px #9584de;
-    border-right: solid 2px #9584de;
-    border-bottom: solid 2px #9584de;
-    border-radius: 4px;
-    /* box-shadow: 0 0 20px #222222; */
-    color: black;
-    font-family: "Blogger Sans";
-    font-size: 16px;
-    line-height: 1.45;
-    /* outline: 0 none; */
-    padding: 10px 15px;
-    text-align: center;
-    width: 450px;
-    margin-top: 3rem;
+	background: #9584de;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.45;
+	outline: 0 none;
+	padding: 10px 15px;
+	text-align: center;
+	width: 450px;
+	border-radius: 4px;
+	font-family: "Blogger Sans";
+	margin-top: 3rem;
 }
 
 /* blockquote:hover {
