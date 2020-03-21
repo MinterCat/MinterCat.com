@@ -181,28 +181,25 @@ $(document).ready(function(){
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 
+$cats = $payloads4['cats'];
+$ccount = (count($cats))-1;
+
 $results = $db_cats->query('SELECT * FROM "table" WHERE addr="'.$address.'"');
 $payloads1 = array();
 while ($res = $results->fetchArray(1)){array_push($payloads1, $res);}
 $result = (count($payloads1)-1);
-
 $countq = ceil(($result+1)/12);
 if ($countq != 0) {
-echo '<div class="cats_div"><div class="cat_content" id="page-1">';
-$id = $_POST['id'];
-if ($id <= 0) {$id=1;}
-$q = ($id-1)*12; if ($q<0){$q=0;}
-$result=($id*12)-1;
-
-$cats = $payloads4['cats'];
-
-$ccount = (count($cats))-1;
-
-
-for ($i = $q; $i <= $result; $i++)
-{
-	$img = $payloads1[$i]['img'];
-	$block = $payloads1[$i]['stored_id'];
+foreach ($payloads1 as $value => $kity) {
+	$value++;
+	if ($value == 1) {
+	$id = 1;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
+	}
+	//-------------------------------------------------
+	$pricebd = $kity['price'];
+	$img = $kity['img'];
+	$block = $kity['stored_id'];
 	for ($y = 0; $y<=$ccount; $y++)
 		{
 			$catimg = $cats[$y]['img'];
@@ -210,6 +207,7 @@ for ($i = $q; $i <= $result; $i++)
 				{
 					$series = $cats[$y]['series'];
 					$rarity = ($cats[$y]['rarity'])*100;
+					$price = $cats[$y]['price'];
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];
@@ -217,9 +215,8 @@ for ($i = $q; $i <= $result; $i++)
 		}
 		if ($gender == '♀') {$gender_number = 1;}
 		if ($gender == '♂') {$gender_number = 0;}
-	$name2 = $payloads1[$i]['name'];
+	$name2 = $kity['name'];
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
-		if ($gender == '0') {$gender = '';}
 
 		switch ($series)
 		{
@@ -231,7 +228,7 @@ for ($i = $q; $i <= $result; $i++)
 			case 5: {$u = '#6AF2D7'; break;}
 			case 999: {$u = '#9BF5DA'; break;}
 		}
-		if ($gender != '') {
+		if ($gender != '0') {
 				echo "
 					<div class='cat_block' style='background: $u'>
 						<div class='cat_img' data-id='$block' data-gender='$gender_number'>
@@ -247,14 +244,21 @@ for ($i = $q; $i <= $result; $i++)
 						</div>
 					</div>";
 
-		}}
+		}
+   //-------------------------------------------------
+if ($value % 12 == 0) {
+	echo "</div></div>";
+	$id++;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
+	}
+}
 echo "</div></div>";
 }
 echo "<br><div class='cat_form'>
 <div class='pagination'>
   <button type='button' id='prev-page-btn' onclick='prevPage()' disabled>«</button>
   <div id='page-counter' style='display: inline-block'>
-    1/1
+    1 ". $language['page_of'] ." ". $countq ."
   </div>
   <button type='button' id='next-page-btn' onlick='nextPage()'>»</button>
 </div>
@@ -263,95 +267,47 @@ echo "<br><div class='cat_form'>
 ";
 echo "
 <script type='text/javascript'>
-  var tooltip = tippy(document.getElementById('heart-btn'));
-  var droppedMale;
-  var droppedFemale;
-  var draggableItems = document.getElementsByClassName('cat_img');
-  for (var i = 0; i < draggableItems.length; i++) {
-    $(draggableItems[i]).draggable();
-  }
-  $('#drop-area-1').droppable({
-    drop: function(event, ui) {
-      let droppedItem = ui.draggable[0];
-      if ($(droppedItem).attr('data-gender') != '1') {
-          droppedItem.style.cssText = 'position: relative; left: 0px; top: 0px;'
-      } else {
-          if (droppedMale && droppedMale != droppedItem) {
-            droppedMale.style.cssText = 'position: relative; left: 0px; top: 0px;'
-          }
-          droppedMale = droppedItem;
-          $('#drop-area-1-input').val($(droppedItem).attr('data-id'));
-      }
-      showToolTip();
-    }
-  });
-  $('#drop-area-2').droppable({
-    drop: function(event, ui) {
-      let droppedItem = ui.draggable[0];
-      if ($(droppedItem).attr('data-gender') != '0') {
-          droppedItem.style.cssText = 'position: relative; left: 0px; top: 0px;'
-      } else {
-          if (droppedFemale && droppedFemale != droppedItem) {
-            droppedFemale.style.cssText = 'position: relative; left: 0px; top: 0px;'
-          }
-          droppedFemale = droppedItem;
-          $('#drop-area-2-input').val($(droppedItem).attr('data-id'));
-      }
-      if (droppedMale && droppedFemale) {
-        $('#heart-btn').attr('disabled', false);
-      }
-      showToolTip();
-    }
-  });
-  function showToolTip() {
-    if (droppedMale && droppedFemale) {
-      $('#heart-btn').attr('disabled', false);
-      tooltip.show();
-    }
-  }
-</script>
-<script type="text/javascript">
-var maxPage = 3;
-var currentPage = 1;
+			var maxPage = ".$countq.";
+			var currentPage = 1;
 
-function prevPage() {
-  $('#page-' + currentPage).hide();
-  currentPage --;
-  if (currentPage < 1) currentPage = 1;
-  $('#page-' + currentPage).show();
+			$(document).ready(function() {
+				console.log('hi');
+				if (currentPage == maxPage) {
+					$('#next-page-btn').prop('disabled', true);
+				}
+				$('#prev-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					console.log(currentPage);
+					currentPage--;
+					if (currentPage < 1) currentPage = 1;
+					$('#page-' + currentPage).show();
 
-  $('#page-counter').html(currentPage + " / " + maxPage);
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
 
-  if (currentPage == 1) {
-    $('#prev-page-btn').prop('disabled', true);
-  }
-  if (currentPage < maxPage) {
-    $('#next-page-btn').prop('disabled', false);
-  }
-}
+					if (currentPage == 1) {
+						$('#prev-page-btn').prop('disabled', true);
+					}
+					if (currentPage < maxPage) {
+						$('#next-page-btn').prop('disabled', false);
+					}
+				});
+				$('#next-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					currentPage++;
+					if (currentPage > maxPage) currentPage = maxPage;
+					$('#page-' + currentPage).show();
 
-function nextPage() {
-  $('#page-' + currentPage).hide();
-  currentPage ++;
-  if (currentPage > maxPage) currentPage = maxPage;
-  $('#page-' + currentPage).show();
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
 
-  $('#page-counter').html(currentPage + " / " + maxPage);
-
-  if (currentPage == maxPage) {
-    $('#next-page-btn').prop('disabled', true);
-  }
-  if (currentPage > 1) {
-    $('#prev-page-btn').prop('disabled', false);
-  }
-}
-
-$(document).ready(function() {
-  if (currentPage == maxPage) {
-    $('#next-page-btn').prop('disabled', true);
-  }
-})
-</script>
+					if (currentPage == maxPage) {
+						$('#next-page-btn').prop('disabled', true);
+					}
+					if (currentPage > 1) {
+						$('#prev-page-btn').prop('disabled', false);
+					}
+				});
+			})
+		</script>
 ";
 //-------------------------------
 include('../footer.php');

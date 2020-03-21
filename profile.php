@@ -2,6 +2,9 @@
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 
+$cats = $payloads4['cats'];
+$ccount = (count($cats))-1;
+
 $a = $_SESSION['a'];
 if ($a==0) {$text = ""; $a=0; $_SESSION['a'] = $a;}
 if ($a==1) {echo $text = "<center><blockquote>" . $language['The_user_with_such_a_nickname_is_not_found'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
@@ -29,24 +32,19 @@ else
 $payloads1 = array();
 while ($res = $results->fetchArray(1)){array_push($payloads1, $res);}
 $result = (count($payloads1)-1);
-
 $countq = ceil(($result+1)/12);
 if ($countq != 0) {
-echo '<div class="cat_content_none"><div class="cat_content">';
-$id = $_POST['id'];
-if ($id==''){$id=1;}
-$q = ($id-1)*12; if ($q<0){$q=0;}
-$result=($id*12)-1;
 
-$cats = $payloads4['cats'];
-
-$ccount = (count($cats))-1;
-
-for ($i = $q; $i <= $result; $i++)
-{
-	$pricebd = $payloads1[$i]['price'];
-	$img = $payloads1[$i]['img'];
-	$block = $payloads1[$i]['stored_id'];
+foreach ($payloads1 as $value => $kity) {
+	$value++;
+	if ($value == 1) {
+	$id = 1;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
+	}
+   //-------------------------------------------------
+	$pricebd = $kity['price'];
+	$img = $kity['img'];
+	$block = $kity['stored_id'];
 	for ($y = 0; $y<=$ccount; $y++)
 		{
 			$catimg = $cats[$y]['img'];
@@ -60,7 +58,7 @@ for ($i = $q; $i <= $result; $i++)
 					$gender = $cats[$y]['gender'];
 				}
 		}
-	$name2 = $payloads1[$i]['name'];
+	$name2 = $kity['name'];
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 	if ($pricebd == '') {$bgimg = ''; $prr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $prr = "<font color='red'><b>$pricebd</b></font>";}
 		if ($gender == '0') {$gender = '';}
@@ -87,80 +85,75 @@ for ($i = $q; $i <= $result; $i++)
 							</a>
 						</div>
 						<div class='cat_text'>
-							#$block $bgimg<br>
+							#$block $bgimg<br>$value
 							<hr>
 							$name $gender<br>
 							$prr $coin<br>
 						</div>
 					</div>";
 
-		}}
+		}
+   //-------------------------------------------------
+if ($value % 12 == 0) {
+	echo "</div></div>";
+	$id++;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
+	}
+}
 echo "</div></div>";
 }
-echo "<br><div class='cat_form'>";
-/*
-if ($key == 2)
-{
-	$key2 = 1;
-	echo "
-				<form method='post'>
-				<input id='submit2' name='submit2' type='submit' value='" . $language['Cats'] . "'>
-				<input id='key' name='key' type='hidden' value='$key2'>
-				</form>
-				";
-}
-else
-{	$key2 = 2;
-	echo "
-				<form method='post'>
-				<input id='submit' name='submit' type='submit' value='" . $language['Eggs'] . "'>
-				<input id='key' name='key' type='hidden' value='$key2'>
-				</form>
-				";
-}
-*/
-$idm1 = $id - 1;
-$idm2 = $id - 2;
-$idp1 = $id + 1;
-$idp2 = $id + 2;
-
-echo "
-<br>
+echo "<br><div class='cat_form'>
 <div class='pagination'>
-<input type='submit' value='". $id ." ". $language['page_of'] ." ". $countq."'>
-</div>
-";
-echo '
-<div class="pagination">
-<form method="post">
-<input type="submit" value="«" style="background-color: white; color: black">
-<input name="id" type="hidden" value="'.$idm1.'">
-<input name="key" type="hidden" value="'.$key.'">
-</form>
-</div>
-';
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-		echo '
-		<div class="pagination">
-		<form method="post">
-		<input type="submit" value="'.$p.'" style="background-color: white; color: black">
-		<input name="id" type="hidden" value="'.$p.'">
-		<input name="key" type="hidden" value="'.$key.'">
-		</form>
-		</div>
-		';
-	  }
-  }
-echo '
-<div class="pagination">
-<form method="post">
-<input type="submit" value="»" style="background-color: white; color: black">
-<input name="id" type="hidden" value="'.$idp1.'">
-<input name="key" type="hidden" value="'.$key.'">
-</form>
+  <button type='button' id='prev-page-btn' onclick='prevPage()' disabled>«</button>
+  <div id='page-counter' style='display: inline-block'>
+    1 ". $language['page_of'] ." ". $countq."
+  </div>
+  <button type='button' id='next-page-btn' onlick='nextPage()'>»</button>
 </div>
 </div>
 <br><br><br><br>
-';
+";
+echo "
+<script type='text/javascript'>
+			var maxPage = ".$countq.";
+			var currentPage = 1;
+
+			$(document).ready(function() {
+				console.log('hi');
+				if (currentPage == maxPage) {
+					$('#next-page-btn').prop('disabled', true);
+				}
+				$('#prev-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					console.log(currentPage);
+					currentPage--;
+					if (currentPage < 1) currentPage = 1;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == 1) {
+						$('#prev-page-btn').prop('disabled', true);
+					}
+					if (currentPage < maxPage) {
+						$('#next-page-btn').prop('disabled', false);
+					}
+				});
+				$('#next-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					currentPage++;
+					if (currentPage > maxPage) currentPage = maxPage;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == maxPage) {
+						$('#next-page-btn').prop('disabled', true);
+					}
+					if (currentPage > 1) {
+						$('#prev-page-btn').prop('disabled', false);
+					}
+				});
+			})
+		</script>
+";

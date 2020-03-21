@@ -10,7 +10,7 @@ echo "
 <link rel='stylesheet' href='".$site."static/css/pagination.css'>
 <link rel='stylesheet' href='".$site."static/css/lk.css'>
 <link rel='stylesheet' href='".$site."static/css/social.css'>
-
+<script src='".$site."static/js/dragndrop/jquery-3.4.1.min.js'></script>
 <link rel='stylesheet' href='".$site."static/css/normalize.css'>
 ";
 
