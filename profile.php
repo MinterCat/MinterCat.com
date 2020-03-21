@@ -85,7 +85,7 @@ foreach ($payloads1 as $value => $kity) {
 							</a>
 						</div>
 						<div class='cat_text'>
-							#$block $bgimg<br>$value
+							#$block $bgimg<br>
 							<hr>
 							$name $gender<br>
 							$prr $coin<br>
@@ -103,15 +103,15 @@ if ($value % 12 == 0) {
 echo "</div></div>";
 }
 echo "<br><div class='cat_form'>
-<div class='pagination'>
-  <button type='button' id='prev-page-btn' onclick='prevPage()' disabled>«</button>
-  <div id='page-counter' style='display: inline-block'>
-    1 ". $language['page_of'] ." ". $countq."
-  </div>
-  <button type='button' id='next-page-btn' onlick='nextPage()'>»</button>
-</div>
-</div>
-<br><br><br><br>
+			<div class='pagination'>
+				<button type='button' id='prev-page-btn' disabled>«</button>
+				<div id='page-counter' style='display: inline-block'>
+					1 ". $language['page_of'] ." ". $countq."
+				</div>
+				<button type='button' id='next-page-btn'>»</button>
+			</div>
+		</div>
+		<br><br><br><br>
 ";
 echo "
 <script type='text/javascript'>
