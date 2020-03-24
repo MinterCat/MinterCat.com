@@ -125,7 +125,7 @@ for ($i = 0; $i <= $countapi; $i++)
 			"rarity" => number_format($qq4,5),
 			"img" => $img,
 			"count" => $qq2,
-			"price" => number_format($prrice,2)
+			"price" => (int)$prrice
 		);
 		$array[] = $array2;
 }
