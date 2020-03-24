@@ -125,7 +125,7 @@ for ($i = 0; $i <= $countapi; $i++)
 			"rarity" => number_format($qq4,5),
 			"img" => $img,
 			"count" => $qq2,
-			"price" => number_format($prrice,2)
+			"price" => (int)$prrice
 		);
 		$array[] = $array2;
 }
@@ -134,4 +134,4 @@ $arr = array(
 			'cats' => $array
 );
 
-echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+echo json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

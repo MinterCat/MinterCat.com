@@ -7,28 +7,12 @@ class Cats extends SQLite3
         $this->open('../../config/cats.sqlite');
     }
 }
-// $db_stored = new Stored();
-class Stored extends SQLite3
-{
-    function __construct()
-    {
-        $this->open('../../config/stored.sqlite');
-    }
-}
 // $db_rss = new RSS();
 class RSS extends SQLite3
 {
     function __construct()
     {
         $this->open('../../config/rss.sqlite');
-    }
-}
-// $db_gen = new Gen();
-class Gen extends SQLite3
-{
-    function __construct()
-    {
-        $this->open('../../config/gen.sqlite');
     }
 }
 // $db_users = new Users();

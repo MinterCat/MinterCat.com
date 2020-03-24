@@ -2,6 +2,7 @@
 $active = 'active';
 switch ($m)
 {
+	case 1: {$a1 = $active; break;} //Home
 	case 2: {$a2 = $active; break;} //Profile
 	case 3: {$a3 = $active; break;} //event
 	case 4: {$a4 = $active; break;} //Developers
@@ -11,7 +12,7 @@ switch ($m)
 
 $menu = "
 <ul id='menu'>
-	<li><a href='".$site."' class='nav-top__link'>" . $language['Home'] . "</a></li>
+	<li><a href='".$site."' class='nav-top__link $a1'>" . $language['Home'] . "</a></li>
 ";
 if ($m == 2)
 	{
@@ -33,7 +34,7 @@ else
 		";
 }
 $menu .= "
-	<li><a href='#' class='nav-top__link $a3'>" . $language['event'] . "</a></li>
+	<li><a href='".$site."refund' class='nav-top__link $a3'>" . $language['event'] . "</a></li>
 	<li><a href='".$site."dev' class='nav-top__link $a4'>" . $language['Developers'] . "</a></li>
 	<li><a href='".$site."language' class='nav-top__link $a5'>Language</a>
 		<ul>

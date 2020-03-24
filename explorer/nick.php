@@ -6,31 +6,29 @@ while ($res = $results->fetchArray(1)){array_push($data, $res);}
 $address = $data[0]['address'];
 $get = file_get_contents($site."api/cats?addr=$address");
 $payloads1 = json_decode($get,true);
+$result = (count($payloads1)-1);
+$countq = ceil(($result+1)/12);
 echo "<center><h2><b>$nick</b></h2></center><hr>";
 
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
-
-$result = (count($payloads1)-1);
-$countq = ceil(($result+1)/12);
-if ($countq != 0)
-{
-echo '<div class="cat_content_none"><div class="cat_content">';
-$id = $_POST['id'];
-if ($id==''){$id=1;}
-$q = ($id-1)*12; if ($q<0){$q=0;}
-$result=($id*12)-1;
-
 $cats = $payloads4['cats'];
-
 $ccount = (count($cats))-1;
 
-for ($i = $q; $i <= $result; $i++)
+if ($countq != 0)
 {
-	$pricebd = $payloads1[$i]['price'];
-	$img = $payloads1[$i]['img'];
-	$block = $payloads1[$i]['stored_id'];
-	for ($y = 0; $y<=$ccount;$y++)
+foreach ($payloads1 as $value => $kity) {
+	$value++;
+	if ($value == 1) {
+	$id = 1;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
+	}
+	//-------------------------------------------------
+
+	$pricebd = $kity['price'];
+	$img = $kity['img'];
+	$block = $kity['stored_id'];
+	for ($y = 0; $y<=$ccount; $y++)
 		{
 			$catimg = $cats[$y]['img'];
 			if ($catimg == $img)
@@ -43,7 +41,7 @@ for ($i = $q; $i <= $result; $i++)
 					$gender = $cats[$y]['gender'];
 				}
 		}
-	$name2 = $payloads1[$i]['name'];
+	$name2 = $kity['name'];
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 	if ($pricebd == '') {$bgimg = ''; $prr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $prr = "<font color='red'><b>$pricebd</b></font>";}
 		if ($gender == '0') {$gender = '';}
@@ -76,53 +74,67 @@ for ($i = $q; $i <= $result; $i++)
 							$prr $coin<br>
 						</div>
 					</div>";
-}}
+}//-------------------------------------------------
+if ($value % 12 == 0) {
+	echo "</div></div>";
+	$id++;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
+	}
+}
 echo "</div></div>";
 }
-echo "<div class='cat_form'>";
-
-$idm1 = $id - 1;
-$idm2 = $id - 2;
-$idp1 = $id + 1;
-$idp2 = $id + 2;
-
-echo "
-<br>
-<div class='pagination' style='background-color: #9584de'>
-	<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
-</div>
-";
-echo '
-<div class="pagination">
-	<form method="post">
-		<a href="#" onclick="parentNode.submit();">«</a>
-		<input name="id" type="hidden" value="'.$idm1.'">
-		<input name="nick" type="hidden" value="'.$nick.'">
-	</form>
-</div>
-';
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-		echo '
-		<div class="pagination">
-			<form method="post">
-				<a href="#" onclick="parentNode.submit();">'.$p.'</a>
-				<input name="id" type="hidden" value="'.$p.'">
-				<input name="nick" type="hidden" value="'.$nick.'">
-			</form>
+echo "<br><div class='cat_form'>
+			<div class='pagination'>
+				<button type='button' id='prev-page-btn' disabled>«</button>
+				<div id='page-counter' style='display: inline-block'>
+					1 ". $language['page_of'] ." ". $countq."
+				</div>
+				<button type='button' id='next-page-btn'>»</button>
+			</div>
 		</div>
-		';
-	  }
-  }
-echo '
-<div class="pagination">
-	<form method="post">
-		<a href="#" onclick="parentNode.submit();">»</a>
-		<input name="id" type="hidden" value="'.$idp1.'">
-		<input name="nick" type="hidden" value="'.$nick.'">
-	</form>
-</div>
-</div>
-<br><br><br><br>
-';
+		<br><br><br><br>
+";
+echo "
+<script type='text/javascript'>
+			var maxPage = ".$countq.";
+			var currentPage = 1;
+
+			$(document).ready(function() {
+				console.log('hi');
+				if (currentPage == maxPage) {
+					$('#next-page-btn').prop('disabled', true);
+				}
+				$('#prev-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					console.log(currentPage);
+					currentPage--;
+					if (currentPage < 1) currentPage = 1;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == 1) {
+						$('#prev-page-btn').prop('disabled', true);
+					}
+					if (currentPage < maxPage) {
+						$('#next-page-btn').prop('disabled', false);
+					}
+				});
+				$('#next-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					currentPage++;
+					if (currentPage > maxPage) currentPage = maxPage;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == maxPage) {
+						$('#next-page-btn').prop('disabled', true);
+					}
+					if (currentPage > 1) {
+						$('#prev-page-btn').prop('disabled', false);
+					}
+				});
+			})
+		</script>
+";

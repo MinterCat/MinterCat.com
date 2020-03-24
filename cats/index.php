@@ -40,23 +40,25 @@ include('../header3.php');
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
 $cats = $payloads4['cats'];
-$result = count($cats);
-$countq = ceil(($result)/12);
-echo '<div class="cat_content_none"><div class="cat_content">';
+$result = (count($cats)-1);
+$countq = ceil(($result+1)/12);
 
-$id = $_POST['id'];
-if ($id==''){$id=1;}
-$q = ($id-1)*12; if ($q<0){$q=0;}
-$result=($id*12)-1;
-for ($y = $q; $y <= $result; $y++)
-{
-	$series = $cats[$y]['series'];
-	$rarity = ($cats[$y]['rarity'])*100;
-	$price = $cats[$y]['price'];
-	$name = $cats[$y]['name'];
-	$count = $cats[$y]['count'];
-	$img = $cats[$y]['img'];
-	$gender = $cats[$y]['gender'];
+foreach ($cats as $value => $kity) {
+	$value++;
+	if ($value == 1) {
+	$id = 1;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
+	}
+	//-------------------------------------------------
+
+	$series = $kity['series'];
+	$rarity = ($kity['rarity'])*100;
+	$price = $kity['price'];
+	$name = $kity['name'];
+	$count = $kity['count'];
+	$img = $kity['img'];
+	$gender = $kity['gender'];
+
 
 switch ($series)
 {
@@ -90,50 +92,68 @@ echo "
 		</div>
 	</div>";
 }
+   //-------------------------------------------------
+if ($value % 12 == 0) {
+	echo "</div></div>";
+	$id++;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
+	}
 }
-echo "</div></div><div class='cat_form'>";
-
-$idm1 = $id - 1;
-$idm2 = $id - 2;
-$idp1 = $id + 1;
-$idp2 = $id + 2;
-
-echo "
-<br>
-<div class='pagination' style='background-color: #9584de'>
-<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
-</div>
-";
-echo '
-<div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">«</a>
-<input name="id" type="hidden" value="'.$idm1.'">
-</form>
-</div>
-';
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-		echo '
-		<div class="pagination">
-		<form method="post">
-		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
-		<input name="id" type="hidden" value="'.$p.'">
-		</form>
+echo "</div></div>";
+echo "<br><div class='cat_form'>
+			<div class='pagination'>
+				<button type='button' id='prev-page-btn' disabled>«</button>
+				<div id='page-counter' style='display: inline-block'>
+					1 ". $language['page_of'] ." ". $countq."
+				</div>
+				<button type='button' id='next-page-btn'>»</button>
+			</div>
 		</div>
-		';
-	  }
-  }
-echo '
-<div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">»</a>
-<input name="id" type="hidden" value="'.$idp1.'">
-</form>
-</div>
-</div>
-<br><br><br><br>
-';
+		<br><br><br><br>
+";
+echo "
+<script type='text/javascript'>
+			var maxPage = ".$countq.";
+			var currentPage = 1;
+
+			$(document).ready(function() {
+				console.log('hi');
+				if (currentPage == maxPage) {
+					$('#next-page-btn').prop('disabled', true);
+				}
+				$('#prev-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					console.log(currentPage);
+					currentPage--;
+					if (currentPage < 1) currentPage = 1;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == 1) {
+						$('#prev-page-btn').prop('disabled', true);
+					}
+					if (currentPage < maxPage) {
+						$('#next-page-btn').prop('disabled', false);
+					}
+				});
+				$('#next-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					currentPage++;
+					if (currentPage > maxPage) currentPage = maxPage;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == maxPage) {
+						$('#next-page-btn').prop('disabled', true);
+					}
+					if (currentPage > 1) {
+						$('#prev-page-btn').prop('disabled', false);
+					}
+				});
+			})
+		</script>
+";
 //-------------------------------
 include('../footer.php');

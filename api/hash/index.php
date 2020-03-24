@@ -22,10 +22,10 @@ if ($img == 'true')
 	{
 		$payload = getBlockByHash($hash)->result->payload;
 		$payload = base64_decode($payload); // {'type':1,'img':1,'hash':'0xBCAEC4A920F1EFB5B6D163D57660EF50A7630AB3B20A4B797C8EACC33BFCF055'}
-		echo json_encode(json_decode($payload), JSON_UNESCAPED_UNICODE);
+		echo json_encode(json_decode($payload), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	}
 else
 	{
 		$json = getBlockByHash($hash);
-		echo json_encode($json, JSON_UNESCAPED_UNICODE);
+		echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	}

@@ -117,8 +117,7 @@ switch ($series)
 	case 999: {$u = '#9BF5DA'; break;}
 }
 
-$db_gen = new Gen();
-$result2 = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $block);
+$result2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block);
 $payloadsID = $result2->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];
@@ -175,7 +174,7 @@ if (isset($_POST['send2']))
 	{
 		echo "
 		<form method='post'>
-		<input id='nik' name='nik' type='text' value='' placeholder='NickName' maxlength='15' size='12'>
+		<input id='nick' name='nick' type='text' value='' placeholder='NickName' maxlength='15' size='12'>
 		<input id='send' name='send' type='submit' value='" . $language['Send'] . "'>
 		<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
 		<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
@@ -190,7 +189,7 @@ else
 						echo "
 						<form method='post'>
 						<p>
-						<input id='price' name='price' type='number' value='' placeholder='Price' maxlength='7' size='12'>
+						<input id='price' name='price' type='number' value='".$_POST['price']."' placeholder='Price' maxlength='7' size='12'>
 						<input id='sendprice' name='sendprice' type='submit' value='" . $language['Send'] . "'>
 						<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
 						<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
@@ -208,6 +207,7 @@ else
 								<form method='post'>
 								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
 								<input id='nosale' name='nosale' type='submit' value='" . $language['Not_sell'] . "'>
+								<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
 								</form>
 								";
 							}
@@ -217,13 +217,13 @@ else
 								<form method='post'>
 								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
 								<input id='sale' name='sale' type='submit' value='" . $language['Sell'] . "'>
+								<input id='price' name='price' type='hidden' value='" . $price . "'>
 								</form>
 								";
 							}
 					}
 	}
-}else{
-	if ($TypeHash == 0)
+}elseif ($TypeHash == 0)
 		{
 			echo "
 					<br>
@@ -235,10 +235,10 @@ else
 		}
 	else
 		{
-			$status = 'https://explorer-api.minter.network/api/v1/status';
-			$statuspayload = json_decode($status,true);
-			$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
-			$eggblock = $latestBlockHeight - $id;
+
+			$json_api = JSON($api2 . 'status');
+			$latestBlockHeight = $json_api->result->latest_block_height;
+			$eggblock = $latestBlockHeight - $block;
 			if ($eggblock >= 17280)
 				{
 					echo "
@@ -250,7 +250,6 @@ else
 					";
 				}
 		}
-}
 
 }else{
 	$sale = $payloads1['sale'];
@@ -273,29 +272,18 @@ else
 Hash create: $hash<br>
 " . $language['Approximate_cost'] . " <b>$pr</b> $coin<br><br>
 ";
-if ($sale == 1)
+if (($sale == 1)and($balance > $pricebd))
 	{
-		if ($balance > $pricebd)
-			{
-				echo "
-				<form method='post'>
-				   <input id='buy' name='buy' type='submit' value='" . $language['Buy'] . "'>
-				   <input id='price' name='price' type='hidden' value='" . $pricebd . "'>
-				   <input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-				   <input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
-				 </form>
-				  ";
-			 }
+		echo "
+		<form method='post'>
+			<input id='buy' name='buy' type='submit' value='" . $language['Buy'] . "'>
+			<input id='price' name='price' type='hidden' value='" . $pricebd . "'>
+			<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
+			<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
+		</form>
+		";
 	}
 }
-//-----------------------------------
-if (isset($_POST['nosale']))
-	{
-		$a=4; $_SESSION['a'] = $a;
-		$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
-		$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
-		header('Location: '.$site.'profile'); exit;
-	}
 //-----------------------------------
 if (isset($_POST['sendprice']))
 	{
@@ -354,7 +342,7 @@ if (isset($_POST['sendprice']))
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
+				
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				
@@ -364,6 +352,69 @@ if (isset($_POST['sendprice']))
 				$db_cats->query('UPDATE "table" SET price = "'.$price .'" WHERE stored_id = "'.$id .'"');
 				header('Location: '.$site.'profile'); exit; // !!!
 			}
+	}
+//-----------------------------------
+if (isset($_POST['nosale']))
+	{
+		$hash = $_POST['hash'];
+		$a=4; $_SESSION['a'] = $a;
+		
+				$text = '{"type":6,"hash":"'.$hash.'","price":0}';
+
+				if ($test != 'testnet')
+					{
+						$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => MinterTx::MAINNET_CHAIN_ID,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => 0
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+					}
+				else
+					{
+						$tx = new MinterTx([
+									'nonce' => $api_node->getNonce($address),
+									'chainId' => MinterTx::TESTNET_CHAIN_ID,
+									'gasPrice' => 1,
+									'gasCoin' => $coin,
+									'type' => MinterMultiSendTx::TYPE,
+									'data' => [
+										'list' => [
+											[
+												'coin' => $coin,
+												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+												'value' => 0
+											]
+										]
+									],
+									'payload' => $text,
+									'serviceData' => '',
+									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+								]);
+					}
+
+				$transaction = $tx->sign($private_key);
+				$get_hesh = TransactoinSendDebug($api2,$transaction);
+				
+				//------------------------------
+				
+				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $id .'"');
+				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $id .'"');
+				
+				header('Location: '.$site.'profile'); exit; // !!!
 	}
 //-----------------------------------
 if (isset($_POST['in']))
@@ -418,7 +469,7 @@ if (isset($_POST['in']))
 						]);
 					}
 					$transaction = $tx->sign($privat_key_mintercat);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
@@ -491,7 +542,7 @@ if (isset($_POST['in2']))
 						]);
 					}
 					$transaction = $tx->sign($privat_key_mintercat);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
@@ -601,7 +652,7 @@ if (isset($_POST['buy']))
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
+				
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				//---------------------
@@ -616,11 +667,10 @@ if (isset($_POST['send']))
 	{
 		$img = $_POST['img'];
 		$hash = $_POST['hash'];
-		$nik = $_POST['nik'];
-		$result = $db_users->query('SELECT * FROM "table" WHERE nick = "'. $nik .'"');
-		$payjsn = $result->fetchArray(1);
-		$logins = $payjsn['nick'];
-		$nik_address = $payjsn['address'];
+		$nick = $_POST['nick'];
+		$result = $db_users->query('SELECT * FROM "table" WHERE nick = "'. $nick .'"')->fetchArray(1);
+		$logins = $result['nick'];
+		$nick_address = $result['address'];
 
 		if ($logins != '')
 				{
@@ -638,7 +688,7 @@ if (isset($_POST['send']))
 								'list' => [
 									[
 										'coin' => $coin,
-										'to' => $nik_address,
+										'to' => $nick_address,
 										'value' => 0
 									],
 									[
@@ -676,17 +726,16 @@ if (isset($_POST['send']))
 						]);
 					}
 					$transaction = $tx->sign($private_key);
-					echo $transaction;
+					
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					//---------------------
 
 					$a=2; $_SESSION['a'] = $a;
-					$addrs = $payjsn[$i]['address'];
 
-					$db_cats->query('UPDATE "table" SET addr = "'. $addrs .'" WHERE stored_id = "'.$id .'"');
-					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
-					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
+					$db_cats->query('UPDATE "table" SET addr = "'. $nick_address .'" WHERE stored_id = "'. $id .'"');
+					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $id .'"');
+					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $id .'"');
 
 					header('Location: '.$site.'profile'); exit;
 				}
@@ -718,4 +767,5 @@ include('../header3.php');
 include('../id2.php');
 }
 //-------------------------------
+echo '<br><br><br><br><br>';
 include('../footer.php');

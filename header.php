@@ -76,7 +76,7 @@ echo "
 <link rel='stylesheet' href='".$site."static/css/pagination.css'>
 <link rel='stylesheet' href='".$site."static/css/lk.css'>
 <link rel='stylesheet' href='".$site."static/css/social.css'>
-
+<script src='".$site."static/js/dragndrop/jquery-3.4.1.min.js'></script>
 <link rel='stylesheet' href='".$site."static/css/normalize.css'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
@@ -334,7 +334,6 @@ $m = 2; include('../menu.php');
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);

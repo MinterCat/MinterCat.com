@@ -13,15 +13,15 @@ $session_language = $_SESSION['session_language'];
 include('../../config/config.php');
 include('../function.php');
 
-function getBlockByHash ($api,$hash)
+function getBlockByHash ($api2,$hash)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->getTransaction($hash);
 }
 
-function TransactoinSendDebug ($api,$transaction)
+function TransactoinSendDebug ($api2,$transaction)
 {
-    $api = new MinterAPI($api);
+    $api = new MinterAPI($api2);
     return $api->send($transaction);
 }
 
@@ -38,11 +38,8 @@ $private_key = $decript['private_key'];
 $db_cats = new Cats();
 $db_rss = new RSS();
 $db_users = new Users();
-$db_gen = new Gen();
-$db_stored = new Stored();
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
@@ -64,7 +61,6 @@ $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP
 echo "
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
   <meta charset='utf-8'>
   <title>MinterCat | $nick</title>
@@ -74,9 +70,7 @@ echo "
   <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
   <link rel='stylesheet' href='".$site."static/css/pagination.css'>
   <link rel='stylesheet' href='".$site."static/css/lk.css'>
-
   <link rel='stylesheet' href='".$site."static/css/normalize.css'>
-
   <link rel='stylesheet' href='".$site."static/css/dragndrop_main.css'>
   <link rel='stylesheet' href='".$site."static/css/dragndrop_scale.css'>
   <script src='".$site."static/js/dragndrop/ba3a0add07.js' crossorigin='anonymous'></script>
@@ -85,19 +79,15 @@ echo "
   <script src='".$site."static/js/dragndrop/popper.min.js'></script>
   <script src='".$site."static/js/dragndrop/tippy-bundle.iife.min.js'></script>
   <script src='".$site."static/js/dragndrop/jquery.ui.touch-punch.min.js'></script>
-
   <link rel='stylesheet' href='".$site."static/css/slider_style.css'>
   <script src='".$site."static/js/slider_jquery-1.12.4.js'></script>
   <script src='".$site."static/js/slider_jquery-ui.js'></script>
   <script src='".$site."static/js/slider_jquery.ui.touch-punch.min.js'></script>
-
   <link rel='stylesheet' href='".$site."static/css/social.css'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
-
 <body>
   <div class='cat_header'>
-
 	<div class='header'>
 		<div class='logo_float'>
 			<div class='logo_cat'>
@@ -114,18 +104,16 @@ echo "$menu
 			</div>
 		</div>
 	</div>
-
 <center><blockquote>
 Balance: ".$balance." ".$coin."
 </blockquote></center>
-
       <form method='post'>
         <div class='drop-areas'>
           <div class='drop-area-container'>
             <div class='drop-area' id='drop-area-1'>
               <h1 class='gender-logo'>♀</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' required disabled style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-1-input' name='cat-1' value='' readonly='readonly' required style='border: none;'>
           </div>
           <div class='heart'>
             <button type='submit' class='heart-button' id='heart-btn' name='button' data-tippy-content='Отлично! Нажми сюда, чтобы скрестить!' disabled style='border: none;'>
@@ -135,38 +123,83 @@ Balance: ".$balance." ".$coin."
             <div class='drop-area' id='drop-area-2'>
               <h1 class='gender-logo'>♂</h1>
             </div>
-            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' required disabled style='border: none;'>
+            <input type='text' class='drop-area-info' id='drop-area-2-input' name='cat-2' value='' readonly='readonly' required style='border: none;'>
           </div>
         </div>
-      </form>
+	<div class='calс_tab calс_tab_1'>
+		<div class='calс_tab_p_1'>
+			<div class='calс_tab_p_txt'>" . $language['Number_of_hours_for_egg_maturation'] . "</div>
+			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly='readonly' required></div>
+		</div>
+		<div class='calс_tab_p_2'>
+			<div class='calс_tab_slider' data-min='0' data-val='24' data-step='1' data-max='24'></div>
+			<div class='calс_tab_slider_grad'>
+				<div class='calс_tab_slider_num calс_tab_slider_num_1'>240 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_25'>180 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_50'>120 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_75'>60 MINTERCAT</div>
+				<div class='calс_tab_slider_num calс_tab_slider_num_100'>1 MINTERCAT</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	$('.calс_tab_slider').each(function(){
+		var insert_val=$(this).closest('.calс_tab').find('.calс_tab_p_input_val');
+		var curr_slide=$(this).slider({
+			min:parseInt($(this).attr('data-min')),
+			max:parseInt($(this).attr('data-max')),
+			step:parseFloat($(this).attr('data-step')),
+			value:parseInt($(this).attr('data-val')),
+			stop: function(event, ui) {
+				insert_val.val(curr_slide.slider('value'));
+			},
+			slide: function(event, ui){
+				setTimeout(function(){
+					insert_val.val(curr_slide.slider('value'));
+				},30);
+			}
+		});
+		insert_val.on('change',function(){
+			var this_val=$(this).val();
+			var tmp_1=curr_slide.slider('value');
+			var tmp_2=this_val;
+			if(tmp_1!=tmp_2){
+				curr_slide.slider('value',tmp_2);
+			}
+		});
+		insert_val.val($(this).attr('data-val')).trigger('change');
+	});
+});
+})(jQuery);
+</script>
+	  </form>
 		";
-
 
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
+
+$cats = $payloads4['cats'];
+$ccount = (count($cats))-1;
 
 $results = $db_cats->query('SELECT * FROM "table" WHERE addr="'.$address.'"');
 $payloads1 = array();
 while ($res = $results->fetchArray(1)){array_push($payloads1, $res);}
 $result = (count($payloads1)-1);
-
 $countq = ceil(($result+1)/12);
 if ($countq != 0) {
-echo '<div class="cats_div"><div class="cat_content">';
-$id = $_POST['id'];
-if ($id==''){$id=1;}
-$q = ($id-1)*12; if ($q<0){$q=0;}
-$result=($id*12)-1;
-
-$cats = $payloads4['cats'];
-
-$ccount = (count($cats))-1;
-
-
-for ($i = $q; $i <= $result; $i++)
-{
-	$img = $payloads1[$i]['img'];
-	$block = $payloads1[$i]['stored_id'];
+foreach ($payloads1 as $value => $kity) {
+	$value++;
+	if ($value == 1) {
+	$id = 1;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
+	}
+	//-------------------------------------------------
+	$pricebd = $kity['price'];
+	$img = $kity['img'];
+	$block = $kity['stored_id'];
 	for ($y = 0; $y<=$ccount; $y++)
 		{
 			$catimg = $cats[$y]['img'];
@@ -174,6 +207,7 @@ for ($i = $q; $i <= $result; $i++)
 				{
 					$series = $cats[$y]['series'];
 					$rarity = ($cats[$y]['rarity'])*100;
+					$price = $cats[$y]['price'];
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];
@@ -181,9 +215,8 @@ for ($i = $q; $i <= $result; $i++)
 		}
 		if ($gender == '♀') {$gender_number = 1;}
 		if ($gender == '♂') {$gender_number = 0;}
-	$name2 = $payloads1[$i]['name'];
+	$name2 = $kity['name'];
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
-		if ($gender == '0') {$gender = '';}
 
 		switch ($series)
 		{
@@ -195,7 +228,7 @@ for ($i = $q; $i <= $result; $i++)
 			case 5: {$u = '#6AF2D7'; break;}
 			case 999: {$u = '#9BF5DA'; break;}
 		}
-		if ($gender != '') {
+		if ($gender != '0') {
 				echo "
 					<div class='cat_block' style='background: $u'>
 						<div class='cat_img' data-id='$block' data-gender='$gender_number'>
@@ -211,53 +244,27 @@ for ($i = $q; $i <= $result; $i++)
 						</div>
 					</div>";
 
-		}}
+		}
+   //-------------------------------------------------
+if ($value % 12 == 0) {
+	echo "</div></div>";
+	$id++;
+	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
+	}
+}
 echo "</div></div>";
 }
-echo "<br><div class='cat_form'>";
-
-$idm1 = $id - 1;
-$idm2 = $id - 2;
-$idp1 = $id + 1;
-$idp2 = $id + 2;
-
-echo "
-<br>
-<div class='pagination' style='background-color: #9584de'>
-<a href='#' style='color: white'>$id " . $language['page_of'] . " $countq</a>
-</div>
-";
-echo '
-<div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">«</a>
-<input name="id" type="hidden" value="'.$idm1.'">
-</form>
-</div>
-';
-  for ($p = 1; $p <= $countq; $p++)
-  {
-	  if (($p == $id) || ($p == $idm1) || ($p == $idm2) || ($p == $idp1) || ($p == $idp2)) {
-		echo '
-		<div class="pagination">
-		<form method="post">
-		<a href="#" onclick="parentNode.submit();">'.$p.'</a>
-		<input name="id" type="hidden" value="'.$p.'">
-		</form>
+echo "<br><div class='cat_form'>
+			<div class='pagination'>
+				<button type='button' id='prev-page-btn' disabled>«</button>
+				<div id='page-counter' style='display: inline-block'>
+					1 ". $language['page_of'] ." ". $countq."
+				</div>
+				<button type='button' id='next-page-btn'>»</button>
+			</div>
 		</div>
-		';
-	  }
-  }
-echo '
-<div class="pagination">
-<form method="post">
-<a href="#" onclick="parentNode.submit();">»</a>
-<input name="id" type="hidden" value="'.$idp1.'">
-</form>
-</div>
-</div>
-';
-
+		<br><br><br><br>
+";
 echo "
 <script type='text/javascript'>
   var tooltip = tippy(document.getElementById('heart-btn'));
@@ -300,7 +307,6 @@ echo "
       showToolTip();
     }
   });
-
   function showToolTip() {
     if (droppedMale && droppedFemale) {
       $('#heart-btn').attr('disabled', false);
@@ -308,19 +314,61 @@ echo "
     }
   }
 </script>
+<script type='text/javascript'>
+			var maxPage = ".$countq.";
+			var currentPage = 1;
+
+			$(document).ready(function() {
+				console.log('hi');
+				if (currentPage == maxPage) {
+					$('#next-page-btn').prop('disabled', true);
+				}
+				$('#prev-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					console.log(currentPage);
+					currentPage--;
+					if (currentPage < 1) currentPage = 1;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == 1) {
+						$('#prev-page-btn').prop('disabled', true);
+					}
+					if (currentPage < maxPage) {
+						$('#next-page-btn').prop('disabled', false);
+					}
+				});
+				$('#next-page-btn').click(function() {
+					$('#page-' + currentPage).hide();
+					currentPage++;
+					if (currentPage > maxPage) currentPage = maxPage;
+					$('#page-' + currentPage).show();
+
+					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+
+					if (currentPage == maxPage) {
+						$('#next-page-btn').prop('disabled', true);
+					}
+					if (currentPage > 1) {
+						$('#prev-page-btn').prop('disabled', false);
+					}
+				});
+			})
+		</script>
 ";
 //-------------------------------
 include('../footer.php');
 
 
-if (isset($_POST['button'])) 
+if (isset($_POST['button']))
 	{
-		$id1 = $_POST['cat1'];
-		$id2 = $_POST['cat2'];
-		
-		if ($id1 == $id2) 
+		$id1 = $_POST['cat-1'];
+		$id2 = $_POST['cat-2'];
+
+		if ($id1 == $id2)
 			{
-				$a=7; $_SESSION['a'] = $a; 
+				$a=7; $_SESSION['a'] = $a;
 				header('Location: '.$site.'profile');
 				exit;
 			}
@@ -329,24 +377,20 @@ if (isset($_POST['button']))
 				$json_block = JSON($api.'/status');
 				$block = $json_block->result->latest_block_height;
 				$block = $block+1;
-				
-				$result = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id1);
-				$data_gen1 = $result->fetchArray(1);	
+
+				$data_gen1 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1)->fetchArray(1);
 				$ok1 = $data_gen1['block'];
-				
-				$result = $db_gen->query('SELECT * FROM "table" WHERE stored_id=' . $id2);
-				$data_gen2 = $result->fetchArray(1);
+
+				$data_gen2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id2)->fetchArray(1);
 				$ok2 = $data_gen2['block'];
 
 				if ((($block >= $ok1) or ($ok1 == '')) and (($block >= $ok2) or ($ok2 == '')))
 					{
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id1);
-$data = $result->fetchArray(1);
+$data = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id1)->fetchArray(1);
 $addr1 = $data['addr'];
 $hash_addr1 = $data['hash'];
 
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id2);
-$data = $result->fetchArray(1);
+$data = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id2)->fetchArray(1);
 $addr2 = $data['addr'];
 $hash_addr2 = $data['hash'];
 
@@ -355,74 +399,50 @@ if (($addr1 == $address) and ($addr2 == $address)) {
 $fishtail1 = $data_gen1['fishtail'];
 $tentacles1 = $data_gen1['tentacles'];
 $horns1 = $data_gen1['horns'];
-//------------------------------------------------------------	
+//------------------------------------------------------------
 $fishtail2 = $data_gen2['fishtail'];
 $tentacles2 = $data_gen2['tentacles'];
 $horns2 = $data_gen2['horns'];
-//------------------------------------------------------------	
+//------------------------------------------------------------
 	if (($fishtail1 >= 1) and ($fishtail2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
 	if (($tentacles1 >= 1) and ($tentacles2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
 	if (($horns1 >= 1) and ($horns2 >= 1)) {$goldengen = 2;} else {$goldengen = 1;}
-//------------------------------------------------------------		
-	
+//------------------------------------------------------------
+
 	$fish = floor(($fishtail1 + $fishtail2)*3/4); if (($fish>0) and ($fish<=1)) {$fish=1;} if ($fish>=30) {$fish=30;}
 	$tentacl = floor(($tentacles1 + $tentacles2)*3/4); if (($tentacl>0) and ($tentacl<=1)) {$tentacl=1;} if ($tentacl>=30) {$tentacl=30;}
 	$horn = floor(($horns1 + $horns2)*3/4); if (($horn>0) and ($horn<=1)) {$horn=1;} if ($horn>=30) {$horn=30;}
-//------------------------------------------------------------		
+//------------------------------------------------------------
 		$kolvo = $_POST['kolvo'];
 		$blockq = $block + (720*$kolvo);
 
 $komsa = 240 - ($kolvo * 10);
-if ($komsa == 0) {$komsa = 0;}
 
-if ($balance > $komsa) 
+if ($balance > $komsa)
 	{
 		$img = rand(9990,9999);
-		$result = $db_cats->query('SELECT id FROM "table" WHERE id = "'.$block.'"');
-		$data = $result->fetchArray(1);
+		$data = $db_cats->query('SELECT id FROM "table" WHERE id = "'.$block.'"')->fetchArray(1);
 
 		if ($data)
 			{
-				echo 'Уже существует!';
-			}
-		else
-			{
-				$db_cats->query('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"stored_id" INTEGER,
-					"addr" VARCHAR,
-					"img" INTEGER,
-					"price" INTEGER,
-					"sale" INTEGER
-				)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0")');
+				$a=7; $_SESSION['a'] = $a;
+				header('Location: '.$site.'profile');
+				exit;
 			}
 
 		$stored = array($id1,$id2,$block);
 		for ($i = 0; $i <= 2; $i++)
 		{
 			$stored_id = $stored[$i];
-			$result = $db_stored->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"');
-			$data = $result->fetchArray(1);
+			$data = $db_cats->query('SELECT stored_id FROM "table" WHERE stored_id="'.$stored_id.'"')->fetchArray(1);
 
 			if ($data)
 				{
-					$db_stored->query('UPDATE "table" SET block = "'.$blockq.'" WHERE stored_id = "'.$stored_id.'"');
-				}
-			else
-				{
-					$db_stored->query('CREATE TABLE IF NOT EXISTS "table" (
-						"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-						"stored_id" INTEGER,
-						"block" INTEGER
-					)');
-					$db_stored->exec('INSERT INTO "table" ("stored_id", "block")
-						VALUES ("'.$stored_id.'", "'.$blockq.'")');
+					$db_cats->query('UPDATE "table" SET stored = "'.$blockq.'" WHERE stored_id = "'.$stored_id.'"');
 				}
 		}
 
-		$db_gen->query('CREATE TABLE IF NOT EXISTS "table" (
+		$db_cats->query('CREATE TABLE IF NOT EXISTS "gen" (
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 			"stored_id" INTEGER,
 			"fishtail" INTEGER,
@@ -430,7 +450,7 @@ if ($balance > $komsa)
 			"horns" INTEGER
 		)');
 
-		$db_gen->exec('INSERT INTO "table" ("stored_id", "fishtail", "tentacles", "horns")
+		$db_cats->exec('INSERT INTO "gen" ("stored_id", "fishtail", "tentacles", "horns")
 			VALUES ("'.$block.'", "'.$fish.'", "'.$tentacl.'", "'.$horn.'")');
 
 
@@ -439,8 +459,8 @@ if ($balance > $komsa)
 		$fond = $komsa/2; //50% in found MinterCat
 		$me = $fond/2; //25%
 		$kamil = $fond/2; //25%
-		
-		$api_node = new MinterAPI($api);
+
+		$api_node = new MinterAPI($api3);
 
 				if ($test != 'testnet')
 					{
@@ -504,12 +524,10 @@ if ($balance > $komsa)
 					}
 
 				$transaction = $tx->sign($private_key);
-				echo $transaction;
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				sleep(6);
 				$block = getBlockByHash($api2,$hash)->result->height;
-				
 				//------------------------------
 				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
 					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -519,10 +537,11 @@ if ($balance > $komsa)
 					"price" INTEGER,
 					"sale" INTEGER,
 					"name" VARCHAR,
-					"hash" VARCHAR
+					"hash" VARCHAR,
+					"stored" INTEGER
 						)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
+				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash", "stored")
+					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'", "'.$stored_id.'")');
 
 				$a=9; $_SESSION['a'] = $a;
 				//------------------------------
@@ -530,21 +549,22 @@ if ($balance > $komsa)
 	}
 else
 	{
-		$a=6; $_SESSION['a'] = $a; 
+		$a=6; $_SESSION['a'] = $a;
 		header('Location: '.$site.'profile');
 		exit;
 	}
 }
 else
 {
-	$a=7; $_SESSION['a'] = $a; 
+	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
 }
-	}else
-{
-	$a=7; $_SESSION['a'] = $a; 
+	}
+	else
+	{
+	$a=7; $_SESSION['a'] = $a;
 	header('Location: '.$site.'profile');
 	exit;
-}	
+}
 	}}
