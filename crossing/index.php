@@ -267,6 +267,54 @@ echo "<br><div class='cat_form'>
 ";
 echo "
 <script type='text/javascript'>
+  var tooltip = tippy(document.getElementById('heart-btn'));
+  var droppedMale;
+  var droppedFemale;
+  var draggableItems = document.getElementsByClassName('cat_img');
+  for (var i = 0; i < draggableItems.length; i++) {
+    $(draggableItems[i]).draggable();
+  }
+  $('#drop-area-1').droppable({
+    drop: function(event, ui) {
+      let droppedItem = ui.draggable[0];
+      if ($(droppedItem).attr('data-gender') != '1') {
+          droppedItem.style.cssText = 'position: relative; left: 0px; top: 0px;'
+      } else {
+          if (droppedMale && droppedMale != droppedItem) {
+            droppedMale.style.cssText = 'position: relative; left: 0px; top: 0px;'
+          }
+          droppedMale = droppedItem;
+          $('#drop-area-1-input').val($(droppedItem).attr('data-id'));
+      }
+      showToolTip();
+    }
+  });
+  $('#drop-area-2').droppable({
+    drop: function(event, ui) {
+      let droppedItem = ui.draggable[0];
+      if ($(droppedItem).attr('data-gender') != '0') {
+          droppedItem.style.cssText = 'position: relative; left: 0px; top: 0px;'
+      } else {
+          if (droppedFemale && droppedFemale != droppedItem) {
+            droppedFemale.style.cssText = 'position: relative; left: 0px; top: 0px;'
+          }
+          droppedFemale = droppedItem;
+          $('#drop-area-2-input').val($(droppedItem).attr('data-id'));
+      }
+      if (droppedMale && droppedFemale) {
+        $('#heart-btn').attr('disabled', false);
+      }
+      showToolTip();
+    }
+  });
+  function showToolTip() {
+    if (droppedMale && droppedFemale) {
+      $('#heart-btn').attr('disabled', false);
+      tooltip.show();
+    }
+  }
+</script>
+<script type='text/javascript'>
 			var maxPage = ".$countq.";
 			var currentPage = 1;
 
