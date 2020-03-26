@@ -62,18 +62,18 @@ $dest = IMG($dest,$src);
 $q = 'Cat' . $bg .'-'. $rand_keys[0] .'-'. $spot .'-'. $rand_keys[1] .'-'. $eyes . '.webp';
 imageWebp($dest, $q);
 
-echo '<title>Generator</title>';
-echo "<center><table><tr><td>";
-echo "<img src='circuit/$bg.webp' width='150' height='150'><img src='bg2/$bg.webp' width='150' height='150'><img src='eyes/$eyes.webp' width='150' height='150'><img src='spot/$spot.webp' width='150' height='150'>";
-echo "</td></tr><tr><td>";
-echo "<img src='$q'>";
-echo "</td><td>";
 echo "
+<title>Generator</title>
+<center><table><tr><td>
+<img src='circuit/$bg.webp' width='150' height='150'><img src='bg2/$bg.webp' width='150' height='150'><img src='eyes/$eyes.webp' width='150' height='150'><img src='spot/$spot.webp' width='150' height='150'>
+</td></tr><tr><td>
+<img src='$q'>
+</td><td>
 bg: $bg <br>
 bg2color: $rand_keys[0] &rarr; $bg2color <br>
 spot: $spot <br>
 spotcolor: $rand_keys[1] &rarr; $spotcolor <br>
 eyes: $eyes <br>
 <a href='$q' target='_blank'>$q</a>
+</td></tr></table></center>
 ";
-echo "</td></tr></table></center>";
