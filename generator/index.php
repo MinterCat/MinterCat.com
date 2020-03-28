@@ -46,15 +46,15 @@ $src = imagecreatefromWebp($generator . 'bg2/'.$arr['bg2'].'.webp');
 $img = hex($src,$arr['bg2color']);
 $dest = IMG($dest,$src);
 //------------------------------------------
-$src = imagecreatefromWebp($generator . 'circuit/'.$arr['circuit'].'.webp');
-$dest = IMG($dest,$src);
-//------------------------------------------ 
 $img = imagecreatefromWebp($generator . 'spot/'.$arr['spot'].'.webp');
 
 $img = hex($img,$arr['spotcolor']);
 
 $dest = IMG($dest,$img);
 //------------------------------------------
+$src = imagecreatefromWebp($generator . 'circuit/'.$arr['circuit'].'.webp');
+$dest = IMG($dest,$src);
+//------------------------------------------ 
 $src = imagecreatefromWebp($generator . 'eyes/'.$arr['eyes'].'.webp');
 $dest = IMG($dest,$src);
 //------------------------------------------
