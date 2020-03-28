@@ -374,9 +374,8 @@ if (isset($_POST['button']))
 			}
 		else
 			{
-				$json_block = JSON($api.'/status');
-				$block = $json_block->result->latest_block_height;
-				$block = $block+1;
+				$json_api = JSON($api.'/status');
+				$block = ($json_api->result->latest_block_height)+1;
 
 				$data_gen1 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id1)->fetchArray(1);
 				$ok1 = $data_gen1['block'];

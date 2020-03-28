@@ -65,12 +65,10 @@ echo "
 <title>MinterCat</title>
 <link rel='shortcut icon' href='".$site."static/img/icons/Cats.webp'>
 <link rel='stylesheet' href='".$site."static/css/swiper.min.css' media='all and (max-width: 480px)'>
-  
 <link rel='stylesheet' href='".$site."static/css/styles.min.css'>
 <link rel='stylesheet' href='".$site."static/css/style_menu.css'>
 <link rel='stylesheet' href='".$site."static/css/pagination.css'>
 <link rel='stylesheet' href='".$site."static/css/social.css'>
-
 <link rel='stylesheet' href='".$site."static/css/normalize.css'>
 </head>
 

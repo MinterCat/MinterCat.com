@@ -19,12 +19,11 @@ $data3 = $result2->fetchArray(1);
 $count3 = $data3['COUNT(*)'];
 
 function JSON ($url)
-{
-	$data = file_get_contents($url);
-    $jsonCalled = json_decode($data);
-    return $jsonCalled;
-}
-
+	{
+		$data = file_get_contents($url);
+		$jsonCalled = json_decode($data);
+		return $jsonCalled;
+	}
 $json_api = JSON('https://api.mintercat.com/coin');
 $count4 = number_format($json_api->estimate,4);
 

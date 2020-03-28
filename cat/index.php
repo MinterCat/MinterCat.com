@@ -235,7 +235,6 @@ else
 		}
 	else
 		{
-
 			$json_api = JSON($api2 . 'status');
 			$latestBlockHeight = $json_api->result->latest_block_height;
 			$eggblock = $latestBlockHeight - $block;

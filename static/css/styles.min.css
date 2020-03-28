@@ -2,42 +2,42 @@
 	font-family: "Avenir Next";
 	font-style: normal;
 	font-weight: 400;
-	src: url(http://testnet.mintercat.com/static/fonts/AvenirNextCyr-Regular.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/AvenirNextCyr-Regular.woff2) format("woff2")
 }
 
 @font-face {
 	font-family: "Avenir Next";
 	font-style: normal;
 	font-weight: 500;
-	src: url(http://testnet.mintercat.com/static/fonts/AvenirNextCyr-Medium.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/AvenirNextCyr-Medium.woff2) format("woff2")
 }
 
 @font-face {
 	font-family: "Avenir Next";
 	font-style: normal;
 	font-weight: 700;
-	src: url(http://testnet.mintercat.com/static/fonts/AvenirNextCyr-Bold.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/AvenirNextCyr-Bold.woff2) format("woff2")
 }
 
 @font-face {
 	font-family: "Blogger Sans";
 	font-style: normal;
 	font-weight: 400;
-	src: url(http://testnet.mintercat.com/static/fonts/BloggerSans-Regular.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/BloggerSans-Regular.woff2) format("woff2")
 }
 
 @font-face {
 	font-family: "Blogger Sans";
 	font-style: normal;
 	font-weight: 500;
-	src: url(http://testnet.mintercat.com/static/fonts/BloggerSans-Medium.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/BloggerSans-Medium.woff2) format("woff2")
 }
 
 @font-face {
 	font-family: "Blogger Sans";
 	font-style: normal;
 	font-weight: 700;
-	src: url(http://testnet.mintercat.com/static/fonts/BloggerSans-Bold.woff2) format("woff2")
+	src: url(https://mintercat.com/testnet/static/fonts/BloggerSans-Bold.woff2) format("woff2")
 }
 
 html {
@@ -842,7 +842,7 @@ body {
 	width: 3.1875rem;
 	height: 3.1875rem;
 	padding: 0;
-	background: #efefef url(http://testnet.mintercat.com/static/img/svg/camera-icon.svg) no-repeat center center/28px;
+	background: #efefef url(https://mintercat.com/testnet/static/img/svg/camera-icon.svg) no-repeat center center/28px;
 	border: none;
 	border-radius: 50%;
 	cursor: pointer
@@ -1142,19 +1142,19 @@ body {
 }
 
 .intro__img-layer-1 {
-	background: url(http://testnet.mintercat.com/static/img/@1x/intro-cats-1.webp) no-repeat bottom/contain
+	background: url(https://mintercat.com/testnet/static/img/@1x/intro-cats-1.webp) no-repeat bottom/contain
 }
 
 .intro__img-layer-2 {
 	width: 77.55102%;
 	margin: 0 auto;
-	background: url(http://testnet.mintercat.com/static/img/@1x/intro-cats-2.webp) no-repeat bottom/contain
+	background: url(https://mintercat.com/testnet/static/img/@1x/intro-cats-2.webp) no-repeat bottom/contain
 }
 
 .intro__img-layer-3 {
 	width: 60%;
 	margin: 0 auto -1rem;
-	background: url(http://testnet.mintercat.com/static/img/@1x/intro-cats-3.webp) no-repeat bottom/contain
+	background: url(https://mintercat.com/testnet/static/img/@1x/intro-cats-3.webp) no-repeat bottom/contain
 }
 
 .intro__img-mobile {
@@ -1177,7 +1177,7 @@ body {
 .about {
 	position: relative;
 	padding-bottom: 26.375rem;
-	background: url(http://testnet.mintercat.com/static/img/svg/about-bg.svg) no-repeat center/cover;
+	background: url(https://mintercat.com/testnet/static/img/svg/about-bg.svg) no-repeat center/cover;
 	overflow: hidden
 }
 
@@ -1188,7 +1188,7 @@ body {
 	z-index: 10;
 	width: 21.1875rem;
 	height: 16.5625rem;
-	background: url(http://testnet.mintercat.com/static/img/svg/cat-ellipse.svg) no-repeat center/contain;
+	background: url(https://mintercat.com/testnet/static/img/svg/cat-ellipse.svg) no-repeat center/contain;
 	content: ''
 }
 
@@ -1198,7 +1198,7 @@ body {
 	left: -5rem;
 	width: 16.6875rem;
 	height: 17rem;
-	background: url(http://testnet.mintercat.com/static/img/svg/circle-illustration.svg) no-repeat center/contain;
+	background: url(https://mintercat.com/testnet/static/img/svg/circle-illustration.svg) no-repeat center/contain;
 	content: ''
 }
 
@@ -1403,7 +1403,7 @@ body {
 	left: 0;
 	right: 0;
 	height: 11.5625rem;
-	background: url(http://testnet.mintercat.com/static/img/svg/footer-top.svg) no-repeat bottom/cover;
+	background: url(https://mintercat.com/testnet/static/img/svg/footer-top.svg) no-repeat bottom/cover;
 	content: ''
 }
 
@@ -1423,7 +1423,7 @@ body {
 	right: -3rem;
 	width: 34px;
 	height: 34px;
-	background: url(http://testnet.mintercat.com/static/img/svg/logo.svg) no-repeat center/cover;
+	background: url(https://mintercat.com/testnet/static/img/svg/logo.svg) no-repeat center/cover;
 	content: ''
 }
 

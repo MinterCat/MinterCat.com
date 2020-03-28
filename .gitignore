@@ -6,4 +6,4 @@ refund/
 bot/
 config/
 testnet/
-css/styles.min.css
+*error_log
