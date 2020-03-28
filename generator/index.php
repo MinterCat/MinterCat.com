@@ -64,15 +64,26 @@ imageWebp($dest, $q);
 
 echo "
 <title>Generator</title>
-<center><table><tr><td>
-<img src='".$generator."circuit/$bg.webp' width='150' height='150'><img src='".$generator."bg2/$bg.webp' width='150' height='150'><img src='".$generator."eyes/$eyes.webp' width='150' height='150'><img src='".$generator."spot/$spot.webp' width='150' height='150'>
-</td></tr><tr><td>
+<center><table><tr>
+<td align='center'>
+<img src='".$generator."circuit/$bg.webp' width='150' height='150'><br>$bg
+</td>
+<td align='center'>
+<img src='".$generator."bg2/$bg.webp' width='150' height='150'><br>$rand_keys[0] &rarr; $bg2color
+</td>
+<td align='center'>
+<img src='".$generator."eyes/$eyes.webp' width='150' height='150'><br>$eyes
+</td>
+<td align='center'>
+<img src='".$generator."spot/$spot.webp' width='150' height='150'><br>$spot<br>($rand_keys[1] &rarr; $spotcolor)
+</td></tr></table>
+<table><tr><td>
 <img src='$q'>
 </td><td>
-bg: $bg <br>
-bg2color: $rand_keys[0] &rarr; $bg2color <br>
+circuit: $bg <br>
+bg color: $rand_keys[0] &rarr; $bg2color <br>
 spot: $spot <br>
-spotcolor: $rand_keys[1] &rarr; $spotcolor <br>
+spot color: $rand_keys[1] &rarr; $spotcolor <br>
 eyes: $eyes <br>
 <a href='$q' target='_blank'>$q</a>
 </td></tr></table></center>
