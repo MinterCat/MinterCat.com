@@ -35,7 +35,7 @@ echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $m = 6; include('../menu.php');
 //-------------------------------
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 $json4 = file_get_contents($site.'api');
 $payloads4 = json_decode($json4,true);
@@ -72,7 +72,6 @@ switch ($series)
 }
 
 if ($img != '') {
-if ($gender == 0) {$gender='';}
 
 echo "
 	<div class='cat_block' style='background: $u'>

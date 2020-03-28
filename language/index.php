@@ -38,7 +38,7 @@ echo "<title>MinterCat | Language</title>";
 $titles = 'Language';
 $m = 5; include('../menu.php');
 //-------------------------------
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 echo "<center><br>
 	<form method='POST'>

@@ -41,14 +41,10 @@ $fishtail = $payloadsID[0]['fishtail'];
 $tentacles = $payloadsID[0]['tentacles'];
 $horns = $payloadsID[0]['horns'];
 
-$json2 = file_get_contents($api3."/block?height=$id");
-$payloads2 = json_decode($json2,true);
+$json_api = JSON($api3."/block?height=$id");
+$data = $json_api->result->time;
 
-$data = $payloads2['result']['time'];
-$timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
-
-$unixD = strtotime($timestamp2);
-$nd = date('d.m.Y', $unixD);
+$nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
 if ($gender == '♂') {
 	$gender_p = $language['Male'] . " ($gender)";

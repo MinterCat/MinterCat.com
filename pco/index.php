@@ -33,7 +33,7 @@ $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP
 echo "<title>MinterCat | PCO</title>";
 $titles = 'PCO';
 $m = 0; include('../menu.php');
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 echo "
 <div class='cat_content' style='text-align: left; float: none;'>

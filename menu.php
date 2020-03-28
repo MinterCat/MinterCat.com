@@ -47,6 +47,7 @@ $menu .= "
 		<ul>
 			<li><a href='".$site."cats' class='nav-top__link'>" . $language['Kitty'] . "</a></li>
 			<li><a href='".$site."explorer/transaction' class='nav-top__link'>Transaction</a></li>
+			<li><a href='".$site."explorer/generator' class='nav-top__link'>Generator</a></li>
 			<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
 		</ul>
 	</li>

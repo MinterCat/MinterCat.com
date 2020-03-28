@@ -8,13 +8,6 @@ class Users extends SQLite3
         $this->open('../../../config/users.sqlite');
     }
 }
-class RSS extends SQLite3
-{
-    function __construct()
-    {
-        $this->open('../../../config/rss.sqlite');
-    }
-}
 //-----------------------
 $base = "../session.txt";
 include('../online.php');
@@ -49,8 +42,8 @@ $m = 6; include('../../menu.php');
 //-------------------------------
 include('../../header2.php');
 //-------------------------------
-echo '<center>';
-include('content.php');
-echo '</center>';
+echo '<div class="cat_content_none"><div class="cat_content">';
+include('../../generator/index.php');
+echo '</div></div>';
 //-------------------------------
 include('../../footer.php');
