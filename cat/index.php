@@ -124,10 +124,8 @@ $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
 $horns = $payloadsID['horns'];
 
-$json2 = file_get_contents($api3."/block?height=$block");
-$payloads2 = json_decode($json2,true);
-
-$data = $payloads2['result']['time'];
+$json_api = JSON($api3."/block?height=$block");
+$data = $json_api->result->time;
 
 $timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
 
@@ -761,9 +759,9 @@ echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $m = 6; include('../menu.php');
 //-------------------------------
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
-include('../id2.php');
+include('../id.php');
 }
 //-------------------------------
 echo '<br><br><br><br><br>';

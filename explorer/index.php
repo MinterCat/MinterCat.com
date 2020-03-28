@@ -34,7 +34,7 @@ echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $m = 6; include('../menu.php');
 //-------------------------------
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 $nick = $_GET['nick'];
 if ($nick == '') 

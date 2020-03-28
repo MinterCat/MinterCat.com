@@ -47,7 +47,7 @@ echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $m = 6; include('../../menu.php');
 //-------------------------------
-include('../../header3.php');
+include('../../header2.php');
 //-------------------------------
 echo '<center>';
 include('content.php');
