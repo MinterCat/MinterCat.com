@@ -72,7 +72,6 @@ switch ($series)
 }
 
 if ($img != '') {
-if ($gender == 0) {$gender='';}
 
 echo "
 	<div class='cat_block' style='background: $u'>
