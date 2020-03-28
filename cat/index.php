@@ -127,10 +127,7 @@ $horns = $payloadsID['horns'];
 $json_api = JSON($api3."/block?height=$block");
 $data = $json_api->result->time;
 
-$timestamp2 = date('Y-m-d',strtotime(explode('T', $data)[0]));
-
-$unixD = strtotime($timestamp2);
-$nd = date('d.m.Y', $unixD);
+$nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
 if ($gender == '♂') {
 	$gender_p = $language['Male'] . " ($gender)";
