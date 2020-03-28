@@ -65,7 +65,7 @@ imageWebp($dest, $q);
 echo "
 <title>Generator</title>
 <center><table><tr><td>
-<img src='circuit/$bg.webp' width='150' height='150'><img src='bg2/$bg.webp' width='150' height='150'><img src='eyes/$eyes.webp' width='150' height='150'><img src='spot/$spot.webp' width='150' height='150'>
+<img src='".$generator."circuit/$bg.webp' width='150' height='150'><img src='".$generator."bg2/$bg.webp' width='150' height='150'><img src='".$generator."eyes/$eyes.webp' width='150' height='150'><img src='".$generator."spot/$spot.webp' width='150' height='150'>
 </td></tr><tr><td>
 <img src='$q'>
 </td><td>
