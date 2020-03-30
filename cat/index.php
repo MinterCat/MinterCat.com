@@ -70,8 +70,7 @@ $m = 2; include('../menu.php');
 include('../header3.php');
 //-------------------------------
 $id = $_GET['id'];
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
-$payloads1 = $result->fetchArray(1);
+$payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
 
 $check_id = $payloads1['id'];
 $addr = $payloads1['addr'];
@@ -80,20 +79,15 @@ if ($address == '') {header('Location: '.$site.'profile'); exit;}
 
 $hash = $payloads1['hash'];
 $block = getBlockByHash($api2,$hash)->result->height;
-$payload = getBlockByHash($api2,$hash)->result->payload;
+$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
 
-$payload = base64_decode($payload);
-
-$decode_payload_hash = json_decode($payload,true);
 $TypeHash = $decode_payload_hash['type'];
-
 $ImgHash = $decode_payload_hash['img'];
 
 $json4 = file_get_contents($site.'api?img='.$ImgHash);
 $payloads4 = json_decode($json4,true);
 
 $pricebd = $payloads1['price'];
-
 $cats = $payloads4['cats'];
 
 $series = $cats[0]['series'];
@@ -117,8 +111,7 @@ switch ($series)
 	case 999: {$u = '#9BF5DA'; break;}
 }
 
-$result2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block);
-$payloadsID = $result2->fetchArray(1);
+$payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block)->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
