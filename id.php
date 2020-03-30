@@ -1,8 +1,7 @@
 <?php
 $id = $_GET['id'];
 $db_cats = new Cats();
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
-$payloads1 = $result->fetchArray(1);
+$payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
 
 $img = $payloads1['img'];
 
@@ -34,8 +33,7 @@ switch ($series)
 	case 999: {$u = '#9BF5DA'; break;}
 }
 
-$result2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id);
-$payloadsID = $result2->fetchArray(1);
+$payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id)->fetchArray(1);
 
 $fishtail = $payloadsID[0]['fishtail'];
 $tentacles = $payloadsID[0]['tentacles'];

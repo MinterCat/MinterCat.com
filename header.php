@@ -41,17 +41,14 @@ $db_cats = new Cats();
 $db_rss = new RSS();
 $db_users = new Users();
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
-if ($check_language != '')
-	{$lang = $check_language;}
-else
-	{
-		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
-	}
+
+if ($check_language != '') {$lang = $check_language;}
+elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
+
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 

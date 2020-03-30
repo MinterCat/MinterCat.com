@@ -5,17 +5,14 @@ $base = "session.txt";
 include('online.php');
 //-----------------------
 $database = new SQLite3('../../config/users.sqlite');
-$result = $database->query('SELECT COUNT(*) FROM "table"');
-$data = $result->fetchArray(1);
+$data = $database->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
 $count = $data['COUNT(*)'];
 
 $database2 = new SQLite3('../../config/cats.sqlite');
-$result2 = $database2->query('SELECT COUNT(*) FROM "table"');
-$data2 = $result2->fetchArray(1);
+$data2 = $database2->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
 $count2 = $data2['COUNT(*)'];
 
-$result2 = $database2->query('SELECT COUNT(*) FROM "table" WHERE sale="1"');
-$data3 = $result2->fetchArray(1);
+$data3 = $database2->query('SELECT COUNT(*) FROM "table" WHERE sale="1"')->fetchArray(1);
 $count3 = $data3['COUNT(*)'];
 
 function JSON ($url)
