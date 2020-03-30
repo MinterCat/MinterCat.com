@@ -22,16 +22,11 @@ $address = $decript['address'];
 
 $db_users = new Users();
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 $check_language = $data['language'];
 }
-if ($check_language != '')
-	{$lang = $check_language;}
-else
-	{
-		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
-	}
+if ($check_language != '') {$lang = $check_language;}
+elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
@@ -67,11 +62,10 @@ $nick = $data['nick'];
 echo "<title>MinterCat | $nick</title>";
 $titles = '';
 $m = 2; include('../menu.php');
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 $id = $_GET['id'];
-$result = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id);
-$payloads1 = $result->fetchArray(1);
+$payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
 
 $check_id = $payloads1['id'];
 $addr = $payloads1['addr'];
@@ -79,21 +73,21 @@ $addr = $payloads1['addr'];
 if ($address == '') {header('Location: '.$site.'profile'); exit;}
 
 $hash = $payloads1['hash'];
+if ($hash != null) {
 $block = getBlockByHash($api2,$hash)->result->height;
-$payload = getBlockByHash($api2,$hash)->result->payload;
+$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
 
-$payload = base64_decode($payload);
-
-$decode_payload_hash = json_decode($payload,true);
 $TypeHash = $decode_payload_hash['type'];
-
 $ImgHash = $decode_payload_hash['img'];
+} else {
+$block = $payloads1['stored_id'];
+$ImgHash = $payloads1['img'];
+$TypeHash = 'NULL';
+}
 
 $json4 = file_get_contents($site.'api?img='.$ImgHash);
 $payloads4 = json_decode($json4,true);
-
 $pricebd = $payloads1['price'];
-
 $cats = $payloads4['cats'];
 
 $series = $cats[0]['series'];
@@ -117,8 +111,7 @@ switch ($series)
 	case 999: {$u = '#9BF5DA'; break;}
 }
 
-$result2 = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block);
-$payloadsID = $result2->fetchArray(1);
+$payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block)->fetchArray(1);
 
 $fishtail = $payloadsID['fishtail'];
 $tentacles = $payloadsID['tentacles'];
@@ -129,17 +122,13 @@ $data = $json_api->result->time;
 
 $nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
-if ($gender == '♂') {
-	$gender_p = $language['Male'] . " ($gender)";
-}
-if ($gender == '♀') {
-	$gender_p = $language['Female'] . " ($gender)";
-}
-if ($gender == '0') {
-	$gender_p = $language['Undefined'];
-}
-if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $pr = $pricebd;}
+if ($gender == '♂') {$gender_p = $language['Male'] . " ($gender)";}
+elseif ($gender == '♀') {$gender_p = $language['Female'] . " ($gender)";}
+else {$gender_p = $language['Undefined'];}
+
+if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 if($addr == $address){
+$sale = $payloads1['sale'];
 echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
@@ -163,6 +152,8 @@ if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
 
+if ($hash != null) {
+
 if ($gender != '0')
 {
 if (isset($_POST['send2']))
@@ -177,9 +168,7 @@ if (isset($_POST['send2']))
 		</form>
 		";
 	}
-else
-	{
-		if (isset($_POST['sale']))
+elseif (isset($_POST['sale']))
 					{
 						echo "
 						<form method='post'>
@@ -193,10 +182,7 @@ else
 						</form>
 						";
 					}
-				else
-					{
-						$sale = $payloads1['sale'];
-						if ($sale == 1)
+				elseif ($sale == 1)
 							{
 								echo "
 								<form method='post'>
@@ -216,8 +202,6 @@ else
 								</form>
 								";
 							}
-					}
-	}
 }elseif ($TypeHash == 0)
 		{
 			echo "
@@ -246,7 +230,14 @@ else
 		}
 
 }else{
-	$sale = $payloads1['sale'];
+echo "
+	<br>
+	<form method='post'>
+	<input id='gethash' name='gethash' type='submit' value='Get Hash'>
+	<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
+	</form>
+	";
+}}else{
 		echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
@@ -471,8 +462,6 @@ if (isset($_POST['in']))
 					
 					$payload = getBlockByHash($api2,$hash)->result->payload;
 
-					// {"type":0,"img":5,"hash":"0xBCAEC4A920F1EFB5B6D163D57660EF50A7630AB3B20A4B797C8EACC33BFCF055"}
-
 					$payload = base64_decode($payload);
 					$decode_payload_hash = json_decode($payload,true);
 
@@ -543,8 +532,6 @@ if (isset($_POST['in2']))
 					$block2 = getBlockByHash($api2,$hash)->result->height;
 					
 					$payload = getBlockByHash($api2,$hash)->result->payload;
-
-					// {"type":0,"img":5,"hash":"0xBCAEC4A920F1EFB5B6D163D57660EF50A7630AB3B20A4B797C8EACC33BFCF055"}
 
 					$payload = base64_decode($payload);
 					$decode_payload_hash = json_decode($payload,true);
@@ -740,6 +727,72 @@ if (isset($_POST['send']))
 
 	}
 //-----------------------------------
+if (isset($_POST['gethash']))
+	{
+		$img = $_POST['img'];
+		$text = '{"type":1,"img":'.$img.'}';
+			//-----------------------------------
+			if ($test != 'testnet')
+					{
+						$tx = new MinterTx([
+							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
+							'chainId' => MinterTx::MAINNET_CHAIN_ID,
+							'gasPrice' => 1,
+							'gasCoin' => $coin,
+							'type' => MinterMultiSendTx::TYPE,
+							'data' => [
+								'list' => [
+									[
+										'coin' => $coin,
+										'to' => $address,
+										'value' => 0
+									]
+								]
+							],
+							'payload' => $text,
+							'serviceData' => '',
+							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+						]);
+					}
+					else
+					{
+						$tx = new MinterTx([
+							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
+							'chainId' => MinterTx::TESTNET_CHAIN_ID,
+							'gasPrice' => 1,
+							'gasCoin' => $coin,
+							'type' => MinterMultiSendTx::TYPE,
+							'data' => [
+								'list' => [
+									[
+										'coin' => $coin,
+										'to' => $address,
+										'value' => 0
+									]
+								]
+							],
+							'payload' => $text,
+							'serviceData' => '',
+							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+						]);
+					}
+					$transaction = $tx->sign($privat_key_mintercat);
+					
+					$get_hesh = TransactoinSendDebug($api2,$transaction);
+					$hash = "0x".$get_hesh->result->hash;
+					sleep(7);
+					$block2 = getBlockByHash($api2,$hash)->result->height;
+
+					$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
+
+					$ImgHash = $decode_payload_hash['img'];
+			//-----------------------------------
+			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
+			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
+			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
+			header('Location: '.$site.'profile'); exit; // !!! header('Location: '.$site.'cat?id='.$block2); exit;
+	}
+//-----------------------------------
 if (isset($_POST['back']))
 	{
 		header('Location: '.$site.'profile'); exit;
@@ -761,5 +814,5 @@ include('../header2.php');
 include('../id.php');
 }
 //-------------------------------
-echo '<br><br><br><br><br>';
+echo '<br><br><br>';
 include('../footer.php');

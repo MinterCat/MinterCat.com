@@ -38,16 +38,11 @@ $decript = json_decode($decript_text,true);
 
 $address = $decript['address'];
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 $check_language = $data['language'];
 }
-if ($check_language != '')
-	{$lang = $check_language;}
-else
-	{
-		if ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
-	}
+if ($check_language != '') {$lang = $check_language;}
+elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
 
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
@@ -490,8 +485,7 @@ if (isset($_POST['Enter']))
 		$_SESSION['cript_mnemonic'] = $cript_mnemonic;
 		//------------------------------
 
-		$result = $db_users->query('SELECT address FROM "table" WHERE address="'.$address.'"');
-		$data = $result->fetchArray(1);
+		$data = $db_users->query('SELECT address FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 
 		if ($data)
 			{
@@ -507,8 +501,7 @@ if (isset($_POST['Enter']))
 				)');
 				$db_users->exec('INSERT INTO "table" ("address", "nick", "language")
 					VALUES ("'.$address.'", "", "")');
-				$result = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"');
-				$data = $result->fetchArray(1);
+				$data = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 				$id = $data['id'];
 				$nick = "ID$id";
 				$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
@@ -543,8 +536,7 @@ if (isset($_POST['Register']))
 		$db_users->exec('INSERT INTO "table" ("address", "nick", "language")
 					VALUES ("'.$address.'", "", "")');
 
-		$result = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"');
-		$data = $result->fetchArray();
+		$data = $db_users->query('SELECT id FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 		$id = $data['id'];
 		$nick = "ID$id";
 		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');

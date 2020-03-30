@@ -18,8 +18,7 @@ $address = $decript['address'];
 
 $db_users = new Users();
 
-$result = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
 $check_language = $data['language'];
 }
 if ($check_language != '') 
