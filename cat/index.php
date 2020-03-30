@@ -73,15 +73,20 @@ $addr = $payloads1['addr'];
 if ($address == '') {header('Location: '.$site.'profile'); exit;}
 
 $hash = $payloads1['hash'];
+if ($hash != null) {
 $block = getBlockByHash($api2,$hash)->result->height;
 $decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
 
 $TypeHash = $decode_payload_hash['type'];
 $ImgHash = $decode_payload_hash['img'];
+} else {
+$block = $payloads1['stored_id'];
+$ImgHash = $payloads1['img'];
+$TypeHash = 'NULL';
+}
 
 $json4 = file_get_contents($site.'api?img='.$ImgHash);
 $payloads4 = json_decode($json4,true);
-
 $pricebd = $payloads1['price'];
 $cats = $payloads4['cats'];
 
@@ -117,17 +122,13 @@ $data = $json_api->result->time;
 
 $nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
-if ($gender == '♂') {
-	$gender_p = $language['Male'] . " ($gender)";
-}
-if ($gender == '♀') {
-	$gender_p = $language['Female'] . " ($gender)";
-}
-if ($gender == '0') {
-	$gender_p = $language['Undefined'];
-}
+if ($gender == '♂') {$gender_p = $language['Male'] . " ($gender)";}
+elseif ($gender == '♀') {$gender_p = $language['Female'] . " ($gender)";}
+else {$gender_p = $language['Undefined'];}
+
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $pr = $pricebd;}
 if($addr == $address){
+$sale = $payloads1['sale'];
 echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
@@ -165,9 +166,7 @@ if (isset($_POST['send2']))
 		</form>
 		";
 	}
-else
-	{
-		if (isset($_POST['sale']))
+elseif (isset($_POST['sale']))
 					{
 						echo "
 						<form method='post'>
@@ -181,10 +180,7 @@ else
 						</form>
 						";
 					}
-				else
-					{
-						$sale = $payloads1['sale'];
-						if ($sale == 1)
+				elseif ($sale == 1)
 							{
 								echo "
 								<form method='post'>
@@ -204,8 +200,6 @@ else
 								</form>
 								";
 							}
-					}
-	}
 }elseif ($TypeHash == 0)
 		{
 			echo "
@@ -234,7 +228,6 @@ else
 		}
 
 }else{
-	$sale = $payloads1['sale'];
 		echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
