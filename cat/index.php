@@ -62,7 +62,7 @@ $nick = $data['nick'];
 echo "<title>MinterCat | $nick</title>";
 $titles = '';
 $m = 2; include('../menu.php');
-include('../header3.php');
+include('../header2.php');
 //-------------------------------
 $id = $_GET['id'];
 $payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
@@ -126,7 +126,7 @@ if ($gender == '♂') {$gender_p = $language['Male'] . " ($gender)";}
 elseif ($gender == '♀') {$gender_p = $language['Female'] . " ($gender)";}
 else {$gender_p = $language['Undefined'];}
 
-if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $pr = $pricebd;}
+if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 if($addr == $address){
 $sale = $payloads1['sale'];
 echo "
@@ -151,6 +151,8 @@ Hash create: $hash<br>
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
 echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
 ";
+
+if ($hash != null) {
 
 if ($gender != '0')
 {
@@ -228,6 +230,14 @@ elseif (isset($_POST['sale']))
 		}
 
 }else{
+echo "
+	<br>
+	<form method='post'>
+	<input id='gethash' name='gethash' type='submit' value='Get Hash'>
+	<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
+	</form>
+	";
+}}else{
 		echo "
 <center>
 	<div style='background: $u' width='100%' height='300'>
@@ -452,8 +462,6 @@ if (isset($_POST['in']))
 					
 					$payload = getBlockByHash($api2,$hash)->result->payload;
 
-					// {"type":0,"img":5,"hash":"0xBCAEC4A920F1EFB5B6D163D57660EF50A7630AB3B20A4B797C8EACC33BFCF055"}
-
 					$payload = base64_decode($payload);
 					$decode_payload_hash = json_decode($payload,true);
 
@@ -524,8 +532,6 @@ if (isset($_POST['in2']))
 					$block2 = getBlockByHash($api2,$hash)->result->height;
 					
 					$payload = getBlockByHash($api2,$hash)->result->payload;
-
-					// {"type":0,"img":5,"hash":"0xBCAEC4A920F1EFB5B6D163D57660EF50A7630AB3B20A4B797C8EACC33BFCF055"}
 
 					$payload = base64_decode($payload);
 					$decode_payload_hash = json_decode($payload,true);
@@ -721,6 +727,72 @@ if (isset($_POST['send']))
 
 	}
 //-----------------------------------
+if (isset($_POST['gethash']))
+	{
+		$img = $_POST['img'];
+		$text = '{"type":1,"img":'.$img.'}';
+			//-----------------------------------
+			if ($test != 'testnet')
+					{
+						$tx = new MinterTx([
+							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
+							'chainId' => MinterTx::MAINNET_CHAIN_ID,
+							'gasPrice' => 1,
+							'gasCoin' => $coin,
+							'type' => MinterMultiSendTx::TYPE,
+							'data' => [
+								'list' => [
+									[
+										'coin' => $coin,
+										'to' => $address,
+										'value' => 0
+									]
+								]
+							],
+							'payload' => $text,
+							'serviceData' => '',
+							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+						]);
+					}
+					else
+					{
+						$tx = new MinterTx([
+							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
+							'chainId' => MinterTx::TESTNET_CHAIN_ID,
+							'gasPrice' => 1,
+							'gasCoin' => $coin,
+							'type' => MinterMultiSendTx::TYPE,
+							'data' => [
+								'list' => [
+									[
+										'coin' => $coin,
+										'to' => $address,
+										'value' => 0
+									]
+								]
+							],
+							'payload' => $text,
+							'serviceData' => '',
+							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+						]);
+					}
+					$transaction = $tx->sign($privat_key_mintercat);
+					
+					$get_hesh = TransactoinSendDebug($api2,$transaction);
+					$hash = "0x".$get_hesh->result->hash;
+					sleep(7);
+					$block2 = getBlockByHash($api2,$hash)->result->height;
+
+					$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
+
+					$ImgHash = $decode_payload_hash['img'];
+			//-----------------------------------
+			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
+			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
+			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
+			header('Location: '.$site.'profile'); exit; // !!! header('Location: '.$site.'cat?id='.$block2); exit;
+	}
+//-----------------------------------
 if (isset($_POST['back']))
 	{
 		header('Location: '.$site.'profile'); exit;
@@ -742,5 +814,5 @@ include('../header2.php');
 include('../id.php');
 }
 //-------------------------------
-echo '<br><br><br><br><br>';
+echo '<br><br><br>';
 include('../footer.php');

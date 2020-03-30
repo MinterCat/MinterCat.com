@@ -18,7 +18,6 @@ $private_key = $decript['private_key'];
 $db_users = new Users();
 
 $data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
-$data = $result->fetchArray(1);
 
 $nick = $data['nick'];
 $check_language = $data['language'];
