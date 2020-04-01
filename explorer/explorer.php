@@ -41,16 +41,14 @@ $arr = array('Russian', 'Ukrainian', 'Bulgarian', 'Chinese', 'English', 'French'
 $push='';
 $summ=0;
 //-----------------------------------
-$result = $db_users->query('SELECT COUNT(*) FROM "table"');
-$data = $result->fetchArray(1);
+$data = $db_users->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
 $Total = $data['COUNT(*)'];
 //-----------------------------------
 $countarr = count($arr)-1;
 for ($i = 0; $i <= $countarr; $i++)
 {
 	$Lng = $arr[$i];
-	$result = $db_users->query('SELECT COUNT(*) FROM "table" WHERE language="'.$Lng.'"');
-	$data = $result->fetchArray(1);
+	$data = $db_users->query('SELECT COUNT(*) FROM "table" WHERE language="'.$Lng.'"')->fetchArray(1);
 	$Language = $data['COUNT(*)'];
 	$push .= "['".$Lng."', ".$Language."],";
 	$summ += $Language;

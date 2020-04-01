@@ -2,9 +2,9 @@
 .htaccess
 .gitignore
 *.md
-refund/
 bot/
 config/
 testnet/
 *error_log
 test.php
+test/

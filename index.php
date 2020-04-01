@@ -5,29 +5,17 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterWallet;
 ob_start();
 //========================================
-include('../config/config.php');
+include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
+
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-class Users extends SQLite3
-{
-    function __construct()
-    {
-        $this->open('../config/users.sqlite');
-    }
-}
-class Cats extends SQLite3
-	{
-		function __construct()
-		{
-			$this->open('../config/cats.sqlite');
-		}
-	}
 $db_users = new Users();
 $db_cats = new Cats();
 
 //-----------------------
-$base = "explorer/session.txt";
-include('explorer/online.php');
+$base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
+include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
 //-----------------------
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];

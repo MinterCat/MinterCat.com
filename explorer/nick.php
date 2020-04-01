@@ -1,9 +1,6 @@
 <?php
-$results = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"');
-$data = array();
-while ($res = $results->fetchArray(1)){array_push($data, $res);}
-
-$address = $data[0]['address'];
+$data = $db_users->query('SELECT * FROM "table" WHERE nick="' . $nick . '"')->fetchArray(1);
+$address = $data['address'];
 $get = file_get_contents($site."api/cats?addr=$address");
 $payloads1 = json_decode($get,true);
 $result = (count($payloads1)-1);
