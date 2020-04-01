@@ -16,8 +16,7 @@ $count2 = $data2['COUNT(*)'];
 $data3 = $db_cats->query('SELECT COUNT(*) FROM "table" WHERE sale="1"')->fetchArray(1);
 $count3 = $data3['COUNT(*)'];
 
-$json_api = JSON('https://api.mintercat.com/coin');
-$count4 = number_format($json_api->estimate,4);
+$count4 = number_format(JSON('https://api.mintercat.com/coin')->estimateCoinSell,4);
 
 echo "
 <div class='cat_content_none' style='margin-top: 30px;'>
