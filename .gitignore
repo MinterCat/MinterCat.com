@@ -8,3 +8,4 @@ config/
 testnet/
 *error_log
 test.php
+test/
