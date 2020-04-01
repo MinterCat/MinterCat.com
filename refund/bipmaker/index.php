@@ -1,9 +1,4 @@
 <?php
-declare(strict_types=1);
-require_once('../config/minterapi/vendor/autoload.php');
-use Minter\MinterAPI;
-use Minter\SDK\MinterTx;
-
 //========================================
 $titles = 'Refund';
 $m = 3;
@@ -17,8 +12,6 @@ $name = 'BipMaker.PRO node';
 $comm = 6;
 
 echo "<title>MinterCat | $name</title>";
-
-$api = new MinterAPI($api3);
 
 $status = file_get_contents('https://explorer-api.minter.network/api/v1/status-page');
 $statuspayload = json_decode($status,true);
@@ -48,7 +41,6 @@ The current block $numberOfBlocks <br><br>
         $block = file_get_contents('https://explorer-api.minter.network/api/v1/blocks');
 		$blockpayload = json_decode($block,true);
 		$blockReward = $blockpayload['data'][0]['reward'];
-		
 		
 		$commision = 1 - ($comm/100);//commision(0..1) - комиссия валидатора
 
