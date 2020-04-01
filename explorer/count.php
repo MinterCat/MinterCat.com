@@ -1,26 +1,21 @@
 <?php
-include('../../config/config.php');
+include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
+$db_users = new Users();
+$db_cats = new Cats();
 //-----------------------
-$base = "session.txt";
-include('online.php');
+$base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
+include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
 //-----------------------
-$database = new SQLite3('../../config/users.sqlite');
-$data = $database->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
+$data = $db_users->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
 $count = $data['COUNT(*)'];
 
-$database2 = new SQLite3('../../config/cats.sqlite');
-$data2 = $database2->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
+$data2 = $db_cats->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
 $count2 = $data2['COUNT(*)'];
 
-$data3 = $database2->query('SELECT COUNT(*) FROM "table" WHERE sale="1"')->fetchArray(1);
+$data3 = $db_cats->query('SELECT COUNT(*) FROM "table" WHERE sale="1"')->fetchArray(1);
 $count3 = $data3['COUNT(*)'];
 
-function JSON ($url)
-	{
-		$data = file_get_contents($url);
-		$jsonCalled = json_decode($data);
-		return $jsonCalled;
-	}
 $json_api = JSON('https://api.mintercat.com/coin');
 $count4 = number_format($json_api->estimate,4);
 

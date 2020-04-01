@@ -1,10 +1,9 @@
 <?php
 include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
-$HTTP_HOST = $_SERVER['DOCUMENT_ROOT'] . '/';
 //========================================
-$base = $HTTP_HOST . 'explorer/session.txt';
-include($HTTP_HOST . 'explorer/online.php');
+$base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
+include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
 //-----------------------
 $session_language = $_SESSION['session_language'];
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
@@ -25,7 +24,7 @@ $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/L
 $language = json_decode($jsonlanguage,true);
 //========================================
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-include($HTTP_HOST . 'menu.php');
+include($_SERVER['DOCUMENT_ROOT'] . 'menu.php');
 echo "
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
