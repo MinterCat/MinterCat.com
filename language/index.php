@@ -1,9 +1,6 @@
 <?php
 ob_start();
 //========================================
-include('../../config/config.php');
-include('../function.php');
-//-----------------------
 echo "<title>MinterCat | Language</title>";
 $titles = 'Language';
 $m = 5;

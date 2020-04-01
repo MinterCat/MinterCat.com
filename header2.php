@@ -1,4 +1,6 @@
 <?php
+include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 $HTTP_HOST = $_SERVER['DOCUMENT_ROOT'] . '/';
 //========================================
 $base = $HTTP_HOST . 'explorer/session.txt';

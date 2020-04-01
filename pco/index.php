@@ -1,8 +1,5 @@
 <?php
 //========================================
-include('../../config/config.php');
-include('../function.php');
-//-----------------------
 echo "<title>MinterCat | PCO</title>";
 $titles = 'PCO';
 $m = 0;

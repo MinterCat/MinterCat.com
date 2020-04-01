@@ -1,8 +1,5 @@
 <?php
 //========================================
-include('../../config/config.php');
-include('../function.php');
-//-----------------------
 echo "<title>MinterCat | Explorer</title>";
 $titles = 'Explorer';
 $m = 6;

@@ -4,7 +4,7 @@ class Cats extends SQLite3
 {
     function __construct()
     {
-        $this->open('../../config/cats.sqlite');
+        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/cats.sqlite');
     }
 }
 // $db_rss = new RSS();
@@ -12,7 +12,7 @@ class RSS extends SQLite3
 {
     function __construct()
     {
-        $this->open('../../config/rss.sqlite');
+        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/rss.sqlite');
     }
 }
 // $db_users = new Users();
@@ -20,7 +20,7 @@ class Users extends SQLite3
 {
     function __construct()
     {
-        $this->open('../../config/users.sqlite');
+        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/users.sqlite');
     }
 }
 // $db_api = new db_api();
@@ -28,7 +28,7 @@ class db_api extends SQLite3
 {
     function __construct()
     {
-        $this->open('../../config/api.sqlite');
+        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/api.sqlite');
     }
 }
 // $json_api = JSON($site.'api');

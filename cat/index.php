@@ -5,9 +5,6 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 //========================================
-include('../../config/config.php');
-include('../function.php');
-//-----------------------
 if ($address != '')
 {
 $api_node = new MinterAPI($api2);
