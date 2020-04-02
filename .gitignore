@@ -8,3 +8,4 @@ testnet/
 *error_log
 test.php
 test/
+feed/json.php
