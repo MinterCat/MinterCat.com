@@ -41,8 +41,7 @@ foreach (TGgetUpdates() as $value => $test) {
 	}
 	
 	$id = $test->channel_post->chat->id;
-	//if ($id == '-1001304129205')
-	if ($id == '-1001482536175')
+	if ($id == '-1001304129205')
 	{
 		$i++;
 		echo '
