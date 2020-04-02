@@ -35,8 +35,7 @@ class db_api extends SQLite3
 function JSON ($url)
 {
 	$data = file_get_contents($url);
-    $jsonCalled = json_decode($data);
-    return $jsonCalled;
+    return json_decode($data);
 }
 
 // $Language = Language('Russian');
@@ -44,8 +43,7 @@ function Language ($lang)
 {
 	$url = 'https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_'.$lang.'.json';
 	$data = file_get_contents($url);
-    $jsonCalled = json_decode($data);
-    return $jsonCalled;
+    return json_decode($data);
 }
 //$CheckHash = new CheckHash($api,$hash,$check);
 class CheckHash
@@ -63,3 +61,18 @@ class CheckHash
 				return json_decode($payload);
 			}
 	}
+//$GetStatusPage = GetStatusPage();
+function GetStatusPage()
+{
+	$data = file_get_contents('https://explorer-api.minter.network/api/v1/status-page');
+    $jsonCalled = json_decode($data);
+    return $jsonCalled->data;
+}
+//$GetBlocks = GetBlocks();
+function GetBlocks()
+{
+	$data = file_get_contents('https://explorer-api.minter.network/api/v1/blocks');
+    $json = json_decode($data,true);
+	$jsonCalled = $json['data'][0];
+	return json_decode(json_encode($jsonCalled));
+}

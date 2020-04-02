@@ -13,10 +13,8 @@ $comm = 7;
 
 echo "<title>MinterCat | $name</title>";
 
-$status = file_get_contents('https://explorer-api.minter.network/api/v1/status-page');
-$statuspayload = json_decode($status,true);
-$totalDelegatedBip = $statuspayload['data']['totalDelegatedBip'];
-$numberOfBlocks = $statuspayload['data']['numberOfBlocks'];
+$totalDelegatedBip = GetStatusPage()->totalDelegatedBip;
+$numberOfBlocks = GetStatusPage()->numberOfBlocks;
 
 class Reward extends SQLite3
 {
@@ -27,8 +25,7 @@ class Reward extends SQLite3
 }
 
 $db = new Reward();
-$result = $db->query('SELECT * FROM "'.$from.'"');
-$data = $result->fetchArray();
+$data = $db->query('SELECT * FROM "'.$from.'"')->fetchArray(1);
 
 $block_r = $data['numberOfBlocks'];
 $block_reward = $block_r + 17280;
@@ -38,9 +35,7 @@ $block_reward = $block_r + 17280;
 The current block $numberOfBlocks <br><br>
 		The next REFUND will be paid after block $block_reward<br><br>";
 		
-        $block = file_get_contents('https://explorer-api.minter.network/api/v1/blocks');
-		$blockpayload = json_decode($block,true);
-		$blockReward = $blockpayload['data'][0]['reward'];
+        $blockReward = GetBlocks()->reward;
 
 		$commision = 1 - ($comm/100);//commision(0..1) - комиссия валидатора
 
