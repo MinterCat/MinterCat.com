@@ -9,7 +9,7 @@ echo '<br>';
 function TG()
 {
 	include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
-	$data = file_get_contents('https://api.telegram.org/'.$token_feed_bot.'/getUpdates');
+	$data = file_get_contents('https://api.telegram.org/bot'.$token_feed_bot.'/getUpdates');
     $tg_array = json_decode($data)->result;
 	return array_reverse($tg_array);
 }
