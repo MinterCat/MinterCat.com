@@ -203,6 +203,22 @@ img, source{
 	padding-bottom: 10px;
 	float: left;
 }
+
+.feed_block {
+	width: 500px;
+	height: 500px;
+	text-decoration: none;
+	border-radius: 10px; /*скругление*/
+
+	border: 2px solid #9584de;
+	/*background: #9BF5DA;*/
+
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	float: none;
+}
+
 .explorer_content {
 	margin: 0 auto; /* Отступ слева и справа */
 	text-align: center;
