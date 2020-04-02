@@ -18,13 +18,14 @@ $data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->
 $check_language = $data['language'];
 
 if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
+elseif ($session_language != '') {$lang = $session_language;} 
+else {$lang = 'English';}
 
 $jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
 $language = json_decode($jsonlanguage,true);
 //========================================
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-include($_SERVER['DOCUMENT_ROOT'] . 'menu.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/menu.php');
 echo "
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
