@@ -35,7 +35,7 @@ else
 }
 $menu .= "
 	<li><a href='".$site."refund' class='nav-top__link $a3'>" . $language['event'] . "</a></li>
-	<li><a href='".$site."dev' class='nav-top__link $a4'>" . $language['Developers'] . "</a></li>
+	<li><a href='".$site."feed' class='nav-top__link $a4'>Feed</a></li>
 	<li><a href='".$site."language' class='nav-top__link $a5'>Language</a>
 		<ul>
 			<li><a href='".$site."language?language=Russian&url=$url' class='nav-top__link'>РУССКИЙ</a></li>

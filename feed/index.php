@@ -2,7 +2,7 @@
 //========================================
 echo "<title>MinterCat | Feed</title>";
 $titles = 'Feed';
-$m = 0;
+$m = 4;
 //-------------------------------
 include('../header2.php');
 echo '<br>';
