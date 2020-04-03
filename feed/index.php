@@ -34,6 +34,7 @@ foreach (TGgetUpdates() as $value => $test) {
 	$photo = json_decode(json_encode($test->channel_post->photo),true);
 	if ($photo != '') {
 		$caption = $test->channel_post->caption;
+		$caption = str_replace("\n", "<br>", $caption);
 		$file_id = $photo[0]['file_id'];
 		$data = TGgetFile($file_id);
 		$width = $photo[0]['width'];
