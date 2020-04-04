@@ -39,6 +39,7 @@ foreach (TGgetUpdates() as $value => $test) {
 	{
 	$message_id_none = $message_id;
 	$text = $channel->text;
+	$text = str_replace("\n", "<br>", $text);
 	$photo = json_decode(json_encode($channel->photo),true);
 	if ($photo != '') {
 		$caption = $channel->caption;
