@@ -5,7 +5,9 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterWallet;
 ob_start();
 //========================================
-include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
+$version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
+if ($version == 'testnet') {include($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
 include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
