@@ -27,13 +27,21 @@ echo '
 <div class="explorer_content">
 ';
 $i=1;
+$message_id_none = '';
 foreach (TGgetUpdates() as $value => $test) {
 	$value++;
-	$text = $test->channel_post->text;
 	
-	$photo = json_decode(json_encode($test->channel_post->photo),true);
+	$edited = $test->edited_channel_post;
+	if ($edited) {$channel = $test->edited_channel_post;} else  {$channel = $test->channel_post;}
+	
+	$message_id = $channel->message_id;
+	if ($message_id_none!=$message_id)
+	{
+	$message_id_none = $message_id;
+	$text = $channel->text;
+	$photo = json_decode(json_encode($channel->photo),true);
 	if ($photo != '') {
-		$caption = $test->channel_post->caption;
+		$caption = $channel->caption;
 		$caption = str_replace("\n", "<br>", $caption);
 		$file_id = $photo[0]['file_id'];
 		$data = TGgetFile($file_id);
@@ -41,7 +49,7 @@ foreach (TGgetUpdates() as $value => $test) {
 		$height = $photo[0]['height'];
 	}
 	
-	$id = $test->channel_post->chat->id;
+	$id = $channel->chat->id;
 	if ($id == '-1001304129205')
 	{
 		$i++;
@@ -62,6 +70,7 @@ foreach (TGgetUpdates() as $value => $test) {
 		echo '</div></div>';
 		if ($i > 5) {break;}
 	}
+}
 }
 //-------------------------------
 echo '</div></div><br><br><br>';
