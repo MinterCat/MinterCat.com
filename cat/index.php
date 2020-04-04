@@ -65,7 +65,7 @@ $cats = $payloads4['cats'];
 
 $series = $cats[0]['series'];
 $rarity = ($cats[0]['rarity'])*100;
-$price = $cats[0]['price'];
+$price = $cats[0]['value'];
 $name1 = $cats[0]['name'];
 $count = $cats[0]['count'];
 $gender = $cats[0]['gender'];

@@ -23,7 +23,7 @@ foreach ($cats as $value => $kity) {
 
 	$series = $kity['series'];
 	$rarity = ($kity['rarity'])*100;
-	$price = $kity['price'];
+	$price = $kity['value'];
 	$name = $kity['name'];
 	$count = $kity['count'];
 	$img = $kity['img'];

@@ -196,7 +196,6 @@ foreach ($payloads1 as $value => $kity) {
 	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'">';
 	}
 	//-------------------------------------------------
-	$pricebd = $kity['price'];
 	$img = $kity['img'];
 	$block = $kity['stored_id'];
 	for ($y = 0; $y<=$ccount; $y++)
@@ -206,7 +205,6 @@ foreach ($payloads1 as $value => $kity) {
 				{
 					$series = $cats[$y]['series'];
 					$rarity = ($cats[$y]['rarity'])*100;
-					$price = $cats[$y]['price'];
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];

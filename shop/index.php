@@ -145,7 +145,7 @@ foreach ($payloads1 as $value => $kity) {
 				{
 					$series = $cats[$y]['series'];
 					$rarity = ($cats[$y]['rarity'])*100;
-					$price = $cats[$y]['price'];
+					$price = $cats[$y]['value'];
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];
