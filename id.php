@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-$db_cats = new Cats();
+$db_cats = new dbCats();
 $payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
 
 $img = $payloads1['img'];
@@ -18,20 +18,10 @@ $price = $cats[0]['price'];
 $name1 = $cats[0]['name'];
 $count = $cats[0]['count'];
 $gender = $cats[0]['gender'];
+$color = $cats[0]['color'];
 
 $name2 = $payloads1[0]['name'];
 if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
-
-switch ($series)
-{
-	case 0: {$u = '#C1B5FF'; break;}
-	case 1: {$u = '#FFF6B5'; break;}
-	case 2: {$u = '#FFB5B5'; break;}
-	case 3: {$u = '#C7F66F'; break;}
-	case 4: {$u = '#FFC873'; break;}
-	case 5: {$u = '#6AF2D7'; break;}
-	case 999: {$u = '#9BF5DA'; break;}
-}
 
 $payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $id)->fetchArray(1);
 
@@ -53,10 +43,10 @@ if ($gender == '♀') {
 if ($gender == '0') {
 	$gender_p = $language['Undefined'];
 }
-if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Продается)</b></font>'; $pr = $pricebd;}
+if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 echo "
 <center>
-	<div style='background: $u' width='100%' height='300'>
+	<div style='background: $color' width='100%' height='300'>
 			<picture>
 			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$img' width='350' height='350'>

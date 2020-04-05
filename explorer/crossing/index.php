@@ -88,24 +88,13 @@ foreach ($cats as $value => $kity) {
 	$count = $kity['count'];
 	$img = $kity['img'];
 	$gender = $kity['gender'];
-
-
-switch ($series)
-{
-	case 0: {$u = '#C1B5FF'; break;}
-	case 1: {$u = '#FFF6B5'; break;}
-	case 2: {$u = '#FFB5B5'; break;}
-	case 3: {$u = '#C7F66F'; break;}
-	case 4: {$u = '#FFC873'; break;}
-	case 5: {$u = '#6AF2D7'; break;}
-	case 999: {$u = '#9BF5DA'; break;}
-}
+	$color = $kity['color'];
 
 if ($img != '') {
 if ($gender == '♀') {$gender_number = 1;}
 if ($gender == '♂') {$gender_number = 0;}
 echo "
-	<div class='cat_block' style='background: $u'>
+	<div class='cat_block' style='background: $color'>
 		<div class='cat_img' data-id='$name' data-gender='$gender_number'>
 			<picture>
 			<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>

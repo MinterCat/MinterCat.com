@@ -39,7 +39,7 @@ $address = $decript['address'];
 $private_key = $decript['private_key'];
 ob_start();
 
-$db_cats = new Cats();
+$db_cats = new dbCats();
 $db_rss = new RSS();
 $db_users = new Users();
 

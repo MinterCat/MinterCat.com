@@ -23,7 +23,7 @@ function TransactoinSendDebug ($api2,$transaction)
 
 $private_key = $decript['private_key'];
 
-$db_cats = new Cats();
+$db_cats = new dbCats();
 $db_rss = new RSS();
 
 $nonce = $api_node->getNonce($address);

@@ -37,7 +37,7 @@ $decript = json_decode($decript_text,true);
 $address = $decript['address'];
 $private_key = $decript['private_key'];
 
-$db_cats = new Cats();
+$db_cats = new dbCats();
 $db_rss = new RSS();
 $db_users = new Users();
 
@@ -208,6 +208,7 @@ foreach ($payloads1 as $value => $kity) {
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];
+					$color = $cats[$y]['color'];
 				}
 		}
 		if ($gender == '♀') {$gender_number = 1;}
@@ -215,19 +216,9 @@ foreach ($payloads1 as $value => $kity) {
 	$name2 = $kity['name'];
 	if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 
-		switch ($series)
-		{
-			case 0: {$u = '#C1B5FF'; break;}
-			case 1: {$u = '#FFF6B5'; break;}
-			case 2: {$u = '#FFB5B5'; break;}
-			case 3: {$u = '#C7F66F'; break;}
-			case 4: {$u = '#FFC873'; break;}
-			case 5: {$u = '#6AF2D7'; break;}
-			case 999: {$u = '#9BF5DA'; break;}
-		}
 		if ($gender != '0') {
 				echo "
-					<div class='cat_block' style='background: $u'>
+					<div class='cat_block' style='background: $color'>
 						<div class='cat_img' data-id='$block' data-gender='$gender_number'>
 								<picture>
 									<source srcset='".$site."static/img/Cat$img.webp' type='image/webp'>

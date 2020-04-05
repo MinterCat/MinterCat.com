@@ -149,25 +149,16 @@ foreach ($payloads1 as $value => $kity) {
 					$name1 = $cats[$y]['name'];
 					$count = $cats[$y]['count'];
 					$gender = $cats[$y]['gender'];
+					$color = $cats[$y]['color'];
 				}
 		}
 $name2 = $kity['name'];
 if (($name2 != '') and ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 if ($gender == '0') {$gender = '';}
 
-switch ($series) 
-{
-	case 0: {$u = '#C1B5FF'; break;}
-	case 1: {$u = '#FFF6B5'; break;}
-	case 2: {$u = '#FFB5B5'; break;}
-	case 3: {$u = '#C7F66F'; break;}
-	case 4: {$u = '#FFC873'; break;}
-	case 5: {$u = '#6AF2D7'; break;}
-	case 999: {$u = '#9BF5DA'; break;}
-}
 if ($img != '') {
 echo "
-	<div class='cat_block' style='background: $u'>
+	<div class='cat_block' style='background: $color'>
 		<div class='cat_img'>
 			<a href='".$site."cat?id=$block'>
 				<picture>
