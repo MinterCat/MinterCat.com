@@ -1,6 +1,6 @@
 <?php
-echo "
-<script type='text/javascript' src='".$site."static/js/jquery-3.4.1.min.js'></script>
+echo "<br>
+<script type='text/javascript' src='https://mintercat.com/static/js/jquery-3.4.1.min.js'></script>
 <div id='content'></div>
 	<script>
 		function show()
@@ -36,25 +36,17 @@ echo '
 <div class="explorer_block_header">Users</div>
 <div class="explorer_block_content">
 ';
-$db_users = new Users();
 $arr = array('Russian', 'Ukrainian', 'Bulgarian', 'Chinese', 'English', 'French', 'Hebrew', 'Igbo', 'Indonesian', 'Spanish', 'Yoruba');
 $push='';
-$summ=0;
-//-----------------------------------
-$data = $db_users->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
-$Total = $data['COUNT(*)'];
 //-----------------------------------
 $countarr = count($arr)-1;
 for ($i = 0; $i <= $countarr; $i++)
 {
 	$Lng = $arr[$i];
-	$data = $db_users->query('SELECT COUNT(*) FROM "table" WHERE language="'.$Lng.'"')->fetchArray(1);
-	$Language = $data['COUNT(*)'];
+	$Language = Languages()->$Lng;
+	$Uncertain = Languages()->Uncertain;
 	$push .= "['".$Lng."', ".$Language."],";
-	$summ += $Language;
 }
-//-----------------------------------
-$Uncertain = $Total - $summ;
 //-----------------------------------
 echo "
 <script src='https://www.google.com/jsapi'></script>

@@ -42,6 +42,12 @@ function Language ($lang)
 		$data = file_get_contents($url);
 		return json_decode($data);
 	}
+function Languages ()
+	{
+		$url = 'https://api.mintercat.com/language';
+		$data = file_get_contents($url);
+		return json_decode($data);
+	}
 class checkHash
 	{
 		public $api;
