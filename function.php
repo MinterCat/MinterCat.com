@@ -15,6 +15,14 @@ class RSS extends SQLite3
         $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/rss.sqlite');
     }
 }
+// $db_gen = new dbGen();
+class dbGen extends SQLite3
+{
+    function __construct()
+    {
+        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/gen.sqlite');
+    }
+}
 // $db_users = new Users();
 class Users extends SQLite3
 {
@@ -167,6 +175,16 @@ class Cats
 		public static function StoredId($stored_id)
 			{
 				$data = file_get_contents('https://api.mintercat.com/cats?id=' . $stored_id);
+				return json_decode($data);
+			}
+	}
+class Gen
+	{
+		public $stored_id;
+
+		public static function StoredId($stored_id)
+			{
+				$data = file_get_contents('https://api.mintercat.com/gen?id=' . $stored_id);
 				return json_decode($data);
 			}
 	}
