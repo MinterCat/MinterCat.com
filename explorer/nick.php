@@ -35,8 +35,8 @@ foreach ($array_cats as $value => $kity) {
 	<div class='cat_block' style='background: $color'>
 		<div class='cat_img'>
 			<picture>
-			<source srcset='https://mintercat.com/static/img/Cat$img.webp' type='image/webp'>
-			<img src='https://mintercat.com/png.php?png=$img'>
+			<source srcset='$cat->webp' type='image/webp'>
+			<img src='$cat->png'>
 			</picture>
 		</div>
 		<div class='cat_text'>
