@@ -1,20 +1,15 @@
 <?php
 include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
-$db_users = new Users();
-$db_cats = new dbCats();
 //-----------------------
 $base = 'session.txt';
 include('online.php');
 //-----------------------
-$data = $db_users->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
-$count = $data['COUNT(*)'];
+$count = count(Users());
 
-$data2 = $db_cats->query('SELECT COUNT(*) FROM "table"')->fetchArray(1);
-$count2 = $data2['COUNT(*)'];
+$count2 = Cats::Counts();
 
-$data3 = $db_cats->query('SELECT COUNT(*) FROM "table" WHERE sale="1"')->fetchArray(1);
-$count3 = $data3['COUNT(*)'];
+$count3 = Shop::Counts;
 
 $count4 = number_format(JSON('https://api.mintercat.com/coin')->estimateCoinSell,4);
 

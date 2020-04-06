@@ -67,6 +67,14 @@ class checkHash
 				return json_decode($payload);
 			}
 	}
+class Shop
+	{
+		public static function counts()
+			{
+				$data = file_get_contents('https://api.mintercat.com/shop');
+				return json_decode($data);
+			}
+	}
 function GetStatusPage()
 	{
 		$data = file_get_contents('https://explorer-api.minter.network/api/v1/status-page');
