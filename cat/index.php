@@ -6,8 +6,8 @@ use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 //========================================
 $version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
-if ($version == 'testnet') {include($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
-else {include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
+if ($version == 'testnet') {require_once($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {require_once(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
 require_once('../function.php');
 //-----------------------
 $base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
@@ -18,9 +18,9 @@ $cript_mnemonic = $_SESSION['cript_mnemonic'];
 
 if ($cript_mnemonic != '') {
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
-$decript = json_decode($decript_text,true);
+$decript = json_decode($decript_text);
 
-$address = $decript['address'];
+$address = $decript->address;
 
 $check_language = User::Address($address)->language;
 }
@@ -40,7 +40,7 @@ function TransactoinSendDebug ($api2,$transaction)
     return $api->send($transaction);
 }
 
-$private_key = $decript['private_key'];
+$private_key = $decript->private_key;
 
 $db_cats = new dbCats();
 $db_rss = new RSS();
