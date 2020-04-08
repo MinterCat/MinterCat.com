@@ -9,9 +9,9 @@ echo "
 <div class='cat_content' style='text-align: left; float: none;'>
 <p>
 <b><img src='".$site."static/img/favicon.png' width='20' height='20'> MINTERCAT</b><br>
-MINTERCAT — " . $Language->official_coin_of_the_MinterCat_project . "<br>
+MINTERCAT — $Language->official_coin_of_the_MinterCat_project<br>
 <br>
-<a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>" . $Language->Coin . " MINTERCAT</a><br>
+<a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>$Language->Coin MINTERCAT</a><br>
 <br>
 </p>
 <p style='text-indent: 25px;'>
@@ -25,14 +25,14 @@ MINTERCAT — " . $Language->official_coin_of_the_MinterCat_project . "<br>
 </p>
 <p style='text-indent: 25px;'>
 <b>" . $Language->At_the_time_of_writing . ":</b><br>
-• " . $Language->Reserve . " 150 000 BIP<br>
-• " . $Language->Price . " 0,4668 BIP<br>
-• " . $Language->Delegated . " 95%<br>
-• " . $Language->Emission . " 430 000 MINTERCAT<br>
+• $Language->Reserve 150 000 BIP<br>
+• $Language->Price 0,4668 BIP<br>
+• $Language->Delegated 95%<br>
+• $Language->Emission 430 000 MINTERCAT<br>
 <br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $Language->Coin_creation_transaction . "</b><br>
+<b>$Language->Coin_creation_transaction</b><br>
 <br>
 <a href='https://minterscan.net/tx/Mtec393388520e9d231c01f3756f173ac38e4c00df5959943dea7f54472fd40678' target='_blank' class='nav-top__link'>" . $Language->The_link_to_the_transaction . "</a><br>
 </p>

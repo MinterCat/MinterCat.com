@@ -1,6 +1,8 @@
 <?php
-include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
+$version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
+if ($version == 'testnet') {require_once($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {require_once(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
+require_once($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 //-----------------------
 $base = 'session.txt';
 include('online.php');

@@ -11,9 +11,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
 //-----------------------
 $session_language = $_SESSION['session_language'];
 $version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
-if ($version == 'testnet') {include($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
-else {include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
-include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
+if ($version == 'testnet') {require_once($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {require_once(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
+require_once($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 
 function getBlockByHash ($api2,$hash)
 {

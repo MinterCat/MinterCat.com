@@ -43,8 +43,8 @@ echo "
 		<div class='cat_text'>
 			<b>$name</b> $gender
 			<hr>
-			" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
-			" . $Language->Chance_of_falling_out . ": <b>$rarity%</b><br>
+			$Language->Number_of_cats_of_this_breed <b>$count</b><br>
+			$Language->Chance_of_falling_out : <b>$rarity%</b><br>
 			<b>$price</b> $coin
 			<br>
 		</div>
@@ -62,7 +62,7 @@ echo "<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $Language->page_of ." ". $countq."
+					1 $Language->page_of $countq
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
@@ -71,7 +71,7 @@ echo "<br><div class='cat_form'>
 ";
 echo "
 <script type='text/javascript'>
-			var maxPage = ".$countq.";
+			var maxPage = $countq;
 			var currentPage = 1;
 
 			$(document).ready(function() {
@@ -86,7 +86,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -101,7 +101,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);
