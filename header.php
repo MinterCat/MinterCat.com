@@ -43,16 +43,12 @@ $db_cats = new dbCats();
 $db_rss = new RSS();
 $db_users = new Users();
 
-$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
+$nick = User::Address($address)->nick;
+$check_language = User::Address($address)->language;
 
-$nick = $data['nick'];
-$check_language = $data['language'];
-
-if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
-
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);} 
+else {$Language = Language('English');}
 
 $nonce = $api_node->getNonce($address);
 $response = $api_node->getBalance($address);
@@ -227,7 +223,7 @@ $m = 2; include('../menu.php');
 		  <div style='position: center'>
 
             <div class='profile-info__item'>
-              <div class='profile-info__item-title'>" . $language['My_nickname'] . ":</div>
+              <div class='profile-info__item-title'>" . $Language->My_nickname . ":</div>
               <div class='profile-info__item-body'>
                 <div class='profile-info__name'>$nick</div>
               </div>
@@ -248,9 +244,9 @@ $m = 2; include('../menu.php');
             <div class='wallet__title'>Balance:</div>
             <div class='wallet__sum'>$balance</div>
 			<img src='".$site."static/img/svg/logo.svg' class='wallet__avatar'>
-			<div class='wallet__title'>" . $language['Buying_a_new_kitten_costs'] . " 50 $coin</div>
+			<div class='wallet__title'>" . $Language->Buying_a_new_kitten_costs . " 50 $coin</div>
 				<form method='post'>
-					<button class='button' id='buycat' name='buycat' type='submit'>" . $language['Buy'] . "</button>
+					<button class='button' id='buycat' name='buycat' type='submit'>" . $Language->Buy . "</button>
 				</form>
           </div>
         </div>

@@ -8,12 +8,12 @@ $ccount = (count($cats))-1;
 
 echo "<center>	
 				<form method='post'>
-				<p>" . $language['Sort'] . ":</p>
+				<p>" . $Language->Sort . ":</p>
 				<input id='key5' name='key5' type='submit' value='My cats'>
-				<input id='key1' name='key1' type='submit' value='" . $language['The_cheapest'] . "'>
-				<input id='key2' name='key2' type='submit' value='" . $language['Most_expensive'] . "'>
-				<input id='key3' name='key3' type='submit' value='" . $language['The_oldest'] . "'>
-				<input id='key4' name='key4' type='submit' value='" . $language['on_breeds'] . "'>
+				<input id='key1' name='key1' type='submit' value='" . $Language->The_cheapest . "'>
+				<input id='key2' name='key2' type='submit' value='" . $Language->Most_expensive . "'>
+				<input id='key3' name='key3' type='submit' value='" . $Language->The_oldest . "'>
+				<input id='key4' name='key4' type='submit' value='" . $Language->on_breeds . "'>
 				</form>
 		</center>";	
 
@@ -187,7 +187,7 @@ echo "<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $language['page_of'] ." ". $countq."
+					1 ". $Language->page_of ." ". $countq."
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
@@ -211,7 +211,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -226,7 +226,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);

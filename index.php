@@ -28,14 +28,11 @@ $decript = json_decode($decript_text,true);
 
 $address = $decript['address'];
 
-$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
-$check_language = $data['language'];
-}
-if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
+$check_language = User::Address($address)->language;
 
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);} 
+else {$Language = Language('English');}
 //========================================
 $api_node = new MinterAPI($api);
 echo "
@@ -172,7 +169,7 @@ echo "
           </li>
             </ul>
 
-            <button class='nav-top__btn-play btn'>" . $language['Play'] . "</button>
+            <button class='nav-top__btn-play btn'>" . $Language->Play . "</button>
 
             <button class='nav-top__close'>
               <svg class='nav-top__close-icon'>
@@ -182,7 +179,7 @@ echo "
 
           </nav>
 
-          <button class='top-header__btn-play'>" . $language['Play'] . "</button>
+          <button class='top-header__btn-play'>" . $Language->Play . "</button>
 
           <button class='btn-hamburger top-header__hamburger'>
             <span class='btn-hamburger__line'></span>
@@ -207,11 +204,11 @@ echo "
               <h1 class='intro__heading'>
                 Minter<span class='intro__heading-dark'>Cat</span>
               </h1>
-              <p class='intro__descr'>" . $language['Collect_crypto-kitty_on_the'] . "
-                " . $language['Minter_blockchain'] . "</p>
+              <p class='intro__descr'>" . $Language->Collect_crypto-kitty_on_the . "
+                " . $Language->Minter_blockchain . "</p>
             </div>
 
-            <button class='btn intro__btn'>" . $language['Play'] . "</button>
+            <button class='btn intro__btn'>" . $Language->Play . "</button>
           </div>
 
           <div class='intro__img-wrapper'>
@@ -240,8 +237,8 @@ echo "
     <main class='main'>
       <div class='about main__about'>
         <div class='container about__container'>
-          <span class='about__subtitle'>" . $language['about_the_project'] . "</span>
-          <h2 class='heading about__heading about__heading'>" . $language['what_is_it'] . "</h2>
+          <span class='about__subtitle'>" . $Language->about_the_project . "</span>
+          <h2 class='heading about__heading about__heading'>" . $Language->what_is_it . "</h2>
 
           <div class='swiper-container'>
             <div class='posts about__posts swiper-wrapper'>
@@ -261,8 +258,8 @@ echo "
                   </div>
                 </div>
 
-                <p class='post__text'>" . $language['The_Interact_project_is_a_crypto-kitty_on_the_Minter_blockchain'] . "
-				" . $language['Each_kitten_can_be_bought'] . "</p>
+                <p class='post__text'>" . $Language->The_Interact_project_is_a_crypto-kitty_on_the_Minter_blockchain . "
+				" . $Language->Each_kitten_can_be_bought . "</p>
               </div>
 
               <div class='post post--reverse posts__item swiper-slide'>
@@ -280,8 +277,8 @@ echo "
                   </div>
                 </div>
 
-                <p class='post__text'>" . $language['Each_cat_has_its_own_set_of_genes'] . "
-				" . $language['When_crossing_the_genes_of_the'] . "</p>
+                <p class='post__text'>" . $Language->Each_cat_has_its_own_set_of_genes . "
+				" . $Language->When_crossing_the_genes_of_the . "</p>
               </div>
 
               <div class='post posts__item swiper-slide'>
@@ -299,8 +296,8 @@ echo "
                   </div>
                 </div>
 
-                <p class='post__text'>" . $language['Each_cat_has_its_own_approximate'] . "
-" . $language['After_adding_new_seals'] . "</p>
+                <p class='post__text'>" . $Language->Each_cat_has_its_own_approximate . "
+" . $Language->After_adding_new_seals . "</p>
               </div>
             </div>
 
@@ -338,7 +335,7 @@ echo "
           </li>
         </ul>
 
-		<span class='footer__copyright'>" . $language['All_rights_are_registered'] . "</span><br>
+		<span class='footer__copyright'>" . $Language->All_rights_are_registered . "</span><br>
 		<span class='footer__copyright'>
 		<a href='".$site."dev' target='_blank' class='nav-top__link'>API</a> | <a href='".$site."pco' target='_blank' class='nav-top__link'>PCO</a> | <a href='".$site."explorer' target='_blank' class='nav-top__link'>Explorer</a>
 		</span>
@@ -356,10 +353,10 @@ echo "
 				<br>
 			</div>
 			<br>
-			<input id='Enter' name='Enter' type='submit' class='btn modal-login__btn' value='" . $language['Enter'] . "'>
+			<input id='Enter' name='Enter' type='submit' class='btn modal-login__btn' value='" . $Language->Enter . "'>
 			<br>
 
-			<input id='Register' name='Register' type='submit' class='btn modal-login__btn' value='" . $language['Register'] . "'>
+			<input id='Register' name='Register' type='submit' class='btn modal-login__btn' value='" . $Language->Register . "'>
 			<br>
 			<a href='#' class='modal-login__link'>Alternative login to the site</a>
 		</form>
@@ -386,16 +383,16 @@ echo "
 	      <form class='modal-login__form'>
 
         <div class='modal-login__form-group'>
-          <label for='' class='modal-login__label'>" . $language['Login'] . ":</label>
+          <label for='' class='modal-login__label'>" . $Language->Login . ":</label>
           <input id='login1' name='login1' type='login' class='modal-login__field-text' value=''  maxlength='15' required>
         </div>
 
         <div class='modal-login__form-group'>
-          <label for='' class='modal-login__label'>" . $language['Password'] . ":</label>
+          <label for='' class='modal-login__label'>" . $Language->Password . ":</label>
           <input id='password1' name='password1' type='password' class='modal-login__field-text' value=''  maxlength='15' required>
         </div>
 
-        <input id='log' name='log' type='submit' class='btn modal-login__btn' value='" . $language['Enter'] . "'>
+        <input id='log' name='log' type='submit' class='btn modal-login__btn' value='" . $Language->Enter . "'>
 
 
         <a href='#' class='modal-login__link'>Back</a>

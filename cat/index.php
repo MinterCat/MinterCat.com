@@ -95,9 +95,9 @@ $data = $json_api->result->time;
 
 $nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
-if ($gender == '♂') {$gender_p = $language['Male'] . " ($gender)";}
-elseif ($gender == '♀') {$gender_p = $language['Female'] . " ($gender)";}
-else {$gender_p = $language['Undefined'];}
+if ($gender == '♂') {$gender_p = $Language->Male . " ($gender)";}
+elseif ($gender == '♀') {$gender_p = $Language->Female . " ($gender)";}
+else {$gender_p = $Language->Undefined;}
 
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 if($addr == $address){
@@ -113,16 +113,16 @@ echo "
 			#$block<br>
 			<b>$name</b>
 			<hr>
-			" . $language['Cat_created'] . " <b>$nd</b>, " . $language['in_block'] . " <b>#$block</b> <br>
-" . $language['Chance_of_falling_out'] . " <b>$rarity%</b><br>
-" . $language['gender'] . ": $gender_p<br>
-" . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
+			" . $Language->Cat_created . " <b>$nd</b>, " . $Language->in_block . " <b>#$block</b> <br>
+" . $Language->Chance_of_falling_out . " <b>$rarity%</b><br>
+" . $Language->gender . ": $gender_p<br>
+" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
 <br>
 Hash create: $hash<br>
 ";
 
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
-echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
+echo $Language->Approximate_cost . " <b>$price</b> $coin<br><br>
 ";
 
 if ($hash != null) {
@@ -134,10 +134,10 @@ if (isset($_POST['send2']))
 		echo "
 		<form method='post'>
 		<input id='nick' name='nick' type='text' value='' placeholder='NickName' maxlength='15' size='12'>
-		<input id='send' name='send' type='submit' value='" . $language['Send'] . "'>
+		<input id='send' name='send' type='submit' value='" . $Language->Send . "'>
 		<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
 		<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-		<input id='back' name='back' type='submit' value='" . $language['Cancel'] . "'>
+		<input id='back' name='back' type='submit' value='" . $Language->Cancel . "'>
 		</form>
 		";
 	}
@@ -147,10 +147,10 @@ elseif (isset($_POST['sale']))
 						<form method='post'>
 						<p>
 						<input id='price' name='price' type='number' value='".$_POST['price']."' placeholder='Price' maxlength='7' size='12'>
-						<input id='sendprice' name='sendprice' type='submit' value='" . $language['Send'] . "'>
+						<input id='sendprice' name='sendprice' type='submit' value='" . $Language->Send . "'>
 						<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
 						<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-						<input id='back' name='back' type='submit' value='" . $language['Cancel'] . "'>
+						<input id='back' name='back' type='submit' value='" . $Language->Cancel . "'>
 						</p>
 						</form>
 						";
@@ -159,8 +159,8 @@ elseif (isset($_POST['sale']))
 							{
 								echo "
 								<form method='post'>
-								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
-								<input id='nosale' name='nosale' type='submit' value='" . $language['Not_sell'] . "'>
+								<input id='send2' name='send2' type='submit' value='" . $Language->Send . "'>
+								<input id='nosale' name='nosale' type='submit' value='" . $Language->Not_sell . "'>
 								<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
 								</form>
 								";
@@ -169,8 +169,8 @@ elseif (isset($_POST['sale']))
 							{
 								echo "
 								<form method='post'>
-								<input id='send2' name='send2' type='submit' value='" . $language['Send'] . "'>
-								<input id='sale' name='sale' type='submit' value='" . $language['Sell'] . "'>
+								<input id='send2' name='send2' type='submit' value='" . $Language->Send . "'>
+								<input id='sale' name='sale' type='submit' value='" . $Language->Sell . "'>
 								<input id='price' name='price' type='hidden' value='" . $price . "'>
 								</form>
 								";
@@ -180,7 +180,7 @@ elseif (isset($_POST['sale']))
 			echo "
 					<br>
 					<form method='post'>
-					<input id='in2' name='in2' type='submit' value='" . $language['Hatching_egg'] . "'>
+					<input id='in2' name='in2' type='submit' value='" . $Language->Hatching_egg . "'>
 					<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
 					</form>
 					";
@@ -195,7 +195,7 @@ elseif (isset($_POST['sale']))
 					echo "
 					<br>
 					<form method='post'>
-					<input id='in' name='in' type='submit' value='" . $language['Hatching_egg'] . "'>
+					<input id='in' name='in' type='submit' value='" . $Language->Hatching_egg . "'>
 					<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
 					</form>
 					";
@@ -222,19 +222,19 @@ echo "
 			#$block<br>
 			$name $gender
 			<hr>
-			" . $language['Cat_created'] . " <b>$nd</b>, " . $language['in_block'] . " <b>#$block</b> <br>
-" . $language['Chance_of_falling_out'] . " <b>$rarity%</b><br>
-" . $language['gender'] . ": $gender_p<br>
-" . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
+			" . $Language->Cat_created . " <b>$nd</b>, " . $Language->in_block . " <b>#$block</b> <br>
+" . $Language->Chance_of_falling_out . " <b>$rarity%</b><br>
+" . $Language->gender . ": $gender_p<br>
+" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
 <br>
 Hash create: $hash<br>
-" . $language['Approximate_cost'] . " <b>$pr</b> $coin<br><br>
+" . $Language->Approximate_cost . " <b>$pr</b> $coin<br><br>
 ";
 if (($sale == 1)and($balance > $pricebd))
 	{
 		echo "
 		<form method='post'>
-			<input id='buy' name='buy' type='submit' value='" . $language['Buy'] . "'>
+			<input id='buy' name='buy' type='submit' value='" . $Language->Buy . "'>
 			<input id='price' name='price' type='hidden' value='" . $pricebd . "'>
 			<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
 			<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>

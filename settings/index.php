@@ -17,16 +17,12 @@ $private_key = $decript['private_key'];
 
 $db_users = new Users();
 
-$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
+$nick = User::Address($address)->nick;
+$check_language = User::Address($address)->language;
 
-$nick = $data['nick'];
-$check_language = $data['language'];
-}
-if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
-
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);} 
+else {$Language = Language('English');}
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "
 <!DOCTYPE html>
@@ -72,20 +68,20 @@ echo "
 			<img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
 		</div>
 	</div>
-	<div class='position_left'>" . $language['My_nickname'] . ":
+	<div class='position_left'>" . $Language->My_nickname . ":
 				<form>
 						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
-						  <input type='submit' id='save' name='save' value='" . $language['Save'] . "'>
+						  <input type='submit' id='save' name='save' value='" . $Language->Save . "'>
 				</form>
 
 
 	</div>
-	<div class='position_left'>" . $language['My_wallet'] . ":
+	<div class='position_left'>" . $Language->My_wallet . ":
                 <input type='text' value='$address' id='myInput'>
 				  <div class='tooltip'>
 					<button onclick='myFunction()' onmouseout='outFunc()'>
 					  <span class='tooltiptext' id='myTooltip'>Copy to clipboard</span>
-					  " . $language['Copy'] . "
+					  " . $Language->Copy . "
 					  </button>
 
 <script>

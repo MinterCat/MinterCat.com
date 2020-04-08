@@ -29,7 +29,7 @@ echo '
           </li>
         </ul>
 
-        <span class="footer__copyright">' . $language["All_rights_are_registered"] . '</span><br>
+        <span class="footer__copyright">' . $Language->All_rights_are_registered . '</span><br>
 		<span class="footer__copyright">
 		<a href="'.$site.'dev" target="_blank" class="nav-top__link">API</a> | <a href="'.$site.'pco" target="_blank" class="nav-top__link">PCO</a> | <a href="'.$site.'explorer" target="_blank" class="nav-top__link">Explorer</a>
 		</span>

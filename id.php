@@ -35,13 +35,13 @@ $data = $json_api->result->time;
 $nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
 if ($gender == '♂') {
-	$gender_p = $language['Male'] . " ($gender)";
+	$gender_p = $Language->Male . " ($gender)";
 }
 if ($gender == '♀') {
-	$gender_p = $language['Female'] . " ($gender)";
+	$gender_p = $Language->Female . " ($gender)";
 }
 if ($gender == '0') {
-	$gender_p = $language['Undefined'];
+	$gender_p = $Language->Undefined;
 }
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 echo "
@@ -55,14 +55,14 @@ echo "
 			#$id<br>
 			$name
 			<hr>
-			" . $language['Cat_created'] . " <b>$nd</b>, " . $language['in_block'] . " <b>#$id</b> <br>
-" . $language['Chance_of_falling_out'] . " <b>$rarity%</b><br>
-" . $language['gender'] . ": $gender_p<br>
-" . $language['Number_of_cats_of_this_breed'] . " <b>$count</b><br>
+			" . $Language->Cat_created . " <b>$nd</b>, " . $Language->in_block . " <b>#$id</b> <br>
+" . $Language->Chance_of_falling_out . " <b>$rarity%</b><br>
+" . $Language->gender . ": $gender_p<br>
+" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
 <br>
 ";
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
-echo $language['Approximate_cost'] . " <b>$price</b> $coin<br><br>
+echo $Language->Approximate_cost . " <b>$price</b> $coin<br><br>
 ";
 
 echo "

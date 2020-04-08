@@ -9,71 +9,71 @@ echo "
 <div class='cat_content' style='text-align: left; float: none;'>
 <p>
 <b><img src='".$site."static/img/favicon.png' width='20' height='20'> MINTERCAT</b><br>
-MINTERCAT — " . $language['official_coin_of_the_MinterCat_project'] . "<br>
+MINTERCAT — " . $Language->official_coin_of_the_MinterCat_project . "<br>
 <br>
-<a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>" . $language['Coin'] . " MINTERCAT</a><br>
+<a href='https://minterscan.net/coin/MINTERCAT' target='_blank' class='nav-top__link'>" . $Language->Coin . " MINTERCAT</a><br>
 <br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['Characteristics_of_coin'] . ":</b><br>
- • " . $language['Symbol'] . " MINTERCAT <br>
+<b>" . $Language->Characteristics_of_coin . ":</b><br>
+ • " . $Language->Symbol . " MINTERCAT <br>
  • CRR 75%<br>
- • " . $language['Initial_reserve'] . " 1 000 BIP<br>
- • " . $language['Initial_price'] . " 0.1 BIP<br>
- • " . $language['Initial_emission'] . " 10 000 MINTERCAT<br>
+ • " . $Language->Initial_reserve . " 1 000 BIP<br>
+ • " . $Language->Initial_price . " 0.1 BIP<br>
+ • " . $Language->Initial_emission . " 10 000 MINTERCAT<br>
 <br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['At_the_time_of_writing'] . ":</b><br>
-• " . $language['Reserve'] . " 150 000 BIP<br>
-• " . $language['Price'] . " 0,4668 BIP<br>
-• " . $language['Delegated'] . " 95%<br>
-• " . $language['Emission'] . " 430 000 MINTERCAT<br>
+<b>" . $Language->At_the_time_of_writing . ":</b><br>
+• " . $Language->Reserve . " 150 000 BIP<br>
+• " . $Language->Price . " 0,4668 BIP<br>
+• " . $Language->Delegated . " 95%<br>
+• " . $Language->Emission . " 430 000 MINTERCAT<br>
 <br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['Coin_creation_transaction'] . "</b><br>
+<b>" . $Language->Coin_creation_transaction . "</b><br>
 <br>
-<a href='https://minterscan.net/tx/Mtec393388520e9d231c01f3756f173ac38e4c00df5959943dea7f54472fd40678' target='_blank' class='nav-top__link'>" . $language['The_link_to_the_transaction'] . "</a><br>
+<a href='https://minterscan.net/tx/Mtec393388520e9d231c01f3756f173ac38e4c00df5959943dea7f54472fd40678' target='_blank' class='nav-top__link'>" . $Language->The_link_to_the_transaction . "</a><br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['The_purpose_of_the_coins'] . "</b><br>
- • " . $language['Development_Fund'] . "<br>
- • " . $language['Cost_coverage'] . "<br>
- • " . $language['Bonuses'] . ": <br>
-" . $language['get_people_for_daily'] . " <br>
-" . $language['is_received_by_people'] . "<br>
- • " . $language['Promotions_large_delegates'] . "<br>
- • " . $language['for_use_in_the_game'] . " <br>
+<b>" . $Language->The_purpose_of_the_coins . "</b><br>
+ • " . $Language->Development_Fund . "<br>
+ • " . $Language->Cost_coverage . "<br>
+ • " . $Language->Bonuses . ": <br>
+" . $Language->get_people_for_daily . " <br>
+" . $Language->is_received_by_people . "<br>
+ • " . $Language->Promotions_large_delegates . "<br>
+ • " . $Language->for_use_in_the_game . " <br>
 </p>
 <p style='text-indent: 25px;'>
-" . $language['We_emphasize_that_the_game'] . " <br>
-" . $language['The_game_is_shareware.'] . "<br>
+" . $Language->We_emphasize_that_the_game . " <br>
+" . $Language->The_game_is_shareware. . "<br>
 <br>
-" . $language['The_minimum_withdrawal'] . "<br>
-" . $language['These_costs_are_covered_by_the'] . "<br>
+" . $Language->The_minimum_withdrawal . "<br>
+" . $Language->These_costs_are_covered_by_the . "<br>
 <br>
-" . $language['Paid_will_be_additional'] . "<br>
+" . $Language->Paid_will_be_additional . "<br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['The_delegation_coins'] . "</b><br>
-" . $language['initial_issue_delegated_per_year'] . " -
+<b>" . $Language->The_delegation_coins . "</b><br>
+" . $Language->initial_issue_delegated_per_year . " -
 <a href='https://minterscan.net/validator/Mp629b5528f09d1c74a83d18414f2e4263e14850c47a3fac3f855f200111111111' target='_blank' class='nav-top__link'>«1%»</a>.<br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['Initial_issue_delegation_transaction'] . ":</b><br><br>
-<a href='https://minterscan.net/tx/Mt81284fef01a3f4923e49765a3ea48e67c60d99362e7ff268105b462c37ff290d' target='_blank' class='nav-top__link'>" . $language['The_link_to_the_transaction'] . "</a><br>
+<b>" . $Language->Initial_issue_delegation_transaction . ":</b><br><br>
+<a href='https://minterscan.net/tx/Mt81284fef01a3f4923e49765a3ea48e67c60d99362e7ff268105b462c37ff290d' target='_blank' class='nav-top__link'>" . $Language->The_link_to_the_transaction . "</a><br>
 </p>
 <p style='text-indent: 25px;'>
-" . $language['Every_time_there'] . "<br>
-" . $language['The_post_will_include'] . "<br>
+" . $Language->Every_time_there . "<br>
+" . $Language->The_post_will_include . "<br>
 </p>
 <p style='text-indent: 25px;'>
-<b>" . $language['Burning_coins'] . "</b><br>
- • " . $language['of_the_profits_from_the_game_project'] . " ( Mx836a597ef7e869058ecbcc124fae29cd3e2b4444 ), " . $language['and_will_be_used_for_the_needs'] . "; <br>
-" . $language['time_payment_for_services'] . " <br>
-" . $language['Payments_to_players_for_daily'] . "<br>
- • " . $language['is_distributed_among_all_project_developers'] . "<br>
+<b>" . $Language->Burning_coins . "</b><br>
+ • " . $Language->of_the_profits_from_the_game_project . " ( Mx836a597ef7e869058ecbcc124fae29cd3e2b4444 ), " . $Language->and_will_be_used_for_the_needs . "; <br>
+" . $Language->time_payment_for_services . " <br>
+" . $Language->Payments_to_players_for_daily . "<br>
+ • " . $Language->is_distributed_among_all_project_developers . "<br>
 </p>
 </div>
 ";

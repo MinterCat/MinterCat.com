@@ -41,15 +41,13 @@ $db_cats = new dbCats();
 $db_rss = new RSS();
 $db_users = new Users();
 
-$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
+$nick = User::Address($address)->nick;
 
-$nick = $data['nick'];
-$check_language = $data['language'];
-if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} else {$lang = 'English';}
+$check_language = User::Address($address)->language;
 
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);} 
+else {$Language = Language('English');}
 
 $nonce = $api_node->getNonce($address);
 $response = $api_node->getBalance($address);
@@ -127,7 +125,7 @@ Balance: ".$balance." ".$coin."
         </div>
 	<div class='calс_tab calс_tab_1'>
 		<div class='calс_tab_p_1'>
-			<div class='calс_tab_p_txt'>" . $language['Number_of_hours_for_egg_maturation'] . "</div>
+			<div class='calс_tab_p_txt'>" . $Language->Number_of_hours_for_egg_maturation . "</div>
 			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly='readonly' required></div>
 		</div>
 		<div class='calс_tab_p_2'>
@@ -246,7 +244,7 @@ echo "<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $language['page_of'] ." ". $countq."
+					1 ". $Language->page_of ." ". $countq."
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
@@ -318,7 +316,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -333,7 +331,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);

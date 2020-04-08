@@ -9,13 +9,13 @@ $ccount = (count($cats))-1;
 
 $a = $_SESSION['a'];
 if ($a==0) {$text = ""; $a=0; $_SESSION['a'] = $a;}
-if ($a==1) {echo $text = "<center><blockquote>" . $language['The_user_with_such_a_nickname_is_not_found'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==2) {echo $text = "<center><blockquote>" . $language['Cat_sent'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==3) {echo $text = "<center><blockquote>" . $language['Cat_is_for_sale'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==4) {echo $text = "<center><blockquote>" . $language['Removed_the_cat_from_sale'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==5) {echo $text = "<center><blockquote>" . $language['From_the_egg_hatched_a_kitty'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==6) {echo $text = "<center><blockquote>" . $language['There_are_not_enough_funds_on_your_balance'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
-if ($a==7) {echo $text = "<center><blockquote>" . $language['Operation_is_not_possible'] . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==1) {echo $text = "<center><blockquote>" . $Language->The_user_with_such_a_nickname_is_not_found . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==2) {echo $text = "<center><blockquote>" . $Language->Cat_sent . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==3) {echo $text = "<center><blockquote>" . $Language->Cat_is_for_sale . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==4) {echo $text = "<center><blockquote>" . $Language->Removed_the_cat_from_sale . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==5) {echo $text = "<center><blockquote>" . $Language->From_the_egg_hatched_a_kitty . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==6) {echo $text = "<center><blockquote>" . $Language->There_are_not_enough_funds_on_your_balance . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
+if ($a==7) {echo $text = "<center><blockquote>" . $Language->Operation_is_not_possible . "</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 if ($a==8) {echo $text = "<center><blockquote>Before starting the game, do not forget to <a href='".$site."wallet'>save your mnemonic phrase.</a><br>It will replace your login and password to enter the game. </blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 if ($a==9) {echo $text = "<center><blockquote>Done!</blockquote></center><br>"; $a=0; $_SESSION['a'] = $a;}
 
@@ -99,7 +99,7 @@ echo "<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $language['page_of'] ." ". $countq."
+					1 ". $Language->page_of ." ". $countq."
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
@@ -123,7 +123,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -138,7 +138,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $language['page_of'] ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);

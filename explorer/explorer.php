@@ -43,9 +43,9 @@ $countarr = count($arr)-1;
 for ($i = 0; $i <= $countarr; $i++)
 {
 	$Lng = $arr[$i];
-	$Language = Languages()->$Lng;
+	$Languages = Languages()->$Lng;
 	$Uncertain = Languages()->Uncertain;
-	$push .= "['".$Lng."', ".$Language."],";
+	$push .= "['".$Lng."', ".$Languages."],";
 }
 //-----------------------------------
 echo "

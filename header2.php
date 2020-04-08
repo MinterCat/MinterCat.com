@@ -16,15 +16,11 @@ $address = $decript['address'];
 
 $db_users = new Users();
 
-$data = $db_users->query('SELECT * FROM "table" WHERE address="'.$address.'"')->fetchArray(1);
-$check_language = $data['language'];
+$check_language = User::Address($address)->language;
 
-if ($check_language != '') {$lang = $check_language;}
-elseif ($session_language != '') {$lang = $session_language;} 
-else {$lang = 'English';}
-
-$jsonlanguage = file_get_contents("https://raw.githubusercontent.com/MinterCat/Language/master/MinterCat_$lang.json");
-$language = json_decode($jsonlanguage,true);
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);} 
+else {$Language = Language('English');}
 //========================================
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 include($_SERVER['DOCUMENT_ROOT'] . '/menu.php');

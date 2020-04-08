@@ -12,17 +12,17 @@ switch ($m)
 
 $menu = "
 <ul id='menu'>
-	<li><a href='".$site."' class='nav-top__link $a1'>" . $language['Home'] . "</a></li>
+	<li><a href='".$site."' class='nav-top__link $a1'>" . $Language->Home . "</a></li>
 ";
 if ($m == 2)
 	{
 		$menu .= "
-		<li><a href='".$site."profile' class='nav-top__link $a2'>" . $language['Profile'] . "</a>
+		<li><a href='".$site."profile' class='nav-top__link $a2'>" . $Language->Profile . "</a>
 			<ul>
-				<li><a href='".$site."wallet' class='nav-top__link '>" . $language['My_wallet'] . "</a></li>
+				<li><a href='".$site."wallet' class='nav-top__link '>" . $Language->My_wallet . "</a></li>
 				<li><a href='".$site."settings' class='nav-top__link '>Settings</a></li>
-				<li><a href='".$site."crossing' class='nav-top__link'>" . $language['Crossing'] . "</a></li>
-				<li><a href='".$site."shop' class='nav-top__link'>" . $language['Shop'] . "</a></li>
+				<li><a href='".$site."crossing' class='nav-top__link'>" . $Language->Crossing . "</a></li>
+				<li><a href='".$site."shop' class='nav-top__link'>" . $Language->Shop . "</a></li>
 			</ul>
 		</li>
 		";
@@ -30,11 +30,11 @@ if ($m == 2)
 else
 {
 	$menu .= "
-		<li><a href='".$site."profile' class='nav-top__link'>" . $language['Profile'] . "</a></li>
+		<li><a href='".$site."profile' class='nav-top__link'>" . $Language->Profile . "</a></li>
 		";
 }
 $menu .= "
-	<li><a href='".$site."refund' class='nav-top__link $a3'>" . $language['event'] . "</a></li>
+	<li><a href='".$site."refund' class='nav-top__link $a3'>" . $Language->event . "</a></li>
 	<li><a href='".$site."feed' class='nav-top__link $a4'>Feed</a></li>
 	<li><a href='".$site."language' class='nav-top__link $a5'>Language</a>
 		<ul>
@@ -45,7 +45,7 @@ $menu .= "
 	</li>
 	<li><a href='".$site."explorer' class='nav-top__link $a6'>Explorer</a>
 		<ul>
-			<li><a href='".$site."cats' class='nav-top__link'>" . $language['Kitty'] . "</a></li>
+			<li><a href='".$site."cats' class='nav-top__link'>" . $Language->Kitty . "</a></li>
 			<li><a href='".$site."explorer/transaction' class='nav-top__link'>Transaction</a></li>
 			<li><a href='".$site."explorer/generator' class='nav-top__link'>Generator</a></li>
 			<li><a href='".$site."rss' class='nav-top__link'>RSS</a></li>
@@ -55,7 +55,7 @@ $menu .= "
 if ($m == 2)
 	{
 		$menu .= "
-		<li><a href='".$site."exit.php' class='nav-top__link'>" . $language['Exit'] . "</a></li>
+		<li><a href='".$site."exit.php' class='nav-top__link'>" . $Language->Exit . "</a></li>
 		";
 	}
 if ($m == 6)
