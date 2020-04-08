@@ -528,36 +528,6 @@ if (isset($_POST['Register']))
 		$nick = "ID$id";
 		$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
 		//------------------------------
-		/*
-		$input = array(1001, 1003, 1004, 1005, 1006);
-		$rand_keys = array_rand($input, 1);
-		$img = $input[$rand_keys[0]];
-
-		$input = array(1002, 1007, 1008, 1009, 1010);
-		$rand_keys = array_rand($input, 1);
-		$img2 = $input[$rand_keys[0]];
-
-		$status = 'https://explorer-api.minter.network/api/v1/status';
-		$statuspayload = json_decode($status,true);
-		$latestBlockHeight = $statuspayload['data']['latestBlockHeight'];
-		$block = $latestBlockHeight + 1;
-		//------------------------------
-
-		$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"stored_id" INTEGER,
-					"addr" VARCHAR,
-					"img" INTEGER,
-					"price" INTEGER,
-					"sale" INTEGER
-						)');
-		$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$latestBlockHeight.'", "'.$address.'", "'.$img.'", "0", "0")');
-		$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img2.'", "0", "0")');
-		//------------------------------
-		sleep(1);
-		*/
 		$a=8; $_SESSION['a'] = $a;
 		//------------------------------
 		header('Location: '.$site.'profile'); exit;
