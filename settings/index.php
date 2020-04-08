@@ -4,8 +4,10 @@ $base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
 include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
 //-----------------------
 $session_language = $_SESSION['session_language'];
-include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/function.php');
+$version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
+if ($version == 'testnet') {include($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
+require_once($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 if ($cript_mnemonic != '') {
@@ -19,7 +21,7 @@ $db_users = new Users();
 
 $nick = User::Address($address)->nick;
 $check_language = User::Address($address)->language;
-
+}
 if ($check_language != '') {$Language = Language($check_language);}
 elseif ($session_language != '') {$Language = Language($session_language);} 
 else {$Language = Language('English');}
@@ -68,20 +70,20 @@ echo "
 			<img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
 		</div>
 	</div>
-	<div class='position_left'>" . $Language->My_nickname . ":
+	<div class='position_left'>$Language->My_nickname :
 				<form>
 						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
-						  <input type='submit' id='save' name='save' value='" . $Language->Save . "'>
+						  <input type='submit' id='save' name='save' value='$Language->Save'>
 				</form>
 
 
 	</div>
-	<div class='position_left'>" . $Language->My_wallet . ":
+	<div class='position_left'>$Language->My_wallet :
                 <input type='text' value='$address' id='myInput'>
 				  <div class='tooltip'>
 					<button onclick='myFunction()' onmouseout='outFunc()'>
 					  <span class='tooltiptext' id='myTooltip'>Copy to clipboard</span>
-					  " . $Language->Copy . "
+					  $Language->Copy 
 					  </button>
 
 <script>

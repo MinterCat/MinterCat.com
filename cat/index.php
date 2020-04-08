@@ -5,15 +5,34 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 //========================================
+$version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
+if ($version == 'testnet') {include($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
+else {include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
+require_once('../function.php');
+//-----------------------
+$base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
+include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');
+//-----------------------	
+$session_language = $_SESSION['session_language'];
+$cript_mnemonic = $_SESSION['cript_mnemonic'];
+
+if ($cript_mnemonic != '') {
+$decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
+$decript = json_decode($decript_text,true);
+
+$address = $decript['address'];
+
+$check_language = User::Address($address)->language;
+}
+if ($check_language != '') {$Language = Language($check_language);}
+elseif ($session_language != '') {$Language = Language($session_language);}
+else {$Language = Language('English');}	
+$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];	
+//========================================
 if ($address != '')
 {
+$nick = User::Address($address)->nick;
 $api_node = new MinterAPI($api2);
-
-function getBlockByHash ($api2,$hash)
-{
-    $api = new MinterAPI($api2);
-    return $api->getTransaction($hash);
-}
 
 function TransactoinSendDebug ($api2,$transaction)
 {
@@ -30,7 +49,6 @@ $nonce = $api_node->getNonce($address);
 $response = $api_node->getBalance($address);
 $balance = intval(($response->result->balance->$coin)/10**18);
 if ($balance == '') {$balance = 0;}
-$nick = $data['nick'];
 //-------------------------------
 echo "<title>MinterCat | $nick</title>";
 $titles = '';
@@ -47,11 +65,9 @@ if ($address == '') {header('Location: '.$site.'profile'); exit;}
 
 $hash = $payloads1['hash'];
 if ($hash != null) {
-$block = getBlockByHash($api2,$hash)->result->height;
-$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
-
-$TypeHash = $decode_payload_hash['type'];
-$ImgHash = $decode_payload_hash['img'];
+$block = checkHash::getHash($api2,$hash)->height;
+$TypeHash = checkHash::getCat($api2,$hash)->type;
+$ImgHash = checkHash::getCat($api2,$hash)->img;
 } else {
 $block = $payloads1['stored_id'];
 $ImgHash = $payloads1['img'];
@@ -69,20 +85,10 @@ $price = $cats[0]['value'];
 $name1 = $cats[0]['name'];
 $count = $cats[0]['count'];
 $gender = $cats[0]['gender'];
+$color = $cats[0]['color'];
 
 $name2 = $payloads1['name'];
 if (($name2 != '') or ($name2 != null)) {$name = $name2;} else {$name = $name1;}
-
-switch ($series)
-{
-	case 0: {$u = '#C1B5FF'; break;}
-	case 1: {$u = '#FFF6B5'; break;}
-	case 2: {$u = '#FFB5B5'; break;}
-	case 3: {$u = '#C7F66F'; break;}
-	case 4: {$u = '#FFC873'; break;}
-	case 5: {$u = '#6AF2D7'; break;}
-	case 999: {$u = '#9BF5DA'; break;}
-}
 
 $payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block)->fetchArray(1);
 
@@ -95,8 +101,8 @@ $data = $json_api->result->time;
 
 $nd = date('d.m.Y', strtotime(explode('T', $data)[0]));
 
-if ($gender == '♂') {$gender_p = $Language->Male . " ($gender)";}
-elseif ($gender == '♀') {$gender_p = $Language->Female . " ($gender)";}
+if ($gender == '♂') {$gender_p = "$Language->Male ($gender)";}
+elseif ($gender == '♀') {$gender_p = "$Language->Female ($gender)";}
 else {$gender_p = $Language->Undefined;}
 
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
@@ -104,7 +110,7 @@ if($addr == $address){
 $sale = $payloads1['sale'];
 echo "
 <center>
-	<div style='background: $u' width='100%' height='300'>
+	<div style='background: $color' width='100%' height='300'>
 			<picture>
 			<source srcset='".$site."static/img/Cat$ImgHash.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$ImgHash' width='350' height='350'>
@@ -113,16 +119,16 @@ echo "
 			#$block<br>
 			<b>$name</b>
 			<hr>
-			" . $Language->Cat_created . " <b>$nd</b>, " . $Language->in_block . " <b>#$block</b> <br>
-" . $Language->Chance_of_falling_out . " <b>$rarity%</b><br>
-" . $Language->gender . ": $gender_p<br>
-" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
+$Language->Cat_created <b>$nd</b>, $Language->in_block <b>#$block</b> <br>
+$Language->Chance_of_falling_out <b>$rarity%</b><br>
+$Language->gender : $gender_p<br>
+$Language->Number_of_cats_of_this_breed <b>$count</b><br>
 <br>
 Hash create: $hash<br>
 ";
 
 if ($pricebd != '') {echo "Price in shop: <b>$pr</b> $coin<br><br>";}
-echo $Language->Approximate_cost . " <b>$price</b> $coin<br><br>
+echo "$Language->Approximate_cost <b>$price</b> $coin<br><br>
 ";
 
 if ($hash != null) {
@@ -134,10 +140,10 @@ if (isset($_POST['send2']))
 		echo "
 		<form method='post'>
 		<input id='nick' name='nick' type='text' value='' placeholder='NickName' maxlength='15' size='12'>
-		<input id='send' name='send' type='submit' value='" . $Language->Send . "'>
-		<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
-		<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-		<input id='back' name='back' type='submit' value='" . $Language->Cancel . "'>
+		<input id='send' name='send' type='submit' value='$Language->Send'>
+		<input id='img' name='img' type='hidden' value='$ImgHash'>
+		<input id='hash' name='hash' type='hidden' value='$hash'>
+		<input id='back' name='back' type='submit' value='$Language->Cancel'>
 		</form>
 		";
 	}
@@ -147,10 +153,10 @@ elseif (isset($_POST['sale']))
 						<form method='post'>
 						<p>
 						<input id='price' name='price' type='number' value='".$_POST['price']."' placeholder='Price' maxlength='7' size='12'>
-						<input id='sendprice' name='sendprice' type='submit' value='" . $Language->Send . "'>
-						<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
-						<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-						<input id='back' name='back' type='submit' value='" . $Language->Cancel . "'>
+						<input id='sendprice' name='sendprice' type='submit' value='$Language->Send'>
+						<input id='img' name='img' type='hidden' value='$ImgHash'>
+						<input id='hash' name='hash' type='hidden' value='$hash'>
+						<input id='back' name='back' type='submit' value='$Language->Cancel'>
 						</p>
 						</form>
 						";
@@ -159,9 +165,9 @@ elseif (isset($_POST['sale']))
 							{
 								echo "
 								<form method='post'>
-								<input id='send2' name='send2' type='submit' value='" . $Language->Send . "'>
-								<input id='nosale' name='nosale' type='submit' value='" . $Language->Not_sell . "'>
-								<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
+								<input id='send2' name='send2' type='submit' value='$Language->Send'>
+								<input id='nosale' name='nosale' type='submit' value='$Language->Not_sell'>
+								<input id='hash' name='hash' type='hidden' value='$hash'>
 								</form>
 								";
 							}
@@ -169,9 +175,9 @@ elseif (isset($_POST['sale']))
 							{
 								echo "
 								<form method='post'>
-								<input id='send2' name='send2' type='submit' value='" . $Language->Send . "'>
-								<input id='sale' name='sale' type='submit' value='" . $Language->Sell . "'>
-								<input id='price' name='price' type='hidden' value='" . $price . "'>
+								<input id='send2' name='send2' type='submit' value='$Language->Send'>
+								<input id='sale' name='sale' type='submit' value='$Language->Sell'>
+								<input id='price' name='price' type='hidden' value='$price'>
 								</form>
 								";
 							}
@@ -180,8 +186,8 @@ elseif (isset($_POST['sale']))
 			echo "
 					<br>
 					<form method='post'>
-					<input id='in2' name='in2' type='submit' value='" . $Language->Hatching_egg . "'>
-					<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
+					<input id='in2' name='in2' type='submit' value='$Language->Hatching_egg'>
+					<input id='hash' name='hash' type='hidden' value='$hash'>
 					</form>
 					";
 		}
@@ -195,8 +201,8 @@ elseif (isset($_POST['sale']))
 					echo "
 					<br>
 					<form method='post'>
-					<input id='in' name='in' type='submit' value='" . $Language->Hatching_egg . "'>
-					<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
+					<input id='in' name='in' type='submit' value='$Language->Hatching_egg'>
+					<input id='hash' name='hash' type='hidden' value='$hash'>
 					</form>
 					";
 				}
@@ -207,13 +213,13 @@ echo "
 	<br>
 	<form method='post'>
 	<input id='gethash' name='gethash' type='submit' value='Get Hash'>
-	<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
+	<input id='img' name='img' type='hidden' value='$ImgHash'>
 	</form>
 	";
 }}else{
 		echo "
 <center>
-	<div style='background: $u' width='100%' height='300'>
+	<div style='background: $color' width='100%' height='300'>
 			<picture>
 			<source srcset='".$site."static/img/Cat$ImgHash.webp' type='image/webp' width='350' height='350'>
 			<img src='".$site."png.php?png=$ImgHash' width='350' height='350'>
@@ -222,22 +228,22 @@ echo "
 			#$block<br>
 			$name $gender
 			<hr>
-			" . $Language->Cat_created . " <b>$nd</b>, " . $Language->in_block . " <b>#$block</b> <br>
-" . $Language->Chance_of_falling_out . " <b>$rarity%</b><br>
-" . $Language->gender . ": $gender_p<br>
-" . $Language->Number_of_cats_of_this_breed . " <b>$count</b><br>
+$Language->Cat_created <b>$nd</b>, $Language->in_block <b>#$block</b> <br>
+$Language->Chance_of_falling_out <b>$rarity%</b><br>
+$Language->gender : $gender_p<br>
+$Language->Number_of_cats_of_this_breed <b>$count</b><br>
 <br>
 Hash create: $hash<br>
-" . $Language->Approximate_cost . " <b>$pr</b> $coin<br><br>
+$Language->Approximate_cost <b>$pr</b> $coin<br><br>
 ";
 if (($sale == 1)and($balance > $pricebd))
 	{
 		echo "
 		<form method='post'>
-			<input id='buy' name='buy' type='submit' value='" . $Language->Buy . "'>
-			<input id='price' name='price' type='hidden' value='" . $pricebd . "'>
-			<input id='hash' name='hash' type='hidden' value='" . $hash . "'>
-			<input id='img' name='img' type='hidden' value='" . $ImgHash . "'>
+			<input id='buy' name='buy' type='submit' value='$Language->Buy'>
+			<input id='price' name='price' type='hidden' value='$pricebd'>
+			<input id='hash' name='hash' type='hidden' value='$hash'>
+			<input id='img' name='img' type='hidden' value='$ImgHash'>
 		</form>
 		";
 	}
@@ -431,19 +437,13 @@ if (isset($_POST['in']))
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
-					$block2 = getBlockByHash($api2,$hash)->result->height;
-					
-					$payload = getBlockByHash($api2,$hash)->result->payload;
-
-					$payload = base64_decode($payload);
-					$decode_payload_hash = json_decode($payload,true);
-
-					$ImgHash = $decode_payload_hash['img'];
+					$block2 = checkHash::getHash($api2,$hash)->height;
+					$ImgHash = checkHash::getCat($api2,$hash)->img;
 			//-----------------------------------
 			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'profile'); exit; // !!! header('Location: '.$site.'cat?id='.$block2); exit;
+			header('Location: '.$site.'cat?id='.$block2); exit;
 		}
 //-----------------------------------
 if (isset($_POST['in2']))
@@ -502,19 +502,13 @@ if (isset($_POST['in2']))
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
-					$block2 = getBlockByHash($api2,$hash)->result->height;
-					
-					$payload = getBlockByHash($api2,$hash)->result->payload;
-
-					$payload = base64_decode($payload);
-					$decode_payload_hash = json_decode($payload,true);
-
-					$ImgHash = $decode_payload_hash['img'];
+					$block2 = checkHash::getHash($api2,$hash)->height;
+					$ImgHash = checkHash::getCat($api2,$hash)->img;
 			//-----------------------------------
 			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'profile'); exit; // !!! header('Location: '.$site.'cat?id='.$block2); exit;
+			header('Location: '.$site.'cat?id='.$block2); exit;
 		}
 //-----------------------------------
 if (isset($_POST['buy']))
@@ -754,16 +748,13 @@ if (isset($_POST['gethash']))
 					$get_hesh = TransactoinSendDebug($api2,$transaction);
 					$hash = "0x".$get_hesh->result->hash;
 					sleep(7);
-					$block2 = getBlockByHash($api2,$hash)->result->height;
-
-					$decode_payload_hash = json_decode(base64_decode(getBlockByHash($api2,$hash)->result->payload),true);
-
-					$ImgHash = $decode_payload_hash['img'];
+					$block2 = checkHash::getHash($api2,$hash)->height;
+					$ImgHash = checkHash::getCat($api2,$hash)->img;
 			//-----------------------------------
 			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'profile'); exit; // !!! header('Location: '.$site.'cat?id='.$block2); exit;
+			header('Location: '.$site.'cat?id='.$block2); exit;
 	}
 //-----------------------------------
 if (isset($_POST['back']))
