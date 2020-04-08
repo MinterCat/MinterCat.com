@@ -55,28 +55,25 @@ $titles = '';
 $m = 2;
 include('../header2.php');
 //-------------------------------
-$id = $_GET['id'];
-$payloads1 = $db_cats->query('SELECT * FROM "table" WHERE stored_id=' . $id)->fetchArray(1);
-
-$check_id = $payloads1['id'];
-$addr = $payloads1['addr'];
+$block = $_GET['id'];
+$check_id = Cats::StoredId($block)->id;
+$addr = Cats::StoredId($block)->addr;
 
 if ($address == '') {header('Location: '.$site.'profile'); exit;}
 
-$hash = $payloads1['hash'];
+$hash = Cats::StoredId($block)->hash;
 if ($hash != null) {
 $block = checkHash::getHash($api2,$hash)->height;
 $TypeHash = checkHash::getCat($api2,$hash)->type;
 $ImgHash = checkHash::getCat($api2,$hash)->img;
 } else {
-$block = $payloads1['stored_id'];
-$ImgHash = $payloads1['img'];
+$ImgHash = Cats::StoredId($block)->img;
 $TypeHash = 'NULL';
 }
+$pricebd = Cats::StoredId($block)->price;
 
 $json4 = file_get_contents($site.'api?img='.$ImgHash);
 $payloads4 = json_decode($json4,true);
-$pricebd = $payloads1['price'];
 $cats = $payloads4['cats'];
 
 $series = $cats[0]['series'];
@@ -87,7 +84,7 @@ $count = $cats[0]['count'];
 $gender = $cats[0]['gender'];
 $color = $cats[0]['color'];
 
-$name2 = $payloads1['name'];
+$name2 = Cats::StoredId($block)->name;
 if (($name2 != '') or ($name2 != null)) {$name = $name2;} else {$name = $name1;}
 
 $payloadsID = $db_cats->query('SELECT * FROM "gen" WHERE stored_id=' . $block)->fetchArray(1);
@@ -107,7 +104,7 @@ else {$gender_p = $Language->Undefined;}
 
 if ($pricebd == '') {$bgimg = ''; $pr = $price;} else {$bgimg = '<font color="red"><b>(Sale)</b></font>'; $pr = $pricebd;}
 if($addr == $address){
-$sale = $payloads1['sale'];
+$sale = Cats::StoredId($block)->sale;
 echo "
 <center>
 	<div style='background: $color' width='100%' height='300'>
@@ -312,8 +309,8 @@ if (isset($_POST['sendprice']))
 				
 				//------------------------------
 				
-				$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$id .'"');
-				$db_cats->query('UPDATE "table" SET price = "'.$price .'" WHERE stored_id = "'.$id .'"');
+				$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$block .'"');
+				$db_cats->query('UPDATE "table" SET price = "'.$price .'" WHERE stored_id = "'.$block .'"');
 				header('Location: '.$site.'profile'); exit; // !!!
 			}
 	}
@@ -375,8 +372,8 @@ if (isset($_POST['nosale']))
 				
 				//------------------------------
 				
-				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $id .'"');
-				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $id .'"');
+				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $block .'"');
+				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
 				
 				header('Location: '.$site.'profile'); exit; // !!!
 	}
@@ -604,9 +601,9 @@ if (isset($_POST['buy']))
 				$get_hesh = TransactoinSendDebug($api2,$transaction);
 				$hash = "0x".$get_hesh->result->hash;
 				//---------------------
-				$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$id .'"');
-				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$id .'"');
-				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$id .'"');
+				$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$block .'"');
+				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$block .'"');
+				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$block .'"');
 				header('Location: '.$site.'profile'); exit;
 			}
 	}
@@ -681,9 +678,9 @@ if (isset($_POST['send']))
 
 					$a=2; $_SESSION['a'] = $a;
 
-					$db_cats->query('UPDATE "table" SET addr = "'. $nick_address .'" WHERE stored_id = "'. $id .'"');
-					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $id .'"');
-					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $id .'"');
+					$db_cats->query('UPDATE "table" SET addr = "'. $nick_address .'" WHERE stored_id = "'. $block .'"');
+					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $block .'"');
+					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
 
 					header('Location: '.$site.'profile'); exit;
 				}
