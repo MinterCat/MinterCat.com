@@ -49,10 +49,8 @@ if ($check_language != '') {$Language = Language($check_language);}
 elseif ($session_language != '') {$Language = Language($session_language);} 
 else {$Language = Language('English');}
 
-$nonce = $api_node->getNonce($address);
-$response = $api_node->getBalance($address);
-$balance = intval(($response->result->balance->$coin)/10**18);
-if ($balance == '') {$balance = 0;}
+$balance = CoinBalance($address, 'MINTERCAT');
+//-------------------------------
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }else{header('Location: '.$site.'exit.php'); exit;}
 echo "
@@ -102,7 +100,7 @@ echo "$menu
 		</div>
 	</div>
 <center><blockquote>
-Balance: ".$balance." ".$coin."
+Balance: $balance $coin
 </blockquote></center>
       <form method='post'>
         <div class='drop-areas'>
@@ -125,7 +123,7 @@ Balance: ".$balance." ".$coin."
         </div>
 	<div class='calс_tab calс_tab_1'>
 		<div class='calс_tab_p_1'>
-			<div class='calс_tab_p_txt'>" . $Language->Number_of_hours_for_egg_maturation . "</div>
+			<div class='calс_tab_p_txt'>$Language->Number_of_hours_for_egg_maturation</div>
 			<div class='calс_tab_p_input'><input id='kolvo' name='kolvo' type='text' class='calс_tab_p_input_val calc_1_val_type_1' value='1' style='border: none;' readonly='readonly' required></div>
 		</div>
 		<div class='calс_tab_p_2'>
@@ -244,14 +242,12 @@ echo "<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $Language->page_of ." ". $countq."
+					1 $Language->page_of $countq
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
 		</div>
 		<br><br><br><br>
-";
-echo "
 <script type='text/javascript'>
   var tooltip = tippy(document.getElementById('heart-btn'));
   var droppedMale;
@@ -301,7 +297,7 @@ echo "
   }
 </script>
 <script type='text/javascript'>
-			var maxPage = ".$countq.";
+			var maxPage = $countq;
 			var currentPage = 1;
 
 			$(document).ready(function() {
@@ -316,7 +312,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -331,7 +327,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);

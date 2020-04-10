@@ -46,9 +46,7 @@ $db_cats = new dbCats();
 $db_rss = new RSS();
 
 $nonce = $api_node->getNonce($address);
-$response = $api_node->getBalance($address);
-$balance = intval(($response->result->balance->$coin)/10**18);
-if ($balance == '') {$balance = 0;}
+$balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
 echo "<title>MinterCat | $nick</title>";
 $titles = '';

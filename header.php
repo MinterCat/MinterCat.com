@@ -51,9 +51,8 @@ elseif ($session_language != '') {$Language = Language($session_language);}
 else {$Language = Language('English');}
 
 $nonce = $api_node->getNonce($address);
-$response = $api_node->getBalance($address);
-$balance = intval(($response->result->balance->$coin)/10**18);
-if ($balance == '') {$balance = 0;}
+$balance = CoinBalance($address, 'MINTERCAT');
+//-------------------------------
 }else{header('Location: '.$site.'exit.php'); exit;}
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "

@@ -1,44 +1,6 @@
 <?php
-// $db_cats = new dbCats();
-class dbCats extends SQLite3
-{
-    function __construct()
-    {
-        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/cats.sqlite');
-    }
-}
-// $db_rss = new RSS();
-class RSS extends SQLite3
-{
-    function __construct()
-    {
-        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/rss.sqlite');
-    }
-}
-// $db_gen = new dbGen();
-class dbGen extends SQLite3
-{
-    function __construct()
-    {
-        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/gen.sqlite');
-    }
-}
-// $db_users = new Users();
-class Users extends SQLite3
-{
-    function __construct()
-    {
-        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/users.sqlite');
-    }
-}
-// $db_api = new db_api();
-class db_api extends SQLite3
-{
-    function __construct()
-    {
-        $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/api.sqlite');
-    }
-}
+include(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'public_html/old_function.php');
+
 function JSON ($url)
 	{
 		$data = file_get_contents($url);
@@ -51,7 +13,7 @@ function CoinBalance($address, $symbol)
 		$json = json_decode($data)->data->balances;
 		foreach ($json as $value => $coins) {
 					$coin = $coins->coin;
-					if ($coin == $symbol) {$amount = $coins->amount;break;}
+					if ($coin == $symbol) {$amount = $coins->amount;break;}else{$amount = 0;}
 				}
 		return number_format($amount,2, '.', '');
 	}
@@ -88,7 +50,7 @@ class checkHash
 	}
 class Shop
 	{
-		public static function counts()
+		public static function Counts()
 			{
 				$data = file_get_contents('https://api.mintercat.com/shop');
 				return json_decode($data);
