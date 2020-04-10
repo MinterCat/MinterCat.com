@@ -44,6 +44,17 @@ function JSON ($url)
 		$data = file_get_contents($url);
 		return json_decode($data);
 	}
+function CoinBalance($address, $symbol)
+	{
+		$url = 'https://explorer-api.minter.network/api/v1/addresses/' . $address;
+		$data = file_get_contents($url);
+		$json = json_decode($data)->data->balances;
+		foreach ($json as $value => $coins) {
+					$coin = $coins->coin;
+					if ($coin == $symbol) {$amount = $coins->amount;break;}
+				}
+		return number_format($amount,2, '.', '');
+	}
 function Language ($lang)
 	{
 		$url = 'https://api.mintercat.com/language?lang=' . $lang;
