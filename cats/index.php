@@ -57,8 +57,8 @@ if ($value % 12 == 0) {
 	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
 	}
 }
-echo "</div></div>";
-echo "<br><div class='cat_form'>
+echo "</div></div>
+<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
@@ -68,8 +68,6 @@ echo "<br><div class='cat_form'>
 			</div>
 		</div>
 		<br><br><br><br>
-";
-echo "
 <script type='text/javascript'>
 			var maxPage = $countq;
 			var currentPage = 1;

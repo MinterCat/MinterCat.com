@@ -309,7 +309,7 @@ if (isset($_POST['sendprice']))
 				
 				$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$block .'"');
 				$db_cats->query('UPDATE "table" SET price = "'.$price .'" WHERE stored_id = "'.$block .'"');
-				header('Location: '.$site.'profile'); exit; // !!!
+				header('Location: '.$site.'profile'); exit;
 			}
 	}
 //-----------------------------------

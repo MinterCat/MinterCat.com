@@ -536,16 +536,16 @@ else
 	}
 }
 else
-{
-	$a=7; $_SESSION['a'] = $a;
-	header('Location: '.$site.'profile');
-	exit;
-}
-	}
-	else
 	{
-	$a=7; $_SESSION['a'] = $a;
-	header('Location: '.$site.'profile');
-	exit;
+		$a=7; $_SESSION['a'] = $a;
+		header('Location: '.$site.'profile');
+		exit;
+	}
 }
+	else
+		{
+			$a=7; $_SESSION['a'] = $a;
+			header('Location: '.$site.'profile');
+			exit;
+		}
 	}}
