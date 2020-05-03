@@ -9,3 +9,4 @@ testnet/
 test.php
 test/
 feed/json.php
+exchange/index.php

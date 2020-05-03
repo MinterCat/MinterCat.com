@@ -29,9 +29,8 @@ echo "<br>
 <div class='explorer_block_content' style='overflow: auto;'>
 ";
 include('transaction/content.php');
-echo '</div></div>';
-//-----------------------------------
-echo '
+echo '</div></div>
+
 <div class="explorer_block">
 <div class="explorer_block_header">Users</div>
 <div class="explorer_block_content">
@@ -70,5 +69,6 @@ echo "
   </script>
 
   <div id='users' style='width: 460px; height: 400px;'></div>
+
+</div></div></div></div></div><br><br><br>
 ";
-echo '</div></div></div></div></div><br><br><br>';

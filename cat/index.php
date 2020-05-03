@@ -254,62 +254,31 @@ if (isset($_POST['sendprice']))
 		if ($price > 0)
 			{
 				$text = '{"type":4,"img":'.$img.',"hash":"'.$hash.'","price":'.$price.'}';
-
-				if ($test != 'testnet')
+				$tx_array = array(
+									array(
+										'coin' => $coin,
+										'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+										'value' => 0
+									)
+								);
+				
+				$transaction = TransactionSend($api,$address,$privat_key,$chainId,$coin,$text,$tx_array);
+				$code = $transaction->code;
+				if ($code == 0) 
 					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::MAINNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => 0
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
+						$hash = $transaction->hash;
+						sleep(6);
+						$block = $api->getTransaction($hash)->result->height;
+						$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$block .'"');
+						$db_cats->query('UPDATE "table" SET price = "'. $price .'" WHERE stored_id = "'.$block .'"');
+						header('Location: '.$site.'profile'); exit;
 					}
 				else
 					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::TESTNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => 0
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
+						$a=7; $_SESSION['a'] = $a;
+						header('Location: '.$site.'profile');
+						exit;
 					}
-
-				$transaction = $tx->sign($private_key);
-				
-				$get_hesh = TransactoinSendDebug($api2,$transaction);
-				$hash = "0x".$get_hesh->result->hash;
-				
-				//------------------------------
-				
-				$db_cats->query('UPDATE "table" SET sale = "1" WHERE stored_id = "'.$block .'"');
-				$db_cats->query('UPDATE "table" SET price = "'.$price .'" WHERE stored_id = "'.$block .'"');
-				header('Location: '.$site.'profile'); exit;
 			}
 	}
 //-----------------------------------
@@ -318,193 +287,105 @@ if (isset($_POST['nosale']))
 		$hash = $_POST['hash'];
 		$a=4; $_SESSION['a'] = $a;
 		
-				$text = '{"type":6,"hash":"'.$hash.'","price":0}';
+		$text = '{"type":6,"hash":"'.$hash.'","price":0}';
 
-				if ($test != 'testnet')
-					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::MAINNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => 0
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
-					}
-				else
-					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::TESTNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => 0
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
-					}
-
-				$transaction = $tx->sign($private_key);
-				$get_hesh = TransactoinSendDebug($api2,$transaction);
+		$tx_array = array(
+							array(
+								'coin' => $coin,
+								'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+								'value' => 0
+							)
+						);
 				
-				//------------------------------
-				
+		$transaction = TransactionSend($api,$address,$privat_key,$chainId,$coin,$text,$tx_array);
+		$code = $transaction->code;
+		if ($code == 0) 
+			{
 				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $block .'"');
 				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
-				
-				header('Location: '.$site.'profile'); exit; // !!!
+				header('Location: '.$site.'profile'); exit;
+			}
+		else
+			{
+				$a=7; $_SESSION['a'] = $a;
+				header('Location: '.$site.'profile');
+				exit;
+			}
 	}
 //-----------------------------------
 if (isset($_POST['in']))
-		{
-			$hash = $_POST['hash'];
-			$a=5; $_SESSION['a'] = $a;
-			include('../egg_hatching.php');
-			$text = '{"type":1,"img":'.$img.',"hash":"'.$hash.'"}';
-			//-----------------------------------
-			if ($test != 'testnet')
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::MAINNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					else
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::TESTNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					$transaction = $tx->sign($privat_key_mintercat);
-					
-					$get_hesh = TransactoinSendDebug($api2,$transaction);
-					$hash = "0x".$get_hesh->result->hash;
-					sleep(7);
-					$block2 = checkHash::getHash($api2,$hash)->height;
-					$ImgHash = checkHash::getCat($api2,$hash)->img;
-			//-----------------------------------
-			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'cat?id='.$block2); exit;
-		}
+	{
+		$hash = $_POST['hash'];
+		$a=5; $_SESSION['a'] = $a;
+		include('../egg_hatching.php');
+		$text = '{"type":1,"img":'.$img.',"hash":"'.$hash.'"}';
+		//-----------------------------------
+		$tx_array = array(
+						array(
+							'coin' => $coin,
+							'to' => $address,
+							'value' => 0
+						)
+					);
+			
+		$transaction = TransactionSend($api,'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',$privat_key_mintercat,$chainId,$coin,$text,$tx_array);
+		$code = $transaction->code;
+		if ($code == 0) 
+			{
+				$hash = $transaction->hash;
+				sleep(6);
+				$block2 = checkHash::getHash($api,$hash)->height;
+				$ImgHash = checkHash::getCat($api,$hash)->img;
+				//-----------------------------------
+				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
+				header('Location: '.$site.'cat?id='.$block2); exit;
+			}
+		else
+			{
+				$a=7; $_SESSION['a'] = $a;
+				header('Location: '.$site.'profile');
+				exit;
+			}
+	}
 //-----------------------------------
 if (isset($_POST['in2']))
-		{
-			$hash = $_POST['hash'];
-			$a=5; $_SESSION['a'] = $a;
-			include('../imgcat.php');
-			$text = '{"type":1,"img":'.$img.',"hash":"'.$hash.'"}';
-			//-----------------------------------
-			if ($test != 'testnet')
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::MAINNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					else
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::TESTNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					$transaction = $tx->sign($privat_key_mintercat);
-					
-					$get_hesh = TransactoinSendDebug($api2,$transaction);
-					$hash = "0x".$get_hesh->result->hash;
-					sleep(7);
-					$block2 = checkHash::getHash($api2,$hash)->height;
-					$ImgHash = checkHash::getCat($api2,$hash)->img;
-			//-----------------------------------
-			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'cat?id='.$block2); exit;
-		}
+	{
+		$hash = $_POST['hash'];
+		$a=5; $_SESSION['a'] = $a;
+		include('../imgcat.php');
+		$text = '{"type":1,"img":'.$img.',"hash":"'.$hash.'"}';
+		//-----------------------------------
+		$tx_array = array(
+						array(
+							'coin' => $coin,
+							'to' => $address,
+							'value' => 0
+						)
+				);
+			
+		$transaction = TransactionSend($api,'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',$privat_key_mintercat,$chainId,$coin,$text,$tx_array);
+		$code = $transaction->code;
+		if ($code == 0) 
+			{
+				$hash = $transaction->hash;
+				sleep(6);
+				$block2 = checkHash::getHash($api2,$hash)->height;
+				$ImgHash = checkHash::getCat($api2,$hash)->img;
+				//-----------------------------------
+				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
+				header('Location: '.$site.'cat?id='.$block2); exit;
+			}
+		else
+			{
+				$a=7; $_SESSION['a'] = $a;
+				header('Location: '.$site.'profile');
+				exit;
+			}
+	}
 //-----------------------------------
 if (isset($_POST['buy']))
 	{
@@ -517,92 +398,40 @@ if (isset($_POST['buy']))
 			{
 				$text = '{"type":5,"img":'.$img.',"hash":"'.$hash.'","price":'.$price.'}';
 				//---------------------
-				$fond = 50/2; //50% in found MinterCat
-				$me = $fond/2; //25%
-				$kamil = $fond/2; //25%
-
-				if ($test != 'testnet')
+				$kamil = $komsa/4; //25%
+				$fond = $komsa - $kamil;
+				$tx_array = array(
+								array(
+									'coin' => $coin,
+									'to' => $addr,
+									'value' => $Amount
+								),
+								array(
+									'coin' => $coin,
+									'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+									'value' => $kamil
+								),
+								array(
+									'coin' => $coin,
+									'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+									'value' => $fond
+								)
+							);
+				$transaction = TransactionSend($api,$address,$privat_key,$chainId,$coin,$text,$tx_array);
+				$code = $transaction->code;
+				if ($code == 0) 
 					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::MAINNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' =>
-									[
-										'list' =>
-										[
-											[
-												'coin' => 'MINTERCAT',
-												'to' => $addr,
-												'value' => $Amount
-											], [
-												'coin' => $coin,
-												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-												'value' => $me
-											], [
-												'coin' => $coin,
-												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-												'value' => $kamil
-											],	[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => $fond
-											]
-										]
-									],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
+						$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$block .'"');
+						$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$block .'"');
+						$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$block .'"');
+						header('Location: '.$site.'profile'); exit;
 					}
-					else
+				else
 					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::TESTNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' =>
-									[
-										'list' =>
-										[
-											[
-												'coin' => 'MINTERCAT',
-												'to' => $addr,
-												'value' => $Amount
-											], [
-												'coin' => $coin,
-												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-												'value' => $me
-											], [
-												'coin' => $coin,
-												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-												'value' => $kamil
-											],	[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => $fond
-											]
-										]
-									],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
+						$a=7; $_SESSION['a'] = $a;
+						header('Location: '.$site.'profile');
+						exit;
 					}
-
-				$transaction = $tx->sign($private_key);
-				
-				$get_hesh = TransactoinSendDebug($api2,$transaction);
-				$hash = "0x".$get_hesh->result->hash;
-				//---------------------
-				$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$block .'"');
-				$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$block .'"');
-				$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$block .'"');
-				header('Location: '.$site.'profile'); exit;
 			}
 	}
 //-----------------------------------
@@ -616,76 +445,46 @@ if (isset($_POST['send']))
 		$nick_address = $result['address'];
 
 		if ($logins != '')
-				{
-					$text = '{"type":2,"img":'.$img.',"hash":"'.$hash.'","price":0}';
-					//---------------------
-					if ($test != 'testnet')
+			{
+				$text = '{"type":2,"img":'.$img.',"hash":"'.$hash.'","price":0}';
+				//---------------------
+				$tx_array = array(
+								array(
+									'coin' => $coin,
+									'to' => $nick_address,
+									'value' => 0
+								),
+								array(
+									'coin' => $coin,
+									'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+									'value' => 0
+								)
+							);
+				$transaction = TransactionSend($api,$address,$privat_key,$chainId,$coin,$text,$tx_array);
+				$code = $transaction->code;
+				if ($code == 0) 
 					{
-						$tx = new MinterTx([
-							'nonce' => $nonce,
-							'chainId' => MinterTx::MAINNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $nick_address,
-										'value' => 0
-									],
-									[
-										'coin' => $coin,
-										'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
+						$db_cats->query('UPDATE "table" SET addr = "'. $nick_address .'" WHERE stored_id = "'. $block .'"');
+						$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $block .'"');
+						$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
+						
+						$a=2; $_SESSION['a'] = $a;
+						header('Location: '.$site.'profile'); 
+						exit;
 					}
-					else
-					{
-						$tx = new MinterTx([
-							'nonce' => $nonce,
-							'chainId' => MinterTx::TESTNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					$transaction = $tx->sign($private_key);
-					
-					$get_hesh = TransactoinSendDebug($api2,$transaction);
-					$hash = "0x".$get_hesh->result->hash;
-					//---------------------
-
-					$a=2; $_SESSION['a'] = $a;
-
-					$db_cats->query('UPDATE "table" SET addr = "'. $nick_address .'" WHERE stored_id = "'. $block .'"');
-					$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'. $block .'"');
-					$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
-
-					header('Location: '.$site.'profile'); exit;
-				}
 				else
-				{
-					$a=1; $_SESSION['a'] = $a; header('Location: '.$site.'profile'); exit;
-				}
+					{
+						$a=7; $_SESSION['a'] = $a;
+						header('Location: '.$site.'profile');
+						exit;
+					}
+			}
+		else
+			{
+				$a=1; $_SESSION['a'] = $a; 
+				header('Location: '.$site.'profile'); 
+				exit;
+			}
 
 	}
 //-----------------------------------
@@ -694,67 +493,40 @@ if (isset($_POST['gethash']))
 		$img = $_POST['img'];
 		$text = '{"type":1,"img":'.$img.'}';
 			//-----------------------------------
-			if ($test != 'testnet')
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::MAINNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					else
-					{
-						$tx = new MinterTx([
-							'nonce' => $api_node->getNonce('Mx836a597ef7e869058ecbcc124fae29cd3e2b4444'),
-							'chainId' => MinterTx::TESTNET_CHAIN_ID,
-							'gasPrice' => 1,
-							'gasCoin' => $coin,
-							'type' => MinterMultiSendTx::TYPE,
-							'data' => [
-								'list' => [
-									[
-										'coin' => $coin,
-										'to' => $address,
-										'value' => 0
-									]
-								]
-							],
-							'payload' => $text,
-							'serviceData' => '',
-							'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-						]);
-					}
-					$transaction = $tx->sign($privat_key_mintercat);
-					
-					$get_hesh = TransactoinSendDebug($api2,$transaction);
-					$hash = "0x".$get_hesh->result->hash;
-					sleep(7);
-					$block2 = checkHash::getHash($api2,$hash)->height;
-					$ImgHash = checkHash::getCat($api2,$hash)->img;
-			//-----------------------------------
-			$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
-			$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-			header('Location: '.$site.'cat?id='.$block2); exit;
+		$tx_array = array(
+							array(
+								'coin' => $coin,
+								'to' => $address,
+								'value' => 0
+							)
+					);
+			
+		$transaction = TransactionSend($api,'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',$privat_key_mintercat,$chainId,$coin,$text,$tx_array);
+		$code = $transaction->code;
+		if ($code == 0) 
+			{
+				$hash = $transaction->hash;
+				sleep(6);
+				$block2 = checkHash::getHash($api2,$hash)->height;
+				$ImgHash = checkHash::getCat($api2,$hash)->img;
+				//-----------------------------------
+				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
+				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
+				header('Location: '.$site.'cat?id='.$block2); exit;
+			}
+		else
+			{
+				$a=7; $_SESSION['a'] = $a;
+				header('Location: '.$site.'profile');
+				exit;
+			}
 	}
 //-----------------------------------
 if (isset($_POST['back']))
 	{
-		header('Location: '.$site.'profile'); exit;
+		header('Location: '.$site.'profile'); 
+		exit;
 	}
 //-----------------------------------
 echo '<br><br>

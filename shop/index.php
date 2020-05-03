@@ -137,7 +137,7 @@ foreach ($payloads1 as $value => $kity) {
 	$img = $kity['img'];
 	$block = $kity['stored_id'];
 	$addr = $kity['addr'];
-	if ($addr == $address) {$bgimg = '<font color="red"><b>(Ваш)</b></font>';} else {$bgimg = '';}
+	if ($addr == $address) {$bgimg = '<font color="red"><b>(your cat)</b></font>';} else {$bgimg = '';}
 	for ($y = 0; $y<=$ccount; $y++)
 		{	
 		$catimg = $cats[$y]['img'];
@@ -181,22 +181,19 @@ if ($value % 12 == 0) {
 	echo '<div class="cat_content_none"><div class="cat_content" id="page-'.$id.'" style="display: none;">';
 	}
 }
-echo "</div></div>";
-
-echo "<br><div class='cat_form'>
+echo "</div></div>
+<br><div class='cat_form'>
 			<div class='pagination'>
 				<button type='button' id='prev-page-btn' disabled>«</button>
 				<div id='page-counter' style='display: inline-block'>
-					1 ". $Language->page_of ." ". $countq."
+					1 $Language->page_of $countq
 				</div>
 				<button type='button' id='next-page-btn'>»</button>
 			</div>
 		</div>
 		<br><br><br><br>
-";
-echo "
 <script type='text/javascript'>
-			var maxPage = ".$countq.";
+			var maxPage = $countq;
 			var currentPage = 1;
 
 			$(document).ready(function() {
@@ -211,7 +208,7 @@ echo "
 					if (currentPage < 1) currentPage = 1;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == 1) {
 						$('#prev-page-btn').prop('disabled', true);
@@ -226,7 +223,7 @@ echo "
 					if (currentPage > maxPage) currentPage = maxPage;
 					$('#page-' + currentPage).show();
 
-					$('#page-counter').html(currentPage + ' ". $Language->page_of ." ' + maxPage);
+					$('#page-counter').html(currentPage + ' $Language->page_of ' + maxPage);
 
 					if (currentPage == maxPage) {
 						$('#next-page-btn').prop('disabled', true);

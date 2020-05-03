@@ -16,20 +16,6 @@ if ($version == 'testnet') {require_once($_SERVER['DOCUMENT_ROOT'] . 'config/con
 else {require_once(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/config.php');}
 require_once($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 
-function getBlockByHash ($api2,$hash)
-{
-    $api = new MinterAPI($api2);
-    return $api->getTransaction($hash);
-}
-
-function TransactoinSendDebug ($api2,$transaction)
-{
-    $api = new MinterAPI($api2);
-    return $api->send($transaction);
-}
-
-$api_node = new MinterAPI($api2);
-
 $cript_mnemonic = $_SESSION['cript_mnemonic'];
 if ($cript_mnemonic != '') {
 $decript_text = openssl_decrypt($cript_mnemonic, $crypt_method, $crypt_key, $crypt_options, $crypt_iv);
@@ -50,7 +36,6 @@ if ($check_language != '') {$Language = Language($check_language);}
 elseif ($session_language != '') {$Language = Language($session_language);} 
 else {$Language = Language('English');}
 
-$nonce = $api_node->getNonce($address);
 $balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
 }else{header('Location: '.$site.'exit.php'); exit;}
@@ -231,9 +216,8 @@ $m = 2; include('../menu.php');
             <div class='profile-info__item'>
               <div class='profile-info__item-title'></div>
               <div class='profile-info__item-body'>
-				  <div class='tooltip'>
-
-</div>
+					<div class='tooltip'>
+					</div>
               </div>
             </div>
 
@@ -243,116 +227,73 @@ $m = 2; include('../menu.php');
             <div class='wallet__title'>Balance:</div>
             <div class='wallet__sum'>$balance</div>
 			<img src='".$site."static/img/svg/logo.svg' class='wallet__avatar'>
-			<div class='wallet__title'>" . $Language->Buying_a_new_kitten_costs . " 50 $coin</div>
+			<div class='wallet__title'>$Language->Buying_a_new_kitten_costs 50 $coin</div>
 				<form method='post'>
-					<button class='button' id='buycat' name='buycat' type='submit'>" . $Language->Buy . "</button>
+					<button class='button' id='buycat' name='buycat' type='submit'>$Language->Buy</button>
 				</form>
           </div>
         </div>
       </div>
     </div>
 </div>
- ";
+";
 
- if (isset($_POST['buycat']))
-{
-	if ($balance > 50)
-			{
-				$img = rand(9990,9999); //egg
+if (isset($_POST['buycat']))
+	{
+		if ($balance > 50)
+				{
+					$img = rand(9990,9999); //egg
 
-				$text = '{"type":0,"img":'.$img.'}';
+					$text = '{"type":0,"img":'.$img.'}';
 
-				$fond = 50/2; //50% in found MinterCat
-				$me = $fond/2; //25%
-				$kamil = $fond/2; //25%
+					$kamil = $komsa/4; //25%
+					$fond = $komsa - $kamil;
+					
+					$tx_array = array(
+						array(
+							'coin' => $coin,
+							'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
+							'value' => $kamil
+						),
+						array(
+							'coin' => $coin,
+							'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
+							'value' => $fond
+						),
+					);
+					
+					$transaction = TransactionSend($api,$address,$privat_key,$chainId,$coin,$text,$tx_array);
+					$code = $transaction->code;
+					if ($code == 0) 
+						{
+							$hash = $transaction->hash;
+							sleep(6);
+							$block = $api->getTransaction($hash)->result->height;
+							$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
+								"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+								"stored_id" INTEGER,
+								"addr" VARCHAR,
+								"img" INTEGER,
+								"price" INTEGER,
+								"sale" INTEGER,
+								"name" VARCHAR,
+								"hash" VARCHAR
+									)');
+							$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
+								VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
 
-				if ($test != 'testnet')
-					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::MAINNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-												'value' => $me
-											], [
-												'coin' => $coin,
-												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-												'value' => $kamil
-											],	[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => $fond
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
-					}
-				else
-					{
-						$tx = new MinterTx([
-									'nonce' => $api_node->getNonce($address),
-									'chainId' => MinterTx::TESTNET_CHAIN_ID,
-									'gasPrice' => 1,
-									'gasCoin' => $coin,
-									'type' => MinterMultiSendTx::TYPE,
-									'data' => [
-										'list' => [
-											[
-												'coin' => $coin,
-												'to' => 'Mxaa9a68f11241eb18deff762eac316e2ccac22a03',
-												'value' => $me
-											], [
-												'coin' => $coin,
-												'to' => 'Mxf7c5a1a3f174a1c15f4671c1651d42377351b5b5',
-												'value' => $kamil
-											],	[
-												'coin' => $coin,
-												'to' => 'Mx836a597ef7e869058ecbcc124fae29cd3e2b4444',
-												'value' => $fond
-											]
-										]
-									],
-									'payload' => $text,
-									'serviceData' => '',
-									'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
-								]);
-					}
-
-				$transaction = $tx->sign($private_key);
-				$get_hesh = TransactoinSendDebug($api2,$transaction);
-				$hash = "0x".$get_hesh->result->hash;
-				sleep(6);
-				$block = getBlockByHash($api2,$hash)->result->height;
-				
-				//------------------------------
-				$db_cats->exec('CREATE TABLE IF NOT EXISTS "table" (
-					"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-					"stored_id" INTEGER,
-					"addr" VARCHAR,
-					"img" INTEGER,
-					"price" INTEGER,
-					"sale" INTEGER,
-					"name" VARCHAR,
-					"hash" VARCHAR
-						)');
-				$db_cats->exec('INSERT INTO "table" ("stored_id", "addr", "img", "price", "sale", "name", "hash")
-					VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
-
-				$a=9; $_SESSION['a'] = $a;
-				//------------------------------
-				header('Location: '.$site.'profile'); exit;
-				
-			}
-}
+							$a=9; $_SESSION['a'] = $a;
+							header('Location: '.$site.'profile'); 
+							exit;						
+						}
+					else
+						{
+							$a=7; $_SESSION['a'] = $a;
+							header('Location: '.$site.'profile');
+							exit;
+						}
+				}
+	}
 $g = ob_get_contents();
 ob_end_clean();
 echo $g;

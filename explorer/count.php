@@ -41,7 +41,7 @@ Cats in the store: <b>$count3</b>
 <source srcset='https://mintercat.com/static/img/icons/online.webp' type='image/webp' width='100' height='100'>
 <img src='https://mintercat.com/png2.php?png=online&type=icons' width='100' height='100'>
 </picture><br>
-Online: <b>". $online_check ."</b>
+Online: <b>$online_check</b>
 </div>
 <div class='explorer_block_icons'>
 <picture>
