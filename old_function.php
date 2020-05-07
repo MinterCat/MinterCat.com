@@ -39,3 +39,7 @@ class db_api extends SQLite3
         $this->open(explode('public_html', $_SERVER['DOCUMENT_ROOT'])[0] . 'config/api.sqlite');
     }
 }
+function header_lol($url)
+{
+	echo "<script>window.location.href='".$url."'</script>";
+}
