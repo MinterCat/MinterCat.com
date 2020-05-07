@@ -68,39 +68,35 @@ echo "
 			<img src='https://my.minter.network/api/v1/avatar/by/address/".$address."' class='avatar__img img-responsive'>
 		</div>
 	</div>
+	<br>
 	<div class='position_left'>$Language->My_nickname :
-				<form>
-						  <input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
-						  <input type='submit' id='save' name='save' value='$Language->Save'>
-				</form>
-
-
+		<input id='login' name='login' value='$nick' maxlength='15' minlength='5' $d>
+		<input type='submit' id='save' name='save' value='$Language->Save'>
 	</div>
 	<div class='position_left'>$Language->My_wallet :
-                <input type='text' value='$address' id='myInput'>
-				  <div class='tooltip'>
-					<button onclick='myFunction()' onmouseout='outFunc()'>
-					  <span class='tooltiptext' id='myTooltip'>Copy to clipboard</span>
-					  $Language->Copy 
-					  </button>
+		<input type='text' value='$address' id='myInput'>
+		<div class='tooltip'>
+			<button onclick='myFunction()' onmouseout='outFunc()'>
+				<span class='tooltiptext' id='myTooltip'>Copy to clipboard</span>
+				$Language->Copy 
+			</button>
+			
+			<script>
+				function myFunction() {
+				  var copyText = document.getElementById('myInput');
+				  copyText.select();
+				  document.execCommand('copy');
+				  var tooltip = document.getElementById('myTooltip');
+				  tooltip.innerHTML = 'Copied: ' + copyText.value;
+				}
 
-<script>
-function myFunction() {
-  var copyText = document.getElementById('myInput');
-  copyText.select();
-  document.execCommand('copy');
+				function outFunc() {
+				  var tooltip = document.getElementById('myTooltip');
+				  tooltip.innerHTML = 'Copy to clipboard';
+				}
+			</script>
 
-  var tooltip = document.getElementById('myTooltip');
-  tooltip.innerHTML = 'Copied: ' + copyText.value;
-}
-
-function outFunc() {
-  var tooltip = document.getElementById('myTooltip');
-  tooltip.innerHTML = 'Copy to clipboard';
-}
-</script>
-
-				</div>
+		</div>
 	</div>
 </div>
 </div>
