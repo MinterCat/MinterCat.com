@@ -5,6 +5,44 @@ use Minter\MinterAPI;
 use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
 
+function TransactionSend($api,$address,$private_key,$chainId,$gasCoin,$text,$tx_array)
+{
+	$api = new MinterAPI($api);
+	if ($chainId == 1) 
+		{
+			$tx = new MinterTx([
+				'nonce' => $api->getNonce($address),
+				'chainId' => MinterTx::MAINNET_CHAIN_ID,
+				'gasPrice' => 1,
+				'gasCoin' => $gasCoin,
+				'type' => MinterMultiSendTx::TYPE,
+				'data' => [
+					'list' => $tx_array
+				],
+				'payload' => $text,
+				'serviceData' => '',
+				'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+			]);
+		} 
+	else 
+		{
+			$tx = new MinterTx([
+				'nonce' => $api->getNonce($address),
+				'chainId' => MinterTx::TESTNET_CHAIN_ID,
+				'gasPrice' => 1,
+				'gasCoin' => $gasCoin,
+				'type' => MinterMultiSendTx::TYPE,
+				'data' => [
+					'list' => $tx_array
+				],
+				'payload' => $text,
+				'serviceData' => '',
+				'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+			]);
+		}
+	$transaction = $tx->sign($private_key);
+	return $api->send($transaction)->result;
+}
 //-----------------------
 $base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
 include($_SERVER['DOCUMENT_ROOT'] . '/explorer/online.php');

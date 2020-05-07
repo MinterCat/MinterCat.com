@@ -4,6 +4,45 @@ require_once('../../config/minterapi/vendor/autoload.php');
 use Minter\MinterAPI;
 use Minter\SDK\MinterTx;
 use Minter\SDK\MinterCoins\MinterMultiSendTx;
+
+function TransactionSend($api,$address,$private_key,$chainId,$gasCoin,$text,$tx_array)
+{
+	$api = new MinterAPI($api);
+	if ($chainId == 1) 
+		{
+			$tx = new MinterTx([
+				'nonce' => $api->getNonce($address),
+				'chainId' => MinterTx::MAINNET_CHAIN_ID,
+				'gasPrice' => 1,
+				'gasCoin' => $gasCoin,
+				'type' => MinterMultiSendTx::TYPE,
+				'data' => [
+					'list' => $tx_array
+				],
+				'payload' => $text,
+				'serviceData' => '',
+				'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+			]);
+		} 
+	else 
+		{
+			$tx = new MinterTx([
+				'nonce' => $api->getNonce($address),
+				'chainId' => MinterTx::TESTNET_CHAIN_ID,
+				'gasPrice' => 1,
+				'gasCoin' => $gasCoin,
+				'type' => MinterMultiSendTx::TYPE,
+				'data' => [
+					'list' => $tx_array
+				],
+				'payload' => $text,
+				'serviceData' => '',
+				'signatureType' => MinterTx::SIGNATURE_SINGLE_TYPE
+			]);
+		}
+	$transaction = $tx->sign($private_key);
+	return $api->send($transaction)->result;
+}
 //========================================
 $version = explode('public_html', $_SERVER['DOCUMENT_ROOT'])[1];
 if ($version == 'testnet') {require_once($_SERVER['DOCUMENT_ROOT'] . 'config/config.php');}
@@ -32,20 +71,12 @@ $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP
 if ($address != '')
 {
 $nick = User::Address($address)->nick;
-$api_node = new MinterAPI($api2);
-
-function TransactoinSendDebug ($api2,$transaction)
-{
-    $api = new MinterAPI($api2);
-    return $api->send($transaction);
-}
 
 $private_key = $decript->private_key;
 
 $db_cats = new dbCats();
 $db_rss = new RSS();
 
-$nonce = $api_node->getNonce($address);
 $balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
 echo "<title>MinterCat | $nick</title>";
