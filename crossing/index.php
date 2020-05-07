@@ -76,7 +76,7 @@ else {$Language = Language('English');}
 $balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-}else{header_lol($site.'exit.php');die();}
+}else{header_lol($site.'exit.php');}
 echo "
 <!DOCTYPE html>
 <html lang='en'>
@@ -376,7 +376,7 @@ if (isset($_POST['button']))
 			{
 				$a=7; $_SESSION['a'] = $a;
 				header_lol($site.'profile');
-				die();
+				
 			}
 		else
 			{
@@ -432,7 +432,7 @@ if ($balance > $komsa)
 			{
 				$a=7; $_SESSION['a'] = $a;
 				header_lol($site.'profile');
-				die();
+				
 			}
 
 		$stored = array($id1,$id2,$block);
@@ -501,33 +501,33 @@ if ($balance > $komsa)
 
 						$a=9; $_SESSION['a'] = $a;
 						header_lol($site.'profile');
-						die();
+						
 					}
 				else
 					{
 						$a=7; $_SESSION['a'] = $a;
 						header_lol($site.'profile');
-						die();
+						
 					}
 	}
 else
 	{
 		$a=6; $_SESSION['a'] = $a;
 		header_lol($site.'profile');
-		die();
+		
 	}
 }
 else
 	{
 		$a=7; $_SESSION['a'] = $a;
 		header_lol($site.'profile');
-		die();
+		
 	}
 }
 	else
 		{
 			$a=7; $_SESSION['a'] = $a;
 			header_lol($site.'profile');
-			die();
+			
 		}
 	}}

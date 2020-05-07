@@ -43,7 +43,7 @@ if (isset($_POST['language']))
 		if ($language == 'language')
 			{
 				header_lol('https://poeditor.com/join/project/4zQZx6tHPM');
-				die();											
+															
 			}
 		else
 			{
@@ -59,7 +59,7 @@ if (isset($_POST['language']))
 					}
 				$_SESSION['session_language'] = $language;
 				header_lol($lang_site);
-				die();
+				
 			}
 	}
 
@@ -79,7 +79,7 @@ if (isset($_GET['language']))
 			}
 		$_SESSION['session_language'] = $language;
 		header_lol($url);
-		die();
+		
 	}
 
 $g = ob_get_contents();

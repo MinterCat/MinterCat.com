@@ -474,7 +474,7 @@ if (isset($_POST['Enter']))
 		if ($data)
 			{
 				header_lol($site.'profile');
-				die();
+				
 			}
 		else
 			{
@@ -492,7 +492,7 @@ if (isset($_POST['Enter']))
 				$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
 
 				header_lol($site.'profile');
-				die();
+				
 			}
 	}
 if (isset($_POST['Register']))
@@ -530,5 +530,5 @@ if (isset($_POST['Register']))
 		$a=8; $_SESSION['a'] = $a;
 		//------------------------------
 		header_lol($site.'profile');
-		die();
+		
 	}

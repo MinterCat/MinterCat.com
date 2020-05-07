@@ -42,4 +42,5 @@ class db_api extends SQLite3
 function header_lol($url)
 {
 	echo "<script>window.location.href='".$url."'</script>";
+	exit;
 }

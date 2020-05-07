@@ -17,7 +17,7 @@ elseif(mb_stripos($nick,"#") !== false)
 	{
 	  $id = explode("#", $nick)[1];
 	  header_lol($site.'cat?id='.$id);
-	  die();
+	  
 	} 
 else {include('nick.php');}
 //-------------------------------

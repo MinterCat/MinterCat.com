@@ -74,7 +74,7 @@ else {$Language = Language('English');}
 
 $balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
-}else{header_lol($site.'exit.php');die();}
+}else{header_lol($site.'exit.php');}
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "
 <!DOCTYPE html>
@@ -320,13 +320,13 @@ if (isset($_POST['buycat']))
 
 							$a=9; $_SESSION['a'] = $a;
 							header_lol($site.'profile');
-							die();							
+														
 						}
 					else
 						{
 							$a=7; $_SESSION['a'] = $a;
 							header_lol($site.'profile');
-							die();
+							
 						}
 				}
 	}
