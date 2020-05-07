@@ -100,5 +100,5 @@ $horns
 </picture>
 ";
 }
-	echo '<br><br><br><br><br><br><br>
-	</center>';
+echo '<br><br><br><br><br><br><br>
+</center>';

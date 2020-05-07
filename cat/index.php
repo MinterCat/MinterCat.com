@@ -371,13 +371,13 @@ if (isset($_POST['in']))
 				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-				header('Location: '.$site.'cat?id='.$block2); exit;
+				header_lol($site.'cat?id='.$block2);
 			}
 		else
 			{
 				$a=7; $_SESSION['a'] = $a;
-				header('Location: '.$site.'profile');
-				exit;
+				header_lol($site.'profile');
+				die();
 			}
 	}
 //-----------------------------------
@@ -408,13 +408,14 @@ if (isset($_POST['in2']))
 				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-				header('Location: '.$site.'cat?id='.$block2); exit;
+				header_lol($site.'cat?id='.$block2);
+				die();
 			}
 		else
 			{
 				$a=7; $_SESSION['a'] = $a;
-				header('Location: '.$site.'profile');
-				exit;
+				header_lol($site.'profile');
+				die();
 			}
 	}
 //-----------------------------------
@@ -455,13 +456,14 @@ if (isset($_POST['buy']))
 						$db_cats->query('UPDATE "table" SET addr = "'. $address .'" WHERE stored_id = "'.$block .'"');
 						$db_cats->query('UPDATE "table" SET sale = "0" WHERE stored_id = "'.$block .'"');
 						$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'.$block .'"');
-						header('Location: '.$site.'profile'); exit;
+						header_lol($site.'profile');
+						die();
 					}
 				else
 					{
 						$a=7; $_SESSION['a'] = $a;
-						header('Location: '.$site.'profile');
-						exit;
+						header_lol($site.'profile');
+						die();
 					}
 			}
 	}
@@ -500,21 +502,21 @@ if (isset($_POST['send']))
 						$db_cats->query('UPDATE "table" SET price = "0" WHERE stored_id = "'. $block .'"');
 						
 						$a=2; $_SESSION['a'] = $a;
-						header('Location: '.$site.'profile'); 
-						exit;
+						header_lol($site.'profile');
+						die();
 					}
 				else
 					{
 						$a=7; $_SESSION['a'] = $a;
-						header('Location: '.$site.'profile');
-						exit;
+						header_lol($site.'profile');
+						die();
 					}
 			}
 		else
 			{
 				$a=1; $_SESSION['a'] = $a; 
-				header('Location: '.$site.'profile'); 
-				exit;
+				header_lol($site.'profile');
+				die();
 			}
 
 	}
@@ -544,20 +546,21 @@ if (isset($_POST['gethash']))
 				$db_cats->query('UPDATE "table" SET img = "'. $ImgHash .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET stored_id = "'. $block2 .'" WHERE id = "'. $check_id .'"');
 				$db_cats->query('UPDATE "table" SET hash = "'. $hash .'" WHERE id = "'. $check_id .'"');
-				header('Location: '.$site.'cat?id='.$block2); exit;
+				header_lol($site.'cat?id='.$block2);
+				die();
 			}
 		else
 			{
 				$a=7; $_SESSION['a'] = $a;
-				header('Location: '.$site.'profile');
-				exit;
+				header_lol($site.'profile');
+				die();
 			}
 	}
 //-----------------------------------
 if (isset($_POST['back']))
 	{
-		header('Location: '.$site.'profile'); 
-		exit;
+		header_lol($site.'profile');
+		die();
 	}
 //-----------------------------------
 echo '<br><br>

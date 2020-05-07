@@ -56,7 +56,7 @@ echo "
     var data = google.visualization.arrayToDataTable([
      ['Язык', 'Кол-во пользователей'],
      $push
-	 ['Uncertain',    ".$Uncertain."]
+	 ['Uncertain',    $Uncertain]
     ]);
     var options = {
      title: 'Users',

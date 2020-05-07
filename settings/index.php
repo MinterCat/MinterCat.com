@@ -17,8 +17,6 @@ $decript = json_decode($decript_text,true);
 $address = $decript['address'];
 $private_key = $decript['private_key'];
 
-$db_users = new Users();
-
 $nick = User::Address($address)->nick;
 $check_language = User::Address($address)->language;
 }

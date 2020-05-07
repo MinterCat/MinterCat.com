@@ -64,8 +64,6 @@ $private_key = $decript['private_key'];
 ob_start();
 
 $db_cats = new dbCats();
-$db_rss = new RSS();
-$db_users = new Users();
 
 $nick = User::Address($address)->nick;
 $check_language = User::Address($address)->language;
@@ -76,7 +74,7 @@ else {$Language = Language('English');}
 
 $balance = CoinBalance($address, 'MINTERCAT');
 //-------------------------------
-}else{header('Location: '.$site.'exit.php'); exit;}
+}else{header_lol($site.'exit.php');die();}
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 echo "
 <!DOCTYPE html>
@@ -321,14 +319,14 @@ if (isset($_POST['buycat']))
 								VALUES ("'.$block.'", "'.$address.'", "'.$img.'", "0", "0", "","'.$hash.'")');
 
 							$a=9; $_SESSION['a'] = $a;
-							header('Location: '.$site.'profile'); 
-							exit;						
+							header_lol($site.'profile');
+							die();							
 						}
 					else
 						{
 							$a=7; $_SESSION['a'] = $a;
-							header('Location: '.$site.'profile');
-							exit;
+							header_lol($site.'profile');
+							die();
 						}
 				}
 	}

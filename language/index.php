@@ -42,7 +42,8 @@ if (isset($_POST['language']))
 		$language = $_POST['language'];
 		if ($language == 'language')
 			{
-				header('Location: https://poeditor.com/join/project/4zQZx6tHPM'); exit;												
+				header_lol('https://poeditor.com/join/project/4zQZx6tHPM');
+				die();											
 			}
 		else
 			{
@@ -57,7 +58,8 @@ if (isset($_POST['language']))
 						$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
 					}
 				$_SESSION['session_language'] = $language;
-				header("Location: $lang_site"); exit;												
+				header_lol($lang_site);
+				die();
 			}
 	}
 
@@ -76,7 +78,8 @@ if (isset($_GET['language']))
 				$db_users->query('UPDATE "table" SET language = "'. $language .'" WHERE address = "'. $address .'"');
 			}
 		$_SESSION['session_language'] = $language;
-		header("Location: $url"); exit;							
+		header_lol($url);
+		die();
 	}
 
 $g = ob_get_contents();

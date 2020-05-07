@@ -16,7 +16,8 @@ if ($nick ==''){include('explorer.php');}
 elseif(mb_stripos($nick,"#") !== false)
 	{
 	  $id = explode("#", $nick)[1];
-	  header('Location: '.$site.'cat?id='.$id); exit;
+	  header_lol($site.'cat?id='.$id);
+	  die();
 	} 
 else {include('nick.php');}
 //-------------------------------

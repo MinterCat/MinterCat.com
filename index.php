@@ -13,7 +13,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/function.php');
 $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $db_users = new Users();
-$db_cats = new Cats();
 
 //-----------------------
 $base = $_SERVER['DOCUMENT_ROOT'] . '/explorer/session.txt';
@@ -474,7 +473,8 @@ if (isset($_POST['Enter']))
 
 		if ($data)
 			{
-				header('Location: '.$site.'profile'); exit;
+				header_lol($site.'profile');
+				die();
 			}
 		else
 			{
@@ -491,7 +491,8 @@ if (isset($_POST['Enter']))
 				$nick = "ID$id";
 				$db_users->exec('UPDATE "table" SET nick = "'. $nick .'" WHERE address = "'. $address .'"');
 
-				header('Location: '.$site.'profile'); exit;
+				header_lol($site.'profile');
+				die();
 			}
 	}
 if (isset($_POST['Register']))
@@ -528,5 +529,6 @@ if (isset($_POST['Register']))
 		//------------------------------
 		$a=8; $_SESSION['a'] = $a;
 		//------------------------------
-		header('Location: '.$site.'profile'); exit;
+		header_lol($site.'profile');
+		die();
 	}
